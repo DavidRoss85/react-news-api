@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { convertToSlideFormat } from "../../utils/convertToSlideFormat";
 import { Failed, Loading } from "../../components/ComponentStatuses";
 
-// import { getBreakingNews } from "../../app/selectors/newsSlice";
-import { getBreakingNews } from "../../app/selectors/newsAPI"
+import { getBreakingNews } from "../../app/selectors/newsSlice";
+// import { getBreakingNews } from "../../app/selectors/newsAPI"
 
 const BreakingNewsSlide = ({ newsParams }) => {
 
