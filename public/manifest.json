@@ -1,0 +1,25 @@
+{
+  "short_name": "DNN",
+  "name": "DNN News Search",
+  "icons": [
+    {
+      "src": "DNN_Tiny.png",
+      "sizes": "66x47",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "DNN_Large.png",
+      "type": "image/png",
+      "sizes": "332x233"
+    },
+    {
+      "src": "DNN_Large.png",
+      "type": "image/png",
+      "sizes": "332x233"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
