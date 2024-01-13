@@ -1,11 +1,16 @@
 import { LOCATIONLIST } from "../app/shared/DEFAULTS";
 import { Row, Col, Label, Input } from "reactstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { getCurrentRegion } from "../utils/regionSlice";
+import { changeRegion } from "../utils/regionSlice";
 
 const RegionFilter = (props) => {
-    const { region, setRegion = () => { console.log("Region changed") } } = props;
+    //const { region, setRegion = () => { console.log("Region changed") } } = props;
+    const currentRegion = useSelector(getCurrentRegion);
+    const dispatch = useDispatch();
 
-    function chooseRegion(event){
-        setRegion(event.target.value.toLowerCase())
+    const chooseRegion = (event)=>{
+        dispatch(changeRegion(event.target.value.toLowerCase()));
     }
 
     return (
@@ -14,7 +19,7 @@ const RegionFilter = (props) => {
                 Region:
             </Label>
             <Col xs="8">
-                <Input type="select" onChange={(e) => chooseRegion(e)} id="country-select" className="blackDropdown">
+                <Input type="select" defaultValue={currentRegion.toUpperCase}  onChange={(e) => chooseRegion(e)} id="country-select" className="blackDropdown">
                     {LOCATIONLIST.map((location, idx) => <option key={idx} value={location}>{location.toUpperCase()}</option>)}
                 </Input>
             </Col>

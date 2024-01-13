@@ -3,8 +3,7 @@ import newsImage from "../../app/img/genericNewsLogo16x9.png";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";
 import { Failed, Loading } from "../../components/ComponentStatuses";
-import { useSelector } from 'react-redux';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
 import { getCustomNews } from "../../app/selectors/newsSlice";
