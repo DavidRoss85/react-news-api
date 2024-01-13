@@ -29,7 +29,7 @@ export const EMPTY_NEWS = {
 }
 
 export const TEST_NEWS = {
-    "status": "error",
+    "status": "ok",
     "totalResults": 36,
     "articles":[
         {

@@ -1,7 +1,6 @@
 import ArticleSquare from "../../components/ArticleSquare";
 import newsImage from "../../app/img/genericNewsLogo16x9.png";
 import { Col, Row } from "reactstrap";
-import { emptyNewsArray } from "../../app/shared/DEFAULTS";
 import { useEffect, useState } from "react";
 import { Failed, Loading } from "../../components/ComponentStatuses";
 import { useSelector } from 'react-redux';
@@ -16,7 +15,6 @@ const ArticlesPallette = (props) => {
 
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray))
     const [isLoading, setLoading] = useState(true);
-    const [reload, setReload] = useState(false);
     const [success, setSuccess] = useState(false);
 
     const newsFeed = useSelector(getCustomNews(10));

@@ -10,7 +10,7 @@ const HomePage = ({region}) => {
 
     
     const [newsParams, setNewsParams] = useState({
-        numArticles: 10,
+        numArticles: 6,
         region: region,
         criteria: "top-headlines"
     });

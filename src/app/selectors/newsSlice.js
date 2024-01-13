@@ -4,7 +4,7 @@ import { TEST_NEWS, BREAKING_NEWS_DEMO, EMPTY_NEWS, WORLD_NEWS_DEMO } from "../s
 const initialState = {
     breakingNews: BREAKING_NEWS_DEMO,
     worldNews: WORLD_NEWS_DEMO,
-    customNews: TEST_NEWS,
+    customNews: WORLD_NEWS_DEMO,
     emptyNews: EMPTY_NEWS
 }
 
@@ -12,6 +12,7 @@ const newsSlice = createSlice({
     name: 'news',
     initialState,
     reducers:{
+        //For testing
         reloadNews: (state, action)=>{
             console.log("reloadNews", action.payload);
             state.breakingNews.status = 'ok';
