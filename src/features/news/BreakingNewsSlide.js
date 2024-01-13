@@ -5,20 +5,19 @@ import { convertToSlideFormat } from "../../utils/convertToSlideFormat";
 import { Failed, Loading } from "../../components/ComponentStatuses";
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
-import { reloadNews } from "../../app/selectors/newsSlice";
 
+import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
 import { getBreakingNews } from "../../app/selectors/newsSlice";
-// import { getBreakingNews } from "../../app/selectors/newsAPI"
 
 const BreakingNewsSlide = ({ newsParams }) => {
 
-    const [slideArray, setSlideArray] = useState(emptyNewsArray);
+    const [slideArray, setSlideArray] = useState(useSelector(getEmptyNewsArray));
     const [isLoading, setLoading] = useState(true);
     const [reload, setReload] = useState(false);
     const [success, setSuccess] = useState(false);
     
-    const breakingNews = useSelector(getBreakingNews(10));
-    const { status } = breakingNews; 
+    const newsFeed = useSelector(getBreakingNews(10));
+    const { status } = newsFeed; 
     const dispatch = useDispatch();
 
     const displayNews = () => {
@@ -36,19 +35,19 @@ const BreakingNewsSlide = ({ newsParams }) => {
     }
 
     const triggerReload = ()=>{
-        dispatch(reloadNews("breakingNews"));
+        dispatch(reloadNews("Breaking News"));
     }
     
     useEffect(()=>{
         setLoading(true);
         setSlideArray(
-            convertToSlideFormat(breakingNews.articles)
+            convertToSlideFormat(newsFeed.articles)
             .filter(
                 (article, idx) => idx < newsParams.numArticles
             )
         );
         displayNews();
-    },[breakingNews]);
+    },[newsFeed]);
 
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }

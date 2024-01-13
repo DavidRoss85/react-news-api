@@ -1368,6 +1368,7 @@ export const WORLD_NEWS_DEMO = {
     ]
 }
 
+
 export const BREAKING_NEWS_DEMO = {
     "status": "ok",
     "totalResults": 36,
