@@ -17,12 +17,16 @@ const newsSlice = createSlice({
             console.log("reloadNews", action.payload);
             state.breakingNews.status = 'ok';
             state.customNews.status = 'ok';
+        },
+        showAllFail: (state, action)=>{
+            state.breakingNews.status = 'error';
+            state.customNews.status = 'error';
         }
     }
 })
 
 export const newsReducer = newsSlice.reducer;
-export const {reloadNews} = newsSlice.actions;
+export const {reloadNews, showAllFail} = newsSlice.actions;
 
 export const getWorldNews = ({ numArticles }) => (state) => {
     return state.news.worldNews;
