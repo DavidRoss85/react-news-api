@@ -3,6 +3,9 @@ import { emptyNewsArray } from "../../app/shared/DEFAULTS";
 import { useEffect, useState } from "react";
 import { convertToSlideFormat } from "../../utils/convertToSlideFormat";
 import { Failed, Loading } from "../../components/ComponentStatuses";
+import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { reloadNews } from "../../app/selectors/newsSlice";
 
 import { getBreakingNews } from "../../app/selectors/newsSlice";
 // import { getBreakingNews } from "../../app/selectors/newsAPI"
@@ -13,29 +16,39 @@ const BreakingNewsSlide = ({ newsParams }) => {
     const [isLoading, setLoading] = useState(true);
     const [reload, setReload] = useState(false);
     const [success, setSuccess] = useState(false);
+    
+    const breakingNews = useSelector(getBreakingNews(10));
+    const { status } = breakingNews; 
+    const dispatch = useDispatch();
 
-    async function fetchNews() {
-        try {
-            // if (isLoading) {
-            const breakingNews = await getBreakingNews(newsParams);
-            setSlideArray(convertToSlideFormat(breakingNews.articles).filter((article, idx) => idx < newsParams.numArticles));
+    const displayNews = () => {
+        if(status === 'ok'){
             setLoading(false);
             setSuccess(true);
-                
-            // }
-        } catch (e) {
-            console.log("ERROR loading news in Breaking News Slide component.", e)
+        } else if (status ==='loading'){
+            setLoading(true);
+            setSuccess(false);
+        } else if (status === 'error'){
+            console.log("ERROR loading news in Breaking News Slide component.")
             setLoading(false);
             setSuccess(false);
         }
     }
-    function triggerReload(){
-        setReload(!reload);
+
+    const triggerReload = ()=>{
+        dispatch(reloadNews("breakingNews"));
     }
+    
     useEffect(()=>{
         setLoading(true);
-        fetchNews();
-    },[newsParams, reload]);
+        setSlideArray(
+            convertToSlideFormat(breakingNews.articles)
+            .filter(
+                (article, idx) => idx < newsParams.numArticles
+            )
+        );
+        displayNews();
+    },[breakingNews]);
 
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }
