@@ -10,13 +10,15 @@ import { useDispatch } from "react-redux";
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
 import { getCustomNews } from "../../app/selectors/newsSlice";
 
-const TopicSection = ({ newsParams }) => {
+const TopicSection = (props) => {
+    const { newsParams } = props;
+    const { id =0, numArticles} = newsParams;
 
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray))
     const [isLoading, setLoading] = useState(true)
     const [success, setSuccess] = useState(false);
 
-    const newsFeed = useSelector(getCustomNews(10));
+    const newsFeed = useSelector(getCustomNews(id));
     const { status } = newsFeed; 
     const dispatch = useDispatch();
 
@@ -40,7 +42,7 @@ const TopicSection = ({ newsParams }) => {
 
     useEffect(()=>{
         setLoading(true);
-        setNewsArray(newsFeed.articles.filter((article, idx) => idx < newsParams.numArticles));
+        setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
         displayNews();
     },[newsFeed]);
 

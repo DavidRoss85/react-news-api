@@ -3,6 +3,7 @@ import { Row, Col, Label, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentRegion } from "../utils/regionSlice";
 import { changeRegion } from "../utils/regionSlice";
+import { showAllFail } from "../app/selectors/newsSlice";
 
 const RegionFilter = (props) => {
     //const { region, setRegion = () => { console.log("Region changed") } } = props;

@@ -9,14 +9,17 @@ import { useDispatch } from "react-redux";
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
 import { getBreakingNews } from "../../app/selectors/newsSlice";
 
-const BreakingNewsSlide = ({ newsParams }) => {
+const BreakingNewsSlide = (props) => {
+    const { newsParams } = props;
+    const { id =0, numArticles} = newsParams;
+    const { xs = "12", sm = xs, md = sm, lg = md, xl = lg } = props;
 
     const [slideArray, setSlideArray] = useState(useSelector(getEmptyNewsArray));
     const [isLoading, setLoading] = useState(true);
     const [reload, setReload] = useState(false);
     const [success, setSuccess] = useState(false);
     
-    const newsFeed = useSelector(getBreakingNews(10));
+    const newsFeed = useSelector(getBreakingNews(id));
     const { status } = newsFeed; 
     const dispatch = useDispatch();
 
@@ -43,7 +46,7 @@ const BreakingNewsSlide = ({ newsParams }) => {
         setSlideArray(
             convertToSlideFormat(newsFeed.articles)
             .filter(
-                (article, idx) => idx < newsParams.numArticles
+                (article, idx) => idx < numArticles
             )
         );
         displayNews();

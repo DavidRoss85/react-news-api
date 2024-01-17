@@ -9,15 +9,26 @@ import { useState, useEffect } from "react";
 const HomePage = ({region}) => {
 
     
-    const [newsParams, setNewsParams] = useState({
-        numArticles: 6,
-        region: region,
-        criteria: "top-headlines"
-    });
+    const [newsParams, setNewsParams] = useState([
+        {
+            id: 0,
+            region: 'all',
+            criteria: 'top-headlines',
+            numArticles: 6,
+            tileType: 'slide'
+        },
+        {
+            id: 1,
+            region: 'all',
+            criteria: 'top-headlines',
+            numArticles: 6,
+            tileType: 'pallette'
+        }
+    ]);
 
     useEffect(()=>{
-        setNewsParams({...newsParams, region: region});
-        console.log("Home page params: ", newsParams)
+        // setNewsParams({...newsParams, region: region});
+        // console.log("Home page params: ", newsParams)
     },[region]);
 
     return (
@@ -31,7 +42,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col className="slideHolder">
-                            <BreakingNewsSlide newsParams={newsParams} />
+                            <BreakingNewsSlide newsParams={newsParams[0]} />
                         </Col>
                     </Row>
                 </Col>
@@ -43,7 +54,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <ArticlesPallette newsParams={newsParams} numArticles={6} md="6" />
+                            <ArticlesPallette newsParams={newsParams[1]} numArticles={6} md="6" />
                         </Col>
                     </Row>
                 </Col>
@@ -55,7 +66,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <ArticlesList newsParams={newsParams} numArticles={9} />
+                            <ArticlesList newsParams={newsParams[1]} numArticles={9} />
                         </Col>
                     </Row>
                 </Col>
@@ -74,7 +85,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <TopicSection newsParams={newsParams} numArticles={10} />
+                            <TopicSection newsParams={newsParams[1]} numArticles={10} />
                         </Col>
                     </Row>
                 </Col>
@@ -86,7 +97,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <ArticlesPallette newsParams={newsParams} numArticles={36} md="3" />
+                            <ArticlesPallette newsParams={newsParams[1]} numArticles={36} md="3" />
                         </Col>
                     </Row>
                 </Col>

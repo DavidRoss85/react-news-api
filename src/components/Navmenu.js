@@ -3,13 +3,28 @@ import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, NavItem, Row,Col } f
 import { NavLink } from "react-router-dom";
 import RegionFilter from "./RegionFilter"
 import SiteLogo from "./SiteLogo";
+import { useDispatch } from "react-redux";
+import { testSomething, updateFeed } from "../app/selectors/newsSlice";
+
+//Testing
+import { WORLD_NEWS_DEMO, BREAKING_NEWS_DEMO } from "../app/shared/TEST_NEWS";
+const testObj = {
+    id: 1,
+    feed: 'customNews',
+    news: BREAKING_NEWS_DEMO
+}
 
 const Navmenu = ({ homeClick = false, region, setRegion }) => {
     const [menuOpen, setMenuOpen] = useState(false);
-
+    const dispatch = useDispatch();
     useEffect(() => {
         setMenuOpen(false);
     }, [homeClick]);
+
+    function localTest(){
+        dispatch(updateFeed(testObj))
+    }
+    
 
     return (
         <Navbar dark sticky="top" expand="md" className="navbar-light bg-black text-end" >
@@ -40,7 +55,7 @@ const Navmenu = ({ homeClick = false, region, setRegion }) => {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className="nav-link" to="#about">
+                        <NavLink className="nav-link" to="#about" onClick={()=>localTest()}>
                             <span>About</span>
                         </NavLink>
                     </NavItem>

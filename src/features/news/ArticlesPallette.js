@@ -9,14 +9,15 @@ import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
 import { getCustomNews } from "../../app/selectors/newsSlice";
 
 const ArticlesPallette = (props) => {
-    const {newsParams } = props;
+    const { newsParams } = props;
+    const { id =0, numArticles} = newsParams;
     const { xs = "12", sm = xs, md = sm, lg = md, xl = lg } = props;
 
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray))
     const [isLoading, setLoading] = useState(true);
     const [success, setSuccess] = useState(false);
 
-    const newsFeed = useSelector(getCustomNews(10));
+    const newsFeed = useSelector(getCustomNews(id));
     const { status } = newsFeed; 
     const dispatch = useDispatch();
 
@@ -40,8 +41,9 @@ const ArticlesPallette = (props) => {
 
     useEffect(()=>{
         setLoading(true);
-        setNewsArray(newsFeed.articles.filter((article, idx) => idx < newsParams.numArticles));
+        setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
         displayNews();
+        console.log('pallette reload')
     },[newsFeed]);
 
     //Show loading wheel
