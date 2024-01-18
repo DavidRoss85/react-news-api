@@ -23,7 +23,10 @@ async function getNews(searchCriteria = "?q=News") {
     }
 }
 
-async function getBreakingNews({ region = "us" }) {
+async function getBreakingNews(searchCriteria) {
+    const { country, category, pageSize = '100', page ='1', keyword } = searchCriteria;
+    // country: country= & category= & pageSize= & page= & q=
+    
     const newsURL = `${URL_BASE}${URL_TOP_HEADLINES}${URL_COUNTRY_PRE}${region}${URL_API_PRE}${apiKey}`
     try {
         const res = await fetch(newsURL);
