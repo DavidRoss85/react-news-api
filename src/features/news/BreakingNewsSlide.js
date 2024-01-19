@@ -5,52 +5,49 @@ import { convertToSlideFormat } from "../../utils/convertToSlideFormat";
 import { Failed, Loading } from "../../components/ComponentStatuses";
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
+import { fetchBreakingNews } from "../../app/selectors/newsSlice";
 
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
 import { getBreakingNews } from "../../app/selectors/newsSlice";
 
 const BreakingNewsSlide = (props) => {
+
     const { newsParams } = props;
-    const { id =0, numArticles} = newsParams;
+    const { id = 0, numArticles } = newsParams;
     const { xs = "12", sm = xs, md = sm, lg = md, xl = lg } = props;
 
     const [slideArray, setSlideArray] = useState(useSelector(getEmptyNewsArray));
-    const [isLoading, setLoading] = useState(true);
-    const [reload, setReload] = useState(false);
     const [success, setSuccess] = useState(false);
-    
+
+    const isLoading = useSelector((state) => state.news.breakingNews[id].isLoading)
     const newsFeed = useSelector(getBreakingNews(id));
-    const { status } = newsFeed; 
+    const { status } = newsFeed;
+
     const dispatch = useDispatch();
 
     const displayNews = () => {
-        if(status === 'ok'){
-            setLoading(false);
+        if (status === 'ok') {
             setSuccess(true);
-        } else if (status ==='loading'){
-            setLoading(true);
-            setSuccess(false);
-        } else if (status === 'error'){
+        } else if (status === 'error') {
             console.log("ERROR loading news in Breaking News Slide component.")
-            setLoading(false);
             setSuccess(false);
         }
     }
 
-    const triggerReload = ()=>{
-        dispatch(reloadNews("Breaking News"));
+    const triggerReload = () => {
+        dispatch(reloadNews({ id: 0, feed: 'breakingNews' }));
+        dispatch(fetchBreakingNews({ id: 0 }))
     }
-    
-    useEffect(()=>{
-        setLoading(true);
+
+    useEffect(() => {
         setSlideArray(
             convertToSlideFormat(newsFeed.articles)
-            .filter(
-                (article, idx) => idx < numArticles
-            )
+                .filter(
+                    (article, idx) => idx < numArticles
+                )
         );
         displayNews();
-    },[newsFeed]);
+    }, [newsFeed]);
 
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }

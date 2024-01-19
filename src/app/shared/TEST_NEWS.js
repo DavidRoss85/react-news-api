@@ -10,7 +10,7 @@ export const newsParams = {
 
 export const EMPTY_NEWS = {
     "status": "loading",
-    "totalResults": 36,
+    "totalResults": 0,
     "articles": [
         {
             "source": {
@@ -28,6 +28,25 @@ export const EMPTY_NEWS = {
     ]
 }
 
+export const ERROR_NEWS = {
+    "status": "error",
+    "totalResults": 0,
+    "articles": [
+        {
+            "source": {
+                "id": "",
+                "name": ""
+            },
+            "author": "",
+            "title": "",
+            "description": "",
+            "url": "",
+            "urlToImage": "",
+            "publishedAt": "",
+            "content": ""
+        }
+    ]
+}
 export const TEST_NEWS = {
     "status": "ok",
     "totalResults": 36,
