@@ -34,8 +34,8 @@ const TopicSection = (props) => {
     }
 
     const triggerReload = () => {
-        dispatch(reloadNews({ id: 0, feed: 'breakingNews' }));
-        dispatch(fetchBreakingNews({ id: 0 }))
+        dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
+        dispatch(fetchBreakingNews({ id: id }))
     }
 
 

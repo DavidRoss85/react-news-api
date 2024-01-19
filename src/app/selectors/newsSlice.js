@@ -37,8 +37,9 @@ const newsSlice = createSlice({
     reducers: {
         //For testing
         reloadNews: (state, action) => {
-            const { id, feed } = action.payload
-            state[feed][id].isLoading = true;
+            const { id, feed = 'breakingNews' } = action.payload
+            const immId = (id > state[feed].length - 1) ? state[feed].length - 1 : id;
+            state[feed][immId].isLoading = true;
 
         },
         showAllFail: (state, action) => {
@@ -57,18 +58,20 @@ const newsSlice = createSlice({
         builder
             .addCase(fetchBreakingNews.pending, (state) => {
                 // const { id } = action.payload;
-                state.breakingNews[0].isLoading = true;
+                //state.breakingNews[0].isLoading = true;
             })
             .addCase(fetchBreakingNews.fulfilled, (state, action) => {
-                const { newsData, id } = action.payload;
-                state.breakingNews[id].isLoading = false;
-                state.breakingNews[id].errMsg = '';
-                state.breakingNews[id].news = newsData
+                const { newsData, id, feed ='breakingNews' } = action.payload;
+                const immId = (id > state[feed].length - 1) ? state[feed].length - 1 : id;
+                state[feed][immId].isLoading = false;
+                state[feed][immId].errMsg = '';
+                state[feed][immId].news = newsData
             })
             .addCase(fetchBreakingNews.rejected, (state, action) => {
-                const { id } = action.payload;
-                state.breakingNews[id].isLoading = false;
-                state.breakingNews[id].errMsg = action.error ? action.error.message : 'Failed'
+                const { id, feed='breakingNews' } = action.payload;
+                const immId = (id > state[feed].length - 1) ? state[feed].length - 1 : id;
+                state[feed][immId].isLoading = false;
+                state[feed][immId].errMsg = action.error ? action.error.message : 'Failed'
             })
     }
 
