@@ -7,50 +7,49 @@ import { Failed, Loading } from "../../components/ComponentStatuses";
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 
+import { fetchBreakingNews, getLoadingStatus } from "../../app/selectors/newsSlice";
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
-import { getCustomNews } from "../../app/selectors/newsSlice";
+import { getBreakingNews } from "../../app/selectors/newsSlice";
 
 const TopicSection = (props) => {
     const { newsParams } = props;
-    const { id =0, numArticles} = newsParams;
+    const { id = 0, numArticles } = newsParams;
 
-    const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray))
-    const [isLoading, setLoading] = useState(true)
+    const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
-    const newsFeed = useSelector(getCustomNews(id));
-    const { status } = newsFeed; 
+    const isLoading = useSelector(getLoadingStatus(id))
+    const newsFeed = useSelector(getBreakingNews(id));
+    const { status } = newsFeed;
+
     const dispatch = useDispatch();
 
     const displayNews = () => {
-        if(status === 'ok'){
-            setLoading(false);
+        if (status === 'ok') {
             setSuccess(true);
-        } else if (status ==='loading'){
-            setLoading(true);
-            setSuccess(false);
-        } else if (status === 'error'){
-            console.log("ERROR loading news in Breaking News Slide component.")
-            setLoading(false);
+        } else if (status === 'error') {
+            console.log("ERROR loading news in News Slide component.")
             setSuccess(false);
         }
     }
 
-    const triggerReload = ()=>{
-        dispatch(reloadNews("Breaking News"));
+    const triggerReload = () => {
+        dispatch(reloadNews({ id: 0, feed: 'breakingNews' }));
+        dispatch(fetchBreakingNews({ id: 0 }))
     }
 
-    useEffect(()=>{
-        setLoading(true);
+
+    useEffect(() => {
         setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
         displayNews();
-    },[newsFeed]);
+    }, [newsFeed]);
+
 
 
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }
 
-    const immArticle = {...newsArray[0], urlToImage: (!newsArray[0].urlToImage) ? newsImage : newsArray[0].urlToImage}
+    const immArticle = { ...newsArray[0], urlToImage: (!newsArray[0].urlToImage) ? newsImage : newsArray[0].urlToImage }
     return (
         <div>
             <Row className="mx-auto">

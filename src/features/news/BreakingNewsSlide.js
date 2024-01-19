@@ -1,12 +1,10 @@
-import SlideShow from "../../components/SlideShow";
-import { emptyNewsArray } from "../../app/shared/DEFAULTS";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { convertToSlideFormat } from "../../utils/convertToSlideFormat";
 import { Failed, Loading } from "../../components/ComponentStatuses";
-import { useSelector } from 'react-redux';
-import { useDispatch } from "react-redux";
-import { fetchBreakingNews } from "../../app/selectors/newsSlice";
+import SlideShow from "../../components/SlideShow";
 
+import { fetchBreakingNews, getLoadingStatus } from "../../app/selectors/newsSlice";
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
 import { getBreakingNews } from "../../app/selectors/newsSlice";
 
@@ -14,12 +12,11 @@ const BreakingNewsSlide = (props) => {
 
     const { newsParams } = props;
     const { id = 0, numArticles } = newsParams;
-    const { xs = "12", sm = xs, md = sm, lg = md, xl = lg } = props;
 
-    const [slideArray, setSlideArray] = useState(useSelector(getEmptyNewsArray));
+    const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
-    const isLoading = useSelector((state) => state.news.breakingNews[id].isLoading)
+    const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
     const { status } = newsFeed;
 
@@ -29,7 +26,7 @@ const BreakingNewsSlide = (props) => {
         if (status === 'ok') {
             setSuccess(true);
         } else if (status === 'error') {
-            console.log("ERROR loading news in Breaking News Slide component.")
+            console.log("ERROR loading news in News Slide component.")
             setSuccess(false);
         }
     }
@@ -40,7 +37,7 @@ const BreakingNewsSlide = (props) => {
     }
 
     useEffect(() => {
-        setSlideArray(
+        setNewsArray(
             convertToSlideFormat(newsFeed.articles)
                 .filter(
                     (article, idx) => idx < numArticles
@@ -54,7 +51,7 @@ const BreakingNewsSlide = (props) => {
 
     return (
         <SlideShow
-            items={slideArray}
+            items={newsArray}
             interval={2000}
             fade={true}
             slide={true}

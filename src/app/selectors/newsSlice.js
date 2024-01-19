@@ -86,6 +86,10 @@ export const getBreakingNews = (id) => (state) => {
     const immId = (id > state.news.breakingNews.length - 1) ? state.news.breakingNews.length - 1 : id;
     return state.news.breakingNews[immId].news;
 };
+export const getLoadingStatus = (id) => (state) => {
+    const immId = (id > state.news.breakingNews.length - 1) ? state.news.breakingNews.length - 1 : id;
+    return state.news.breakingNews[immId].isLoading;
+};
 
 export const getCustomNews = (id) => (state) => {
     const immId = (id > state.news.customNews.length - 1) ? state.news.customNews.length - 1 : id;
