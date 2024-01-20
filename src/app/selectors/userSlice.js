@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { userPref } from "../shared/USER_PREFERENCES";
+import { userPref } from "../shared/DEFAULTS";
 import { useParams } from "react-router-dom";
 
 const TEMPURL = 'http://localhost:3001/users'

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { EMPTY_NEWS} from "../shared/TEST_NEWS";
 import { fetchFromServer } from "./newsAPI";
-import { userPref } from "../shared/USER_PREFERENCES";
+import { userPref } from "../shared/DEFAULTS";
 
 
 const initialState = {

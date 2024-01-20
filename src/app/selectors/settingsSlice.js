@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userPref } from "../shared/USER_PREFERENCES";
+import { userPref } from "../shared/DEFAULTS";
 
 const initialState = {
     data: {
