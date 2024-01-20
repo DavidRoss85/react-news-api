@@ -1,24 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { TEST_NEWS, BREAKING_NEWS_DEMO, EMPTY_NEWS, WORLD_NEWS_DEMO } from "../shared/TEST_NEWS";
+import { EMPTY_NEWS} from "../shared/TEST_NEWS";
 import { fetchFromServer } from "./newsAPI";
-
+import { userPref } from "../shared/USER_PREFERENCES";
 
 
 const initialState = {
-    breakingNews: [
-        {
-            news: EMPTY_NEWS,
-            isLoading: true,
-            errMsg: ''
+    breakingNews:
+        userPref.homepage.map((tile)=>{
+            return {
+                news: EMPTY_NEWS,
+                isLoading: true,
+                errMsg: ''
+            }
         }
-    ],
-    worldNews: [EMPTY_NEWS],
-    customNews: [
-        WORLD_NEWS_DEMO,
-        WORLD_NEWS_DEMO,
-        BREAKING_NEWS_DEMO,
-        TEST_NEWS
-    ],
+    ),
     emptyNews: [EMPTY_NEWS]
 }
 
@@ -35,19 +30,11 @@ const newsSlice = createSlice({
     name: 'news',
     initialState,
     reducers: {
-        //For testing
         reloadNews: (state, action) => {
             const { id, feed = 'breakingNews' } = action.payload
             const immId = (id > state[feed].length - 1) ? state[feed].length - 1 : id;
             state[feed][immId].isLoading = true;
 
-        },
-        showAllFail: (state, action) => {
-            state.breakingNews.news[0].status = 'error';
-            state.customNews[0].status = 'error';
-        },
-        testSomething: (state, action) => {
-            state.customNews[1].status = 'error';
         },
         updateFeed: (state, action) => {
             const { feed, id, news } = action.payload;
@@ -58,7 +45,7 @@ const newsSlice = createSlice({
         builder
             .addCase(fetchBreakingNews.pending, (state) => {
                 // const { id } = action.payload;
-                //state.breakingNews[0].isLoading = true;
+                // state.breakingNews[0].isLoading = true;
             })
             .addCase(fetchBreakingNews.fulfilled, (state, action) => {
                 const { newsData, id, feed ='breakingNews' } = action.payload;

@@ -4,17 +4,8 @@ import { NavLink } from "react-router-dom";
 import RegionFilter from "./RegionFilter"
 import SiteLogo from "./SiteLogo";
 import { useDispatch } from "react-redux";
-import { testSomething, updateFeed } from "../app/selectors/newsSlice";
 
-//Testing
-import { WORLD_NEWS_DEMO, BREAKING_NEWS_DEMO } from "../app/shared/TEST_NEWS";
-const testObj = {
-    id: 1,
-    feed: 'customNews',
-    news: BREAKING_NEWS_DEMO
-}
-
-const Navmenu = ({ homeClick = false, region, setRegion }) => {
+const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -22,7 +13,7 @@ const Navmenu = ({ homeClick = false, region, setRegion }) => {
     }, [homeClick]);
 
     function localTest(){
-        dispatch(updateFeed(testObj))
+        alert('Test your functions here!')
     }
     
 
@@ -32,7 +23,7 @@ const Navmenu = ({ homeClick = false, region, setRegion }) => {
                 <SiteLogo />
             </NavbarBrand>
 
-            <RegionFilter region={region} setRegion={setRegion}/>
+            <RegionFilter />
 
             <NavbarToggler onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen) }} />
 
@@ -55,7 +46,7 @@ const Navmenu = ({ homeClick = false, region, setRegion }) => {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className="nav-link" to="#about" onClick={()=>localTest()}>
+                        <NavLink className="nav-link" to="#about">
                             <span>About</span>
                         </NavLink>
                     </NavItem>
@@ -64,6 +55,12 @@ const Navmenu = ({ homeClick = false, region, setRegion }) => {
                             <span><i className="fa fa-search"></i> Search</span>
                         </a>
                     </NavItem>
+                    <NavItem>
+                        <NavLink className="nav-link" to="#about" onClick={()=>localTest()}>
+                            <button className="btn btn-warning">TEST BUTTON</button>
+                        </NavLink>
+                    </NavItem>
+
                     {/* <NavItem className="d-inline-block d-md-none">
                         <a className="nav-link" href="#searchBox">
                             <span>TEST</span>

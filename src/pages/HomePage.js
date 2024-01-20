@@ -5,31 +5,17 @@ import ArticlesList from "../features/news/ArticlesList";
 import TopicSection from "../features/news/TopicSection";
 import { newsParams } from "../app/shared/DEFAULTS";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getUserPreferences } from "../app/selectors/userSlice";
 
-const HomePage = ({region}) => {
+const HomePage = () => {
 
-    
-    const [newsParams, setNewsParams] = useState([
-        {
-            id: 0,
-            region: 'all',
-            criteria: 'top-headlines',
-            numArticles: 6,
-            tileType: 'slide'
-        },
-        {
-            id: 1,
-            region: 'all',
-            criteria: 'top-headlines',
-            numArticles: 6,
-            tileType: 'pallette'
-        }
-    ]);
-
+    const userData = useSelector(getUserPreferences)
+    const newsParams = userData.homepage;
+    console.log('userData: ', userData)
     useEffect(()=>{
-        // setNewsParams({...newsParams, region: region});
-        // console.log("Home page params: ", newsParams)
-    },[region]);
+
+    },[]);
 
     return (
         <Container fluid>
@@ -54,7 +40,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <ArticlesPallette newsParams={newsParams[1]} numArticles={6} md="6" />
+                            <ArticlesPallette newsParams={newsParams[1]} md="6" />
                         </Col>
                     </Row>
                 </Col>
@@ -66,7 +52,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <ArticlesList newsParams={newsParams[1]} numArticles={9} />
+                            <ArticlesList newsParams={newsParams[1]} />
                         </Col>
                     </Row>
                 </Col>
@@ -85,7 +71,7 @@ const HomePage = ({region}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <TopicSection newsParams={newsParams[1]} numArticles={10} />
+                            <TopicSection newsParams={newsParams[1]} />
                         </Col>
                     </Row>
                 </Col>

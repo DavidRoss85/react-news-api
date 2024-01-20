@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { newsReducer } from './selectors/newsSlice';
-import { regionReducer } from '../utils/regionSlice';
+import { settingsReducer } from './selectors/settingsSlice';
+import { userReducer } from './selectors/userSlice';
 
 export const store = configureStore({
     reducer: {
         news: newsReducer,
-        country: regionReducer
+        settings: settingsReducer,
+        user: userReducer
     }
 })
