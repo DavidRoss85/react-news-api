@@ -48,7 +48,6 @@ const TopicSection = (props) => {
 
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }
-
     const immArticle = { ...newsArray[0], urlToImage: (!newsArray[0].urlToImage) ? newsImage : newsArray[0].urlToImage }
     return (
         <div>

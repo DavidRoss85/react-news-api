@@ -1635,7 +1635,7 @@
                         "country": "us",
                         "category": "",
                         "errorMode": false,
-                        "keyword": "top-headlines",
+                        "keyword": "",
                         "numArticles": 10,
                         "tileType": "slide"
                     },
@@ -1645,7 +1645,7 @@
                         "country": "us",
                         "category": "",
                         "errorMode": false,
-                        "keyword": "top-headlines",
+                        "keyword": "",
                         "numArticles": 6,
                         "tileType": "pallette"
                     },
@@ -1655,7 +1655,7 @@
                         "country": "us",
                         "category": "",
                         "errorMode": false,
-                        "keyword": "top-headlines",
+                        "keyword": "",
                         "numArticles": 8,
                         "tileType": "list"
                     },
@@ -1665,7 +1665,7 @@
                         "country": "us",
                         "category": "",
                         "errorMode": false,
-                        "keyword": "top-headlines",
+                        "keyword": "",
                         "numArticles": 6,
                         "tileType": "topic"
                     },
@@ -1675,7 +1675,7 @@
                         "country": "us",
                         "category": "",
                         "errorMode": false,
-                        "keyword": "top-headlines",
+                        "keyword": "",
                         "numArticles": 12,
                         "tileType": "pallette"
                     }

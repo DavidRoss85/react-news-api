@@ -7,7 +7,7 @@ export const userPref = {
             country: 'us',
             category: '',
             errorMode: false,
-            keyword: 'top-headlines',
+            keyword: '',
             numArticles: 10,
             tileType: 'slide'
         },
@@ -17,7 +17,7 @@ export const userPref = {
             country: 'us',
             category: '',
             errorMode: false,
-            keyword: 'top-headlines',
+            keyword: '',
             numArticles: 6,
             tileType: 'pallette'
         },
@@ -27,7 +27,7 @@ export const userPref = {
             country: 'us',
             category: '',
             errorMode: false,
-            keyword: 'top-headlines',
+            keyword: '',
             numArticles: 8,
             tileType: 'list'
         },
@@ -37,7 +37,7 @@ export const userPref = {
             country: 'us',
             category: '',
             errorMode: false,
-            keyword: 'top-headlines',
+            keyword: '',
             numArticles: 6,
             tileType: 'topic'
         },
@@ -47,7 +47,7 @@ export const userPref = {
             country: 'us',
             category: '',
             errorMode: false,
-            keyword: 'top-headlines',
+            keyword: '',
             numArticles: 12,
             tileType: 'pallette'
         },

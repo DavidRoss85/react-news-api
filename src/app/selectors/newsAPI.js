@@ -16,12 +16,12 @@ const testMode = true;
 
 
 async function fetchFromServer(searchCriteria) {
-    // const newsURL = `${URL_BASE}${URL_TOP_HEADLINES}${URL_COUNTRY_PRE}${region}${URL_API_PRE}${apiKey}`
+
     let newsURL = buildNewsURL(searchCriteria);
-    
-    if (testMode) newsURL = LOCAL_URL + (searchCriteria.errorMode ? 'errorNews' : 'breakingNews')
+
     console.log('The built url: ' + newsURL)
-    
+    if (testMode) newsURL = LOCAL_URL + (searchCriteria.errorMode ? 'errorNews' : 'breakingNews')
+
 
     try {
         const res = await fetch(newsURL);
@@ -35,34 +35,49 @@ async function fetchFromServer(searchCriteria) {
     }
 }
 
-const buildNewsURL = (searchCriteria) =>{
-    const { endpoint='top-headlines', country, category, pageSize = '100', page ='1', keyword } = searchCriteria;
-    //top-headlines? country= & category= & pageSize= & page= & q=
-    const immCountry = country ? `country=${country}` : '';
-    const immCategory = category ? (immCountry ?  '&' : '') + `category=${category}` : '' ;
-    const immPageSize = pageSize ? ((immCountry || immCategory) ?  '&' : '') + `pageSize=${pageSize}` : `pageSize=100`; 
-    const immPage = page ? `&page=${page}` : `&page=1`; 
-    const immKeyword = keyword ? `&keyword=${keyword}` : '';
+const buildNewsURL = (searchCriteria) => {
+    const { endpoint = 'top-headlines', country, category, pageSize = '100', page = '1', keyword } = searchCriteria;
+    const { searchIn, dateFrom, dateTo, language, sortBy } = searchCriteria;
 
-    const newsURL =
-        `${URL_BASE}${endpoint}?`
-        + `${immCountry}${immCategory}${immPageSize}`
-        + `${immPage}${immKeyword}`
-        + `${URL_API_PRE}${apiKey}`
-    return newsURL;
+    if (endpoint === 'top-headlines') {
+        //top-headlines? country= & category= & pageSize= & page= & q=
+        const immCountry = country ? country === 'all' ? '' : `country=${country}` : '';
+        const immCategory = category ? (immCountry ? '&' : '') + `category=${category}` : '';
+        const immPageSize = pageSize ? ((immCountry || immCategory) ? '&' : '') + `pageSize=${pageSize}` : `pageSize=100`;
+        const immPage = page ? `&page=${page}` : `&page=1`;
+        const immKeyword = keyword ? `&q=${keyword}` : '';
+
+        const newsURL =
+            `${URL_BASE}${endpoint}?`
+            + `${immCountry}${immCategory}${immPageSize}`
+            + `${immPage}${immKeyword}`
+            + `${URL_API_PRE}${apiKey}`;
+        return newsURL;
+    } else if (endpoint === 'everything') {
+        //everything? q= &searchIn=(title/description/content) &from=(2024-01-20) &to=(2024-01-20)
+        //&language=(ar/de/en/es/fr/he/it/nl/no/pt/ru/sv/ud/zh)
+        //&sortBy=(relevancy/popularity/publishedAt)
+        //&pageSize= &page=
+        const immKeyword = keyword ? `q=${keyword}` : '';
+        const immSearchIn = searchIn ? (immKeyword ? '&' : '') + `searchIn=${searchIn}` : '';
+        const immFrom = dateFrom ? ((immKeyword || immSearchIn) ? '&' : '') + `from=${dateFrom}` : '';
+        const immTo = dateTo ? ((immKeyword || immSearchIn || immFrom) ? '&' : '') + `to=${dateTo}` : '';
+        const immLang = language ? ((immKeyword || immSearchIn || immFrom || immTo) ? '&' : '') + `language=${language}` : '';
+        const immSort = sortBy ? ((immKeyword || immSearchIn || immFrom || immTo || immLang) ? '&' : '') + `sortBy${sortBy}` : '';
+        const immPageSize = pageSize ? ((immKeyword || immSearchIn || immFrom || immTo || immLang || immSort) ? '&' : '') + `pageSize=${pageSize}` : `pageSize=100`;
+        const immPage = page ? `&page=${page}` : `&page=1`;
+
+        const newsURL =
+            `${URL_BASE}${endpoint}?`
+            + `${immKeyword}${immSearchIn}${immFrom}`
+            + `${immTo}${immLang}${immSort}`
+            + `${immPageSize}${immPage}`
+            + `${URL_API_PRE}${apiKey}`;
+        return newsURL;
+
+    }
+
 }
 
-// async function getNews(searchCriteria = "?q=News") {
-//     const newsURL = `${URL_BASE}${URL_EVERYTHING}${searchCriteria}${URL_API_PRE}${apiKey}`
-//     try {
-//         const response = await fetch(newsURL);
-//         const data = await response.json();
-//         return data;
-//     } catch (error) {
-//         console.error('There was an error!', error);
-//     }
-// }
 
-
-
- export { fetchFromServer }
+export { fetchFromServer }

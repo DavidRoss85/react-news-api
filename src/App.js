@@ -34,9 +34,9 @@ function App() {
   },[userInfo])
 
   useEffect(() => {
-    appSettings.data.preferences.homepage.map((tile) => {
+    appSettings.data.current.homepage.map((tile) => {
       dispatch(reloadNews({id: tile.id}));
-      dispatch(fetchBreakingNews(tile));
+      dispatch(fetchBreakingNews({...tile, country: region}));
     });
   }, [dispatch, userInfo.isLoading, region])
 

@@ -10,7 +10,9 @@ const RegionFilter = () => {
     const dispatch = useDispatch();
 
     const chooseRegion = (event)=>{
-        dispatch(changeRegion(event.target.value.toLowerCase()));
+        dispatch(changeRegion(
+            event.target.value.toLowerCase()
+        ));
     }
 
     return (
