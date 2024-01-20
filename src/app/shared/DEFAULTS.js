@@ -21,7 +21,16 @@ export const userPref = {
             errorMode: false,
             keyword: '',
             numArticles: 10,
-            tileType: 'slide'
+            tileType: 'slide',
+            title: 'Top-Stories',
+            row: 1,
+            sizing: {
+                md:'6', lg:'5', className:''
+            },
+            innerSizing:{
+                className: 'slideHolder'
+            },
+            componentAttribute: {}
         },
         {
             id: 1,
@@ -31,7 +40,16 @@ export const userPref = {
             errorMode: false,
             keyword: '',
             numArticles: 6,
-            tileType: 'pallette'
+            tileType: 'pallette',
+            title: 'Trending',
+            row: 1,
+            sizing: {
+                md:'6', lg:'4', className:''
+            },
+            innerSizing:{
+                className: ''
+            },
+            componentAttribute: { md:'6'}
         },
         {
             id: 2,
@@ -41,7 +59,16 @@ export const userPref = {
             errorMode: false,
             keyword: '',
             numArticles: 8,
-            tileType: 'list'
+            tileType: 'list',
+            title: 'News',
+            row: 1,
+            sizing: {
+                md:'d-none', lg:'3', className:'d-none d-lg-inline-block'
+            },
+            innerSizing:{
+                className: ''
+            },
+            componentAttribute: {}
         },
         {
             id: 3,
@@ -51,7 +78,16 @@ export const userPref = {
             errorMode: false,
             keyword: '',
             numArticles: 6,
-            tileType: 'topic'
+            tileType: 'topic',
+            title: 'More News',
+            row: 2,
+            sizing: {
+                md:'6', lg:'4', className:''
+            },
+            innerSizing:{
+                className: ''
+            },
+            componentAttribute: {}
         },
         {
             id: 4,
@@ -61,7 +97,16 @@ export const userPref = {
             errorMode: false,
             keyword: '',
             numArticles: 12,
-            tileType: 'pallette'
+            tileType: 'pallette',
+            title: 'Even MORE',
+            row: 2,
+            sizing: {
+                md:'6', lg:'8', className:''
+            },
+            innerSizing:{
+                className: ''
+            },
+            componentAttribute: { md:'3'}
         },
     ]
 }

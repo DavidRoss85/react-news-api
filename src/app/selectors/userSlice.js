@@ -45,6 +45,7 @@ const userSlice = createSlice({
             .addCase(fetchUserData.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.errMsg = '';
+                //replace this with the filter for the currently logged in user
                 state.data.preferences = action.payload.filter((user) => user.username = 'user')[0].preferences
             })
             .addCase(fetchUserData.rejected, (state, action) => {

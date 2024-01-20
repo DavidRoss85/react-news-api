@@ -21,6 +21,7 @@ const settingsSlice = createSlice({
         },
         loadUserPreferences: (state, action) => {
             state.data = { ...action.payload.data, current: action.payload.data.preferences }
+            // console.log('STRINGIFY',JSON.stringify(userPref));
         }
     }
 });

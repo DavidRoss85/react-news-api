@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "reactstrap";
 import bannerVideo from "../app/img/worldLoop.mov"
-// import adVideo1 from "../app/img/newsAd3.mp4"
-import adVideo1 from "../app/img/worldLoop.mov"
+import adVideo1 from "../app/img/newsAd3.mp4"
+// import adVideo1 from "../app/img/worldLoop.mov"
 
 const Header = () => {
     return (
