@@ -19,6 +19,7 @@ function App() {
 
   //These let NavMenu know to collapse when something else is clicked
   const [homeClick, toggleHomeClick] = useState(false);
+  const [initialFetchComplete, setInitialFetchComplete] = useState(false);
 
   const dispatch = useDispatch();
   const userInfo = useSelector(getUserInfo);
@@ -29,16 +30,22 @@ function App() {
     dispatch(fetchUserData());
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(loadUserPreferences(userInfo));
-  },[userInfo])
+  }, [userInfo])
 
   useEffect(() => {
-    appSettings.data.current.homepage.map((tile) => {
-      dispatch(reloadNews({id: tile.id}));
-      dispatch(fetchBreakingNews({...tile, country: region}));
+    if (initialFetchComplete) return
+    appSettings.data.current.homepage.map((tile, idx) => {
+      const immRegion = tile.country === 'default' ? region : tile.country
+      if (idx < 99) { //Limit articles for testing
+        dispatch(reloadNews({ id: tile.id }));
+        dispatch(fetchBreakingNews({ ...tile, country: immRegion }));
+        setInitialFetchComplete(true);
+        console.log('App.js: Call to fetch')
+      }
     });
-  }, [dispatch, userInfo.isLoading, region])
+  }, [])
 
   return (
     <div onClick={() => toggleHomeClick(!homeClick)} className="App">

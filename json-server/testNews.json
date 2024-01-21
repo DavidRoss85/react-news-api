@@ -1627,7 +1627,7 @@
             "username": "user",
             "avatar": "none",
             "preferences": {
-                "region": "us",
+                "region": "default",
                 "homepage": [
                     {
                         "id": 0,
@@ -1653,7 +1653,7 @@
                     {
                         "id": 1,
                         "endpoint": "top-headlines",
-                        "country": "us",
+                        "country": "default",
                         "category": "",
                         "errorMode": false,
                         "keyword": "",

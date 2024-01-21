@@ -18,11 +18,10 @@ const testMode = true;
 async function fetchFromServer(searchCriteria) {
 
     let newsURL = buildNewsURL(searchCriteria);
-
-    console.log('The built url: ' + newsURL)
+    
+    // console.log('The built url: ' + newsURL)
     if (testMode) newsURL = LOCAL_URL + (searchCriteria.errorMode ? 'errorNews' : 'breakingNews')
-
-
+    // console.log('The sent URL: ', newsURL)
     try {
         const res = await fetch(newsURL);
         if (!res.ok) return ERROR_NEWS;
@@ -38,19 +37,19 @@ async function fetchFromServer(searchCriteria) {
 const buildNewsURL = (searchCriteria) => {
     const { endpoint = 'top-headlines', country, category, pageSize = '100', page = '1', keyword } = searchCriteria;
     const { searchIn, dateFrom, dateTo, language, sortBy } = searchCriteria;
-
+    
     if (endpoint === 'top-headlines') {
         //top-headlines? country= & category= & pageSize= & page= & q=
         const immCountry = country ? country === 'all' ? '' : `country=${country}` : '';
-        const immCategory = category ? (immCountry ? '&' : '') + `category=${category}` : '';
-        const immPageSize = pageSize ? ((immCountry || immCategory) ? '&' : '') + `pageSize=${pageSize}` : `pageSize=100`;
+        const immKeyword = immCountry? '&q=${keyword}' : (keyword ?  `q=${keyword}` : `q=all` );
+        const immCategory = category ? `&category=${category}` : '';
+        const immPageSize = pageSize ? `&pageSize=${pageSize}` : `&pageSize=100`;
         const immPage = page ? `&page=${page}` : `&page=1`;
-        const immKeyword = keyword ? `&q=${keyword}` : '';
 
         const newsURL =
             `${URL_BASE}${endpoint}?`
-            + `${immCountry}${immCategory}${immPageSize}`
-            + `${immPage}${immKeyword}`
+            + `${immCountry}${immKeyword}${immCategory}${immPageSize}`
+            + `${immPage}`
             + `${URL_API_PRE}${apiKey}`;
         return newsURL;
     } else if (endpoint === 'everything') {

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { getAppSettings } from "../app/selectors/settingsSlice";
 import NewsTile from "../components/NewsTile";
 
-const TestHomePage = () => {
+const HomePage = () => {
     //Make this pure later
     const appSettings = useSelector(getAppSettings)
     const newsParams = appSettings.data.current.homepage;
@@ -35,4 +35,4 @@ const TestHomePage = () => {
 
 }
 
-export default TestHomePage;
+export default HomePage;
