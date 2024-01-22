@@ -53,7 +53,7 @@ const newsSlice = createSlice({
                 const immId = (id > state[feed].length - 1) ? state[feed].length - 1 : id;
                 state[feed][immId].isLoading = false;
                 state[feed][immId].errMsg = '';
-                state[feed][immId].news = newsData
+                state[feed][immId].news = newsData;
             })
             .addCase(fetchBreakingNews.rejected, (state, action) => {
                 const { id, feed='breakingNews' } = action.payload;

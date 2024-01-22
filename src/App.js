@@ -28,10 +28,12 @@ function App() {
 
   const initializeTiles = () =>{
     appSettings.data.current.homepage.map((tile, idx) => {
-      const immRegion = tile.country === 'default' ? region : tile.country;
+      const{search} = tile
+      const immRegion = search.country === 'default' ? region : search.country;
       if (idx < 99) { //Limit tiles for testing
         dispatch(reloadNews({ id: tile.id }));
-        dispatch(fetchBreakingNews({ ...tile, country: immRegion }));
+        dispatch(fetchBreakingNews({ ...search, country: immRegion, id: tile.id }));
+        return {[idx]: tile.title}
       }
     });
     setInitialFetchComplete(true);
@@ -40,14 +42,14 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUserData());
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if(userInfo.fetchComplete && !initialFetchComplete){
       dispatch(loadUserPreferences(userInfo));
       console.log('User Preferences Loaded')
     }
-  }, [userInfo]);
+  }, [userInfo,dispatch,initialFetchComplete]);
   
   useEffect(()=>{
     if(appSettings.isLoaded && !initialFetchComplete){
@@ -55,9 +57,9 @@ function App() {
       console.log('Initialized Tiles')
     }
 
-  },[appSettings])
+  },[appSettings,initialFetchComplete])
 
-  console.log('APP SETTINGS',appSettings)
+  // console.log('APP SETTINGS',appSettings)
   return (
     <div onClick={() => toggleHomeClick(!homeClick)} className="App">
       <Header />

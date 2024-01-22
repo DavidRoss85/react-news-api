@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
-
+import { useDispatch } from 'react-redux';
+import { reloadNews, fetchBreakingNews } from "./newsSlice";
 const initialState = {
     data: {
         username: '',
@@ -19,6 +20,15 @@ const settingsSlice = createSlice({
     reducers: {
         changeRegion: (state, action) => {
             state.data.current.region = action.payload;
+            state.data.preferences.homepage.map((page,idx)=>{
+                console.log('Change region: ', action.payload)
+                if(page.search.country==='default'){
+                    console.log('changed #' + page.id)
+                    state.data.current.homepage[idx].search.country = action.payload
+                }
+            })
+
+            
         },
         loadUserPreferences: (state, action) => {
             state.data = { ...action.payload.data, current: action.payload.data.preferences }
@@ -35,7 +45,7 @@ export const getCurrentRegion = (state) => {
 }
 
 export const getAppSettings = (state) =>{
-    console.log('settings state:', state.settings)
+    // console.log('settings state:', state.settings)
     return state.settings
     
 }

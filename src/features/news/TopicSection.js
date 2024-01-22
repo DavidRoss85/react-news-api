@@ -18,8 +18,10 @@ const TopicSection = (props) => {
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
+    const emptyNewsArray = useSelector(getEmptyNewsArray);
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
+    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id])
     const { status } = newsFeed;
 
     const dispatch = useDispatch();
@@ -35,21 +37,28 @@ const TopicSection = (props) => {
 
     const triggerReload = () => {
         dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
-        dispatch(fetchBreakingNews({ id: id }))
+        dispatch(fetchBreakingNews({...tileSetting, id: id }))
     }
 
+    useEffect(() => {
+        triggerReload();
+    }, [tileSetting])
 
     useEffect(() => {
-        setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
-        displayNews();
+        if (newsFeed) {
+            setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
+            displayNews();
+        }
     }, [newsFeed]);
 
 
 
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }
-    
-    const immArticle = { ...newsArray[0], urlToImage: (!newsArray[0].urlToImage) ? newsImage : newsArray[0].urlToImage }
+
+    const immArticle = newsArray[0] ?
+        { ...newsArray[0], urlToImage: (!newsArray[0].urlToImage) ? newsImage : newsArray[0].urlToImage }
+        : emptyNewsArray;
     return (
         <div>
             <Row className="mx-auto">

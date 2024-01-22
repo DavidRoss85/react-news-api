@@ -52,6 +52,7 @@ const userSlice = createSlice({
                 state.errMsg = '';
                 //replace this with the filter for the currently logged in user
                 state.data = action.payload.filter((user) => user.username = 'user')[0]
+                console.log(action.payload.filter((user) => user.username = 'user')[0])
             })
             .addCase(fetchUserData.rejected, (state, action) => {
                 state.isLoading = false;

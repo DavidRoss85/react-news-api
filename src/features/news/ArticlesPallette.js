@@ -17,8 +17,10 @@ const ArticlesPallette = (props) => {
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
+    const emptyNewsArray = useSelector(getEmptyNewsArray);
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
+    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id])
     const { status } = newsFeed;
 
     const dispatch = useDispatch();
@@ -34,13 +36,18 @@ const ArticlesPallette = (props) => {
 
     const triggerReload = () => {
         dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
-        dispatch(fetchBreakingNews({ id: id }))
+        dispatch(fetchBreakingNews({...tileSetting, id: id }))
     }
 
+    useEffect(() => {
+        triggerReload();
+    }, [tileSetting])
 
     useEffect(() => {
-        setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
-        displayNews();
+        if (newsFeed) {
+            setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
+            displayNews();
+        }
     }, [newsFeed]);
 
     //Show loading wheel

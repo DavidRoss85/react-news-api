@@ -1,5 +1,5 @@
-import { Container, Row, Col } from "reactstrap";
-import { useState, useEffect } from "react";
+import { Container, Row } from "reactstrap";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getAppSettings } from "../app/selectors/settingsSlice";
 import NewsTile from "../components/NewsTile";
@@ -17,12 +17,12 @@ const HomePage = () => {
             <Row key={i}>
                 {
                     newsParams.filter((param) => param.row === i)
-                    .map((param, idx) => {
-                        return <NewsTile newsParams={param} key={idx} />
-                    })
+                        .map((param, idx) => {
+                            return <NewsTile newsParams={param} key={idx} />
+                        })
                 }
             </Row>
-        )     
+        )
     }
     useEffect(() => {
 

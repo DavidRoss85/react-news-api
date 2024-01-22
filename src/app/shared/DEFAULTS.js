@@ -15,98 +15,124 @@ export const userPref = {
     homepage: [
         {
             id: 0,
-            endpoint: 'top-headlines',
-            country: 'us',
-            category: '',
-            errorMode: false,
-            keyword: '',
-            numArticles: 10,
-            tileType: 'slide',
-            title: 'Top-Stories',
+            search: {
+                category: "",
+                country: "default",
+                endpoint: "top-headlines",
+                errorMode: false,
+                keyword: "",
+                numArticles: 10
+            },
+            title: "Top-Stories",
+            tileType: "slide",
             row: 1,
             sizing: {
-                md:'6', lg:'5', className:''
+                md: "6",
+                lg: "5",
+                className: ""
             },
-            innerSizing:{
-                className: 'slideHolder'
+            innerSizing: {
+                className: "slideHolder"
             },
             componentAttribute: {}
         },
         {
             id: 1,
-            endpoint: 'top-headlines',
-            country: 'us',
-            category: '',
-            errorMode: false,
-            keyword: '',
+            search: {
+                category: "entertainment",
+                country: "default",
+                endpoint: "top-headlines",
+                errorMode: false,
+                keyword: ""
+            },
             numArticles: 6,
-            tileType: 'pallette',
-            title: 'Trending',
+            title: "Entertainment",
+            tileType: "pallette",
             row: 1,
             sizing: {
-                md:'6', lg:'4', className:''
+                md: "6",
+                lg: "4",
+                className: ""
             },
-            innerSizing:{
-                className: ''
+            innerSizing: {
+                className: ""
             },
-            componentAttribute: { md:'6'}
+            componentAttribute: {
+                md: "6"
+            }
         },
         {
             id: 2,
-            endpoint: 'top-headlines',
-            country: 'us',
-            category: '',
-            errorMode: false,
-            keyword: '',
+            search: {
+                category: "",
+                country: "us",
+                endpoint: "top-headlines",
+                errorMode: false,
+                keyword: ""
+            },
             numArticles: 8,
-            tileType: 'list',
-            title: 'News',
+            title: "US News",
+            tileType: "list",
             row: 1,
             sizing: {
-                md:'d-none', lg:'3', className:'d-none d-lg-inline-block'
+                md: "d-none",
+                lg: "3",
+                className: "d-none d-lg-inline-block"
             },
-            innerSizing:{
-                className: ''
+            innerSizing: {
+                className: ""
             },
             componentAttribute: {}
         },
         {
             id: 3,
-            endpoint: 'top-headlines',
-            country: 'us',
-            category: '',
-            errorMode: false,
-            keyword: '',
+            search: {
+                category: "",
+                country: "gb",
+                endpoint: "top-headlines",
+                errorMode: false,
+                keyword: ""
+            },
             numArticles: 6,
-            tileType: 'topic',
-            title: 'More News',
+            title: "UK News",
+            tileType: "topic",
             row: 2,
             sizing: {
-                md:'6', lg:'4', className:''
+                md: "6",
+                lg: "4",
+                className: ""
             },
-            innerSizing:{
-                className: ''
+            innerSizing: {
+                className: ""
             },
             componentAttribute: {}
         },
         {
             id: 4,
-            endpoint: 'top-headlines',
-            country: 'us',
-            category: '',
-            errorMode: false,
-            keyword: '',
+            search: {
+                category: "business",
+                country: "us",
+                endpoint: "top-headlines",
+                errorMode: false,
+                keyword: ""
+            },
             numArticles: 12,
-            tileType: 'pallette',
-            title: 'Even MORE',
+            title: "US Business",
+            tileType: "pallette",
             row: 2,
             sizing: {
-                md:'6', lg:'8', className:''
+                md: "6",
+                lg: "8",
+                className: ""
             },
-            innerSizing:{
-                className: ''
+            innerSizing: {
+                className: ""
             },
-            componentAttribute: { md:'3'}
-        },
+            componentAttribute: {
+                md: "3"
+            }
+        }
     ]
 }
+
+

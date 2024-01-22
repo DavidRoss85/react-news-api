@@ -1631,14 +1631,16 @@
                 "homepage": [
                     {
                         "id": 0,
-                        "endpoint": "top-headlines",
-                        "country": "default",
-                        "category": "",
-                        "errorMode": false,
-                        "keyword": "",
+                        "search" :{
+                            "category": "",
+                            "country": "default",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": ""
+                        },
                         "numArticles": 10,
-                        "tileType": "slide",
                         "title": "Top-Stories",
+                        "tileType": "slide",
                         "row": 1,
                         "sizing": {
                             "md": "6",
@@ -1652,14 +1654,16 @@
                     },
                     {
                         "id": 1,
-                        "endpoint": "top-headlines",
-                        "country": "default",
-                        "category": "entertainment",
-                        "errorMode": false,
-                        "keyword": "",
+                        "search":{
+                            "category": "entertainment",
+                            "country": "default",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": ""
+                        },
                         "numArticles": 6,
-                        "tileType": "pallette",
                         "title": "Entertainment",
+                        "tileType": "pallette",
                         "row": 1,
                         "sizing": {
                             "md": "6",
@@ -1675,14 +1679,16 @@
                     },
                     {
                         "id": 2,
-                        "endpoint": "top-headlines",
-                        "country": "us",
-                        "category": "",
-                        "errorMode": false,
-                        "keyword": "",
+                        "search":{
+                            "category": "",
+                            "country": "us",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": ""
+                        },
                         "numArticles": 8,
-                        "tileType": "list",
                         "title": "US News",
+                        "tileType": "list",
                         "row": 1,
                         "sizing": {
                             "md": "d-none",
@@ -1696,14 +1702,16 @@
                     },
                     {
                         "id": 3,
-                        "endpoint": "top-headlines",
-                        "country": "gb",
-                        "category": "",
-                        "errorMode": false,
-                        "keyword": "",
+                        "search":{
+                            "category": "",
+                            "country": "gb",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": ""
+                        },
                         "numArticles": 6,
-                        "tileType": "topic",
                         "title": "UK News",
+                        "tileType": "topic",
                         "row": 2,
                         "sizing": {
                             "md": "6",
@@ -1717,14 +1725,16 @@
                     },
                     {
                         "id": 4,
-                        "endpoint": "top-headlines",
-                        "country": "us",
-                        "category": "business",
-                        "errorMode": false,
-                        "keyword": "",
+                        "search":{
+                            "category": "business",
+                            "country": "us",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": ""
+                        },
                         "numArticles": 12,
-                        "tileType": "pallette",
                         "title": "US Business",
+                        "tileType": "pallette",
                         "row": 2,
                         "sizing": {
                             "md": "6",
