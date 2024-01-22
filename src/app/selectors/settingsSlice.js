@@ -9,7 +9,8 @@ const initialState = {
             region: userPref.region,
             homepage: userPref.homepage
         }
-    }
+    },
+    isLoaded: false
 }
 
 const settingsSlice = createSlice({
@@ -21,8 +22,8 @@ const settingsSlice = createSlice({
         },
         loadUserPreferences: (state, action) => {
             state.data = { ...action.payload.data, current: action.payload.data.preferences }
-            // console.log('STRINGIFY',JSON.stringify(userPref));
-        }
+            state.isLoaded=action.payload;
+        },
     }
 });
 
@@ -34,5 +35,7 @@ export const getCurrentRegion = (state) => {
 }
 
 export const getAppSettings = (state) =>{
+    console.log('settings state:', state.settings)
     return state.settings
+    
 }

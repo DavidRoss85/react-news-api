@@ -23,30 +23,41 @@ function App() {
 
   const dispatch = useDispatch();
   const userInfo = useSelector(getUserInfo);
-  const appSettings = useSelector(getAppSettings);
+  const appSettings = useSelector((state)=>state.settings);
   const region = useSelector(getCurrentRegion);
+
+  const initializeTiles = () =>{
+    appSettings.data.current.homepage.map((tile, idx) => {
+      const immRegion = tile.country === 'default' ? region : tile.country;
+      if (idx < 99) { //Limit tiles for testing
+        dispatch(reloadNews({ id: tile.id }));
+        dispatch(fetchBreakingNews({ ...tile, country: immRegion }));
+      }
+    });
+    setInitialFetchComplete(true);
+    console.log('call to fetch all')
+  }
 
   useEffect(() => {
     dispatch(fetchUserData());
   }, [])
 
   useEffect(() => {
-    dispatch(loadUserPreferences(userInfo));
-  }, [userInfo])
+    if(userInfo.fetchComplete && !initialFetchComplete){
+      dispatch(loadUserPreferences(userInfo));
+      console.log('User Preferences Loaded')
+    }
+  }, [userInfo]);
+  
+  useEffect(()=>{
+    if(appSettings.isLoaded && !initialFetchComplete){
+      initializeTiles();
+      console.log('Initialized Tiles')
+    }
 
-  useEffect(() => {
-    if (initialFetchComplete) return
-    appSettings.data.current.homepage.map((tile, idx) => {
-      const immRegion = tile.country === 'default' ? region : tile.country
-      if (idx < 99) { //Limit articles for testing
-        dispatch(reloadNews({ id: tile.id }));
-        dispatch(fetchBreakingNews({ ...tile, country: immRegion }));
-        setInitialFetchComplete(true);
-        console.log('App.js: Call to fetch')
-      }
-    });
-  }, [])
+  },[appSettings])
 
+  console.log('APP SETTINGS',appSettings)
   return (
     <div onClick={() => toggleHomeClick(!homeClick)} className="App">
       <Header />
