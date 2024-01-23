@@ -1,10 +1,17 @@
 import { ERROR_NEWS } from "../shared/TEST_NEWS"
 import { buildNewsURL } from "../../utils/buildNewsUrl"
 
+//Move this into a component...
+import { checkCache } from "./cacheSlice";
+const cacheResults = (searchCriteria, searchResults) =>{
+    if(checkCache(searchCriteria)){}
+}
+//--------------------------------
+
 const LOCAL_URL = 'http://localhost:3001/'
 const testMode = true;
 
-async function fetchFromServer(searchCriteria) {
+export const fetchFromServer = async (searchCriteria) => {
 
     let newsURL = buildNewsURL(searchCriteria);
     // console.log('The built url: ' + newsURL)
@@ -15,6 +22,7 @@ async function fetchFromServer(searchCriteria) {
         const res = await fetch(newsURL);
         if (!res.ok) return ERROR_NEWS;
         const data = await res.json();
+        cacheResults(searchCriteria, data)
         return data;
 
     } catch (e) {
@@ -23,5 +31,3 @@ async function fetchFromServer(searchCriteria) {
     }
 }
 
-
-export { fetchFromServer }

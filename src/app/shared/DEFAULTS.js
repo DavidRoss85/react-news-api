@@ -21,7 +21,7 @@ export const userPref = {
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: "",
-                numArticles: 10
+                numArticles: 10,
             },
             title: "Top-Stories",
             tileType: "slide",

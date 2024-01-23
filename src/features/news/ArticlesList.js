@@ -44,7 +44,10 @@ const ArticlesList = (props) => {
 
     useEffect(() => {
         if (newsFeed) {
-            setNewsArray(newsFeed.articles.filter((article, idx) => idx < numArticles));
+            setNewsArray(newsFeed.articles.filter((article, idx) => {
+                const immNumArticles = numArticles || 1
+                return idx < immNumArticles
+            }));
             displayNews();
         }
     }, [newsFeed]);

@@ -44,17 +44,21 @@ const BreakingNewsSlide = (props) => {
 
     useEffect(() => {
         setNewsArray(
-            convertToSlideFormat(newsFeed.articles)
+            convertToSlideFormat(
+                newsFeed.articles)
                 .filter(
-                    (article, idx) => idx < numArticles
+                    (article, idx) => {
+                        const immNumArticles = numArticles || 1
+                        return idx < immNumArticles
+                    }
                 )
         );
+        
         displayNews();
     }, [newsFeed]);
-
+    
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }
-
     return (
         <SlideShow
             items={newsArray}
