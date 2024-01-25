@@ -12,14 +12,14 @@ const URL_API_PRE = "&apiKey="
 export const buildNewsURL = (searchCriteria) => {
     const { endpoint = 'top-headlines', country, category, pageSize = '100', page = '1', keyword } = searchCriteria;
     const { searchIn, dateFrom, dateTo, language, sortBy } = searchCriteria;
-    
+
     if (endpoint === 'top-headlines') {
         //top-headlines? country= & category= & pageSize= & page= & q=
         const immCountry = country ? country === 'all' ? '' : `country=${country}` : '';
-        const immKeyword = (immCountry? `&` : '') + (keyword ? `q=${keyword}` : `q=all` );
+        const immKeyword = immCountry ? (keyword ? `&q=${keyword}` : '') : (keyword ? `q={keyword}` : 'q=news');
         const immCategory = category ? `&category=${category}` : '';
-        const immPageSize = pageSize ? `&pageSize=${pageSize}` : `&pageSize=100`;
-        const immPage = page ? `&page=${page}` : `&page=1`;
+        const immPageSize = pageSize ? `&pageSize=${pageSize}` : '';
+        const immPage = page ? `&page=${page}` : '';
 
         const newsURL =
             `${URL_BASE}${endpoint}?`
@@ -32,14 +32,14 @@ export const buildNewsURL = (searchCriteria) => {
         //&language=(ar/de/en/es/fr/he/it/nl/no/pt/ru/sv/ud/zh)
         //&sortBy=(relevancy/popularity/publishedAt)
         //&pageSize= &page=
-        const immKeyword = keyword ? `q=${keyword}` : '&q=all';
+        const immKeyword = keyword ? `q=${keyword}` : '&q=news';
         const immSearchIn = searchIn ? `&searchIn=${searchIn}` : '';
         const immFrom = dateFrom ? `&from=${dateFrom}` : '';
         const immTo = dateTo ? `&to=${dateTo}` : '';
         const immLang = language ? `&language=${language}` : '';
         const immSort = sortBy ? `&sortBy${sortBy}` : '';
-        const immPageSize = pageSize ?  `&pageSize=${pageSize}` : `&pageSize=100`;
-        const immPage = page ? `&page=${page}` : `&page=1`;
+        const immPageSize = pageSize ? `&pageSize=${pageSize}` : '';
+        const immPage = page ? `&page=${page}` : '';
 
         const newsURL =
             `${URL_BASE}${endpoint}?`

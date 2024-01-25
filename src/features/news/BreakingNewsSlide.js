@@ -36,7 +36,6 @@ const BreakingNewsSlide = (props) => {
     const triggerReload = () => {
         dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
         dispatch(fetchBreakingNews({...tileSetting, id: id }))
-        console.log('What to fetch:', tileSetting)
     }
 
     useEffect(() => {

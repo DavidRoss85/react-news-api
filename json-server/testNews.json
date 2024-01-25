@@ -1603,6 +1603,402 @@
             }
         ]
     },
+    "japanNews": {
+        "status": "ok",
+        "totalResults": 30,
+        "articles": [
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nhk.or.jp"
+                },
+                "author": null,
+                "title": "関越道 バスとトラックなど3台からむ事故 約20人けが 軽症か - nhk.or.jp",
+                "description": "24日朝、新潟県湯沢町の関越自動車道上り線で、高速バスと大型トラックなど3台がからむ事故が起きました。警察によりますと、…",
+                "url": "https://www3.nhk.or.jp/news/html/20240124/k10014332351000.html",
+                "urlToImage": "https://www3.nhk.or.jp/news/html/20240124/K10014332351_2401240916_0124092916_01_02.jpg",
+                "publishedAt": "2024-01-24T02:21:19Z",
+                "content": "24310"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nhk.or.jp"
+                },
+                "author": null,
+                "title": "ニューハンプシャー州予備選 トランプ氏勝利確実 主要メディア | NHK - nhk.or.jp",
+                "description": "秋のアメリカ大統領選挙に向けた野党・共和党の候補者選びの第2戦、東部ニューハンプシャー州の予備選挙で、アメリカの主要メデ…",
+                "url": "https://www3.nhk.or.jp/news/html/20240124/k10014332371000.html",
+                "urlToImage": "https://www3.nhk.or.jp/news/html/20240124/K10014332371_2401241140_0124114107_01_03.jpg",
+                "publishedAt": "2024-01-24T02:06:43Z",
+                "content": "2\r\n112237249\r\n10402553.645.5\r\n15\r\n30"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Impress.co.jp"
+                },
+                "author": null,
+                "title": "ASUS、Ryzen 9 8945HS搭載の15.6型堅牢ゲーミングノート - PC Watch",
+                "description": "ASUS JAPAN株式会社は、高い堅牢性を特徴とするTUF Gamingシリーズから、Ryzen 9 8945HS搭載の15.6型ゲーミングノート「TUF Gaming A15 FA507UV」を2月7日に発売する。価格は18万9,800円。",
+                "url": "https://pc.watch.impress.co.jp/docs/news/1562729.html",
+                "urlToImage": "https://pc.watch.impress.co.jp/img/pcw/list/1562/729/01.jpg",
+                "publishedAt": "2024-01-24T02:00:00Z",
+                "content": "ASUS JAPANTUF GamingRyzen 9 8945HS15.6TUF Gaming A15 FA507UV27189,800 \r\n TUF Gaming A15 FA507UVCPURyzen 9 8945HSCPUGPURadeon 780MGPUGeForce RTX 4060 Laptop GPU \r\n 15.6HD(1,920×1,200)144HzTUF GamingMI… [+245 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nhk.or.jp"
+                },
+                "author": null,
+                "title": "人類最後の日まで残り時間は“1分30秒” 前例ない危険な状態に | NHK - nhk.or.jp",
+                "description": "アメリカの科学雑誌は「人類最後の日」までの残り時間を象徴的に示すことしの「終末時計」について、ウクライナ情勢や緊迫化する…",
+                "url": "https://www3.nhk.or.jp/news/html/20240124/k10014331941000.html",
+                "urlToImage": "https://www3.nhk.or.jp/news/html/20240124/K10014331941_2401240746_0124095946_01_02.jpg",
+                "publishedAt": "2024-01-24T01:51:53Z",
+                "content": "130"
+            },
+            {
+                "source": {
+                    "id": "reuters",
+                    "name": "Reuters"
+                },
+                "author": "ロイター編集",
+                "title": "北朝鮮、西岸沖へ複数の巡航ミサイル発射＝韓国軍 - ロイター (Reuters Japan)",
+                "description": "韓国軍合同参謀本部は、北朝鮮が２４日午前７時（日本時間同）ごろ、西岸沖に向けて複数の巡航ミサイルを発射したと発表した。韓国と米国の情報機関が分析中という。",
+                "url": "https://jp.reuters.com/world/north-korea/ATS24OEAFZOKVKKYS6LJFYUAXE-2024-01-24/",
+                "urlToImage": "https://jp.reuters.com/resizer/ZWqhxCKSbYcACJMif759fgiLjFY=/1920x1005/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/UH54BILVZVIEZB6KGV42IVMMG4.jpg",
+                "publishedAt": "2024-01-24T01:49:42Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Osaka-u.ac.jp"
+                },
+                "author": null,
+                "title": "＼１ナノメートル以下の分解能で！／ 世界初！１分子内部の電子の歪みを画像化 - 大阪大学 ResOU",
+                "description": "大阪大学大学院工学研究科　菅原康弘教授、山本達也さん（研究当時：博士後期課程）、大阪大学大学院基礎工学研究科　石原一教授、大阪公立大学大学院工学研究科　余越伸彦准教授、大阪産業技術研究所　山根秀勝研究員らの研究チームは、光照射により発生する力（光圧）を計る顕微鏡（光誘起力顕微鏡）を用いて、単一分子の中で電子が複雑に歪む様子を１ナノメートル（１０億分の1メートル）以下の分解能で画像化することに世界で初めて成功しました（図１）。\n基板や配列をデザインして一つ一つの分子を積み上げ新しい機能を持つ物質を創り出す技術は、将…",
+                "url": "https://resou.osaka-u.ac.jp/ja/research/2024/20240123_1",
+                "urlToImage": "https://resou.osaka-u.ac.jp/ja/research/2024/20240123_1/@@images/b7f852c7-fc7c-4e95-8231-bd9c1ab98d8f.jpeg",
+                "publishedAt": "2024-01-24T01:25:42Z",
+                "content": "1. (a) (Ag)(b) (c) (d) (c).2. (a) 2(b) (c) 23. (a) (b) (c) ACS Nano\r\nOptical Imaging of a Single Molecule with Subnanometer Resolution by Photoinduced \r\nForce MicroscopyT. Yamamoto, H. Yamane, N. Yok… [+71 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Jiji.com"
+                },
+                "author": "時事通信社",
+                "title": "戦闘員１００人殺害 ハマス、２カ月休戦案拒否か―イスラエル軍 - 時事通信ニュース",
+                "description": "【カイロ時事】イスラエル軍報道官は２３日、パレスチナ自治区ガザ南部ハンユニスの西部で集中的作戦を行い、イスラム組織ハマスの戦闘員１００人以上を殺害したと発表した。軍はハンユニスをハマスの主要拠点とみており、報道官は「広範な攻撃を続ける」と語った。",
+                "url": "https://www.jiji.com/jc/article?k=2024012400267&g=int",
+                "urlToImage": "https://www.jiji.com/news2/kiji_photos/202401/20240124at06S_o.jpg",
+                "publishedAt": "2024-01-24T01:21:00Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Famitsu.com"
+                },
+                "author": "ファミ通.com",
+                "title": "『【推しの子】』実写化決定。2024年冬にドラマシリーズをアマプラで世界独占配信、映画を東映配給で劇場公開 - ファミ通.com",
+                "description": "『【推しの子】』の実写映像化が決定。2024年冬にドラマシリーズをAmazon（アマゾン）のPrime Video（プライムビデオ）で世界独占配信、映画を東映配給にて劇場公開されることが発表された。",
+                "url": "https://www.famitsu.com/news/202401/24332107.html",
+                "urlToImage": "https://www.famitsu.com/images/000/332/107/z_65b057942989c.jpg",
+                "publishedAt": "2024-01-24T00:25:00Z",
+                "content": "Amazon2024AmazonPrime Video\r\nMEM\r\n(Amazon.co.jp)\r\nAmazonAmazonPrime Video\r\n2020202411,5002023YOASOBI\r\nYouTubeVIVANT(2023TBS) Season1(2023WOWOW)B46sweetANB2021~=LOVE (MBS2022)20231202320092022NHK20232… [+386 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Security-next.com"
+                },
+                "author": null,
+                "title": "【セキュリティ ニュース】Mozilla、「Firefox 122」をリリース - 脆弱性15件を解消（1ページ目 / 全1ページ） - Security NEXT",
+                "description": "Mozilla Foundationは、現地時間1月23日にブラウザの新版となる「Firefox 122」をリリースした。あわせて延長サポート版のアップデートを提供している。：Security NEXT",
+                "url": "https://www.security-next.com/152931",
+                "urlToImage": null,
+                "publishedAt": "2024-01-24T00:08:56Z",
+                "content": "Mozilla Foundation123Firefox 122\r\nFirefox 122CVE152High5\r\nCVE-2024-0741CVE-2024-0745CVE-2024-0742\r\n101ModerateFirefox ESR 115.79\r\nFirefox 122\r\nCVE-2024-0741CVE-2024-0742CVE-2024-0743CVE-2024-0744CVE-… [+263 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nhk.or.jp"
+                },
+                "author": null,
+                "title": "路面凍結でスリップか トレーラーにはねられ男性死亡 北九州 | NHK - nhk.or.jp",
+                "description": "24日午前3時半ごろ、北九州市門司区の県道で大型トレーラーが凍結した路面でスリップし、対向車線にいた男性がはねられて死亡…",
+                "url": "https://www3.nhk.or.jp/news/html/20240124/k10014332311000.html",
+                "urlToImage": "https://www3.nhk.or.jp/news/html/20240124/K10014332311_2401240915_0124091532_01_02.jpg",
+                "publishedAt": "2024-01-24T00:08:37Z",
+                "content": ""
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Weathernews.jp"
+                },
+                "author": "ウェザーニュース",
+                "title": "九州の雪は次第に峠を越える 引き続き車の運転や足元には注意 - ウェザーニュース",
+                "description": "昨日から続いている九州の雪は峠を越えてきています。雪が収まってもしばらくは路面に雪の残る所がありますので、車の運転や足元には注意が必要です。",
+                "url": "https://weathernews.jp/s/topics/202401/240075/",
+                "urlToImage": "https://smtgvs.weathernews.jp/s/topics/img/202401/202401240075_top_img_A.jpg?1706054789",
+                "publishedAt": "2024-01-24T00:08:00Z",
+                "content": "{{topic.rank}}\r\n{{topic.pageTitle}}{{editTstr(topic.editTime)}}"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nhk.or.jp"
+                },
+                "author": "日本放送協会",
+                "title": "【速報】西鉄路線バス 北九州市内は午前8時21分に一部再開｜NHK 福岡のニュース - nhk.or.jp",
+                "description": "【NHK】西鉄バスは雪のため、北九州市内を走るすべての路線バスで始発から運行を見合わせていましたが、午前８時２１分に黒崎バスセンターを出発する一部の…",
+                "url": "https://www3.nhk.or.jp/fukuoka-news/20240124/5010023195.html",
+                "urlToImage": "https://www3.nhk.or.jp/fukuoka-news/20240124/5010023195_20240124083321_m.jpg",
+                "publishedAt": "2024-01-23T23:36:00Z",
+                "content": ""
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nikkei.com"
+                },
+                "author": "日本経済新聞社",
+                "title": "NY株ハイライト ダウ高値続かず、広がる銘柄「格差」 - 日本経済新聞",
+                "description": "【NQNﾆｭｰﾖｰｸ=戸部実華】23日の米株式市場でダウ工業株30種平均は3日連続の最高値更新を阻まれた。前日比96ドル安の3万7905ドルで取引を終えた。米主要企業の決算発表が相次ぐなか、業績見通しがさえなかった銘柄への売りが重荷となった。人工知能（AI）期待のハイテク株買いが相場を支えるが、銘柄間で広がる「格差」は先行きの相場全体の上昇余地を抑えかねないとの慎重な見方もある。工業製品・事",
+                "url": "https://www.nikkei.com/article/DGXZQOFL2402U0U4A120C2000000/",
+                "urlToImage": "https://www.nikkei.com/.resources/k-components/rectangle.rev-d54ea30.png",
+                "publishedAt": "2024-01-23T23:32:15Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Prtimes.jp"
+                },
+                "author": null,
+                "title": "【ベンチャー・スタートアップ必見】【無料WEB開催】弁護士による「スタートアップ法務における契約書の実務～会社設立時・従業員雇用の際のチェックポイント～」セミナー開催決定 - PR TIMES",
+                "description": "弁護士　中沢　信介のプレスリリース（2024年1月24日 08時00分）【ベンチャー・スタートアップ必見】【無料WEB開催】弁護士による「スタートアップ法務における契約書の実務～会社設立時・従業員雇用の際のチェックポイント～」セミナー開催決定",
+                "url": "https://prtimes.jp/main/html/rd/p/000000002.000131191.html",
+                "urlToImage": "https://prcdn.freetls.fastly.net/release_image/131191/2/131191-2-1b9759bc66e85b77a20dbca781f4c3a6-1172x515.png?format=jpeg&auto=webp&fit=bounds&width=1200&height=630",
+                "publishedAt": "2024-01-23T23:00:01Z",
+                "content": "Copyright © PR TIMES Corporation. All Rights Reserved."
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Bloomberg.co.jp"
+                },
+                "author": null,
+                "title": "日本株は小幅続落へ、円安勢い失い輸出関連に売り－半導体も下落か - ブルームバーグ",
+                "description": "24日の東京株式相場は続落。日本銀行が前日にややタカ派的な見解を示した後、外国為替市場で円安の勢いに陰りが出ており、業績期待の後退で電機や機械など輸出関連株の一角が軟調。将来的な金利上昇観測から相対的に有利子負債が多い不動産や建設、陸運株も安い。",
+                "url": "https://www.bloomberg.co.jp/news/articles/2024-01-23/S7QGEVT1UM0W00",
+                "urlToImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifax0nrnjJ7g/v0/1200x801.jpg",
+                "publishedAt": "2024-01-23T22:48:00Z",
+                "content": "24日の東京株式相場は続落。\r\n日本銀行が前日にややタカ派的な見解を示した後、外国為替市場で円安の勢いに陰りが出ており、業績期待の後退で電機や機械など輸出関連株の一角が軟調。将来的な金利上昇観測から相対的に有利子負債が多い不動産や建設、陸運株も安い。\r\n<table><tr><td><ul><li>ＴＯＰＩＸは前日比0.6％安の2527.57－午前９時44分時点</li><li>日経平均株価は0… [+856 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nhk.or.jp"
+                },
+                "author": null,
+                "title": "東海道新幹線 積雪のため 名古屋と米原間で速度落とし運転 - nhk.or.jp",
+                "description": "JR東海によりますと、東海道新幹線は滋賀県米原市付近での積雪のため、始発から名古屋と米原の間の一部の区間で速度を落として…",
+                "url": "https://www3.nhk.or.jp/news/html/20240124/k10014332261000.html",
+                "urlToImage": "https://www3.nhk.or.jp/news/html/20240124/K10014332261_2401240541_0124054405_01_02.jpg",
+                "publishedAt": "2024-01-23T22:21:38Z",
+                "content": ""
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Sankei.com"
+                },
+                "author": "産経ニュース",
+                "title": "2ちゃんの書き込みこそ「真実」 青葉被告の孤独 京アニ25日判決 - 産経ニュース",
+                "description": "底辺の人間、底辺の論理…。３６人が死亡した京都アニメーション放火殺人事件で、殺人などの罪に問われた青葉真司被告（４５）は法廷で「底辺」という言葉を繰り返した。",
+                "url": "https://www.sankei.com/article/20240124-X2KAKHC4RBIOZFIHYRCHWZ32GQ/",
+                "urlToImage": "https://www.sankei.com/resizer/DV8rW6yn3kWjhowtXmn4oo7fS6k=/1200x630/filters:focal(322x237:332x247):quality(50)/cloudfront-ap-northeast-1.images.arcpublishing.com/sankei/DITGRWM24BFAVMN5SN5AKRGICY.jpg",
+                "publishedAt": "2024-01-23T22:00:00Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nhk.or.jp"
+                },
+                "author": null,
+                "title": "プロボクシング 那須川 初めて世界ランカーと対戦 TKO勝ち - nhk.or.jp",
+                "description": "プロボクシングの那須川天心選手が初めて世界ランカーと対戦し、ボクシングデビュー後初めてとなるテクニカルノックアウト勝ちを…",
+                "url": "https://www3.nhk.or.jp/news/html/20240124/k10014332141000.html",
+                "urlToImage": "https://www3.nhk.or.jp/news/html/20240124/K10014332141_2401232249_0124064122_01_02.jpg",
+                "publishedAt": "2024-01-23T21:41:20Z",
+                "content": "472\r\n23WBAWBO148\r\n2\r\n43\r\n2WBA1\r\n1203\r\nWBA130"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Www.fnn.jp"
+                },
+                "author": "フジテレビ, 国際取材部",
+                "title": "「娘には子どもが…」床下に夫婦の遺体遺棄で逮捕のフィリピン人女の母「信じられない」事件2日後会話も｜FNNプライムオンライン - FNNプライムオンライン",
+                "description": "東京・足立区にある住宅から50代の夫婦の遺体が見つかった事件で、逮捕されたフィリピン国籍の女の母親が取材に応じた。モラレス容疑者の母親「自分の娘がそんなことをするなんて信じられない。できるとは思えない」高橋徳弘さんと妻の希美江さんの遺体を遺棄した疑いで逮捕された、モラレス・ヘイゼル・アン容疑者。母親によると、前の夫との間にできた子どもを母親に預けていて、事件の2日後にも話したばかりだという。モラレス容疑者は、高橋さん夫妻の長男とかつて交際していて、一家と金銭トラブルを抱えていた。モラレス容疑者の母親「(高橋さん夫…",
+                "url": "https://www.fnn.jp/articles/-/647113",
+                "urlToImage": "https://fnn.ismcdn.jp/mwimgs/a/7/600/img_a7af48d96fb153d8fea481777c96e48a539150.jpg",
+                "publishedAt": "2024-01-23T21:16:00Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": "reuters",
+                    "name": "Reuters"
+                },
+                "author": "ロイター編集",
+                "title": "トルコ、スウェーデンのＮＡＴＯ加盟を承認 数日中に大統領が署名へ - ロイター (Reuters Japan)",
+                "description": "トルコ議会は２３日、スウェーデンの北大西洋条約機構（ＮＡＴＯ）加盟を認める法案を承認した。４時間以上にわたる討議の後、賛成多数で可決された。",
+                "url": "https://jp.reuters.com/world/security/E7RCJ57WY5MHRFEGVM5KAN7VFM-2024-01-23/",
+                "urlToImage": "https://jp.reuters.com/resizer/mRyWnkgQti3XK9uGcek9vC3EWEo=/1920x1005/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/ZYPT66JXRFMTTDEEW6LBSRGTDA.jpg",
+                "publishedAt": "2024-01-23T20:36:00Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Natalie.mu"
+                },
+                "author": "音楽ナタリー編集部",
+                "title": "石原さとみ＆亀梨和也が初共演「Destiny」新キャストに宮澤エマ、矢本悠馬、田中みな実（コメントあり） - 音楽ナタリー",
+                "description": "4月にテレビ朝日系でスタートする石原さとみと亀梨和也（KAT-TUN）初共演の連続ドラマ「Destiny」に宮澤エマ、矢本悠馬、田中みな実が出演する。",
+                "url": "https://natalie.mu/music/news/558209",
+                "urlToImage": "https://ogre.natalie.mu/media/news/music/2024/0123/destiny_visual.jpg?impolicy=twitter_card_face_crop",
+                "publishedAt": "2024-01-23T20:00:00Z",
+                "content": "Michael Kaneko×Keity×brkfstblend3rdAOR"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "YouTube"
+                },
+                "author": null,
+                "title": "米英が新たにフーシ派攻撃 ミサイル関連施設など8拠点【 WBS 】（2024年1月23日） - テレ東BIZ",
+                "description": "アメリカ軍とイギリス軍は22日、イエメンの親イラン武装組織フーシ派のミサイル関連施設など8カ所の拠点を新たに攻撃しました。フーシ派が紅海などで商船への攻撃を続けていることへの対抗措置です。共同声明では、「フーシ派の能力を低下させるためだ」とし、商船への攻撃が続く場合、追加で攻撃することを示唆しました。#米国 #英...",
+                "url": "https://www.youtube.com/watch?v=JCitrMqROvI",
+                "urlToImage": "https://i.ytimg.com/vi/JCitrMqROvI/maxresdefault.jpg",
+                "publishedAt": "2024-01-23T16:25:59Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Eiga.com"
+                },
+                "author": "映画.com",
+                "title": "【第96回アカデミー賞】「ゴジラ－1.0」視覚効果賞にノミネート 山崎貴監督「新しい扉が開いた」 : 映画ニュース - 映画.com",
+                "description": "米アカデミー賞を主催する映画芸術科学アカデミーは1月23日（現地時間）、第96回アカデミー賞のノミネート作品を発表した。山崎貴監督の「ゴジラ－1.0」（公開中）は、視覚効果賞にノミネートされた。同賞を邦画・アジア映画が受賞した実績はなく、史",
+                "url": "https://eiga.com/news/20240123/21/",
+                "urlToImage": "https://eiga.k-img.com/images/buzz/107957/c18dbe2b3151239c.jpg",
+                "publishedAt": "2024-01-23T13:53:24Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Www.fnn.jp"
+                },
+                "author": "フジテレビ, 国際取材部",
+                "title": "ロシア軍がキーウなどにミサイル攻撃 65人死傷 ウクライナ侵攻から2年を前に…攻撃の応酬｜FNNプライムオンライン - FNNプライムオンライン",
+                "description": "ロシア軍が23日、ウクライナの首都キーウなどにミサイル攻撃を行い、少なくとも子ども5人を含む65人が死傷した。死傷者はさらに増える可能性がある。ウクライナ当局は23日、首都キーウや北東部ハルキウがロシア軍のミサイル攻撃を受けたと発表した。キーウは民間のアパートが空爆を受け、20人が負傷。またハルキウでは、ガスのパイプラインが攻撃を受けて炎上したほか、病気の子どもの療養所や民間の住宅が被害を受けて3人が死亡、40人が負傷したという。東部ドニプロも空爆を受け、2人が死傷した。ウクライナ当局は、41発のミサイル攻撃を受…",
+                "url": "https://www.fnn.jp/articles/-/647047",
+                "urlToImage": "https://fnn.ismcdn.jp/mwimgs/e/e/600/img_eeb27f43e37bbeb413abcbe3f6f51cec302319.jpg",
+                "publishedAt": "2024-01-23T12:02:00Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Football-zone.net"
+                },
+                "author": null,
+                "title": "森保監督、インドネシア戦では“数人入れ替え”を明言「いくつかのポジションを変えながら」【現地発】 - FOOTBALL ZONE（フットボールゾーン）",
+                "description": "日本代表を率いる森保一監督は1月23日、アジアカップ・グループリーグ第3戦インドネシア戦に向けて公式会見に出席した。引き分け以上で2位通過が決まる一戦で「いくつかのポジションを変えながら試合に向けて準備している」と明かした。初戦のベトナム戦から第2戦のイラク戦ではスタメン2人を入れ替え。インドネシア戦に向けては「明日の",
+                "url": "https://www.football-zone.net/archives/504712",
+                "urlToImage": "https://www.football-zone.net/wp-content/uploads/2024/01/14223349/20240114_moriyasu-1-reuters.gif",
+                "publishedAt": "2024-01-23T10:24:35Z",
+                "content": "12332\r\n22\r\n112\r\n267\r\n261\r\nFOOTBALL ZONE / Mai Kosugi"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "YouTube"
+                },
+                "author": null,
+                "title": "「人が燃えている」作業員感電 新幹線が停電で緊急停止 一部 終日見合わせも - FNNプライムオンライン",
+                "description": "23日午前10時ごろに発生した停電の影響で、東北・上越・北陸の各新幹線が一部区間で運転見合わせとなり、各地で大混乱となりました。線路上で止まった北陸新幹線「かがやき」。金沢駅を出発後、大宮駅と上野駅の間で停電に見舞われました。閉じ込められた乗客は450人。車両内の乗客を避難させるため、現場には多くの消防隊員が駆け...",
+                "url": "https://www.youtube.com/watch?v=l0HYrsRJCkE",
+                "urlToImage": "https://i.ytimg.com/vi/l0HYrsRJCkE/maxresdefault.jpg",
+                "publishedAt": "2024-01-23T09:31:45Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Tegevajaro.com"
+                },
+                "author": null,
+                "title": "2024年シーズン 明治安田Ｊ３リーグ全日程発表 - テゲバジャーロ宮崎",
+                "description": "※クリックで拡大2月25日（日）に開幕する明治安田生命Ｊ３リーグの全試合日程が発表されましたのでお知らせいたします。テゲバジャーロ宮崎の試合日程はスケジュールページをご覧ください。https://ww...",
+                "url": "https://www.tegevajaro.com/news/schedule/88287.html",
+                "urlToImage": "https://www.tegevajaro.com/contents/wp-content/uploads/2024/01/2024seasongame.jpg",
+                "publishedAt": "2024-01-23T08:25:44Z",
+                "content": "Copyright© TEGEVAJARO MIYAZAKI All rights Reserved."
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nikkansports.com"
+                },
+                "author": "日刊スポーツ",
+                "title": "ドジャース、パクストンと１年17億円で契約合意間近 山本由伸、グラスノーに次ぐ大物投手獲得 - ニッカンスポーツ",
+                "description": "大谷効果が抜群だ。ドジャースが、またも高額年俸選手の補強に動いた。大リーグ公式サイトは22日（日本時間23日）、通算64勝のジェームズ・パクストン投手（35＝… - 日刊スポーツ新聞社のニュースサイト、ニッカンスポーツ・コム（nikkansports.com）。",
+                "url": "https://www.nikkansports.com/baseball/mlb/news/202401230000319.html",
+                "urlToImage": "https://www.nikkansports.com/baseball/mlb/news/img/202401230000319-w500_0.jpg",
+                "publishedAt": "2024-01-23T05:05:00Z",
+                "content": "(C)2024,Nikkan Sports News.\r\nnikkansports.comNEWS"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "YouTube"
+                },
+                "author": null,
+                "title": "【被災者支援パッケージ】25日にも決定 「北陸応援割」も - 日テレNEWS",
+                "description": "能登半島地震を受け政府は、復旧復興に向けた被災者支援のパッケージを、25日にも決定します。北陸地方への旅行代金を補助する「北陸応援割」も盛りこまれる見通しです。この動画の記事を読む＞https://news.ntv.co.jp/category/politics/644b4d8b18cc4f28a83329710...",
+                "url": "https://www.youtube.com/watch?v=B6U6ebE1ff0",
+                "urlToImage": "https://i.ytimg.com/vi/B6U6ebE1ff0/hqdefault.jpg",
+                "publishedAt": "2024-01-23T03:25:42Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Nikkansports.com"
+                },
+                "author": "日刊スポーツ",
+                "title": "立花孝志氏、松本人志裁判に私見「この弁護士がついた時点で…」 SNS上でも話題 - ニッカンスポーツ",
+                "description": "立花孝志氏（56）が23日までにYouTubeチャンネルを更新。ダウンタウン松本人志（60）の「週刊文春」側との訴訟で代理人弁護士を務める八重洲総合法律事務所… - 日刊スポーツ新聞社のニュースサイト、ニッカンスポーツ・コム（nikkansports.com）。",
+                "url": "https://www.nikkansports.com/entertainment/news/202401230000114.html",
+                "urlToImage": "https://www.nikkansports.com/entertainment/news/img/202401230000114-w500_0.jpg",
+                "publishedAt": "2024-01-23T01:17:00Z",
+                "content": "(C)2024,Nikkan Sports News.\r\nnikkansports.comNEWS"
+            }
+        ]
+    },
     "errorNews": {
         "status": "error",
         "totalResults": 0,
@@ -1631,7 +2027,7 @@
                 "homepage": [
                     {
                         "id": 0,
-                        "search" :{
+                        "search": {
                             "category": "",
                             "country": "default",
                             "endpoint": "top-headlines",
@@ -1654,15 +2050,15 @@
                     },
                     {
                         "id": 1,
-                        "search":{
-                            "category": "entertainment",
+                        "search": {
+                            "category": "business",
                             "country": "default",
                             "endpoint": "top-headlines",
                             "errorMode": false,
                             "keyword": ""
                         },
                         "numArticles": 6,
-                        "title": "Entertainment",
+                        "title": "Business",
                         "tileType": "pallette",
                         "row": 1,
                         "sizing": {
@@ -1679,7 +2075,7 @@
                     },
                     {
                         "id": 2,
-                        "search":{
+                        "search": {
                             "category": "",
                             "country": "us",
                             "endpoint": "top-headlines",
@@ -1702,15 +2098,15 @@
                     },
                     {
                         "id": 3,
-                        "search":{
+                        "search": {
                             "category": "",
-                            "country": "mx",
+                            "country": "gb",
                             "endpoint": "top-headlines",
                             "errorMode": false,
                             "keyword": ""
                         },
                         "numArticles": 6,
-                        "title": "Mexico News",
+                        "title": "UK Headlines",
                         "tileType": "topic",
                         "row": 2,
                         "sizing": {
@@ -1725,15 +2121,15 @@
                     },
                     {
                         "id": 4,
-                        "search":{
+                        "search": {
                             "category": "",
-                            "country": "us",
+                            "country": "",
                             "endpoint": "everything",
                             "errorMode": false,
                             "keyword": "music"
                         },
                         "numArticles": 12,
-                        "title": "Music News",
+                        "title": "Everything Music",
                         "tileType": "pallette",
                         "row": 2,
                         "sizing": {

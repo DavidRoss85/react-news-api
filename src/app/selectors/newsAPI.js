@@ -9,12 +9,12 @@ const cacheResults = (searchCriteria, searchResults) =>{
 //--------------------------------
 
 const LOCAL_URL = 'http://localhost:3001/'
-const testMode = false;
+const testMode = true;
 
 export const fetchFromServer = async (searchCriteria) => {
 
     let newsURL = buildNewsURL(searchCriteria);
-    console.log('The built url: ' + newsURL)
+    // console.log('The built url: ' + newsURL)
 
     if (testMode) newsURL = LOCAL_URL + (searchCriteria.errorMode ? 'errorNews' : 'breakingNews')
 
