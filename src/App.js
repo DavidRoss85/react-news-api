@@ -23,17 +23,17 @@ function App() {
 
   const dispatch = useDispatch();
   const userInfo = useSelector(getUserInfo);
-  const appSettings = useSelector((state)=>state.settings);
+  const appSettings = useSelector((state) => state.settings);
   const region = useSelector(getCurrentRegion);
 
-  const initializeTiles = () =>{
+  const initializeTiles = () => {
     appSettings.data.current.homepage.map((tile, idx) => {
-      const{search} = tile
+      const { search } = tile
       const immRegion = search.country === 'default' ? region : search.country;
       if (idx < 99) { //Limit tiles for testing
         dispatch(reloadNews({ id: tile.id }));
         dispatch(fetchBreakingNews({ ...search, country: immRegion, id: tile.id }));
-        return {[idx]: tile.title}
+        return { [idx]: tile.title }
       }
     });
     setInitialFetchComplete(true);
@@ -45,19 +45,19 @@ function App() {
   }, [dispatch])
 
   useEffect(() => {
-    if(userInfo.fetchComplete && !initialFetchComplete){
+    if (userInfo.fetchComplete && !initialFetchComplete) {
       dispatch(loadUserPreferences(userInfo));
       console.log('User Preferences Loaded')
     }
-  }, [userInfo,dispatch,initialFetchComplete]);
-  
-  useEffect(()=>{
-    if(appSettings.isLoaded && !initialFetchComplete){
+  }, [userInfo, dispatch, initialFetchComplete]);
+
+  useEffect(() => {
+    if (appSettings.isLoaded && !initialFetchComplete) {
       initializeTiles();
       console.log('Initialized Tiles')
     }
 
-  },[appSettings,initialFetchComplete])
+  }, [appSettings, initialFetchComplete])
 
   // console.log('APP SETTINGS',appSettings)
   return (

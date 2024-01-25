@@ -19,7 +19,7 @@ const ArticlesList = (props) => {
     const emptyNewsArray = useSelector(getEmptyNewsArray);
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
-    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id])
+    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id].search)
     const { status } = newsFeed;
 
     const dispatch = useDispatch();

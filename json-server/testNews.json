@@ -1704,13 +1704,13 @@
                         "id": 3,
                         "search":{
                             "category": "",
-                            "country": "gb",
+                            "country": "mx",
                             "endpoint": "top-headlines",
                             "errorMode": false,
                             "keyword": ""
                         },
                         "numArticles": 6,
-                        "title": "UK News",
+                        "title": "Mexico News",
                         "tileType": "topic",
                         "row": 2,
                         "sizing": {
@@ -1726,14 +1726,14 @@
                     {
                         "id": 4,
                         "search":{
-                            "category": "business",
+                            "category": "",
                             "country": "us",
-                            "endpoint": "top-headlines",
+                            "endpoint": "everything",
                             "errorMode": false,
-                            "keyword": ""
+                            "keyword": "music"
                         },
                         "numArticles": 12,
-                        "title": "US Business",
+                        "title": "Music News",
                         "tileType": "pallette",
                         "row": 2,
                         "sizing": {

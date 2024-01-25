@@ -23,7 +23,7 @@ export const fetchBreakingNews = createAsyncThunk(
         // console.log('fetchBreakingNews searchcriteria: ', searchCriteria)
         const { id } = searchCriteria;
         const newsData = await fetchFromServer(searchCriteria);
-        return { id, newsData };
+        return { id: id, newsData };
     }
 )
 

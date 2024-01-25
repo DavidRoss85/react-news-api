@@ -19,7 +19,7 @@ const BreakingNewsSlide = (props) => {
     const emptyNewsArray = useSelector(getEmptyNewsArray);
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
-    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id])
+    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id].search)
     const { status } = newsFeed;
 
     const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const BreakingNewsSlide = (props) => {
     const triggerReload = () => {
         dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
         dispatch(fetchBreakingNews({...tileSetting, id: id }))
+        console.log('What to fetch:', tileSetting)
     }
 
     useEffect(() => {

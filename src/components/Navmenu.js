@@ -3,17 +3,18 @@ import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, NavItem, Row,Col } f
 import { NavLink } from "react-router-dom";
 import RegionFilter from "./RegionFilter"
 import SiteLogo from "./SiteLogo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const cachedNews = useSelector((state)=>state.news.breakingNews)
     const dispatch = useDispatch();
     useEffect(() => {
         setMenuOpen(false);
     }, [homeClick]);
 
     function localTest(){
-        alert('Test your functions here!')
+        console.log('Current Feed:', cachedNews)
     }
     
 
