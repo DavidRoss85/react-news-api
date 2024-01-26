@@ -20,19 +20,27 @@ const settingsSlice = createSlice({
     reducers: {
         changeRegion: (state, action) => {
             state.data.current.region = action.payload;
-            state.data.preferences.homepage.map((page,idx)=>{
+            state.data.preferences.homepage.map((page, idx) => {
                 console.log('Change region: ', action.payload)
-                if(page.search.country==='default'){
+                if (page.search.country === 'default') {
                     console.log('changed #' + page.id)
                     state.data.current.homepage[idx].search.country = action.payload
                 }
             })
 
-            
+
         },
         loadUserPreferences: (state, action) => {
-            state.data = { ...action.payload.data, current: action.payload.data.preferences }
-            state.isLoaded=action.payload;
+            //copies the preferences then if the country is set to 'default', change it to the current region.
+            const { data } = action.payload
+            state.data = { ...data, current: { ...data.preferences } }
+            state.data.current.homepage = state.data.current.homepage.map((page) => {
+                const {country} = page.search;
+                const immCountry = (country === 'default') ? state.data.current.region : country
+                const immPage = {...page, search: {...page.search,country: immCountry}};
+                return immPage
+            })
+            state.isLoaded = true;
         },
     }
 });
@@ -44,8 +52,8 @@ export const getCurrentRegion = (state) => {
     return state.settings.data.current.region
 }
 
-export const getAppSettings = (state) =>{
+export const getAppSettings = (state) => {
     // console.log('settings state:', state.settings)
     return state.settings
-    
+
 }

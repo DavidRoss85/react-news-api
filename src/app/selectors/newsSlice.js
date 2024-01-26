@@ -14,15 +14,30 @@ const initialState = {
             }
         }
     ),
+    searchResults:{
+        news: EMPTY_NEWS,
+        isLoading:true,
+        errMsg:''
+    },
     emptyNews: [EMPTY_NEWS]
 }
 
 export const fetchBreakingNews = createAsyncThunk(
     'news/fetchBreakingNews',
     async (searchCriteria) => {
-        // console.log('fetchBreakingNews searchcriteria: ', searchCriteria)
+        // console.log('searchCriteria:',searchCriteria)
         const { id } = searchCriteria;
         const newsData = await fetchFromServer(searchCriteria);
+        return { id: id, newsData };
+    }
+)
+
+export const fetchSearchResults = createAsyncThunk(
+    'news/fetchSearchResults',
+    async (searchCriteria) => {
+        const { id } = searchCriteria;
+        const newsData = await fetchFromServer(searchCriteria);
+        console.log('Searchdata:',newsData)
         return { id: id, newsData };
     }
 )
@@ -60,6 +75,19 @@ const newsSlice = createSlice({
                 const immId = (id > state[feed].length - 1) ? state[feed].length - 1 : id;
                 state[feed][immId].isLoading = false;
                 state[feed][immId].errMsg = action.error ? action.error.message : 'Failed'
+            })
+            .addCase(fetchSearchResults.pending, (state)=>{
+                state.searchResults.isLoading=true;
+            })
+            .addCase(fetchSearchResults.fulfilled, (state, action)=>{
+                state.searchResults.isLoading=false;
+                state.searchResults.errMsg='';
+                state.searchResults.news = action.payload.newsData
+                console.log('Search results logged')
+            })
+            .addCase(fetchSearchResults.rejected, (state,action)=>{
+                state.searchResults.isLoading=false;
+                state.searchResults.errMsg = action.error ? action.error.message : 'Search failed'
             })
     }
 

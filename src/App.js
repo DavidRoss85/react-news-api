@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from "./components/Footer"
 import Navmenu from "./components/Navmenu";
 import HomePage from './pages/HomePage';
+import SearchPage from './pages/SearchPage';
 import { fetchBreakingNews, reloadNews } from './app/selectors/newsSlice';
 import { fetchUserData, getUserInfo } from './app/selectors/userSlice';
 
@@ -27,17 +28,17 @@ function App() {
   const region = useSelector(getCurrentRegion);
 
   const initializeTiles = () => {
-    appSettings.data.current.homepage.map((tile, idx) => {
-      const { search } = tile
-      const immRegion = search.country === 'default' ? region : search.country;
-      if (idx < 99) { //Limit tiles for testing
-        dispatch(reloadNews({ id: tile.id }));
-        dispatch(fetchBreakingNews({ ...search, country: immRegion, id: tile.id }));
-        return { [idx]: tile.title }
-      }
-    });
-    setInitialFetchComplete(true);
-    console.log('call to fetch all')
+    // appSettings.data.current.homepage.map((tile, idx) => {
+    //   const { search } = tile
+    //   const immRegion = (search.country === 'default') ? region : search.country;
+    //   if (idx < 99) { //Limit tiles for testing
+    //     dispatch(reloadNews({ id: tile.id }));
+    //     dispatch(fetchBreakingNews({ ...search, country: immRegion, id: tile.id }));
+    //     return { [idx]: tile.title }
+    //   }
+    // });
+    // setInitialFetchComplete(true);
+    // console.log('call to fetch all')
   }
 
   useEffect(() => {
@@ -66,6 +67,7 @@ function App() {
       <Navmenu homeClick={homeClick} />
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/search/:searchCriteria' element={<SearchPage />} />
       </Routes>
       <Footer />
     </div>

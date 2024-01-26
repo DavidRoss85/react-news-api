@@ -10,7 +10,7 @@ const URL_API_PRE = "&apiKey="
 // const URL_EVERYTHING = "everything"
 
 export const buildNewsURL = (searchCriteria) => {
-    const { endpoint = 'top-headlines', country, category, pageSize = '100', page = '1', keyword } = searchCriteria;
+    const { endpoint = 'top-headlines', country, category, pageSize, page, keyword } = searchCriteria;
     const { searchIn, dateFrom, dateTo, language, sortBy } = searchCriteria;
 
     if (endpoint === 'top-headlines') {
