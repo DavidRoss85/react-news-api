@@ -52,13 +52,13 @@ function App() {
     }
   }, [userInfo, dispatch, initialFetchComplete]);
 
-  useEffect(() => {
-    if (appSettings.isLoaded && !initialFetchComplete) {
-      initializeTiles();
-      console.log('Initialized Tiles')
-    }
+  // useEffect(() => {
+  //   if (appSettings.isLoaded && !initialFetchComplete) {
+  //     initializeTiles();
+  //     console.log('Initialized Tiles')
+  //   }
 
-  }, [appSettings, initialFetchComplete])
+  // }, [appSettings, initialFetchComplete])
 
   // console.log('APP SETTINGS',appSettings)
   return (

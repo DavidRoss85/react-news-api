@@ -25,7 +25,6 @@ const initialState = {
 export const fetchBreakingNews = createAsyncThunk(
     'news/fetchBreakingNews',
     async (searchCriteria) => {
-        // console.log('searchCriteria:',searchCriteria)
         const { id } = searchCriteria;
         const newsData = await fetchFromServer(searchCriteria);
         return { id: id, newsData };

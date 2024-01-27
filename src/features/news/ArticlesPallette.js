@@ -61,6 +61,7 @@ const ArticlesPallette = (props) => {
     return (
         <Row className='mx-auto'>
             {newsArray.map((article, idx) => {
+                //replace empty image with generic news icon
                 const immArticle = { ...article, urlToImage: (!article.urlToImage) ? newsImage : article.urlToImage }
                 return (
                     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} className="py-1" key={idx}>
