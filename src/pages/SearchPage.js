@@ -1,31 +1,45 @@
+import { Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
 import { fetchSearchResults } from "../app/selectors/newsSlice";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import ArticleCard from "../components/ArticleCard";
+import { formatArticle } from "../utils/formatArticle";
+import { Loading } from "../components/ComponentStatuses";
 
-const SearchPage = () =>{
+const SearchPage = () => {
     const { searchCriteria } = useParams();
-    const searchResults = useSelector((state)=>state.news.searchResults.news)
-
+    const searchResults = useSelector((state) => state.news.searchResults.news)
+    const isLoading = useSelector((state) => state.news.searchResults.isLoading)
     // useEffect(()=>{
     //     fetchSearchResults({keyword: searchCriteria})
     // },[])
-    useEffect(()=>{
+    useEffect(() => {
         console.log('Results change')
         console.log('Results:', searchResults)
-    },[searchResults])
+    }, [searchResults])
 
-    return(
+    if (isLoading) { return (<Loading />) };
+
+    return (
         <>
-            
-            {searchResults.articles.map((result,idx)=>{
+            <Row>
+                <Col className='text-center'>
+                    <h3>Search Results for {searchCriteria}</h3>
+                    <hr />
+                </Col>
+            </Row>
+            {searchResults.articles.map((article, idx) => {
+                if (idx > 10) return;//limit to 10 articles for now
+                const immArticle = formatArticle(article)
                 return (
-                    <div key={idx}>
-                        <div>Title: {result.title}</div>
-                        <div>{searchCriteria}</div>
-                    </div>
-                    
-                    )
+                    <Row key={idx}>
+                        <Col>
+                            <ArticleCard article={immArticle} />
+                        </Col>
+                    </Row>
+
+                )
             })}
         </>
     )

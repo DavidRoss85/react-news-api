@@ -12,7 +12,7 @@ const SearchBar = () => {
     const handleSubmit = ()=>{
         if (searchCriteria){
             
-            dispatch(fetchSearchResults({endpoint: 'everything'}))
+            dispatch(fetchSearchResults({endpoint: 'everything', keyword: searchCriteria}))
             navigate(`/search/${searchCriteria}`)
         }
     }
