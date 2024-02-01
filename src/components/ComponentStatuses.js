@@ -1,27 +1,28 @@
-import { Row,Col } from "reactstrap";
+import { Row, Col } from 'reactstrap';
 
-const Loading = () =>{
-    return(
-        <Row style={{ height: '100%' }} className="text-center align-items-center">
+const Loading = ({ message = 'Loading News...' }) => {
+    return (
+        <Row style={{ height: '100%' }} className='text-center align-items-center'>
             <Col>
-                Loading News...
-                <div className="loading-wheel rotate-clockwise"></div>
+                {message}
+                <div className='loading-wheel rotate-clockwise'></div>
             </Col>
         </Row>
 
     )
 }
 
-const Failed = ( {reset}) => {
-    return(
-            <Row style={{ height: '100%' }} className="text-center align-items-center">
-                <Col>
-                    Failed to load News...
-                    <br/>
-                    <button onClick={()=>{reset()}} className="btn btn-warning">Reload</button>
-                </Col>
-            </Row>
+const Failed = (props) => {
+    const { reset, message = 'Failed to load News...', buttonText = 'Reload' } = props
+    return (
+        <Row style={{ height: '100%' }} className='text-center align-items-center'>
+            <Col>
+                {message}
+                <br />
+                <button onClick={() => { reset() }} className='btn btn-warning'>{buttonText}</button>
+            </Col>
+        </Row>
     )
 }
 
-export {Loading, Failed};
+export { Loading, Failed };

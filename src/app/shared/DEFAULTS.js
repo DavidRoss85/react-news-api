@@ -1,5 +1,5 @@
 export const emptyNewsArray = [
-    { src: "", caption: "author", title: "title", url: "", altText: "title" }
+    { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
 
 export const newsParams = {

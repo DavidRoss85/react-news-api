@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import { useState } from "react";
-import { fetchSearchResults } from "../app/selectors/newsSlice";
+import { fetchSearchResults, reloadNews } from "../app/selectors/newsSlice";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
@@ -11,7 +11,7 @@ const SearchBar = () => {
 
     const handleSubmit = ()=>{
         if (searchCriteria){
-            
+            dispatch(reloadNews({id:0, feed: 'searchResults'}));
             dispatch(fetchSearchResults({endpoint: 'everything', keyword: searchCriteria}))
             navigate(`/search/${searchCriteria}`)
         }

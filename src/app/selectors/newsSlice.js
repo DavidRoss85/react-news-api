@@ -14,11 +14,12 @@ const initialState = {
             }
         }
     ),
-    searchResults:{
+    searchResults:[{
         news: EMPTY_NEWS,
         isLoading:true,
-        errMsg:''
-    },
+        errMsg:'',
+        criteria: ''
+    }],
     emptyNews: [EMPTY_NEWS]
 }
 
@@ -27,7 +28,7 @@ export const fetchBreakingNews = createAsyncThunk(
     async (searchCriteria) => {
         const { id } = searchCriteria;
         const newsData = await fetchFromServer(searchCriteria);
-        return { id: id, newsData };
+        return { id, newsData };
     }
 )
 
@@ -36,8 +37,8 @@ export const fetchSearchResults = createAsyncThunk(
     async (searchCriteria) => {
         const { id } = searchCriteria;
         const newsData = await fetchFromServer(searchCriteria);
-        console.log('Searchdata:',newsData)
-        return { id: id, newsData };
+        console.log('Search criteria: ',searchCriteria)
+        return { id, newsData,criteria: searchCriteria };
     }
 )
 
@@ -76,17 +77,20 @@ const newsSlice = createSlice({
                 state[feed][immId].errMsg = action.error ? action.error.message : 'Failed'
             })
             .addCase(fetchSearchResults.pending, (state)=>{
-                state.searchResults.isLoading=true;
+                state.searchResults[0].isLoading=true;
+                state.searchResults[0].criteria= '';
             })
             .addCase(fetchSearchResults.fulfilled, (state, action)=>{
-                state.searchResults.isLoading=false;
-                state.searchResults.errMsg='';
-                state.searchResults.news = action.payload.newsData
+                state.searchResults[0].isLoading=false;
+                state.searchResults[0].errMsg='';
+                state.searchResults[0].news = action.payload.newsData
+                state.searchResults[0].criteria= action.payload.criteria.keyword
                 console.log('Search results logged')
             })
             .addCase(fetchSearchResults.rejected, (state,action)=>{
-                state.searchResults.isLoading=false;
-                state.searchResults.errMsg = action.error ? action.error.message : 'Search failed'
+                state.searchResults[0].isLoading=false;
+                state.searchResults[0].errMsg = action.error ? action.error.message : 'Search failed'
+                state.searchResults[0].criteria= '';
             })
     }
 
