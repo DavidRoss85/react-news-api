@@ -2143,6 +2143,75 @@
                         "componentAttribute": {
                             "md": "3"
                         }
+                    },
+                    {
+                        "id": 5,
+                        "search": {
+                            "category": "",
+                            "country": "",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": "politics"
+                        },
+                        "numArticles": 10,
+                        "title": "Politics",
+                        "tileType": "topic",
+                        "row": 3,
+                        "sizing": {
+                            "md": "4",
+                            "lg": "4",
+                            "className": ""
+                        },
+                        "innerSizing": {
+                            "className": ""
+                        },
+                        "componentAttribute": {}
+                    },
+                    {
+                        "id": 6,
+                        "search": {
+                            "category": "sports",
+                            "country": "",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": "sports"
+                        },
+                        "numArticles": 10,
+                        "title": "Sports",
+                        "tileType": "topic",
+                        "row": 3,
+                        "sizing": {
+                            "md": "4",
+                            "lg": "4",
+                            "className": ""
+                        },
+                        "innerSizing": {
+                            "className": ""
+                        },
+                        "componentAttribute": {}
+                    },
+                    {
+                        "id": 7,
+                        "search": {
+                            "category": "",
+                            "country": "us",
+                            "endpoint": "top-headlines",
+                            "errorMode": false,
+                            "keyword": "crime"
+                        },
+                        "numArticles": 10,
+                        "title": "Crime in the US",
+                        "tileType": "topic",
+                        "row": 3,
+                        "sizing": {
+                            "md": "4",
+                            "lg": "4",
+                            "className": ""
+                        },
+                        "innerSizing": {
+                            "className": ""
+                        },
+                        "componentAttribute": {}
                     }
                 ]
             }
