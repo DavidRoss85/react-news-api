@@ -16,7 +16,7 @@ export const buildNewsURL = (searchCriteria) => {
     if (endpoint === 'top-headlines') {
         //top-headlines? country= & category= & pageSize= & page= & q=
         const immCountry = country ? country === 'all' ? '' : `country=${country}` : '';
-        const immKeyword = immCountry ? (keyword ? `&q=${keyword}` : '') : (keyword ? `q={keyword}` : 'q=news');
+        const immKeyword = immCountry ? (keyword ? `&q=${keyword}` : '') : (keyword ? `q=${keyword}` : 'q=news');
         const immCategory = category ? `&category=${category}` : '';
         const immPageSize = pageSize ? `&pageSize=${pageSize}` : '';
         const immPage = page ? `&page=${page}` : '';

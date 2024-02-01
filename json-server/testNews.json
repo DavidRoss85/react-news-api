@@ -2194,13 +2194,13 @@
                         "id": 7,
                         "search": {
                             "category": "",
-                            "country": "us",
-                            "endpoint": "top-headlines",
+                            "country": "",
+                            "endpoint": "everything",
                             "errorMode": false,
-                            "keyword": "crime"
+                            "keyword": "United States"
                         },
                         "numArticles": 10,
-                        "title": "Crime in the US",
+                        "title": "Just American News",
                         "tileType": "topic",
                         "row": 3,
                         "sizing": {

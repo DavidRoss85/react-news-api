@@ -56,11 +56,11 @@ const Navmenu = ({ homeClick = false }) => {
                             <span><i className="fa fa-search"></i> Search</span>
                         </a>
                     </NavItem>
-                    {/* <NavItem>
+                    <NavItem>
                         <NavLink className="nav-link" to="#about" onClick={()=>localTest()}>
                             <button className="btn btn-warning">TEST BUTTON</button>
                         </NavLink>
-                    </NavItem> */}
+                    </NavItem>
 
                     {/* <NavItem className="d-inline-block d-md-none">
                         <a className="nav-link" href="#searchBox">
