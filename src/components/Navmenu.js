@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const cachedNews = useSelector((state)=>state.news.breakingNews)
+    const peekInfo = useSelector((state)=>state.settings.data.current)
     const dispatch = useDispatch();
     useEffect(() => {
         setMenuOpen(false);
     }, [homeClick]);
 
     function localTest(){
-        console.log('Current Feed:', cachedNews)
+        console.log('Settings:', peekInfo)
     }
     
 
@@ -62,11 +62,11 @@ const Navmenu = ({ homeClick = false }) => {
                         </NavLink>
                     </NavItem>
 
-                    {/* <NavItem className="d-inline-block d-md-none">
+                    <NavItem className="">
                         <a className="nav-link" href="#searchBox">
                             <span>TEST</span>
                         </a>
-                    </NavItem> */}
+                    </NavItem>
                 </Nav>
  
             </Collapse>

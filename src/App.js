@@ -43,12 +43,14 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUserData());
+    console.log('Fetch user dat...')
   }, [dispatch])
 
   useEffect(() => {
     if (userInfo.fetchComplete && !initialFetchComplete) {
       dispatch(loadUserPreferences(userInfo));
       console.log('User Preferences Loaded')
+      setInitialFetchComplete(true);
     }
   }, [userInfo, dispatch, initialFetchComplete]);
 

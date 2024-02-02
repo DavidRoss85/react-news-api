@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
 import { useDispatch } from 'react-redux';
 import { reloadNews, fetchBreakingNews } from "./newsSlice";
+import { EMPTY_NEWS } from "../shared/TEST_NEWS";
 const initialState = {
     data: {
         username: '',
@@ -34,7 +35,12 @@ const settingsSlice = createSlice({
             //copies the preferences then if the country is set to 'default', change it to the current region.
             const { data } = action.payload
             state.data = { ...data, current: { ...data.preferences } }
-            state.data.current.homepage = state.data.current.homepage.map((page) => {
+            state.data.current.homepage = state.data.current.homepage.map((page, idx) => {
+                if(!page.search){
+                    return {
+                        id: idx
+                    }
+                } 
                 const {country} = page.search;
                 const immCountry = (country === 'default') ? state.data.current.region : country
                 const immPage = {...page, search: {...page.search,country: immCountry}};

@@ -21,13 +21,19 @@ const initialState = {
 export const fetchUserData = createAsyncThunk(
     'user/fetchUserData',
     async () => {
-        const response = await fetch(TEMPURL);
-        if (!response.ok) {
+        try{
+            const response = await fetch(TEMPURL);
+            if (!response.ok) {
+                return Promise.reject('Failed to get user preferences');
+            }
+            console.log('user response: ', response)
+            const data = await response.json();
+            return data
+
+        }catch (e){
+            console.log ('Error fetching user preferences: ')
             return Promise.reject('Failed to get user preferences');
         }
-
-        const data = await response.json();
-        return data
     }
 )
 
@@ -59,6 +65,7 @@ const userSlice = createSlice({
                 state.fetchComplete=true;
                 state.errMsg = action.error ? action.error.message : 'Failed to get user data';
                 state.data.preferences = userPref;
+                console.log('Fetch data rejected')
             })
     }
 })

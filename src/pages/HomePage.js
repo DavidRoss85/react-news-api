@@ -10,7 +10,8 @@ const HomePage = () => {
     const newsParams = appSettings.data.current.homepage;
 
     //figure out how many rows to generate:
-    const maxRows = Math.max(...newsParams.map((param) => param.row));
+    const maxRows = Math.max(...newsParams.map((param) => param.row ? param.row : 1));
+    console.log('Max rows to generate: ', maxRows)
     let renderRows = []
     for (let i = 1; i <= maxRows; i++) {
         renderRows.push(

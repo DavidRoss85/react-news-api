@@ -9,7 +9,7 @@ const cacheResults = (searchCriteria, searchResults) =>{
 //--------------------------------
 
 const LOCAL_URL = 'http://localhost:3001/'
-const testMode = false;
+const testMode = true;
 
 export const fetchFromServer = async (searchCriteria) => {
 
