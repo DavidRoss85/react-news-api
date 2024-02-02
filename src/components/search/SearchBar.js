@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import { useState } from "react";
-import { fetchSearchResults, reloadNews } from "../app/selectors/newsSlice";
+import { fetchSearchResults, reloadNews } from "../../app/selectors/newsSlice";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {

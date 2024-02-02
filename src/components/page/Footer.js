@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "reactstrap";
-import FooterSearch from "../features/search/FooterSearch";
+import FooterSearch from "../../features/search/FooterSearch";
 import SiteLogo from "./SiteLogo";
 import SocialIcons from "./SocialIcons";
 import BottomText from "./BottomText";

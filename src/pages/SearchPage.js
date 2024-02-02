@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchSearchResults, reloadNews, getEmptyNewsArray } from "../app/selectors/newsSlice";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ArticleCard from "../components/ArticleCard";
+import ArticleCard from "../components/news/ArticleCard";
 import PageNumbers from "../components/PageNumbers"
 import { formatArticle } from "../utils/formatArticle";
 import { Loading, Failed } from "../components/ComponentStatuses";

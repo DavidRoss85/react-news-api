@@ -2,7 +2,7 @@ import { Container, Row } from "reactstrap";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getAppSettings } from "../app/selectors/settingsSlice";
-import NewsTile from "../components/NewsTile";
+import NewsTile from "../components/page/NewsTile";
 
 const HomePage = () => {
     //Make this pure later

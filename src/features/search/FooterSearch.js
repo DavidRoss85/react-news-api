@@ -1,6 +1,6 @@
-import LinksGroup from "../../components/LinksGroup";
+import LinksGroup from "../../components/search/LinksGroup";
 import { SEARCH_OPTIONS } from "../../app/shared/SEARCH_OPTIONS";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "../../components/search/SearchBar";
 import { Row, Col } from "reactstrap";
 
 const FooterSearch = () => {

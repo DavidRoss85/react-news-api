@@ -1,8 +1,8 @@
 import { Row, Col } from "reactstrap";
-import BreakingNewsSlide from "../features/news/BreakingNewsSlide";
-import ArticlesPallette from "../features/news/ArticlesPallette";
-import ArticlesList from "../features/news/ArticlesList";
-import TopicSection from "../features/news/TopicSection";
+import BreakingNewsSlide from "../../features/news/BreakingNewsSlide";
+import ArticlesPallette from "../../features/news/ArticlesPallette";
+import ArticlesList from "../../features/news/ArticlesList";
+import TopicSection from "../../features/news/TopicSection";
 
 //Place this inside of a <Row> component 
 const NewsTile = ({ newsParams }) => {

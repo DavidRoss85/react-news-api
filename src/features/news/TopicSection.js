@@ -1,5 +1,5 @@
-import ArticleHeadline from "../../components/ArticleHeadline";
-import ArticleBigSquare from "../../components/ArticleBigSquare";
+import ArticleHeadline from "../../components/news/ArticleHeadline";
+import ArticleBigSquare from "../../components/news/ArticleBigSquare";
 import newsImage from "../../app/img/genericNewsLogo16x9.png";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";

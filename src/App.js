@@ -2,9 +2,9 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import Header from './components/Header';
-import Footer from "./components/Footer"
-import Navmenu from "./components/Navmenu";
+import Header from './components/page/Header';
+import Footer from "./components/page/Footer"
+import Navmenu from "./components/page/Navmenu";
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import { fetchBreakingNews, reloadNews } from './app/selectors/newsSlice';

@@ -1,4 +1,4 @@
-import ArticleSquare from "../../components/ArticleSquare";
+import ArticleSquare from "../../components/news/ArticleSquare";
 import newsImage from "../../app/img/genericNewsLogo16x9.png";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";

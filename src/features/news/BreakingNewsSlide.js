@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { convertToSlideFormat } from "../../utils/convertToSlideFormat";
 import { Failed, Loading } from "../../components/ComponentStatuses";
-import SlideShow from "../../components/SlideShow";
+import SlideShow from "../../components/news/SlideShow";
 
 import { fetchBreakingNews, getLoadingStatus } from "../../app/selectors/newsSlice";
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";

@@ -1,4 +1,4 @@
-import ArticleHeadline from "../../components/ArticleHeadline";
+import ArticleHeadline from "../../components/news/ArticleHeadline";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";
 import { Failed, Loading } from "../../components/ComponentStatuses";
