@@ -56,17 +56,20 @@ const Navmenu = ({ homeClick = false }) => {
                             <span><i className="fa fa-search"></i> Search</span>
                         </a>
                     </NavItem>
+
+                </Nav>
+                <Nav className="ms-auto">
                     <NavItem>
                         <NavLink className="nav-link" to="#about" onClick={()=>localTest()}>
                             <button className="btn btn-warning">TEST BUTTON</button>
                         </NavLink>
                     </NavItem>
-
                     <NavItem className="">
                         <a className="nav-link" href="#searchBox">
                             <span>TEST</span>
                         </a>
                     </NavItem>
+
                 </Nav>
  
             </Collapse>
