@@ -14,8 +14,10 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { validateUserLoginForm } from "../../utils/validateUserLoginForm";
+import LoginModal from "./LoginModal";
 
-const UserLogin = () => {
+const UserLoginMenu = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
 
@@ -42,27 +44,11 @@ const UserLogin = () => {
                 </DropdownMenu>
             </Dropdown>
 
-
-            <Modal isOpen={loginModalOpen}>
-                <ModalHeader toggle={() => setLoginModalOpen(false)}>
-                    Login
-                </ModalHeader>
-                <ModalBody>
-                    <Formik onSubmit={handleLogin}>
-                        <Form>
-                            <FormGroup>
-                                Username
-                            </FormGroup>
-                            <FormGroup>
-                                Password
-                            </FormGroup>
-                            <Button type='submit' color='primary'>Login</Button>
-                            {' '}
-                            <Button onClick={()=>setLoginModalOpen(false)} >Cancel</Button>
-                        </Form>
-                    </Formik>
-                </ModalBody>
-            </Modal>
+            <LoginModal 
+                loginModalOpen={loginModalOpen}
+                setLoginModalOpen={setLoginModalOpen}
+                handleLogin={handleLogin} 
+            />
         </>
     )
 }
@@ -73,4 +59,4 @@ const menuStyle = {
 
 }
 
-export default UserLogin
+export default UserLoginMenu;

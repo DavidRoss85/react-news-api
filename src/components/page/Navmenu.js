@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import RegionFilter from "../misc/RegionFilter"
 import SiteLogo from "./SiteLogo";
 import { useDispatch, useSelector } from "react-redux";
-import UserLogin from "../misc/UserLogin";
+import UserLoginMenu from "./UserLoginMenu";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -66,7 +66,7 @@ const Navmenu = ({ homeClick = false }) => {
                         </NavLink>
                     </NavItem> */}
                     <NavItem className="">
-                        <UserLogin />
+                        <UserLoginMenu />
                     </NavItem>
 
                 </Nav>
