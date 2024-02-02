@@ -2,7 +2,7 @@ import ArticleSquare from "../../components/news/ArticleSquare";
 import newsImage from "../../app/img/genericNewsLogo16x9.png";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";
-import { Failed, Loading } from "../../components/ComponentStatuses";
+import { Failed, Loading } from "../../components/misc/ComponentStatuses";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchBreakingNews, getLoadingStatus } from "../../app/selectors/newsSlice";

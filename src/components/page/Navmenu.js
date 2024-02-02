@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, NavItem, Row,Col } from "reactstrap";
 import { NavLink } from "react-router-dom";
-import RegionFilter from "../RegionFilter"
+import RegionFilter from "../misc/RegionFilter"
 import SiteLogo from "./SiteLogo";
 import { useDispatch, useSelector } from "react-redux";
-import UserLogin from "../UserLogin";
+import UserLogin from "../misc/UserLogin";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);

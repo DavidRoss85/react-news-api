@@ -4,9 +4,9 @@ import { fetchSearchResults, reloadNews, getEmptyNewsArray } from "../app/select
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ArticleCard from "../components/news/ArticleCard";
-import PageNumbers from "../components/PageNumbers"
+import PageNumbers from "../components/misc/PageNumbers"
 import { formatArticle } from "../utils/formatArticle";
-import { Loading, Failed } from "../components/ComponentStatuses";
+import { Loading, Failed } from "../components/misc/ComponentStatuses";
 
 const SearchPage = () => {
     const { searchCriteria } = useParams();

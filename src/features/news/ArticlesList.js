@@ -1,7 +1,7 @@
 import ArticleHeadline from "../../components/news/ArticleHeadline";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";
-import { Failed, Loading } from "../../components/ComponentStatuses";
+import { Failed, Loading } from "../../components/misc/ComponentStatuses";
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 

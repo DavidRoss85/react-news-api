@@ -1,8 +1,8 @@
-import { LOCATIONLIST } from "../app/shared/DEFAULTS";
+import { LOCATIONLIST } from "../../app/shared/DEFAULTS";
 import { Row, Col, Label, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getCurrentRegion } from "../app/selectors/settingsSlice";
-import { changeRegion } from "../app/selectors/settingsSlice";
+import { getCurrentRegion } from "../../app/selectors/settingsSlice";
+import { changeRegion } from "../../app/selectors/settingsSlice";
 
 const RegionFilter = () => {
 
