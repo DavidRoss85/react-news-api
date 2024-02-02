@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import RegionFilter from "./RegionFilter"
 import SiteLogo from "./SiteLogo";
 import { useDispatch, useSelector } from "react-redux";
+import UserLogin from "./UserLogin";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -59,15 +60,13 @@ const Navmenu = ({ homeClick = false }) => {
 
                 </Nav>
                 <Nav className="ms-auto">
-                    <NavItem>
+                    {/* <NavItem>
                         <NavLink className="nav-link" to="#about" onClick={()=>localTest()}>
                             <button className="btn btn-warning">TEST BUTTON</button>
                         </NavLink>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem className="">
-                        <a className="nav-link" href="#searchBox">
-                            <span>TEST</span>
-                        </a>
+                        <UserLogin />
                     </NavItem>
 
                 </Nav>
