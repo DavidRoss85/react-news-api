@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
-import { useParams } from "react-router-dom";
 
-const TEMPURL = 'http://localhost:3002/user'
+// const TEMPURL = 'http://localhost:3002/user'
 const TEMP_LOGIN_URL = 'http://localhost:3002/'
 
 const initialState = {
@@ -19,9 +18,9 @@ const initialState = {
         userLoading: false,
         success: false
     },
-    isLoading: true,
-    fetchComplete: false,
-    errMsg: ''
+    // isLoading: true,
+    // fetchComplete: false,
+    // errMsg: ''
 }
 
 export const attemptLogin = createAsyncThunk(
@@ -42,23 +41,23 @@ export const attemptLogin = createAsyncThunk(
     }
 )
 
-export const fetchUserData = createAsyncThunk(
-    'user/fetchUserData',
-    async () => {
-        try {
-            const response = await fetch(TEMPURL);
-            if (!response.ok) {
-                return Promise.reject('Failed to get user preferences');
-            }
-            const data = await response.json();
-            return data
+// export const fetchUserData = createAsyncThunk(
+//     'user/fetchUserData',
+//     async () => {
+//         try {
+//             const response = await fetch(TEMPURL);
+//             if (!response.ok) {
+//                 return Promise.reject('Failed to get user preferences');
+//             }
+//             const data = await response.json();
+//             return data
 
-        } catch (e) {
-            console.log('Error fetching user preferences: ')
-            return Promise.reject('Failed to get user preferences');
-        }
-    }
-)
+//         } catch (e) {
+//             console.log('Error fetching user preferences: ')
+//             return Promise.reject('Failed to get user preferences');
+//         }
+//     }
+// )
 
 const userSlice = createSlice({
     name: 'user',
@@ -68,33 +67,32 @@ const userSlice = createSlice({
             state.data.preferences.region = action.payload
         },
         logOutUser: (state, action) => {
-            console.log('IM TRYING')
             state.data = initialState.data
             state.userState=initialState.userState
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUserData.pending, (state) => {
-                state.isLoading = true;
-                state.fetchComplete = false;
-                state.errMsg = '';
-            })
-            .addCase(fetchUserData.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.fetchComplete = true;
-                state.errMsg = '';
-                //replace this with the filter for the currently logged in user
-                state.data = action.payload.filter((user) => user.username = 'user')[0]
-                console.log(action.payload.filter((user) => user.username = 'user')[0])
-            })
-            .addCase(fetchUserData.rejected, (state, action) => {
-                state.isLoading = false;
-                state.fetchComplete = true;
-                state.errMsg = action.error ? action.error.message : 'Failed to get user data';
-                state.data.preferences = userPref;
-                console.log('Fetch data rejected')
-            })
+            // .addCase(fetchUserData.pending, (state) => {
+            //     state.isLoading = true;
+            //     state.fetchComplete = false;
+            //     state.errMsg = '';
+            // })
+            // .addCase(fetchUserData.fulfilled, (state, action) => {
+            //     state.isLoading = false;
+            //     state.fetchComplete = true;
+            //     state.errMsg = '';
+            //     //replace this with the filter for the currently logged in user
+            //     state.data = action.payload.filter((user) => user.username = 'user')[0]
+            //     console.log(action.payload.filter((user) => user.username = 'user')[0])
+            // })
+            // .addCase(fetchUserData.rejected, (state, action) => {
+            //     state.isLoading = false;
+            //     state.fetchComplete = true;
+            //     state.errMsg = action.error ? action.error.message : 'Failed to get user data';
+            //     state.data.preferences = userPref;
+            //     console.log('Fetch data rejected')
+            // })
             .addCase(attemptLogin.pending, (state) => {
                 state.userState.userLoading = true;
                 state.userState.success = false;

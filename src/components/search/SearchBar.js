@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import { useState } from "react";
 import { fetchSearchResults, reloadNews } from "../../app/selectors/newsSlice";
@@ -9,23 +9,23 @@ const SearchBar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    const handleSubmit = ()=>{
-        if (searchCriteria){
-            dispatch(reloadNews({id:0, feed: 'searchResults'}));
-            dispatch(fetchSearchResults({endpoint: 'everything', keyword: searchCriteria}))
+    const handleSubmit = () => {
+        if (searchCriteria) {
+            dispatch(reloadNews({ id: 0, feed: 'searchResults' }));
+            dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria }))
             navigate(`/search/${searchCriteria}`)
         }
     }
     return (
         <Row>
             <Col md="10">
-                <input 
-                id="searchBox" 
-                className="form-control" 
-                type="text" 
-                placeholder="This is DNN"
-                onChange={(e)=>setSearchCriteria(e.target.value)}
-                onKeyDown={(e)=>e.key==='Enter' ? handleSubmit(): e} 
+                <input
+                    id="searchBox"
+                    className="form-control"
+                    type="text"
+                    placeholder="This is DNN"
+                    onChange={(e) => setSearchCriteria(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' ? handleSubmit() : e}
                 />
             </Col>
             <Col>

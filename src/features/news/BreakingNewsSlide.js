@@ -16,7 +16,6 @@ const BreakingNewsSlide = (props) => {
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
-    const emptyNewsArray = useSelector(getEmptyNewsArray);
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
     const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id].search)

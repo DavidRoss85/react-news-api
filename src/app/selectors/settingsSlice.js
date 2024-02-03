@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
-import { useDispatch } from 'react-redux';
-import { reloadNews, fetchBreakingNews } from "./newsSlice";
-import { EMPTY_NEWS } from "../shared/TEST_NEWS";
+
 const initialState = {
     data: {
         username: '',
@@ -60,7 +58,6 @@ export const getCurrentRegion = (state) => {
 }
 
 export const getAppSettings = (state) => {
-    // console.log('settings state:', state.settings)
     return state.settings
 
 }

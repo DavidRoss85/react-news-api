@@ -1,5 +1,4 @@
 import ArticleSquare from "../../components/news/ArticleSquare";
-import newsImage from "../../app/img/genericNewsLogo16x9.png";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";
 import { Failed, Loading } from "../../components/misc/ComponentStatuses";
@@ -18,7 +17,6 @@ const ArticlesPallette = (props) => {
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
-    const emptyNewsArray = useSelector(getEmptyNewsArray);
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
     const tileSetting = useSelector((state) => state.settings.data.current.homepage[id].search)

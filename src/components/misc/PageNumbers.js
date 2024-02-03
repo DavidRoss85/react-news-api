@@ -1,5 +1,4 @@
-import { Row, Col, Card, CardBody, CardText, Button } from "reactstrap";
-import { useState } from "react";
+import { Row, Col, Button } from "reactstrap";
 
 const PageNumbers = (props) => {
     const { currentPage = 1, numPages, click, color = 'secondary', highlight = 'danger' } = props;

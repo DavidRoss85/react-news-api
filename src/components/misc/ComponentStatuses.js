@@ -1,6 +1,6 @@
 import { Row, Col } from 'reactstrap';
 
-const Loading = ({ message = 'Loading News...' }) => {
+export const Loading = ({ message = 'Loading News...' }) => {
     return (
         <Row style={{ height: '100%' }} className='text-center align-items-center'>
             <Col>
@@ -12,7 +12,7 @@ const Loading = ({ message = 'Loading News...' }) => {
     )
 }
 
-const Failed = (props) => {
+export const Failed = (props) => {
     const { reset, message = 'Failed to load News...', buttonText = 'Reload' } = props
     return (
         <Row style={{ height: '100%' }} className='text-center align-items-center'>
@@ -24,5 +24,3 @@ const Failed = (props) => {
         </Row>
     )
 }
-
-export { Loading, Failed };

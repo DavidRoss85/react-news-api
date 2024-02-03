@@ -1,4 +1,4 @@
-import { Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardHeader } from "reactstrap"
+import { Card, CardImg, CardTitle, CardBody } from "reactstrap"
 // import { Link } from 'react-router-dom';
 
 const ArticleBigSquare = ({ article, className }) => {
