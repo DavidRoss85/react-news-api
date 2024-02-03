@@ -14,7 +14,7 @@ const testMode = true;
 export const fetchFromServer = async (searchCriteria) => {
 
     let newsURL = buildNewsURL(searchCriteria);
-    console.log('The built url: ' + newsURL)
+    // console.log('The built url: ' + newsURL)
 
     if (testMode) newsURL = LOCAL_URL + (searchCriteria.errorMode ? 'errorNews' : 'worldNews')
 

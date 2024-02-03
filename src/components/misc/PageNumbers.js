@@ -19,7 +19,7 @@ const PageNumbers = (props) => {
                     <Button style={{}} color={currentPage === i+1 ? highlight : color} onClick={() => handleClick(i + 1)} >{i + 1}</Button>
                 </Col>
             )
-        })()
+        })()//function is invoked
     }
     return (
         <Row>

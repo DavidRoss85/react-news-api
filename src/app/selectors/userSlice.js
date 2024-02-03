@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
 import { useParams } from "react-router-dom";
 
-const TEMPURL = 'http://localhost:3001/users'
+const TEMPURL = 'http://localhost:3002/user'
+const TEMP_LOGIN_URL = 'http://localhost:3002/'
 
 const initialState = {
     data: {
@@ -13,25 +14,47 @@ const initialState = {
             homepage: userPref.homepage
         }
     },
+    userState: {
+        loggedIn: false,
+        userLoading: false,
+        success: false
+    },
     isLoading: true,
-    fetchComplete:false,
+    fetchComplete: false,
     errMsg: ''
 }
+
+export const attemptLogin = createAsyncThunk(
+    'user/attemptLogin',
+    async (userInfo) => {
+        try {
+            const response = await fetch(TEMP_LOGIN_URL + userInfo.username);
+            if (!response.ok) {
+                console.log('Bad response getting user')
+                return Promise.reject('No user found');
+            }
+            const data = await response.json();
+            return data
+        } catch (e) {
+            console.log('Error getting user')
+            return Promise.reject('No user found');
+        }
+    }
+)
 
 export const fetchUserData = createAsyncThunk(
     'user/fetchUserData',
     async () => {
-        try{
+        try {
             const response = await fetch(TEMPURL);
             if (!response.ok) {
                 return Promise.reject('Failed to get user preferences');
             }
-            console.log('user response: ', response)
             const data = await response.json();
             return data
 
-        }catch (e){
-            console.log ('Error fetching user preferences: ')
+        } catch (e) {
+            console.log('Error fetching user preferences: ')
             return Promise.reject('Failed to get user preferences');
         }
     }
@@ -43,18 +66,23 @@ const userSlice = createSlice({
     reducers: {
         updateRegion: (state, action) => {
             state.data.preferences.region = action.payload
+        },
+        logOutUser: (state, action) => {
+            console.log('IM TRYING')
+            state.data = initialState.data
+            state.userState=initialState.userState
         }
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchUserData.pending, (state) => {
                 state.isLoading = true;
-                state.fetchComplete=false;
+                state.fetchComplete = false;
                 state.errMsg = '';
             })
             .addCase(fetchUserData.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.fetchComplete=true;
+                state.fetchComplete = true;
                 state.errMsg = '';
                 //replace this with the filter for the currently logged in user
                 state.data = action.payload.filter((user) => user.username = 'user')[0]
@@ -62,16 +90,32 @@ const userSlice = createSlice({
             })
             .addCase(fetchUserData.rejected, (state, action) => {
                 state.isLoading = false;
-                state.fetchComplete=true;
+                state.fetchComplete = true;
                 state.errMsg = action.error ? action.error.message : 'Failed to get user data';
                 state.data.preferences = userPref;
                 console.log('Fetch data rejected')
+            })
+            .addCase(attemptLogin.pending, (state) => {
+                state.userState.userLoading = true;
+                state.userState.success = false;
+            })
+            .addCase(attemptLogin.fulfilled, (state, action) => {
+                state.userState.loggedIn = true;
+                state.userState.userLoading = false;
+                state.userState.success = true;
+                state.data = action.payload
+            })
+            .addCase(attemptLogin.rejected, (state, action) => {
+                state.userState.loggedIn = false;
+                state.userState.userLoading = false;
+                state.userState.success = false
+                state.errMsg = 'User not found'
             })
     }
 })
 
 export const userReducer = userSlice.reducer;
-export const { updateRegion } = userSlice.actions;
+export const { updateRegion, logOutUser } = userSlice.actions;
 
 export const getUserInfo = (state) => {
     return state.user

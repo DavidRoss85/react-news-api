@@ -19,7 +19,7 @@ const Failed = (props) => {
             <Col>
                 {message}
                 <br />
-                <button onClick={() => { reset() }} className='btn btn-warning'>{buttonText}</button>
+                <button onClick={reset} className='btn btn-warning'>{buttonText}</button>
             </Col>
         </Row>
     )

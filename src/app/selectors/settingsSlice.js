@@ -22,6 +22,7 @@ const settingsSlice = createSlice({
         changeRegion: (state, action) => {
             state.data.current.region = action.payload;
             state.data.preferences.homepage.map((page, idx) => {
+                if(!page.search) return
                 console.log('Change region: ', action.payload)
                 if (page.search.country === 'default') {
                     console.log('changed #' + page.id)

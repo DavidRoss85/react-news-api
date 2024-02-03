@@ -3,8 +3,8 @@ export const validateUserLoginForm = (values) => {
 
     if (!values.username) {
         errors.username = 'Username is required.';
-    } else if (values.username.length < 6 || values.username.length > 40) {
-        errors.username = 'Username must be between 6 and 40 characters long.';
+    } else if (values.username.length < 3 || values.username.length > 40) {
+        errors.username = 'Username must be between 3 and 40 characters long.';
     }
 
     if (!values.password) {

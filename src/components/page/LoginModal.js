@@ -8,15 +8,35 @@ import {
 } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { validateUserLoginForm } from "../../utils/validateUserLoginForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LoginForm from "../misc/LoginForm";
+import { Loading, Failed } from "../misc/ComponentStatuses";
 
 
-const LoginModal = (props) =>{
+const LoginModal = (props) => {
 
-    const {loginModalOpen, setLoginModalOpen,handleLogin} = props;
-    const [showPassword, setShowPassword] = useState(false)
+    //Make sure to pass these props
+    const { loginModalOpen, setLoginModalOpen, handleLogin, success, isLoading } = props;
+    const [tryingToLogIn, setTryingToLogIn] = useState(false);
+
+    let renderItem = <LoginForm clickCancel={() => setLoginModalOpen(false)} handleSubmit={handleLogin} />
+    console.log('isLoading', isLoading)
+
+    useEffect(() => {
+        console.log('Activated')
+        if (isLoading) {
+            setTryingToLogIn(true);
+            renderItem = <Loading message='Logging in...' />
+        }
+        if (!isLoading && !success && tryingToLogIn) {
+            renderItem = <Failed message='Failed to log in' buttonText='OK' reset={() => setTryingToLogIn(false)} />
+        }
+    }, [isLoading, success, tryingToLogIn])
+
+
+
 
     return (
         <Modal isOpen={loginModalOpen}>
@@ -24,54 +44,7 @@ const LoginModal = (props) =>{
                 Login
             </ModalHeader>
             <ModalBody>
-                <Formik
-                    initialValues={{
-                        username: '',
-                        password: ''
-                    }} 
-                    onSubmit={handleLogin} 
-                    validate={validateUserLoginForm}
-                >
-                    <Form>
-                        <FormGroup>
-                            <Label htmlFor='username'>Username</Label>
-                            <Field 
-                                id='username'
-                                name='username'
-                                placeholder='Username'
-                                className='form-control'
-                            />
-                            <ErrorMessage name='username'>
-                                {(msg)=> <p className='text-danger'>{msg}</p>}
-                            </ErrorMessage>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor='password'>Password</Label>
-                            <div className="form-control p-0" style={{display:'flex', justifyContent:'end'}}>
-                                <Field
-                                    id='password'
-                                    name='password'
-                                    type={showPassword ? 'text':'password'}
-                                    placeholder='Password'
-                                    className='form-control'
-                                    style={{border:'none'}}
-                                />
-                                <FontAwesomeIcon 
-                                    icon={showPassword ? ['far','fa-eye'] : ['far','fa-eye-slash']} 
-                                    className='p-2'
-                                    onClick={()=>setShowPassword(!showPassword)}
-                                    style={{position:'absolute'}}
-                                />
-                            </div>
-                            <ErrorMessage name='password'>
-                                {(msg)=> <p className='text-danger'>{msg}</p>}
-                            </ErrorMessage>
-                        </FormGroup>
-                        <Button type='submit' color='primary'>Login</Button>
-                        {' '}
-                        <Button onClick={()=>setLoginModalOpen(false)} >Cancel</Button>
-                    </Form>
-                </Formik>
+                {renderItem}
             </ModalBody>
         </Modal>
 

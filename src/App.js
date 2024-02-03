@@ -29,32 +29,18 @@ function App() {
   const appSettings = useSelector((state) => state.settings);
   const region = useSelector(getCurrentRegion);
 
-  const initializeTiles = () => {
-    // appSettings.data.current.homepage.map((tile, idx) => {
-    //   const { search } = tile
-    //   const immRegion = (search.country === 'default') ? region : search.country;
-    //   if (idx < 99) { //Limit tiles for testing
-    //     dispatch(reloadNews({ id: tile.id }));
-    //     dispatch(fetchBreakingNews({ ...search, country: immRegion, id: tile.id }));
-    //     return { [idx]: tile.title }
-    //   }
-    // });
-    // setInitialFetchComplete(true);
-    // console.log('call to fetch all')
-  }
+  // useEffect(() => {
+  //   dispatch(fetchUserData());
+  //   console.log('Fetch user data...')
+  // }, [dispatch])
 
-  useEffect(() => {
-    dispatch(fetchUserData());
-    console.log('Fetch user data...')
-  }, [dispatch])
-
-  useEffect(() => {
-    if (userInfo.fetchComplete && !initialFetchComplete) {
-      dispatch(loadUserPreferences(userInfo));
-      console.log('User Preferences Loaded')
-      setInitialFetchComplete(true);
-    }
-  }, [userInfo, dispatch, initialFetchComplete]);
+  // useEffect(() => {
+  //   if (userInfo.fetchComplete && !initialFetchComplete) {
+  //     dispatch(loadUserPreferences(userInfo));
+  //     console.log('User Preferences Loaded')
+  //     setInitialFetchComplete(true);
+  //   }
+  // }, [userInfo, dispatch, initialFetchComplete]);
 
 
   return (
