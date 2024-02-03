@@ -16,7 +16,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const LoginModal = (props) =>{
 
     const {loginModalOpen, setLoginModalOpen,handleLogin} = props;
-    
+    const [showPassword, setShowPassword] = useState(false)
+
     return (
         <Modal isOpen={loginModalOpen}>
             <ModalHeader toggle={() => setLoginModalOpen(false)}>
@@ -46,12 +47,22 @@ const LoginModal = (props) =>{
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor='password'>Password</Label>
-                            <Field
-                                id='password'
-                                name='password'
-                                placeholder='Password'
-                                className='form-control'
-                            />
+                            <div className="form-control p-0" style={{display:'flex', justifyContent:'end'}}>
+                                <Field
+                                    id='password'
+                                    name='password'
+                                    type={showPassword ? 'text':'password'}
+                                    placeholder='Password'
+                                    className='form-control'
+                                    style={{border:'none'}}
+                                />
+                                <FontAwesomeIcon 
+                                    icon={showPassword ? ['far','fa-eye'] : ['far','fa-eye-slash']} 
+                                    className='p-2'
+                                    onClick={()=>setShowPassword(!showPassword)}
+                                    style={{position:'absolute'}}
+                                />
+                            </div>
                             <ErrorMessage name='password'>
                                 {(msg)=> <p className='text-danger'>{msg}</p>}
                             </ErrorMessage>

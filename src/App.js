@@ -12,6 +12,8 @@ import { fetchUserData, getUserInfo } from './app/selectors/userSlice';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { getAppSettings, getCurrentRegion, loadUserPreferences } from './app/selectors/settingsSlice';
 
@@ -43,7 +45,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUserData());
-    console.log('Fetch user dat...')
+    console.log('Fetch user data...')
   }, [dispatch])
 
   useEffect(() => {
@@ -54,15 +56,7 @@ function App() {
     }
   }, [userInfo, dispatch, initialFetchComplete]);
 
-  // useEffect(() => {
-  //   if (appSettings.isLoaded && !initialFetchComplete) {
-  //     initializeTiles();
-  //     console.log('Initialized Tiles')
-  //   }
 
-  // }, [appSettings, initialFetchComplete])
-
-  // console.log('APP SETTINGS',appSettings)
   return (
     <div onClick={() => toggleHomeClick(!homeClick)} className="App">
       <Header />
@@ -77,4 +71,4 @@ function App() {
 }
 
 export default App;
-library.add(fab, faCheckSquare, faCoffee)
+library.add(fab, fas, far, faCheckSquare, faCoffee)

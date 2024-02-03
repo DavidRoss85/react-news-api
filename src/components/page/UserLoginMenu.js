@@ -21,24 +21,33 @@ const UserLoginMenu = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
 
-    const toggleMenu = () => setDropdownOpen((prevState) => !prevState);
-    const handleLogin =() =>{
-        setLoginModalOpen(false)
-    }
+    const toggleMenu = (event) => {
+        event.stopPropagation()
+        setDropdownOpen((prevState) => !prevState)
+    };
+    const handleLogin =(values) =>{
+        const currentUser = {
+            username: values.username,
+            password: values.password
+        }
+        setLoginModalOpen(false);
+    };
 
 
     return (
         <>
             <Dropdown isOpen={dropdownOpen} toggle={toggleMenu} direction={'down'}>
-                <DropdownToggle caret style={{ ...menuStyle, border: '1px solid white' }}><i className="fa fa-user" /></DropdownToggle>
+                <DropdownToggle caret style={{ ...menuStyle, border: '1px solid white' }}>
+                    <FontAwesomeIcon icon="fa-regular fa-user" />
+                </DropdownToggle>
                 <DropdownMenu style={menuStyle} end>
                     <DropdownItem header style={menuStyle}>
                         User
                     </DropdownItem>
-                    <DropdownItem style={{ color: 'white' }} onClick={() => setLoginModalOpen(true)}>
-                        Login
+                    <DropdownItem style={{ color: '#aaa' }} onClick={() => setLoginModalOpen(true)}>
+                        Sign in
                     </DropdownItem>
-                    <DropdownItem style={{}} disabled>
+                    <DropdownItem style={{color: '#333'}} disabled>
                         Create Account
                     </DropdownItem>
                 </DropdownMenu>

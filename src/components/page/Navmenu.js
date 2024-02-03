@@ -5,6 +5,7 @@ import RegionFilter from "../misc/RegionFilter"
 import SiteLogo from "./SiteLogo";
 import { useDispatch, useSelector } from "react-redux";
 import UserLoginMenu from "./UserLoginMenu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -27,7 +28,7 @@ const Navmenu = ({ homeClick = false }) => {
 
             <RegionFilter />
 
-            <NavbarToggler onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen) }} />
+            <NavbarToggler onClick={(event) => { event.stopPropagation(); setMenuOpen(!menuOpen) }} />
 
             <Collapse isOpen={menuOpen} navbar className="justify-content-start">
 
@@ -37,24 +38,24 @@ const Navmenu = ({ homeClick = false }) => {
                             <span>Home</span>
                         </NavLink>
                     </NavItem>
-                    <NavItem>
+                    {/* <NavItem>
                         <NavLink className="nav-link" to="#topStories">
                             <span>Top Stories</span>
                         </NavLink>
-                    </NavItem>
-                    <NavItem>
+                    </NavItem> */}
+                    {/* <NavItem>
                         <NavLink className="nav-link" to="#worldNews">
                             <span>World News</span>
                         </NavLink>
-                    </NavItem>
-                    <NavItem>
+                    </NavItem> */}
+                    {/* <NavItem>
                         <NavLink className="nav-link" to="#about">
                             <span>About</span>
                         </NavLink>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem>
                         <a className="nav-link" href="#searchBox">
-                            <span><i className="fa fa-search"></i> Search</span>
+                            <span><FontAwesomeIcon icon="fa fa-search"/> Search</span>
                         </a>
                     </NavItem>
 
@@ -72,11 +73,6 @@ const Navmenu = ({ homeClick = false }) => {
                 </Nav>
  
             </Collapse>
-            {/* <NavItem className="d-none d-md-inline-block">
-                <a className="nav-link" href="#searchBox">
-                    <span>TEST</span>
-                </a>
-            </NavItem> */}
         </Navbar>
     )
 }
