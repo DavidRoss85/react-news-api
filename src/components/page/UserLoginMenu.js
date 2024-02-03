@@ -1,21 +1,13 @@
 import {
-    Modal,
-    ModalHeader,
-    ModalBody,
-    FormGroup,
-    Label,
-    Button,
     Dropdown,
     DropdownToggle,
     DropdownMenu,
     DropdownItem
 } from "reactstrap";
-import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { validateUserLoginForm } from "../../utils/validateUserLoginForm";
-import { fetchUserData, attemptLogin, logOutUser } from "../../app/selectors/userSlice";
+import { attemptLogin, logOutUser } from "../../app/selectors/userSlice";
 import { loadUserPreferences } from "../../app/selectors/settingsSlice";
 import LoginModal from "./LoginModal";
 
@@ -39,7 +31,6 @@ const UserLoginMenu = () => {
             password: values.password
         }
         dispatch(attemptLogin(currentUser))
-        //setLoginModalOpen(false);
     };
 
     //reset settings
@@ -73,9 +64,16 @@ const UserLoginMenu = () => {
                         User
                     </DropdownItem>
                     {loggedIn ? (
-                        <DropdownItem style={{ color: '#aaa' }} onClick={signOut}>
-                            Sign out
-                        </DropdownItem>
+                        <>
+                            <DropdownItem style={{ color: '#333' }} onClick={()=>{}} disabled>
+                                <FontAwesomeIcon icon="fa-solid fa-gear" />{' '} Options
+                            </DropdownItem>
+                            <DropdownItem style={{ color: '#aaa' }} onClick={signOut}>
+                                <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />{' '} Sign out
+                            </DropdownItem>
+
+                        </>
+                        
                     ) : (
                         <>
                             <DropdownItem style={{ color: '#aaa' }} onClick={() => setLoginModalOpen(true)}>
