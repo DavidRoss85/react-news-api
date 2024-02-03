@@ -1,13 +1,6 @@
 import { ERROR_NEWS } from "../shared/TEST_NEWS"
 import { buildNewsURL } from "../../utils/buildNewsUrl"
 
-//Move this into a component...
-import { checkCache } from "./cacheSlice";
-const cacheResults = (searchCriteria, searchResults) =>{
-    if(checkCache(searchCriteria)){}
-}
-//--------------------------------
-
 const LOCAL_URL = 'http://localhost:3001/'
 const testMode = true;
 

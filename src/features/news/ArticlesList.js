@@ -18,12 +18,12 @@ const ArticlesList = (props) => {
 
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
-    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id].search)
+    const tileSetting = useSelector((state) => state.settings.data.current.homepage[id].search)
     const { status } = newsFeed;
 
     const dispatch = useDispatch();
 
-    const displayNews = () => {
+    function displayNews() {
         if (status === 'ok') {
             setSuccess(true);
         } else if (status === 'error') {
@@ -34,7 +34,7 @@ const ArticlesList = (props) => {
 
     const triggerReload = () => {
         dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
-        dispatch(fetchBreakingNews({...tileSetting, id: id }))
+        dispatch(fetchBreakingNews({ ...tileSetting, id: id }))
     }
 
     useEffect(() => {
