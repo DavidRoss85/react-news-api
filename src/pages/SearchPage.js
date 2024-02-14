@@ -40,7 +40,7 @@ const SearchPage = () => {
     }
 
     useEffect(() => {
-        setNumPages(Math.ceil(searchResults.articles.length/10))
+        setNumPages(Math.ceil(searchResults.articles.length / 10))
         displayNews();
     }, [searchResults])
 
@@ -59,6 +59,11 @@ const SearchPage = () => {
                 <Col className='text-center'>
                     <h3>Search Results for {searchCriteria}</h3>
                     <hr />
+                </Col>
+            </Row>
+            <Row className='justify-content-center'>
+                <Col xs='auto' className='text-center'>
+                    <PageNumbers currentPage={currentPage} numPages={numPages} click={changePage} />
                 </Col>
             </Row>
             {searchResults.articles.map((article, idx) => {
