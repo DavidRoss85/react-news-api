@@ -14,6 +14,7 @@ const SearchPage = () => {
     const oldSearchCriteria = useSelector((state) => state.news.searchResults[0].criteria);
     const searchResults = useSelector((state) => state.news.searchResults[0].news);
     const isLoading = useSelector((state) => state.news.searchResults[0].isLoading);
+    const searchCache = useSelector((state) => state.news.cache)
     const [success, setSuccess] = useState(false);
     const [numPages, setNumPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +33,7 @@ const SearchPage = () => {
 
     const triggerReload = () => {
         dispatch(reloadNews({ id: 0, feed: 'searchResults' }));
-        dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria }));
+        dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria, searchCache }));
     }
     const changePage = (page) => {
         if (page < 1 || page > numPages) return

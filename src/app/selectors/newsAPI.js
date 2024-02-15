@@ -1,18 +1,18 @@
 import { ERROR_NEWS } from "../shared/TEST_NEWS"
 import { buildNewsURL } from "../../utils/buildNewsUrl"
 
+const apiKey = process.env.REACT_APP_NEWS_API_KEY
+const URL_API_PRE = "&apiKey="
 const LOCAL_URL = 'http://localhost:3001/'
 const testMode = true;
 
-export const fetchFromServer = async (searchCriteria) => {
+export const fetchFromServer = async (newsURL) => {
 
-    let newsURL = buildNewsURL(searchCriteria);
     // console.log('The built url: ' + newsURL)
-
-    if (testMode) newsURL = LOCAL_URL + (searchCriteria.errorMode ? 'errorNews' : 'worldNews')
+    const testURL = LOCAL_URL + 'worldNews'
 
     try {
-        const res = await fetch(newsURL);
+        const res = testMode ? await fetch(testURL) : await fetch(newsURL + `${URL_API_PRE}${apiKey}`);
         if (!res.ok) return ERROR_NEWS;
         const data = await res.json();
         return data;

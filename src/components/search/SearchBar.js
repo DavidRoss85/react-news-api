@@ -2,17 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import { useState } from "react";
 import { fetchSearchResults, reloadNews } from "../../app/selectors/newsSlice";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const SearchBar = () => {
     const [searchCriteria, setSearchCriteria] = useState('');
+    const searchCache = useSelector((state) => state.news.cache)
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const handleSubmit = () => {
         if (searchCriteria) {
             dispatch(reloadNews({ id: 0, feed: 'searchResults' }));
-            dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria }))
+            dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria, searchCache }))
             navigate(`/search/${searchCriteria}`)
         }
     }

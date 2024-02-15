@@ -14,11 +14,13 @@ import LoginModal from "./LoginModal";
 const UserLoginMenu = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
+
     const currentUserName = useSelector((state) => state.user.data.username);
-    const userInfo = useSelector((state)=>state.user);
+    const userInfo = useSelector((state) => state.user);
     const userState = useSelector((state) => state.user.userState);
-    const {loggedIn, userLoading, success} = userState;
     const dispatch = useDispatch()
+
+    const { loggedIn, userLoading, success } = userState;
 
 
     const toggleMenu = (event) => {
@@ -65,7 +67,7 @@ const UserLoginMenu = () => {
                     </DropdownItem>
                     {loggedIn ? (
                         <>
-                            <DropdownItem style={{ color: '#333' }} onClick={()=>{}} disabled>
+                            <DropdownItem style={{ color: '#333' }} onClick={() => { }} disabled>
                                 <FontAwesomeIcon icon="fa-solid fa-gear" />{' '} Options
                             </DropdownItem>
                             <DropdownItem style={{ color: '#aaa' }} onClick={signOut}>
@@ -73,7 +75,7 @@ const UserLoginMenu = () => {
                             </DropdownItem>
 
                         </>
-                        
+
                     ) : (
                         <>
                             <DropdownItem style={{ color: '#aaa' }} onClick={() => setLoginModalOpen(true)}>
@@ -88,7 +90,7 @@ const UserLoginMenu = () => {
             </Dropdown>
 
             <LoginModal
-                success = {success}
+                success={success}
                 isLoading={userLoading}
                 loginModalOpen={loginModalOpen}
                 setLoginModalOpen={setLoginModalOpen}

@@ -15,7 +15,7 @@ export const buildNewsURL = (searchCriteria) => {
 
     if (endpoint === 'top-headlines') {
         //top-headlines? country= & category= & pageSize= & page= & q=
-        const immCountry = country ? country === 'all' ? '' : `country=${country}` : '';
+        const immCountry = country ? country === 'all' || country ==='default' ? '' : `country=${country}` : '';
         const immKeyword = immCountry ? (keyword ? `&q=${keyword}` : '') : (keyword ? `q=${keyword}` : 'q=news');
         const immCategory = category ? `&category=${category}` : '';
         const immPageSize = pageSize ? `&pageSize=${pageSize}` : '';
@@ -24,8 +24,8 @@ export const buildNewsURL = (searchCriteria) => {
         const newsURL =
             `${URL_BASE}${endpoint}?`
             + `${immCountry}${immKeyword}${immCategory}${immPageSize}`
-            + `${immPage}`
-            + `${URL_API_PRE}${apiKey}`;
+            + `${immPage}`;
+            //+ `${URL_API_PRE}${apiKey}`;
         return newsURL;
     } else if (endpoint === 'everything') {
         //everything? q= &searchIn=(title/description/content) &from=(2024-01-20) &to=(2024-01-20)
@@ -45,8 +45,8 @@ export const buildNewsURL = (searchCriteria) => {
             `${URL_BASE}${endpoint}?`
             + `${immKeyword}${immSearchIn}${immFrom}`
             + `${immTo}${immLang}${immSort}`
-            + `${immPageSize}${immPage}`
-            + `${URL_API_PRE}${apiKey}`;
+            + `${immPageSize}${immPage}`;
+            //+ `${URL_API_PRE}${apiKey}`;
         return newsURL;
 
     }

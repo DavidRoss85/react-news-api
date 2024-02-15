@@ -5,8 +5,7 @@ import { getAppSettings } from "../app/selectors/settingsSlice";
 import NewsTile from "../components/page/NewsTile";
 
 const HomePage = () => {
-    //Make this pure later
-    const appSettings = useSelector(getAppSettings)
+    const appSettings = useSelector((state)=>state.settings)
     const newsParams = appSettings.data.current.homepage;
 
     //figure out how many rows to generate:

@@ -6,7 +6,7 @@ import SlideShow from "../../components/news/SlideShow";
 
 import { fetchBreakingNews, getLoadingStatus } from "../../app/selectors/newsSlice";
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
-import { getBreakingNews } from "../../app/selectors/newsSlice";
+import { getBreakingNews, testFetch } from "../../app/selectors/newsSlice";
 
 const BreakingNewsSlide = (props) => {
 
@@ -18,7 +18,8 @@ const BreakingNewsSlide = (props) => {
 
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
-    const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id].search)
+    const searchCache = useSelector((state) => state.news.cache)
+    const tileSetting = useSelector((state) => state.settings.data.current.homepage[id].search);
     const { status } = newsFeed;
 
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const BreakingNewsSlide = (props) => {
 
     const triggerReload = () => {
         dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
-        dispatch(fetchBreakingNews({...tileSetting, id: id }))
+        dispatch(fetchBreakingNews({ ...tileSetting, id: id, searchCache }))
     }
 
     useEffect(() => {
@@ -52,10 +53,10 @@ const BreakingNewsSlide = (props) => {
                     }
                 )
         );
-        
+
         displayNews();
     }, [newsFeed]);
-    
+
     if (isLoading) { return (<Loading />) }
     if (!success) { return (<Failed reset={triggerReload} />) }
     return (

@@ -16,8 +16,9 @@ const ArticlesList = (props) => {
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
-    const isLoading = useSelector(getLoadingStatus(id))
+    const isLoading = useSelector(getLoadingStatus(id));
     const newsFeed = useSelector(getBreakingNews(id));
+    const searchCache = useSelector((state) => state.news.cache)
     const tileSetting = useSelector((state) => state.settings.data.current.homepage[id].search)
     const { status } = newsFeed;
 
@@ -34,7 +35,7 @@ const ArticlesList = (props) => {
 
     const triggerReload = () => {
         dispatch(reloadNews({ id: id, feed: 'breakingNews' }));
-        dispatch(fetchBreakingNews({ ...tileSetting, id: id }))
+        dispatch(fetchBreakingNews({ ...tileSetting, id: id, searchCache }))
     }
 
     useEffect(() => {
