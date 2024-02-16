@@ -24,7 +24,7 @@ const LinksGroup = ({ searchLinks }) => {
         <>
             <Row className="link-group pt-2">
                 <Col className="text-sm-start">
-                    <h4 className="search-link">{headLink.title}</h4>
+                    <h4 className="search-link" onClick={()=>handleClick(headLink.title)}>{headLink.title}</h4>
                 </Col>
             </Row>
             {subLinks.map((subLink, idx) => {
