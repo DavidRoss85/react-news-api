@@ -2,11 +2,13 @@ export const emptyNewsArray = [
     { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
 
-export const newsParams = {
-    numArticles: 10,
-    country: "us",
-    criteria: "top-headlines"
-}
+// export const newsParams = {
+//     numArticles: 10,
+//     country: "us",
+//     criteria: "top-headlines"
+// }
+
+export const CACHE_TTE = 3600000 //milliseconds
 
 export const LOCATIONLIST = ["all", "us", "ae", "ar", "at", "au", "be", "bg", "br", "ca", "ch", "cn", "co", "cu", "cz", "de", "eg", "fr", "gb", "gr", "hk", "hu", "id", "ie", "il", "in", "it", "jp", "kr", "lt", "lv", "ma", "mx", "my", "ng", "nl", "no", "nz", "ph", "pl", "pt", "ro", "rs", "ru", "sa", "se", "sg", "si", "sk", "th", "tr", "tw", "ua", "ve", "za"]
 
@@ -65,13 +67,13 @@ export const userPref = {
             id: 2,
             search: {
                 category: "",
-                country: "us",
+                country: "default",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: ""
             },
             numArticles: 8,
-            title: "US News",
+            title: "News",
             tileType: "list",
             row: 1,
             sizing: {
@@ -88,13 +90,13 @@ export const userPref = {
             id: 3,
             search: {
                 category: "",
-                country: "gb",
+                country: "default",
                 endpoint: "top-headlines",
                 errorMode: false,
-                keyword: ""
+                keyword: "music"
             },
             numArticles: 6,
-            title: "UK News",
+            title: "Music News",
             tileType: "topic",
             row: 2,
             sizing: {
@@ -111,13 +113,13 @@ export const userPref = {
             id: 4,
             search: {
                 category: "business",
-                country: "us",
+                country: "default",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: ""
             },
             numArticles: 12,
-            title: "US Business",
+            title: "Business",
             tileType: "pallette",
             row: 2,
             sizing: {
