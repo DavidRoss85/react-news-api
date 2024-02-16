@@ -6,9 +6,11 @@ import newsImage5 from '../app/img/genericNewsLogo5.png'
 
 const imageArray = [newsImage1, newsImage2, newsImage3, newsImage4, newsImage5]
 
-export const formatArticle = (article) => {
+export const formatArticle = (article, imageNum) => {
 
-    const rIndex = Math.floor(Math.random() * imageArray.length)
+    const rIndex = imageNum
+        ? imageNum > imageArray.length ? 1 : imageNum - 1
+        : Math.floor(Math.random() * imageArray.length)
     const immArticle = { ...article, urlToImage: (!article.urlToImage) ? imageArray[rIndex] : article.urlToImage }
     return immArticle
 }

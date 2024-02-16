@@ -62,7 +62,7 @@ const ArticlesPallette = (props) => {
         <Row className='mx-auto'>
             {newsArray.map((article, idx) => {
                 //replace empty image with generic news icon
-                const immArticle = formatArticle(article)
+                const immArticle = formatArticle(article, (idx % 5 + 1))
                 return (
                     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} className="py-1" key={idx}>
                         <ArticleSquare article={immArticle} className={"text-truncate"} />
