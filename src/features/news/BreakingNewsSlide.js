@@ -6,13 +6,13 @@ import SlideShow from "../../components/news/SlideShow";
 
 import { fetchBreakingNews, getLoadingStatus } from "../../app/selectors/newsSlice";
 import { getEmptyNewsArray, reloadNews } from "../../app/selectors/newsSlice";
-import { getBreakingNews, testFetch } from "../../app/selectors/newsSlice";
+import { getBreakingNews } from "../../app/selectors/newsSlice";
 
-const BreakingNewsSlide = (props) => {
+const BreakingNewsSlide = ({newsParams}) => {
 
-    const { newsParams } = props;
-    const { id = 0, numArticles } = newsParams;
-
+    const { id = 0 } = newsParams;
+    const { numArticles } = newsParams.search
+    
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
 
