@@ -14,7 +14,8 @@ const SearchBar = () => {
         if (searchCriteria) {
             dispatch(reloadNews({ id: 0, feed: 'searchResults' }));
             dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria, searchCache }))
-            navigate(`/search/${searchCriteria}`)
+            navigate(`/search/${searchCriteria}`);
+            setSearchCriteria('')
         }
     }
     return (
@@ -25,6 +26,7 @@ const SearchBar = () => {
                     className="form-control"
                     type="text"
                     placeholder="This is DNN"
+                    value={searchCriteria}
                     onChange={(e) => setSearchCriteria(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' ? handleSubmit() : e}
                 />

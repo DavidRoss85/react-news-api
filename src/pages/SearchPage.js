@@ -1,12 +1,13 @@
 import { Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
-import { fetchSearchResults, reloadNews, getEmptyNewsArray } from "../app/selectors/newsSlice";
+import { fetchSearchResults, reloadNews } from "../app/selectors/newsSlice";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ArticleCard from "../components/news/ArticleCard";
 import PageNumbers from "../components/misc/PageNumbers"
 import { formatArticle } from "../utils/formatArticle";
 import { Loading, Failed } from "../components/misc/ComponentStatuses";
+import SearchBar from "../components/search/SearchBar";
 
 const SearchPage = () => {
     const { searchCriteria } = useParams();
@@ -22,15 +23,7 @@ const SearchPage = () => {
 
     const dispatch = useDispatch();
 
-    const displayNews = () => {
-        if (status === 'ok') {
-            setSuccess(true);
-        } else if (status === 'error') {
-            console.log("ERROR loading news Search.")
-            setSuccess(false);
-        }
-    }
-
+    
     const triggerReload = () => {
         dispatch(reloadNews({ id: 0, feed: 'searchResults' }));
         dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria, searchCache }));
@@ -39,23 +32,38 @@ const SearchPage = () => {
         if (page < 1 || page > numPages) return
         setCurrentPage(page)
     }
-
+    
+    const displayNews = () => {
+        if (status === 'ok') {
+            setSuccess(true);
+        } else if (status === 'error') {
+            console.log("ERROR loading news Search.")
+            setSuccess(false);
+        }
+    }
     useEffect(() => {
         setNumPages(Math.ceil(searchResults.articles.length / 10))
         displayNews();
-    }, [searchResults])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [searchResults])
 
     useEffect(() => {
         if (searchCriteria !== oldSearchCriteria) {
             triggerReload();
-        }
-    }, [])
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchCriteria, oldSearchCriteria])
 
     if (isLoading) { return (<Loading />) };
     if (!success) { return (<Failed message='News Search Failed...' reset={triggerReload} />) }
 
     return (
         <>
+            <Row className='footer-container p-3'>
+                <Col>
+                    <SearchBar />
+                </Col>
+            </Row>
             <Row>
                 <Col className='text-center'>
                     <h3>Search Results for {searchCriteria}</h3>
