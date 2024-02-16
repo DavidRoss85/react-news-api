@@ -125,6 +125,17 @@ const newsSlice = createSlice({
         },
         emptyCache: (state, action)=>{
             state.cache = EMPTY_CACHE;
+        },
+        loadLocalCache: (state, action)=>{
+            const localCache = sessionStorage.getItem('searchCache');
+            if (localCache){
+                state.cache = localCache;
+            }else {
+                state.cache = EMPTY_CACHE;
+            }
+        },
+        saveLocalCache: (state, action)=>{
+            sessionStorage.setItem('searchCache', state.cache)
         }
     },
     extraReducers: (builder) => {
@@ -194,7 +205,7 @@ const newsSlice = createSlice({
 })
 
 export const newsReducer = newsSlice.reducer;
-export const { reloadNews, updateFeed, emptyCache } = newsSlice.actions;
+export const { reloadNews, updateFeed, emptyCache, saveLocalCache, loadLocalCache } = newsSlice.actions;
 
 export const getWorldNews = (id) => (state) => {
     const immId = (id > state.news.worldNews.length - 1) ? state.news.worldNews.length - 1 : id;
