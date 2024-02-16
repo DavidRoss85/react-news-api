@@ -75,6 +75,7 @@ export const fetchBreakingNews = createAsyncThunk(
             }
             return newsData.status === 'error' ? { id, newsData } : { id, newsData, cache: dataToCache, ...cachedItems };
         } else {
+            console.log('Load Cache')
             return { id, ...cachedItems };
         }
     }

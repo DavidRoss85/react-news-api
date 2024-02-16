@@ -47,7 +47,7 @@ export const userPref = {
                 errorMode: false,
                 keyword: ""
             },
-            numArticles: 6,
+            numArticles: 10,
             title: "Entertainment",
             tileType: "pallette",
             row: 1,
