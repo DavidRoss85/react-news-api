@@ -5,6 +5,7 @@ import {
     DropdownItem
 } from "reactstrap";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { attemptLogin, logOutUser } from "../../app/selectors/userSlice";
@@ -18,7 +19,8 @@ const UserLoginMenu = () => {
     const currentUserName = useSelector((state) => state.user.data.username);
     const userInfo = useSelector((state) => state.user);
     const userState = useSelector((state) => state.user.userState);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { loggedIn, userLoading, success } = userState;
 
@@ -67,7 +69,7 @@ const UserLoginMenu = () => {
                     </DropdownItem>
                     {loggedIn ? (
                         <>
-                            <DropdownItem style={{ color: '#333' }} onClick={() => { }} disabled>
+                            <DropdownItem style={{ color: '#333' }} onClick={() => { navigate(`/settings/`) }} >
                                 <FontAwesomeIcon icon="fa-solid fa-gear" />{' '} Options
                             </DropdownItem>
                             <DropdownItem style={{ color: '#aaa' }} onClick={signOut}>
