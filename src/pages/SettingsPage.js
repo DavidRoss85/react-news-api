@@ -43,8 +43,10 @@
 // 	}
 // On Mouse up => make wArray = newArray values
 // Resize windows
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FeedRow from "../components/settings/FeedRow";
 
 const MIN_WIDTH = 9;
 const percentToCol = (value) => {
@@ -89,7 +91,10 @@ const adjustValues = (index = 0, newValue, vArray = []) => {
 
 const SettingsPage = () => {
     const [slideTotal, setSlideTotal] = useState([9, 9, 9]);
-    const [calculation, setCalculation] = useState([9, 9, 9])
+    const [calculation, setCalculation] = useState([9, 9, 9]);
+
+    const [newsRows, setNewsRows] = useState([{ title: 'Row' }]);
+    const [selectedRows, setSelectedRows] = useState([]);
 
     const handleChange = (idx, value) => {
         setSlideTotal((slideTotal) => {
@@ -100,11 +105,32 @@ const SettingsPage = () => {
         })
     }
 
+    const addFeedRow = () => {
+        setNewsRows(newsRows => {
+            newsRows.push({ title: 'Row' });
+            return newsRows;
+        })
+    }
 
+    const toggleRowSelect = (index) => {
+        if (selectedRows.includes(index)) {
+            setSelectedRows(selectedRows => selectedRows.filter(item => item !== index))
+        } else {
+            setSelectedRows(selectedRows => {
+                selectedRows.push(index);
+                return selectedRows;
+            })
+        }
+    }
+
+    const deleteSelectedRows = () => {
+        setNewsRows(newsRows => newsRows.filter((item, idx) => !selectedRows.includes(idx)));
+        setSelectedRows([])
+    }
     return (
         <>
             <Container fluid>
-                <Row style={{ height: '500px' }}>
+                <Row>
                     <Col className='justify-content-center text-center'>
                         Settings Page
                         <br />
@@ -129,6 +155,21 @@ const SettingsPage = () => {
                                 )
                             })}
                         </Row>
+                        <Row>
+                            <Col>
+                                <Button onClick={addFeedRow}>Add Row</Button>
+                                <Button onClick={deleteSelectedRows}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected Rows</Button>
+                            </Col>
+                        </Row>
+                        {newsRows.map((item, idx) => {
+                            return (
+                                <FeedRow
+                                    key={idx}
+                                    toggleRowSelect={() => toggleRowSelect(idx)}
+                                    rowSelected={selectedRows.includes(idx) ? true : false}
+                                />
+                            )
+                        })}
                     </Col>
                 </Row>
             </Container>

@@ -69,7 +69,7 @@ const UserLoginMenu = () => {
                     </DropdownItem>
                     {loggedIn ? (
                         <>
-                            <DropdownItem style={{ color: '#333' }} onClick={() => { navigate(`/settings/`) }} >
+                            <DropdownItem style={{ color: '#aaa' }} onClick={() => { navigate(`/settings/`) }} >
                                 <FontAwesomeIcon icon="fa-solid fa-gear" />{' '} Options
                             </DropdownItem>
                             <DropdownItem style={{ color: '#aaa' }} onClick={signOut}>
