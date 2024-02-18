@@ -63,9 +63,9 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        updateRegion: (state, action) => {
-            state.data.preferences.region = action.payload
-        },
+        // updateRegion: (state, action) => {
+        //     state.data.preferences.region = action.payload
+        // },
         logOutUser: (state, action) => {
             state.data = initialState.data
             state.userState=initialState.userState
@@ -113,7 +113,7 @@ const userSlice = createSlice({
 })
 
 export const userReducer = userSlice.reducer;
-export const { updateRegion, logOutUser } = userSlice.actions;
+export const {logOutUser } = userSlice.actions;
 
 export const getUserInfo = (state) => {
     return state.user

@@ -5,7 +5,7 @@ import { settingsReducer } from './selectors/settingsSlice';
 import { userReducer } from './selectors/userSlice';
 
 
-
+//Testing custom middleware
 const logMiddleMessage = (store) => (next) => (action) => {
     if (action.type === 'news/fetchBreakingNews/fulfilled') {
         console.log('STORE', store);

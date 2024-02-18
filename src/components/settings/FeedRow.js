@@ -1,15 +1,25 @@
 import { Row, Col, Button } from "reactstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SelectBox from "../misc/SelectBox";
+import FeedCol from "./FeedCol";
+import DeleteButton from "../misc/DeleteButton";
 
 const tempArray = [
     { title: 'News', width: 30 },
     { title: 'More', width: 30 },
     { title: 'Yeah', width: 30 }
 ]
-const FeedRow = ({ rowSelected, toggleRowSelect = () => { } }) => {
+const FeedRow = (props) => {
 
-    const [newsColumns, setNewsColumns] = useState(tempArray);
+    const {
+        rowSelected,
+        toggleRowSelect = () => { },
+        deleteFunc = () => { },
+        params
+    } = props;
+
+    const [newsColumns, setNewsColumns] = useState(params.pages);
     const [selectedColumns, setSelectedColumns] = useState([]);
 
     const addNewsComponent = () => {
@@ -21,12 +31,12 @@ const FeedRow = ({ rowSelected, toggleRowSelect = () => { } }) => {
         })
     };
 
-    const toggleColumnSelect = (index) => {
-        if (selectedColumns.includes(index)) {
-            setSelectedColumns(selectedColumns => selectedColumns.filter(item => item !== index))
+    const toggleColumnSelect = (id) => {
+        if (selectedColumns.includes(id)) {
+            setSelectedColumns(selectedColumns => selectedColumns.filter(item => item !== id))
         } else {
             setSelectedColumns(selectedColumns => {
-                selectedColumns.push(index);
+                selectedColumns.push(id);
                 return selectedColumns;
             })
         }
@@ -39,39 +49,43 @@ const FeedRow = ({ rowSelected, toggleRowSelect = () => { } }) => {
         setSelectedColumns([])
     }
 
+    const deleteColumn = (id) => {
+        setNewsColumns(newsColumns => newsColumns.filter((item, idx) => id !== idx));
+    }
     return (
         <>
-            <Row style={rowSelected ? styles.rowSelected : styles.rowStyle}>
+            <Row style={
+                rowSelected
+                    ? { ...styles.basicStyle, ...styles.rowSelected }
+                    : { ...styles.basicStyle, ...styles.rowStyle }
+            }
+            >
                 <Col>
                     <Row style={styles.menuRow}>
-                        <Col>
-                            <Button style={styles.buttonStyle} onClick={toggleRowSelect}>{rowSelected ? 'Deselect Row' : 'Select Row'}</Button>
+                        <Col style={{textAlign:'start'}}>
+                            Row: {params.rowNum} : idx : {params.idx}
                         </Col>
+                        <Col style={{ textAlign: 'end', }}>
+                            <SelectBox isSelected={rowSelected} onClick={toggleRowSelect} />
+                            <DeleteButton onClick={deleteFunc} style={styles.deleteButton} btnText={'Delete Row'} />
+                        </Col>
+                    </Row>
+                    <Row style={{ textAlign: 'start' }}>
                         <Col>
                             <Button style={styles.buttonStyle} onClick={addNewsComponent}>+ Add Column</Button>
-                            <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button>
+                            {/* <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
                         </Col>
                     </Row>
                     <Row>
                         {newsColumns.map((item, idx) => {
-
                             return (
-                                <Col
+                                <FeedCol
                                     key={idx}
-                                    style={selectedColumns.includes(idx) ? styles.newsSelected : styles.newsStyle}
-
-                                >
-                                    Title: {item.title}
-                                    <Button
-                                        onClick={() => toggleColumnSelect(idx)}
-                                        style={selectedColumns.includes(idx) ? styles.checkboxSelected : styles.checkboxUnselected}
-                                    >
-                                        {selectedColumns.includes(idx)
-                                            ? <>Select <FontAwesomeIcon icon="fa-regular fa-square-check" /></>
-                                            : <>Select <FontAwesomeIcon icon="fa-regular fa-square" /></>
-                                        }
-                                    </Button>
-                                </Col>
+                                    deleteFunc={() => deleteColumn(idx)}
+                                    isSelected={selectedColumns.includes(idx)}
+                                    toggleSelect={() => toggleColumnSelect(idx)}
+                                    params={newsColumns[idx]}
+                                />
                             )
                         })}
                     </Row>
@@ -87,54 +101,31 @@ const myColors = {
 };
 
 const styles = {
+    basicStyle: {
+        padding: '5px',
+        border: '3px solid black',
+        borderRadius: '14px',
+        marginTop: '8px',
+    },
     buttonStyle: {
         backgroundColor: 'rgba(80,80,255,.8)',
         marginLeft: '3px',
         marginRight: '3px'
     },
-    checkboxSelected: {
-        border: 'none',
-        backgroundColor: 'rgba(0,0,0,0)',
-        color: 'black',
-        fontWeight: 'bold'
-    },
-    checkboxUnselected: {
-        border: 'none',
+    deleteButton: {
+        border: '1px solid black',
         backgroundColor: 'rgba(0,0,0,0)',
         color: 'black',
         fontWeight: 'bold'
     },
     menuRow: {
         borderRadius: '10px',
-        textAlign: 'left',
         padding: '5px',
     },
-    newsStyle: {
-        background: 'white',
-        border: '2px solid black',
-        borderRadius: '20px',
-        margin: '5px',
-        height: '20vh'
-    },
-    newsSelected: {
-        background: myColors.selectedGreen,
-        border: '2px solid black',
-        borderRadius: '20px',
-        margin: '5px',
-        height: '20vh'
-    },
     rowStyle: {
-        border: '3px solid black',
-        borderRadius: '14px',
-        height: '30vh',
-        marginTop: '8px',
         background: myColors.lightRed
     },
     rowSelected: {
-        border: '3px solid black',
-        borderRadius: '14px',
-        height: '30vh',
-        marginTop: '8px',
         background: 'blue'
     },
 };
