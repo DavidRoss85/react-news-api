@@ -9,23 +9,47 @@ const HomeViewSet = () => {
     const [newsRows, setNewsRows] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
     const userSettings = useSelector(state => state.user.data);
-    const [currentSettings,setCurrentSettings] = useState(userSettings);
+    const [currentSettings, setCurrentSettings] = useState(userSettings);
     const { homepage: homePageSettings } = currentSettings.preferences;
+
+    
+    useEffect(() => {
+        setCurrentSettings(userSettings);
+    },[userSettings])
 
     useEffect(() => {
         setNewsRows(() => {
-            const tempArray = [];
-            for (const item of homePageSettings) {
-                if (!item.row || tempArray.includes(item.row)) continue;
-                tempArray.push(item.row)
+            /*tempArr = [
+                [{id: 0,row: 1},{id: 1,row: 1}],
+                [{id: 2,row: 2},{id: 3,row: 2}],
+                [{id: 4,row: 3}],
+            ]*/
+            const tempArr = [];
+            const maxRows = Math.max(...homePageSettings.map((item) => item.row ? item.row : 1));
+            for (let i = 1; i <= maxRows; i++) {
+                tempArr.push([]);
             }
-            return tempArray;
+            console.log('tempArr:', tempArr)
+            for (const item of homePageSettings) {
+                if (item.row) {
+                    const rIndex = item.row - 1;
+                    tempArr[rIndex].push(item)
+                }
+            }
+            return tempArr;
         })
     }, [homePageSettings])
 
+    const updateFeedRow = (id, value) => {
+        setNewsRows(newsRows => {
+            newsRows[id] = value;
+            return newsRows;
+        })
+    }
+
     const addFeedRow = () => {
         setNewsRows(newsRows => {
-            newsRows.push(newsRows.length + 1);
+            newsRows.push([]);
             return newsRows;
         })
     }
@@ -47,9 +71,12 @@ const HomeViewSet = () => {
     }
 
     const deleteRow = (id) => {
-        setNewsRows(newsRows => newsRows.filter((item, idx) => id !== idx));
-    }
+        setNewsRows(newsRows => newsRows.filter((item, idx) => {
+            console.log('id:idx', id, idx, id !== idx)
 
+            return id !== idx
+        }));
+    }
     return (
         <>
             <Row>
@@ -59,17 +86,18 @@ const HomeViewSet = () => {
                 </Col>
             </Row>
             <Row>
-                {newsRows.map((item, idx) => {
+                {newsRows.map((components, idx) => {
                     return (
                         <FeedRow
                             key={idx}
                             toggleRowSelect={() => toggleRowSelect(idx)}
                             rowSelected={selectedRows.includes(idx) ? true : false}
                             deleteFunc={() => deleteRow(idx)}
+                            updateFunc={updateFeedRow}
                             params={{
-                                rowNum: newsRows[idx],
+                                rowNum: idx + 1,
                                 idx,
-                                pages: homePageSettings.filter(item => item.row === newsRows[idx])
+                                components: components
                             }}
                         />
                     )

@@ -2,6 +2,29 @@ export const emptyNewsArray = [
     { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
 
+export const defaultPageColumn = {
+    id: 0,
+    title: "News Window",
+    tileType: "slide",
+    row: 1,
+    sizing: {
+        md: "12",
+        lg: "12",
+        className: ""
+    },
+    innerSizing: {
+        className: "slideHolder"
+    },
+    componentAttribute: {},
+    search: {
+        category: "",
+        country: "default",
+        endpoint: "top-headlines",
+        errorMode: false,
+        keyword: "",
+        numArticles: 10,
+    },
+}
 // export const newsParams = {
 //     numArticles: 10,
 //     country: "us",

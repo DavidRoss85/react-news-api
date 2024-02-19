@@ -40,6 +40,7 @@ const UserLoginMenu = () => {
     //reset settings
     const signOut = () => {
         dispatch(logOutUser());
+        dispatch(loadUserPreferences(userInfo));
     }
 
     useEffect(() => {

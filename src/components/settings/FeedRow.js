@@ -1,6 +1,6 @@
 import { Row, Col, Button } from "reactstrap";
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from "react";
+import { defaultPageColumn } from "../../app/shared/DEFAULTS";
 import SelectBox from "../misc/SelectBox";
 import FeedCol from "./FeedCol";
 import DeleteButton from "../misc/DeleteButton";
@@ -13,19 +13,29 @@ const tempArray = [
 const FeedRow = (props) => {
 
     const {
+        rowNum,
         rowSelected,
         toggleRowSelect = () => { },
         deleteFunc = () => { },
+        updateFunc = () => { },
         params
     } = props;
 
-    const [newsColumns, setNewsColumns] = useState(params.pages);
+    const [newsColumns, setNewsColumns] = useState(params.components);
     const [selectedColumns, setSelectedColumns] = useState([]);
+
+    useEffect(() => {
+        updateFunc(params.idx, newsColumns);
+    }, [newsColumns])
+
+    useEffect(()=>{
+        setNewsColumns(params.components)
+    },[params.components])
 
     const addNewsComponent = () => {
         setNewsColumns(newsColumns => {
             newsColumns.length < 5
-                ? newsColumns.push({ title: 'News', width: 30 })
+                ? newsColumns.push(defaultPageColumn)
                 : console.log();
             return newsColumns;
         })
@@ -62,7 +72,7 @@ const FeedRow = (props) => {
             >
                 <Col>
                     <Row style={styles.menuRow}>
-                        <Col style={{textAlign:'start'}}>
+                        <Col style={{ textAlign: 'start' }}>
                             Row: {params.rowNum} : idx : {params.idx}
                         </Col>
                         <Col style={{ textAlign: 'end', }}>
