@@ -11,6 +11,7 @@ const HomeViewSet = () => {
     const userSettings = useSelector(state => state.user.data);
     const [currentSettings, setCurrentSettings] = useState(userSettings);
     const { homepage: homePageSettings } = currentSettings.preferences;
+    const [toggleUpdate, setToggleUpdate]=useState(false);
 
     
     useEffect(() => {
@@ -65,16 +66,17 @@ const HomeViewSet = () => {
     }
 
     const deleteSelectedRows = () => {
-        setNewsRows(newsRows => newsRows.filter((item, idx) => !selectedRows.includes(idx)));
+        selectedRows.map((id)=>{
+            deleteRow(id);
+        })
         setSelectedRows([])
     }
 
     const deleteRow = (id) => {
         setNewsRows(newsRows => newsRows.filter((item, idx) => {
-            console.log('id:idx', id, idx, id !== idx)
-
             return id !== idx
         }));
+        setToggleUpdate(!toggleUpdate)
     }
     return (
         <>
@@ -82,6 +84,7 @@ const HomeViewSet = () => {
                 <Col style={{ padding: '8px', textAlign: 'start' }}>
                     <Button style={styles.buttonStyle} onClick={addFeedRow}>+ Add Row</Button>
                     <Button style={styles.buttonStyle} onClick={deleteSelectedRows}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected Rows</Button>
+                    <Button style={styles.buttonStyle} onClick={()=>{console.log('Selected Rows: ', selectedRows);console.log('newsRows: ', newsRows)}}> Test</Button>
                 </Col>
             </Row>
             <Row>
@@ -93,6 +96,7 @@ const HomeViewSet = () => {
                             rowSelected={selectedRows.includes(idx) ? true : false}
                             deleteFunc={() => deleteRow(idx)}
                             updateFunc={updateFeedRow}
+                            toggleUpdate={toggleUpdate}
                             params={{
                                 rowNum: idx + 1,
                                 idx,

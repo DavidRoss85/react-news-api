@@ -17,6 +17,7 @@ const FeedRow = (props) => {
         toggleRowSelect = () => { },
         deleteFunc = () => { },
         updateFunc = () => { },
+        toggleUpdate,
         params
     } = props;
 
@@ -34,10 +35,9 @@ const FeedRow = (props) => {
         });
     }, [newsColumns])
 
-    // useEffect(() => {
-    //     //setNewsColumns(params.components);
-    //     console.log('params.components change')
-    // }, [params.components])
+    useEffect(() => {
+        setNewsColumns(params.components);
+    }, [toggleUpdate])
 
     useEffect(()=>{
         // updateNewsColumnsWidth(columnWidths)
@@ -72,9 +72,9 @@ const FeedRow = (props) => {
     }
 
     const deleteSelected = () => {
-        setNewsColumns(newsColumns => newsColumns.filter((item, idx) => {
-            return !selectedColumns.includes(idx);
-        }));
+        selectedColumns.map((id)=>{
+            deleteColumn(id);
+        })
         setSelectedColumns([])
     }
 
@@ -87,16 +87,8 @@ const FeedRow = (props) => {
         setColumnWidths(columnWidths => {
             const newWidths = restrictArrayValues(id, parseInt(value), columnWidths);
             updateNewsColumnsWidth(newWidths);
-            // setNewsColumns(newsColumns => {
-            //     const newValue = newsColumns.map((column, idx) => {
-            //         //updates column.sizing.md
-            //         return { ...column, sizing: { ...column.sizing, md: newWidths[idx] } };
-            //     })
-            //     return newValue
-            // })
             return newWidths
         });
-        // console.log(columnWidths)
     }
     const updateNewsColumnsWidth=(newWidths)=>{
         setNewsColumns(newsColumns => {
@@ -128,7 +120,7 @@ const FeedRow = (props) => {
                     <Row style={{ textAlign: 'start' }}>
                         <Col>
                             <Button style={styles.buttonStyle} onClick={addNewsColumn}>+ Add Column</Button>
-                            <Button style={styles.buttonStyle} onClick={() => { console.log(columnWidths);console.log('newsColums: ',newsColumns.map(n=>n.sizing.md)) }}>Test</Button>
+                            <Button style={styles.buttonStyle} onClick={() => { console.log('selected: ',selectedColumns);console.log('newsColums: ',newsColumns.map((n,idx)=>idx)) }}>Test</Button>
                             {/* <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
                         </Col>
                     </Row>

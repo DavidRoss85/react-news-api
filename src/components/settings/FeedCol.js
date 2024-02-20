@@ -12,7 +12,7 @@ const FeedCol = (props) => {
     } = props
 
     const [localParams, setLocalParams] = useState(params)
-    //const { title, tileType, row, sizing, innerSizing, componentAttribute, search } = localParams;
+    const { title='', tileType='', row=1, sizing={}, innerSizing={}, componentAttribute={}, search={} } = localParams;
 
     useEffect(()=>{
         setLocalParams(params);
@@ -44,15 +44,15 @@ const FeedCol = (props) => {
             </Row>
             <Row>
                 <Col>
-                    Type: {localParams.tileType}
+                    Type: {tileType}
                     <br/>
-                    Sizing: {JSON.stringify(localParams.sizing)}
+                    Sizing: {JSON.stringify(sizing)}
                     <br/>
-                    Inner Sizing: {JSON.stringify(localParams.innerSizing)}
+                    Inner Sizing: {JSON.stringify(innerSizing)}
                     <br/>
-                    componentAttribute: {JSON.stringify(localParams.componentAttribute)}
+                    componentAttribute: {JSON.stringify(componentAttribute)}
                     <br/>
-                    Search criteria: {JSON.stringify(localParams.search)}
+                    Search criteria: {JSON.stringify(search)}
                 </Col>
             </Row>
         </Col>
