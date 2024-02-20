@@ -8,8 +8,7 @@ export const defaultPageColumn = {
     tileType: "slide",
     row: 1,
     sizing: {
-        md: "12",
-        lg: "12",
+        md: "1",
         className: ""
     },
     innerSizing: {
@@ -52,8 +51,7 @@ export const userPref = {
             tileType: "slide",
             row: 1,
             sizing: {
-                md: "6",
-                lg: "5",
+                md: "5",
                 className: ""
             },
             innerSizing: {
@@ -75,8 +73,7 @@ export const userPref = {
             tileType: "pallette",
             row: 1,
             sizing: {
-                md: "6",
-                lg: "4",
+                md: "4",
                 className: ""
             },
             innerSizing: {
@@ -100,9 +97,8 @@ export const userPref = {
             tileType: "list",
             row: 1,
             sizing: {
-                md: "d-none",
-                lg: "3",
-                className: "d-none d-lg-inline-block"
+                md: "3",
+                className: ""
             },
             innerSizing: {
                 className: ""
@@ -124,7 +120,6 @@ export const userPref = {
             row: 2,
             sizing: {
                 md: "6",
-                lg: "4",
                 className: ""
             },
             innerSizing: {
@@ -147,7 +142,6 @@ export const userPref = {
             row: 2,
             sizing: {
                 md: "6",
-                lg: "8",
                 className: ""
             },
             innerSizing: {
@@ -156,7 +150,7 @@ export const userPref = {
             componentAttribute: {
                 md: "3"
             }
-        },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+        }, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
     ]
 }
 

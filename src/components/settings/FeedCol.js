@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import SelectBox from "../misc/SelectBox";
 import DeleteButton from "../misc/DeleteButton";
@@ -10,7 +11,13 @@ const FeedCol = (props) => {
         params
     } = props
 
-    const { title, tileType, row, sizing, innerSizing, componentAttribute, search } = params
+    const [localParams, setLocalParams] = useState(params)
+    //const { title, tileType, row, sizing, innerSizing, componentAttribute, search } = localParams;
+
+    useEffect(()=>{
+        setLocalParams(params);
+    },[params]);
+
     return (
         <Col
             style={
@@ -18,12 +25,12 @@ const FeedCol = (props) => {
                     ? { ...styles.basicStyle, ...styles.newsSelected }
                     : { ...styles.basicStyle, ...styles.newsStyle }
             }
-            {...sizing}
+            {...localParams.sizing}
 
         >
             <Row style={styles.topMenu}>
                 <Col>
-                    <h4>Title: {title}</h4>
+                    <h4>Title: {localParams.title}</h4>
                 </Col>
                 <Col>
                     {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
@@ -37,15 +44,15 @@ const FeedCol = (props) => {
             </Row>
             <Row>
                 <Col>
-                    Type: {tileType}
+                    Type: {localParams.tileType}
                     <br/>
-                    Sizing: {JSON.stringify(sizing)}
+                    Sizing: {JSON.stringify(localParams.sizing)}
                     <br/>
-                    Inner Sizing: {JSON.stringify(innerSizing)}
+                    Inner Sizing: {JSON.stringify(localParams.innerSizing)}
                     <br/>
-                    componentAttribute: {JSON.stringify(componentAttribute)}
+                    componentAttribute: {JSON.stringify(localParams.componentAttribute)}
                     <br/>
-                    Search criteria: {JSON.stringify(search)}
+                    Search criteria: {JSON.stringify(localParams.search)}
                 </Col>
             </Row>
         </Col>

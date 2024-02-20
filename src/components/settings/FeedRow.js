@@ -1,15 +1,14 @@
 import { Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { defaultPageColumn } from "../../app/shared/DEFAULTS";
+import { makeRoomInArray, restrictArrayValues } from "../../utils/mathConversions";
+
 import SelectBox from "../misc/SelectBox";
 import FeedCol from "./FeedCol";
 import DeleteButton from "../misc/DeleteButton";
+import ColSizeSlide from "./ColSizeSlide";
 
-const tempArray = [
-    { title: 'News', width: 30 },
-    { title: 'More', width: 30 },
-    { title: 'Yeah', width: 30 }
-]
+const MAX_COLUMNS = 5;
 const FeedRow = (props) => {
 
     const {
@@ -23,20 +22,34 @@ const FeedRow = (props) => {
 
     const [newsColumns, setNewsColumns] = useState(params.components);
     const [selectedColumns, setSelectedColumns] = useState([]);
+    const [columnWidths, setColumnWidths] = useState([]);
+    const [trackingNumber, setTrackingNumber] = useState(1)
 
     useEffect(() => {
         updateFunc(params.idx, newsColumns);
+        setColumnWidths(columnWidths => {
+            const value = newsColumns.map(column => column.sizing.md);
+            return value;
+        });
     }, [newsColumns])
 
-    useEffect(()=>{
-        setNewsColumns(params.components)
-    },[params.components])
+    // useEffect(() => {
+    //     //setNewsColumns(params.components);
+    //     console.log('params.components change')
+    // }, [params.components])
 
-    const addNewsComponent = () => {
+    const addNewsColumn = () => {
+        setTrackingNumber(trackingNumber + 1)
+        setColumnWidths(columnWidths => {
+            if (columnWidths.length < MAX_COLUMNS) {
+                return makeRoomInArray(columnWidths)
+            }
+            return columnWidths;
+        })
         setNewsColumns(newsColumns => {
-            newsColumns.length < 5
-                ? newsColumns.push(defaultPageColumn)
-                : console.log();
+            if (newsColumns.length < MAX_COLUMNS) {
+                newsColumns.push({ ...defaultPageColumn, title: `Win #${trackingNumber}` })
+            }
             return newsColumns;
         })
     };
@@ -61,6 +74,22 @@ const FeedRow = (props) => {
 
     const deleteColumn = (id) => {
         setNewsColumns(newsColumns => newsColumns.filter((item, idx) => id !== idx));
+        // setColumnWidths(columnWidths => columnWidths.filter((item, idx) => id !== idx));
+    }
+
+    const changeColumnWidth = (id) => (value) => {
+        setColumnWidths(columnWidths => {
+            const newWidths = restrictArrayValues(id, parseInt(value), columnWidths);
+            setNewsColumns(newsColumns => {
+                const newValue = newsColumns.map((column, idx) => {
+                    //updates column.sizing.md
+                    return { ...column, sizing: { ...column.sizing, md: newWidths[idx] } };
+                })
+                return newValue
+            })
+            return newWidths
+        });
+        // console.log(columnWidths)
     }
     return (
         <>
@@ -82,19 +111,51 @@ const FeedRow = (props) => {
                     </Row>
                     <Row style={{ textAlign: 'start' }}>
                         <Col>
-                            <Button style={styles.buttonStyle} onClick={addNewsComponent}>+ Add Column</Button>
+                            <Button style={styles.buttonStyle} onClick={addNewsColumn}>+ Add Column</Button>
+                            <Button style={styles.buttonStyle} onClick={() => { console.log(columnWidths) }}>Test</Button>
                             {/* <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
                         </Col>
                     </Row>
                     <Row>
+                        <Col >
+                            <Row className='justify-content-start'>
+                                {newsColumns.map((item, idx) => {
+                                    return (
+                                        <Col>
+                                            <ColSizeSlide
+                                                key={idx}
+                                                title={'Adjust width:'}
+                                                slideInput={columnWidths[idx]}
+                                                finishChange={changeColumnWidth(idx)}
+                                            />
+                                        </Col>
+                                    )
+                                })}
+                            </Row>
+                        </Col>
+                        <Col md='6'>
+                        </Col>
+                    </Row>
+                    <Row>
+                        {/*Mapping twice to simplify layout code and readability*/}
                         {newsColumns.map((item, idx) => {
+                            //inserts the md value into the object
+                            const immItem = {
+                                ...item,
+                                sizing: {
+                                    ...item.sizing,
+                                    md: columnWidths[idx]
+                                        ? columnWidths[idx].toString()
+                                        : '1'
+                                }
+                            }
                             return (
                                 <FeedCol
                                     key={idx}
                                     deleteFunc={() => deleteColumn(idx)}
                                     isSelected={selectedColumns.includes(idx)}
                                     toggleSelect={() => toggleColumnSelect(idx)}
-                                    params={newsColumns[idx]}
+                                    params={immItem}
                                 />
                             )
                         })}

@@ -67,7 +67,7 @@
                     "tileType": "list",
                     "row": 1,
                     "sizing": {
-                        "md": "d-none",
+                        "md": "3",
                         "lg": "3",
                         "className": "d-none d-lg-inline-block"
                     },
@@ -264,7 +264,7 @@
                     "tileType": "list",
                     "row": 1,
                     "sizing": {
-                        "md": "d-none",
+                        "md": "3",
                         "lg": "3",
                         "className": "d-none d-lg-inline-block"
                     },
