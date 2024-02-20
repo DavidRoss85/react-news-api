@@ -1,8 +1,9 @@
 import { Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import FeedRow from "./FeedRow";
+import { postSettings } from "../../app/selectors/userSlice";
 
 const HomeViewSet = () => {
 
@@ -13,6 +14,7 @@ const HomeViewSet = () => {
     const { homepage: homePageSettings } = currentSettings.preferences;
     const [toggleUpdate, setToggleUpdate]=useState(false);
 
+    const dispatch=useDispatch();
     
     useEffect(() => {
         setCurrentSettings(userSettings);
@@ -40,6 +42,19 @@ const HomeViewSet = () => {
         })
     }, [homePageSettings])
 
+    const saveUserSettings=(newsArray)=>{
+        const settingsArray = newsArray.flat()
+        const settingsObj = {
+            username: userSettings.username || 'defaultUser',
+            avatar:'',
+            preferences: {
+                region:'',
+                homepage: settingsArray
+            }
+        }
+        console.log('\n\n\n\n\nInvoked Save Settings\nCheck testUsers.json\n',settingsObj)
+        dispatch(postSettings(settingsObj));
+    }
     const updateFeedRow = (id, value) => {
         setNewsRows(newsRows => {
             newsRows[id] = value;
@@ -82,9 +97,14 @@ const HomeViewSet = () => {
         <>
             <Row>
                 <Col style={{ padding: '8px', textAlign: 'start' }}>
-                    <Button style={styles.buttonStyle} onClick={addFeedRow}>+ Add Row</Button>
+                    <Button style={styles.buttonStyle} onClick={addFeedRow}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Row</Button>
                     <Button style={styles.buttonStyle} onClick={deleteSelectedRows}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected Rows</Button>
-                    <Button style={styles.buttonStyle} onClick={()=>{console.log('Selected Rows: ', selectedRows);console.log('newsRows: ', newsRows)}}> Test</Button>
+                    <Button 
+                        style={styles.buttonStyle} 
+                        onClick={()=>saveUserSettings(newsRows)}
+                    > 
+                        <FontAwesomeIcon icon="fa-regular fa-floppy-disk" /> Save Settings
+                    </Button>
                 </Col>
             </Row>
             <Row>

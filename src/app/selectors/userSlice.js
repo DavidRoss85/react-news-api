@@ -41,6 +41,25 @@ export const attemptLogin = createAsyncThunk(
     }
 )
 
+export const postSettings = createAsyncThunk(
+    'user/postSettings',
+    async (settings, {dispatch}) =>{
+        const userName = settings.username.toLowerCase()
+        const response = await fetch(
+            TEMP_LOGIN_URL + userName, 
+            { 
+                //GET, PUT, POST, DELETE
+                method: 'PUT', //will replace
+                body: JSON.stringify(settings),
+                headers: {'Content-Type': 'application/json'}
+            }
+        )
+        if(!response.ok) return Promise.reject(response.status);
+        const data = await response.json();
+        // dispatch(You can do a dispatch request here);
+    }
+)
+
 // export const fetchUserData = createAsyncThunk(
 //     'user/fetchUserData',
 //     async () => {
@@ -108,6 +127,12 @@ const userSlice = createSlice({
                 state.userState.userLoading = false;
                 state.userState.success = false
                 state.errMsg = 'User not found'
+            })
+            .addCase(postSettings.fulfilled, (state,action)=>{
+                console.log('Save user preferences success')
+            })
+            .addCase(postSettings.rejected, (state,action)=>{
+                console.log('Save user preferences failed!\n', action.error? action.error.message : 'Fetch failed')
             })
     }
 })

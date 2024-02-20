@@ -1,5 +1,6 @@
 import { Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { defaultPageColumn } from "../../app/shared/DEFAULTS";
 import { makeRoomInArray, restrictArrayValues } from "../../utils/mathConversions";
 
@@ -12,7 +13,6 @@ const MAX_COLUMNS = 5;
 const FeedRow = (props) => {
 
     const {
-        rowNum,
         rowSelected,
         toggleRowSelect = () => { },
         deleteFunc = () => { },
@@ -54,7 +54,7 @@ const FeedRow = (props) => {
         });
         setNewsColumns(newsColumns => {
             if (newsColumns.length < MAX_COLUMNS) {
-                newsColumns.push({ ...defaultPageColumn, title: `Win #${trackingNumber}` })
+                newsColumns.push({ ...defaultPageColumn, row: params.rowNum })
             }
             return newsColumns;
         });
@@ -109,8 +109,8 @@ const FeedRow = (props) => {
             >
                 <Col>
                     <Row style={styles.menuRow}>
-                        <Col style={{ textAlign: 'start' }}>
-                            Row: {params.rowNum} : idx : {params.idx}
+                        <Col style={{ textAlign: 'start', fontWeight:'bold' }}>
+                            Row: #{params.rowNum}
                         </Col>
                         <Col style={{ textAlign: 'end', }}>
                             <SelectBox isSelected={rowSelected} onClick={toggleRowSelect} />
@@ -119,8 +119,8 @@ const FeedRow = (props) => {
                     </Row>
                     <Row style={{ textAlign: 'start' }}>
                         <Col>
-                            <Button style={styles.buttonStyle} onClick={addNewsColumn}>+ Add Column</Button>
-                            <Button style={styles.buttonStyle} onClick={() => { console.log('selected: ',selectedColumns);console.log('newsColums: ',newsColumns.map((n,idx)=>idx)) }}>Test</Button>
+                            <Button style={styles.buttonStyle} onClick={addNewsColumn}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Column</Button>
+                            {/* <Button style={styles.buttonStyle} onClick={() => { console.log('selected: ',selectedColumns);console.log('newsColums: ',newsColumns.map((n,idx)=>idx)) }}>Test</Button> */}
                             {/* <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
                         </Col>
                     </Row>

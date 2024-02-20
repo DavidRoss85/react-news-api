@@ -30,7 +30,7 @@ const ColSizeSlide = (props) => {
     return (
         <>
             {/* {title}<br /> */}
-            Value: {slideValue} <br/>
+            {title} {slideValue} <br/>
             <input
                 style={{ width: '100px' }}
                 type='range'

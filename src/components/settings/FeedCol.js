@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SelectBox from "../misc/SelectBox";
 import DeleteButton from "../misc/DeleteButton";
 
@@ -12,7 +13,7 @@ const FeedCol = (props) => {
     } = props
 
     const [localParams, setLocalParams] = useState(params)
-    const { title='', tileType='', row=1, sizing={}, innerSizing={}, componentAttribute={}, search={} } = localParams;
+    const { title='', tileType='', row=1, sizing={}, innerSizing={}, componentAttribute={}, search={}, numArticles=1 } = localParams;
 
     useEffect(()=>{
         setLocalParams(params);
@@ -29,8 +30,8 @@ const FeedCol = (props) => {
 
         >
             <Row style={styles.topMenu}>
-                <Col>
-                    <h4>Title: {localParams.title}</h4>
+                <Col className='text-no-wrap text-truncate'>
+                    <h5>Title: {localParams.title}</h5>
                 </Col>
                 <Col>
                     {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
@@ -46,13 +47,15 @@ const FeedCol = (props) => {
                 <Col>
                     Type: {tileType}
                     <br/>
-                    Sizing: {JSON.stringify(sizing)}
-                    <br/>
-                    Inner Sizing: {JSON.stringify(innerSizing)}
-                    <br/>
-                    componentAttribute: {JSON.stringify(componentAttribute)}
-                    <br/>
-                    Search criteria: {JSON.stringify(search)}
+                    Number of Articles to load:
+                    <p>
+                        {JSON.stringify(numArticles)}
+                    </p>
+                    Search criteria:
+                    <p className='text-no-wrap text-truncate'>
+                        {JSON.stringify(search)}
+                    </p>
+                    <Button> Edit search criteria <FontAwesomeIcon icon="fa-solid fa-pen" /></Button>
                 </Col>
             </Row>
         </Col>
@@ -69,6 +72,7 @@ const styles = {
         marginTop: '5px',
         border: '2px solid black',
         borderRadius: '20px',
+        paddingBottom: '5px',
     },
     topMenu: {
         textAlign: 'right'
