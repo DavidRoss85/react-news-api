@@ -7,6 +7,7 @@ const ColSizeSlide = (props) => {
     const {
         finishChange = (v) => { },
         slideInput,
+        forceUpdate,
         title
     } = props;
 
@@ -22,9 +23,14 @@ const ColSizeSlide = (props) => {
         }
     }, [slideInput]);
 
+    useEffect(()=>{
+        // console.log('test this first');
+        // setSlideValue(slideInput);
+    },[forceUpdate])
     return (
         <>
-            {title}<br />
+            {/* {title}<br /> */}
+            Value: {slideValue} <br/>
             <input
                 style={{ width: '100px' }}
                 type='range'

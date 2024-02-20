@@ -29,7 +29,6 @@ const HomeViewSet = () => {
             for (let i = 1; i <= maxRows; i++) {
                 tempArr.push([]);
             }
-            console.log('tempArr:', tempArr)
             for (const item of homePageSettings) {
                 if (item.row) {
                     const rIndex = item.row - 1;

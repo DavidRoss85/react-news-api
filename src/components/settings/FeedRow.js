@@ -23,7 +23,8 @@ const FeedRow = (props) => {
     const [newsColumns, setNewsColumns] = useState(params.components);
     const [selectedColumns, setSelectedColumns] = useState([]);
     const [columnWidths, setColumnWidths] = useState([]);
-    const [trackingNumber, setTrackingNumber] = useState(1)
+    const [trackingNumber, setTrackingNumber] = useState(1);
+    const [toggleSliderUpdate, setToggleSliderUpdate] = useState(false);
 
     useEffect(() => {
         updateFunc(params.idx, newsColumns);
@@ -38,20 +39,25 @@ const FeedRow = (props) => {
     //     console.log('params.components change')
     // }, [params.components])
 
+    useEffect(()=>{
+        // updateNewsColumnsWidth(columnWidths)
+    },[columnWidths])
     const addNewsColumn = () => {
-        setTrackingNumber(trackingNumber + 1)
+        setTrackingNumber(trackingNumber + 1); //temp code for tracking windows while testing
         setColumnWidths(columnWidths => {
             if (columnWidths.length < MAX_COLUMNS) {
-                return makeRoomInArray(columnWidths)
+                const newArray = makeRoomInArray(columnWidths)
+                updateNewsColumnsWidth(newArray)
+                return newArray
             }
             return columnWidths;
-        })
+        });
         setNewsColumns(newsColumns => {
             if (newsColumns.length < MAX_COLUMNS) {
                 newsColumns.push({ ...defaultPageColumn, title: `Win #${trackingNumber}` })
             }
             return newsColumns;
-        })
+        });
     };
 
     const toggleColumnSelect = (id) => {
@@ -80,17 +86,27 @@ const FeedRow = (props) => {
     const changeColumnWidth = (id) => (value) => {
         setColumnWidths(columnWidths => {
             const newWidths = restrictArrayValues(id, parseInt(value), columnWidths);
-            setNewsColumns(newsColumns => {
-                const newValue = newsColumns.map((column, idx) => {
-                    //updates column.sizing.md
-                    return { ...column, sizing: { ...column.sizing, md: newWidths[idx] } };
-                })
-                return newValue
-            })
+            updateNewsColumnsWidth(newWidths);
+            // setNewsColumns(newsColumns => {
+            //     const newValue = newsColumns.map((column, idx) => {
+            //         //updates column.sizing.md
+            //         return { ...column, sizing: { ...column.sizing, md: newWidths[idx] } };
+            //     })
+            //     return newValue
+            // })
             return newWidths
         });
         // console.log(columnWidths)
     }
+    const updateNewsColumnsWidth=(newWidths)=>{
+        setNewsColumns(newsColumns => {
+            const newValue = newsColumns.map((column, idx) => {
+                //updates column.sizing.md
+                return { ...column, sizing: { ...column.sizing, md: newWidths[idx] } };
+            })
+            return newValue
+        });
+}
     return (
         <>
             <Row style={
@@ -112,7 +128,7 @@ const FeedRow = (props) => {
                     <Row style={{ textAlign: 'start' }}>
                         <Col>
                             <Button style={styles.buttonStyle} onClick={addNewsColumn}>+ Add Column</Button>
-                            <Button style={styles.buttonStyle} onClick={() => { console.log(columnWidths) }}>Test</Button>
+                            <Button style={styles.buttonStyle} onClick={() => { console.log(columnWidths);console.log('newsColums: ',newsColumns.map(n=>n.sizing.md)) }}>Test</Button>
                             {/* <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
                         </Col>
                     </Row>
@@ -121,12 +137,12 @@ const FeedRow = (props) => {
                             <Row className='justify-content-start'>
                                 {newsColumns.map((item, idx) => {
                                     return (
-                                        <Col>
+                                        <Col key={idx}>
                                             <ColSizeSlide
-                                                key={idx}
                                                 title={'Adjust width:'}
                                                 slideInput={columnWidths[idx]}
                                                 finishChange={changeColumnWidth(idx)}
+                                                forceUpdate={toggleSliderUpdate}
                                             />
                                         </Col>
                                     )
