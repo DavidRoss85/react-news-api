@@ -385,7 +385,7 @@
           "id": 0,
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": "",
@@ -395,168 +395,30 @@
           "tileType": "slide",
           "row": 1,
           "sizing": {
-            "md": 5,
+            "md": 6,
             "className": ""
           },
           "innerSizing": {
             "className": "slideHolder"
           },
-          "componentAttribute": {}
+          "componentAttribute": {},
+          "numArticles": 10
         },
         {
           "id": 1,
           "search": {
             "category": "entertainment",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
           },
           "numArticles": 10,
           "title": "Entertainment",
-          "tileType": "pallette",
-          "row": 1,
-          "sizing": {
-            "md": 4,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {
-            "md": "6"
-          }
-        },
-        {
-          "id": 2,
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
-          },
-          "numArticles": 8,
-          "title": "News",
           "tileType": "list",
           "row": 1,
           "sizing": {
-            "md": 3,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {}
-        },
-        {
-          "id": 3,
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "music"
-          },
-          "numArticles": 6,
-          "title": "Music News",
-          "tileType": "topic",
-          "row": 2,
-          "sizing": {
-            "md": 6,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {}
-        },
-        {
-          "id": 4,
-          "search": {
-            "category": "business",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
-          },
-          "numArticles": 12,
-          "title": "Business",
-          "tileType": "pallette",
-          "row": 2,
-          "sizing": {
-            "md": 6,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {
-            "md": "3"
-          }
-        },
-        {
-          "id": 5,
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "politics"
-          },
-          "numArticles": 10,
-          "title": "Politics",
-          "tileType": "topic",
-          "row": 3,
-          "sizing": {
-            "md": "4",
-            "lg": "4",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {}
-        },
-        {
-          "id": 6,
-          "search": {
-            "category": "sports",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "sports"
-          },
-          "numArticles": 10,
-          "title": "Sports",
-          "tileType": "topic",
-          "row": 3,
-          "sizing": {
-            "md": "4",
-            "lg": "4",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {}
-        },
-        {
-          "id": 7,
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "everything",
-            "errorMode": false,
-            "keyword": "United States"
-          },
-          "numArticles": 10,
-          "title": "Just American News",
-          "tileType": "topic",
-          "row": 3,
-          "sizing": {
-            "md": "4",
-            "lg": "4",
+            "md": 5,
             "className": ""
           },
           "innerSizing": {
@@ -567,10 +429,10 @@
         {
           "id": 0,
           "title": "News Window",
-          "tileType": "slide",
-          "row": 4,
+          "tileType": "topic",
+          "row": 2,
           "sizing": {
-            "md": 12,
+            "md": "6",
             "className": ""
           },
           "innerSizing": {
@@ -579,7 +441,147 @@
           "componentAttribute": {},
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": "",
+            "numArticles": 10
+          },
+          "numArticles": 10
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "topic",
+          "row": 2,
+          "sizing": {
+            "md": "6",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": "slideHolder"
+          },
+          "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": "",
+            "numArticles": 10
+          },
+          "numArticles": 6
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "pallette",
+          "row": 3,
+          "sizing": {
+            "md": "6",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": "slideHolder"
+          },
+          "componentAttribute": {
+            "md": "6"
+          },
+          "search": {
+            "category": "",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": "",
+            "numArticles": 10
+          },
+          "numArticles": 10
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "pallette",
+          "row": 3,
+          "sizing": {
+            "md": "6",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": "slideHolder"
+          },
+          "componentAttribute": {
+            "md": "6"
+          },
+          "search": {
+            "category": "",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": "",
+            "numArticles": 10
+          },
+          "numArticles": 6
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "list",
+          "row": 4,
+          "sizing": {
+            "md": "6",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": "slideHolder"
+          },
+          "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": "",
+            "numArticles": 10
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "topic",
+          "row": 4,
+          "sizing": {
+            "md": "3",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": "slideHolder"
+          },
+          "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": "",
+            "numArticles": 10
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "topic",
+          "row": 4,
+          "sizing": {
+            "md": "3",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": "slideHolder"
+          },
+          "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": "",

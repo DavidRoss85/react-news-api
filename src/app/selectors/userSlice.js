@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
+import { loadUserPreferences } from "./settingsSlice";
 
 // const TEMPURL = 'http://localhost:3002/user'
 const TEMP_LOGIN_URL = 'http://localhost:3002/'
@@ -56,7 +57,7 @@ export const postSettings = createAsyncThunk(
         )
         if(!response.ok) return Promise.reject(response.status);
         const data = await response.json();
-        // dispatch(You can do a dispatch request here);
+        dispatch(loadUserPreferences({data}));
     }
 )
 

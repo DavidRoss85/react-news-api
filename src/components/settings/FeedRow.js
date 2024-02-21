@@ -2,7 +2,7 @@ import { Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { defaultPageColumn } from "../../app/shared/DEFAULTS";
-import { makeRoomInArray, restrictArrayValues } from "../../utils/mathConversions";
+import { makeRoomInArray, restrictArrayValues } from "../../utils/miscConversions";
 
 import SelectBox from "../misc/SelectBox";
 import FeedCol from "./FeedCol";
@@ -11,7 +11,6 @@ import ColSizeSlide from "./ColSizeSlide";
 
 const MAX_COLUMNS = 5;
 const FeedRow = (props) => {
-
     const {
         rowSelected,
         toggleRowSelect = () => { },
@@ -24,39 +23,33 @@ const FeedRow = (props) => {
     const [newsColumns, setNewsColumns] = useState(params.components);
     const [selectedColumns, setSelectedColumns] = useState([]);
     const [columnWidths, setColumnWidths] = useState([]);
-    const [trackingNumber, setTrackingNumber] = useState(1);
-    const [toggleSliderUpdate, setToggleSliderUpdate] = useState(false);
-
+    
     useEffect(() => {
         updateFunc(params.idx, newsColumns);
         setColumnWidths(columnWidths => {
             const value = newsColumns.map(column => column.sizing.md);
-            return value;
+            return [...value];
         });
     }, [newsColumns])
 
     useEffect(() => {
         setNewsColumns(params.components);
-    }, [toggleUpdate])
+    }, [params.components])
 
-    useEffect(()=>{
-        // updateNewsColumnsWidth(columnWidths)
-    },[columnWidths])
     const addNewsColumn = () => {
-        setTrackingNumber(trackingNumber + 1); //temp code for tracking windows while testing
         setColumnWidths(columnWidths => {
             if (columnWidths.length < MAX_COLUMNS) {
                 const newArray = makeRoomInArray(columnWidths)
                 updateNewsColumnsWidth(newArray)
-                return newArray
+                return [...newArray]
             }
-            return columnWidths;
+            return [...columnWidths];
         });
         setNewsColumns(newsColumns => {
             if (newsColumns.length < MAX_COLUMNS) {
                 newsColumns.push({ ...defaultPageColumn, row: params.rowNum })
             }
-            return newsColumns;
+            return [...newsColumns];
         });
     };
 
@@ -66,13 +59,13 @@ const FeedRow = (props) => {
         } else {
             setSelectedColumns(selectedColumns => {
                 selectedColumns.push(id);
-                return selectedColumns;
+                return [...selectedColumns];
             })
         }
     }
 
     const deleteSelected = () => {
-        selectedColumns.map((id)=>{
+        selectedColumns.map((id) => {
             deleteColumn(id);
         })
         setSelectedColumns([])
@@ -80,25 +73,30 @@ const FeedRow = (props) => {
 
     const deleteColumn = (id) => {
         setNewsColumns(newsColumns => newsColumns.filter((item, idx) => id !== idx));
-        // setColumnWidths(columnWidths => columnWidths.filter((item, idx) => id !== idx));
     }
 
     const changeColumnWidth = (id) => (value) => {
         setColumnWidths(columnWidths => {
             const newWidths = restrictArrayValues(id, parseInt(value), columnWidths);
             updateNewsColumnsWidth(newWidths);
-            return newWidths
+            return [...newWidths]
         });
     }
-    const updateNewsColumnsWidth=(newWidths)=>{
+    const updateNewsColumnsWidth = (newWidths) => {
         setNewsColumns(newsColumns => {
             const newValue = newsColumns.map((column, idx) => {
                 //updates column.sizing.md
                 return { ...column, sizing: { ...column.sizing, md: newWidths[idx] } };
             })
-            return newValue
+            return [...newValue]
         });
-}
+    }
+    const updateColumnContents = (id) => (values) => {
+        setNewsColumns(newsColumns => {
+            newsColumns[id] = { ...newsColumns[id], ...values };
+            return [...newsColumns];
+        })
+    }
     return (
         <>
             <Row style={
@@ -109,7 +107,7 @@ const FeedRow = (props) => {
             >
                 <Col>
                     <Row style={styles.menuRow}>
-                        <Col style={{ textAlign: 'start', fontWeight:'bold' }}>
+                        <Col style={{ textAlign: 'start', fontWeight: 'bold' }}>
                             Row: #{params.rowNum}
                         </Col>
                         <Col style={{ textAlign: 'end', }}>
@@ -120,7 +118,7 @@ const FeedRow = (props) => {
                     <Row style={{ textAlign: 'start' }}>
                         <Col>
                             <Button style={styles.buttonStyle} onClick={addNewsColumn}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Column</Button>
-                            {/* <Button style={styles.buttonStyle} onClick={() => { console.log('selected: ',selectedColumns);console.log('newsColums: ',newsColumns.map((n,idx)=>idx)) }}>Test</Button> */}
+                            <Button style={styles.buttonStyle} onClick={() => updateColumnContents(0)({ ...newsColumns[0], tileType: 'pallette' })}>Test</Button>
                             {/* <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
                         </Col>
                     </Row>
@@ -134,7 +132,6 @@ const FeedRow = (props) => {
                                                 title={'Adjust width:'}
                                                 slideInput={columnWidths[idx]}
                                                 finishChange={changeColumnWidth(idx)}
-                                                forceUpdate={toggleSliderUpdate}
                                             />
                                         </Col>
                                     )
@@ -161,6 +158,7 @@ const FeedRow = (props) => {
                                 <FeedCol
                                     key={idx}
                                     deleteFunc={() => deleteColumn(idx)}
+                                    updateFunc={updateColumnContents(idx)}
                                     isSelected={selectedColumns.includes(idx)}
                                     toggleSelect={() => toggleColumnSelect(idx)}
                                     params={immItem}

@@ -1,4 +1,9 @@
 
+export const capitalizeFirstLetter=(text)=>{
+    const tempString = text[0].toUpperCase() + text.slice(1);
+    return tempString;
+}
+
 //Converts percentage values to bootstrap column width
 export const percentToCol = (value) => {
     if (value) {
@@ -148,4 +153,4 @@ export const makeRoomInArray = (vArray, minWidth, maxWidth) => {
     } else {
         return oldArray;
     }
-}
+};

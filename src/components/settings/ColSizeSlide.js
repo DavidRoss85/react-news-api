@@ -1,7 +1,4 @@
-import { Container, Row, Col } from "reactstrap";
 import { useState, useEffect } from "react";
-import { balanceArrayValues, percentToCol, colToPercent } from "../../utils/mathConversions";
-
 
 const ColSizeSlide = (props) => {
     const {
@@ -23,10 +20,6 @@ const ColSizeSlide = (props) => {
         }
     }, [slideInput]);
 
-    useEffect(()=>{
-        // console.log('test this first');
-        // setSlideValue(slideInput);
-    },[forceUpdate])
     return (
         <>
             {/* {title}<br /> */}

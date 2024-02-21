@@ -1,8 +1,8 @@
-import { LOCATIONLIST } from "../../app/shared/DEFAULTS";
-import { Row, Col, Label, Input } from "reactstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { getCurrentRegion } from "../../app/selectors/settingsSlice";
-import { changeRegion } from "../../app/selectors/settingsSlice";
+import { LOCATIONLIST } from '../../app/shared/DEFAULTS';
+import { Row, Col, Label, Input } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCurrentRegion } from '../../app/selectors/settingsSlice';
+import { changeRegion } from '../../app/selectors/settingsSlice';
 
 const RegionFilter = () => {
 
@@ -17,11 +17,11 @@ const RegionFilter = () => {
 
     return (
         <Row>
-            <Label htmlFor="country-select" md="4" className="text-start">
+            <Label htmlFor='country-select' md='4' className='text-start'>
                 Region:
             </Label>
-            <Col xs="8">
-                <Input type="select" defaultValue={currentRegion.toUpperCase}  onChange={(e) => chooseRegion(e)} id="country-select" className="blackDropdown">
+            <Col xs='8'>
+                <Input type='select' defaultValue={currentRegion.toUpperCase}  onChange={(e) => chooseRegion(e)} id='country-select' className='blackDropdown'>
                     {LOCATIONLIST.map((location, idx) => <option key={idx} value={location}>{location.toUpperCase()}</option>)}
                 </Input>
             </Col>

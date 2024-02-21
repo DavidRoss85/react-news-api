@@ -3,7 +3,7 @@ import { ERROR_NEWS } from "../shared/TEST_NEWS"
 const apiKey = process.env.REACT_APP_NEWS_API_KEY
 const URL_API_PRE = "&apiKey="
 const LOCAL_URL = 'http://localhost:3001/'
-const testMode = true;
+const testMode = false;
 
 export const fetchFromServer = async (newsURL) => {
 

@@ -12,6 +12,7 @@ const DeleteButton = (props) => {
         <Button
             onClick={onClick}
             style={style}
+            className='text-truncate'
         >
             {textInFront
                 ? <>{btnText} <FontAwesomeIcon icon="fa-solid fa-trash" /></>
