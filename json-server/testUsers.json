@@ -12,9 +12,9 @@
             "country": "default",
             "endpoint": "top-headlines",
             "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
+            "keyword": ""
           },
+          "numArticles": 10,
           "title": "Top-Stories",
           "tileType": "slide",
           "row": 1,
@@ -84,292 +84,172 @@
       "homepage": [
         {
           "id": 0,
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          },
-          "title": "Top-Stories",
+          "title": "News Window",
           "tileType": "slide",
           "row": 1,
+          "numArticles": 10,
           "sizing": {
-            "md": "5",
+            "md": 5,
             "className": ""
           },
           "innerSizing": {
             "className": "slideHolder"
           },
-          "componentAttribute": {}
-        },
-        {
-          "id": 1,
+          "componentAttribute": {},
           "search": {
-            "category": "entertainment",
-            "country": "default",
+            "category": "",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
-          },
-          "numArticles": 10,
-          "title": "Entertainment",
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
           "tileType": "pallette",
           "row": 1,
+          "numArticles": 10,
           "sizing": {
-            "md": "4",
+            "md": 4,
             "className": ""
           },
-          "innerSizing": {
-            "className": ""
-          },
+          "innerSizing": {},
           "componentAttribute": {
             "md": "6"
-          }
-        },
-        {
-          "id": 2,
+          },
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
-          },
-          "numArticles": 8,
-          "title": "News",
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
           "tileType": "list",
           "row": 1,
+          "numArticles": 15,
           "sizing": {
-            "md": "3",
+            "md": 3,
             "className": ""
           },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {}
-        },
-        {
-          "id": 3,
+          "innerSizing": {},
+          "componentAttribute": {},
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
-            "keyword": "music"
-          },
-          "numArticles": 6,
-          "title": "Music News",
-          "tileType": "topic",
+            "keyword": ""
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "slide",
           "row": 2,
+          "numArticles": 6,
           "sizing": {
-            "md": "6",
+            "md": 4,
             "className": ""
           },
           "innerSizing": {
-            "className": ""
+            "className": "slideHolder"
           },
-          "componentAttribute": {}
-        },
-        {
-          "id": 4,
+          "componentAttribute": {},
           "search": {
-            "category": "business",
+            "category": "",
             "country": "default",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
-          },
-          "numArticles": 12,
-          "title": "Business",
-          "tileType": "pallette",
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "slide",
           "row": 2,
+          "numArticles": 6,
           "sizing": {
-            "md": "6",
+            "md": 8,
             "className": ""
           },
           "innerSizing": {
+            "className": "slideHolder"
+          },
+          "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "default",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": ""
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "topic",
+          "row": 3,
+          "numArticles": 6,
+          "sizing": {
+            "md": 6,
             "className": ""
           },
+          "innerSizing": {},
+          "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "default",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": ""
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "topic",
+          "row": 3,
+          "numArticles": 6,
+          "sizing": {
+            "md": 4,
+            "className": ""
+          },
+          "innerSizing": {},
+          "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "default",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": ""
+          }
+        },
+        {
+          "id": 0,
+          "title": "News Window",
+          "tileType": "pallette",
+          "row": 3,
+          "numArticles": 6,
+          "sizing": {
+            "md": "2",
+            "className": ""
+          },
+          "innerSizing": {},
           "componentAttribute": {
-            "md": "3"
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 3,
-          "sizing": {
-            "md": 5,
-            "className": ""
+            "md": "6"
           },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
           "search": {
             "category": "",
             "country": "default",
             "endpoint": "top-headlines",
             "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 3,
-          "sizing": {
-            "md": 5,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 5,
-          "sizing": {
-            "md": 3,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 5,
-          "sizing": {
-            "md": 2,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 5,
-          "sizing": {
-            "md": 3,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 5,
-          "sizing": {
-            "md": 3,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 6,
-          "sizing": {
-            "md": 6,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 6,
-          "sizing": {
-            "md": 6,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "default",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
+            "keyword": ""
           }
         }
       ]
@@ -383,209 +263,24 @@
       "homepage": [
         {
           "id": 0,
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          },
-          "title": "Top-Stories",
+          "title": "News Window",
           "tileType": "slide",
           "row": 1,
-          "sizing": {
-            "md": 6,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "numArticles": 10
-        },
-        {
-          "id": 1,
-          "search": {
-            "category": "entertainment",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
-          },
-          "numArticles": 10,
-          "title": "Entertainment",
-          "tileType": "list",
-          "row": 1,
+          "numArticles": 6,
           "sizing": {
             "md": 5,
             "className": ""
           },
           "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {}
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "topic",
-          "row": 2,
-          "sizing": {
-            "md": "6",
-            "className": ""
-          },
-          "innerSizing": {
             "className": "slideHolder"
           },
           "componentAttribute": {},
           "search": {
             "category": "",
-            "country": "",
+            "country": "default",
             "endpoint": "top-headlines",
             "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          },
-          "numArticles": 10
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "topic",
-          "row": 2,
-          "sizing": {
-            "md": "6",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          },
-          "numArticles": 6
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "pallette",
-          "row": 3,
-          "sizing": {
-            "md": "6",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {
-            "md": "6"
-          },
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          },
-          "numArticles": 10
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "pallette",
-          "row": 3,
-          "sizing": {
-            "md": "6",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {
-            "md": "6"
-          },
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          },
-          "numArticles": 6
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "list",
-          "row": 4,
-          "sizing": {
-            "md": "6",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "topic",
-          "row": 4,
-          "sizing": {
-            "md": "3",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
-          }
-        },
-        {
-          "id": 0,
-          "title": "News Window",
-          "tileType": "topic",
-          "row": 4,
-          "sizing": {
-            "md": "3",
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": "",
-            "numArticles": 10
+            "keyword": ""
           }
         }
       ]

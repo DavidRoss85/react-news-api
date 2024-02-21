@@ -7,6 +7,7 @@ export const defaultPageColumn = {
     title: "News Window",
     tileType: "slide",
     row: 1,
+    numArticles: 6,
     sizing: {
         md: "1",
         className: ""
@@ -20,8 +21,7 @@ export const defaultPageColumn = {
         country: "default",
         endpoint: "top-headlines",
         errorMode: false,
-        keyword: "",
-        numArticles: 10,
+        keyword: ""
     },
 }
 // export const newsParams = {
@@ -45,8 +45,8 @@ export const userPref = {
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: "",
-                numArticles: 10,
             },
+            numArticles: 10,
             title: "Top-Stories",
             tileType: "slide",
             row: 1,

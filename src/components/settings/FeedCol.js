@@ -37,19 +37,18 @@ const FeedCol = (props) => {
     const { title = '', tileType = '', row = 1, sizing = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
     
     const chooseType = (value) => {
-        let attribute = {}
+        let attribute = {};
+        let thisInnerSizing={};
         switch (value) {
             case 'slide':
-                attribute = {};
+                thisInnerSizing={className:''};
                 break;
             case 'pallette':
                 attribute = { md: '6' };
                 break;
             case 'list':
-                attribute = {};
                 break;
             case 'topic':
-                attribute = {};
                 break;
             default:
         }
@@ -57,7 +56,8 @@ const FeedCol = (props) => {
         const newParams = { 
             ...localParams, 
             tileType: value, 
-            componentAttribute: attribute 
+            componentAttribute: attribute,
+            innerSizing: thisInnerSizing 
         };
         updateFunc(newParams);
     }
@@ -69,6 +69,7 @@ const FeedCol = (props) => {
         const newParams = { ...localParams, numArticles: (newNumber >= 1) ? newNumber : 1 };
         updateFunc(newParams);
     }
+    // console.log(numArticles)
     return (
         <Col
             style={

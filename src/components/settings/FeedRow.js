@@ -78,7 +78,7 @@ const FeedRow = (props) => {
     const changeColumnWidth = (id) => (value) => {
         setColumnWidths(columnWidths => {
             const newWidths = restrictArrayValues(id, parseInt(value), columnWidths);
-            updateNewsColumnsWidth(newWidths);
+            updateNewsColumnsWidth([...newWidths]);
             return [...newWidths]
         });
     }

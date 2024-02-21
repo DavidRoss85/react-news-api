@@ -10,8 +10,7 @@ import { getBreakingNews } from "../../app/selectors/newsSlice";
 
 const BreakingNewsSlide = ({newsParams}) => {
 
-    const { id = 0 } = newsParams;
-    const { numArticles } = newsParams.search
+    const { id = 0, numArticles } = newsParams;
     
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Input } from "reactstrap";
 
 const ColSizeSlide = (props) => {
     const {
@@ -24,7 +25,7 @@ const ColSizeSlide = (props) => {
         <>
             {/* {title}<br /> */}
             {title} {slideValue} <br/>
-            <input
+            <Input
                 style={{ width: '100px' }}
                 type='range'
                 min='1'
