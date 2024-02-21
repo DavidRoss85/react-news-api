@@ -9,6 +9,7 @@ import previewPic3 from '../../app/img/headlinesPic.png';
 import previewPic4 from '../../app/img/topicPic.png';
 import { COMPONENT_TYPES } from '../../app/shared/DEFAULTS';
 import { capitalizeFirstLetter } from '../../utils/miscConversions';
+import EditSearchModal from './EditSearchModal';
 
 const componentPic = {
     slide: previewPic1,
@@ -26,7 +27,13 @@ const FeedCol = (props) => {
     } = props
 
     const [localParams, setLocalParams] = useState(params);
+    const { title = '', tileType = '', row = 1, sizing = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
     
+    const [titleText, setTitleText] = useState('');
+    const [numberText, setNumberText]=useState('');
+    const [editTitle, setEditTitle]=useState(false);
+    const [editNumber, setEditNumber]= useState(false);
+    const [editSearchModalOpen, setEditSearchModalOpen] = useState(false);
     
     useEffect(() => {
         if (params){
@@ -34,7 +41,6 @@ const FeedCol = (props) => {
         }
     }, [params]);
     
-    const { title = '', tileType = '', row = 1, sizing = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
     
     const chooseType = (value) => {
         let attribute = {};
@@ -61,92 +67,148 @@ const FeedCol = (props) => {
         };
         updateFunc(newParams);
     }
-    const chooseNumArticles = (value) => {
+    const updateNumber = (value) => {
         //ensure value is a number less than 100
         const newNumber = (parseInt(value) || 1) > 100 ? 100 : parseInt(value) || 1
 
         //updates numArticles with a number > 0
         const newParams = { ...localParams, numArticles: (newNumber >= 1) ? newNumber : 1 };
-        updateFunc(newParams);
+        updateFunc({...newParams});
+        setEditNumber(false);
+        setNumberText('');
     }
     // console.log(numArticles)
+    
+    const updateTitle=(value)=>{
+        if (value!==''){
+            const newParams = {...localParams, title: value};
+            updateFunc({...newParams});
+            setTitleText('');
+        }
+        setEditTitle(false);
+    }
+    
     return (
-        <Col
-            style={
-                isSelected
-                    ? { ...styles.basicStyle, ...styles.newsSelected }
-                    : { ...styles.basicStyle, ...styles.newsStyle }
-            }
-            {...localParams.sizing}
+        <>
+            <Col
+                style={
+                    isSelected
+                        ? { ...styles.basicStyle, ...styles.newsSelected }
+                        : { ...styles.basicStyle, ...styles.newsStyle }
+                }
+                {...localParams.sizing}
 
-        >
-            <Row style={styles.topMenu}>
-                <Col className='text-no-wrap text-truncate'>
-                    <h5>Title: {title}</h5>
-                </Col>
-                <Col>
-                    {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
-                    <DeleteButton onClick={deleteFunc} style={styles.deleteButton} btnText={'Delete'} />
-                </Col>
-            </Row>
-            <Row >
-                <Col>
-                    <strong>Current Settings:</strong>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Row className='justify-content-center text-start'>
-                        <Col>
-                            <Label htmlFor='type-selector'>
-                                Type:
-                            </Label>
-                            <Input
-                                type='select'
-                                defaultValue={tileType}
-                                id='type-selector'
-                                onChange={(e) => { chooseType(e.target.value) }}
-                            >
-                                {COMPONENT_TYPES.map((item, idx) => {
-                                    return (
-                                        <option
-                                            key={idx}
-                                            className='text-center'
-                                            value={item}
-                                        >
-                                            {capitalizeFirstLetter(item)}
-                                        </option>)
-                                })}
-                            </Input>
+            >
+                <Row style={styles.topMenu}>
+                    <Col className='text-start'>
+                        <strong>Current Settings:</strong>
+                    </Col>
+                    <Col>
+                        {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
+                        <DeleteButton onClick={deleteFunc} style={styles.deleteButton} btnText={'Delete'} />
+                    </Col>
+                </Row>
+                <Row>
+                    {editTitle ?
+                            <Col className={classes.titleClass + 'text-end'}>
+                                <Input
+                                    type={'text'}
+                                    placeholder='Enter new Title'
+                                    value={titleText}
+                                    onChange={(e)=>{setTitleText(e.target.value)}}
+                                    onKeyDown={(e) => e.key === 'Enter' ? updateTitle(titleText) : e}
+                                />
+                                <Button onClick={()=>{updateTitle(titleText)}} style={styles.saveButton}>
+                                    <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
+                                </Button>
+                                <Button onClick={()=>{setEditTitle(false);setTitleText('')}} style={styles.cancelButton}>
+                                    <FontAwesomeIcon icon="fa-solid fa-x" />
+                                </Button>
+                            </Col>
+                    : 
+                        <Col className={classes.titleClass + 'text-center'}>
+                            <span>Title: {title} </span> 
+                            <Button onClick={()=>{setEditTitle(true)}} style={styles.editButton}>
+                                <FontAwesomeIcon icon='fa-solid fa-pen' />
+                            </Button>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col className='mt-2'>
-                            <img src={componentPic[tileType]} className='img-fluid' />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Label htmlFor='numArticles' className='text-start'>
-                                Number of Articles to display:
-                            </Label>
-                            <Input
-                                className='text-center'
-                                placeholder={JSON.stringify(numArticles)}
-                                onChange={(e) => { chooseNumArticles(e.target.value) }}
-                            // value={JSON.stringify(numArticles)}
-                            />
-                        </Col>
-                    </Row>
-                    Search criteria:
-                    <p className='text-no-wrap text-truncate'>
-                        {JSON.stringify(search)}
-                    </p>
-                    <Button> Edit search criteria <FontAwesomeIcon icon='fa-solid fa-pen' /></Button>
-                </Col>
-            </Row>
-        </Col>
+                    }
+                </Row>
+                <Row >
+                </Row>
+                <Row>
+                    <Col>
+                        <Row className='justify-content-center text-start'>
+                            <Col>
+                                <Label htmlFor='type-selector'>
+                                    Type:
+                                </Label>
+                                <Input
+                                    type='select'
+                                    defaultValue={tileType}
+                                    id='type-selector'
+                                    onChange={(e) => { chooseType(e.target.value) }}
+                                >
+                                    {COMPONENT_TYPES.map((item, idx) => {
+                                        return (
+                                            <option
+                                                key={idx}
+                                                className='text-center'
+                                                value={item}
+                                            >
+                                                {capitalizeFirstLetter(item)}
+                                            </option>)
+                                    })}
+                                </Input>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className='mt-2'>
+                                <img src={componentPic[tileType]} className='img-fluid' />
+                            </Col>
+                        </Row>
+                        <Row>
+                            {editNumber ?
+                                <Col className={classes.titleClass + 'text-end'}>
+                                    <Input
+                                        type={'text'}
+                                        placeholder='Enter a number (1-100)'
+                                        value={numberText}
+                                        onChange={(e)=>{setNumberText(e.target.value)}}
+                                        onKeyDown={(e) => e.key === 'Enter' ? updateNumber(numberText) : e}
+                                    />
+                                    <Button onClick={()=>{updateNumber(numberText)}} style={styles.saveButton}>
+                                        <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
+                                    </Button>
+                                    <Button onClick={()=>{setEditNumber(false);setNumberText('')}} style={styles.cancelButton}>
+                                        <FontAwesomeIcon icon="fa-solid fa-x" />
+                                    </Button>
+                                </Col>
+                            : 
+                                <Col className={classes.titleClass + 'text-center'}>
+                                    <span>Number of Articles: {numArticles} </span> 
+                                    <Button onClick={()=>{setEditNumber(true)}} style={styles.editButton}>
+                                        <FontAwesomeIcon icon='fa-solid fa-pen' />
+                                    </Button>
+                                </Col>
+                            }
+                        </Row>
+                        Search criteria:
+                        <p className='text-no-wrap text-truncate'>
+                            {JSON.stringify(search)}
+                        </p>
+                        <Button style={styles.editButton} onClick={()=>{setEditSearchModalOpen(true)}}>
+                            Edit search criteria <FontAwesomeIcon icon='fa-solid fa-pen' />
+                        </Button>
+                    </Col>
+                </Row>
+            </Col>
 
+            <EditSearchModal
+                isModalOpen={editSearchModalOpen}
+                setIsModalOpen={setEditSearchModalOpen}
+            />
+        </>
     )
 }
 const myColors = {
@@ -176,5 +238,24 @@ const styles = {
     newsSelected: {
         background: myColors.selectedGreen,
     },
+    editButton:{
+        border: 'none',
+        color: 'rgb(100,50,50)',
+        backgroundColor: 'rgba(50,50,50,.2)',
+    },
+    saveButton:{
+        border: 'none',
+        color:'green',
+        backgroundColor: 'rgba(50,100,50,.5)',
+    },
+    cancelButton: {
+        border: 'none',
+        color: 'red',
+        backgroundColor: 'rgba(100,50,50,.5)',
+    },
+}
+
+const classes = {
+    titleClass: 'text-no-wrap text-truncate '
 }
 export default FeedCol;
