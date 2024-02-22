@@ -28,10 +28,10 @@ const NewsTile = ({ newsParams }) => {
     }
 
     return (
-        <Col {...sizing}>
-            <Row>
+        <Col {...sizing} style={{border:'2px black solid'}}>
+            <Row style={{padding:'10px'}}>
                 <Col className="text-center">
-                    <h3>{title}</h3>
+                    <h2>{title}</h2>
                 </Col>
             </Row>
             <Row>

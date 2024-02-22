@@ -99,6 +99,36 @@ const FeedCol = (props) => {
         const newParams ={...localParams, search: searchCriteria};
         updateFunc({...newParams});
     }
+
+    const displaySearchCriteria=(search)=>{
+        if (search.endpoint==='top-headlines'){
+            return (
+                <>
+                    Search criteria:
+                    <p className='text-no-wrap text-truncate'>
+                        {capitalizeFirstLetter(search.endpoint)}<br/>
+                        Country - {capitalizeFirstLetter(search.country)}<br/>
+                        Category - {capitalizeFirstLetter(search.category)}<br/>
+                        Keywords - {capitalizeFirstLetter(search.keyword)}<br/>
+                    </p>
+                </>
+            )
+        }else {
+            
+            return (
+                <>
+                    Search criteria:
+                    <p>
+                        {capitalizeFirstLetter(search.endpoint)}<br/>
+                        Date Range {capitalizeFirstLetter(search.fromDate)}{' - '}
+                        {capitalizeFirstLetter(search.toDate)}<br/>
+                        Language - {search.language.toUpperCase()}<br/>
+                        Sort By - {capitalizeFirstLetter(search.sortBy)}
+                    </p>
+                </>
+            )
+        }
+    }
     return (
         <>
             <Col
@@ -173,12 +203,12 @@ const FeedCol = (props) => {
                                 </Input>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col className='mt-2'>
+                        <Row className='mt-2'>
+                            <Col>
                                 <img src={componentPic[tileType]} className='img-fluid' />
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className='mt-2'>
                             {editNumber ?
                                 <Col className={classes.titleClass + 'text-end'}>
                                     <Input
@@ -204,13 +234,14 @@ const FeedCol = (props) => {
                                 </Col>
                             }
                         </Row>
-                        Search criteria:
-                        <p className='text-no-wrap text-truncate'>
-                            {JSON.stringify(search)}
-                        </p>
-                        <Button style={styles.editButton} onClick={()=>{setEditSearchModalOpen(true)}}>
-                            Edit search criteria <FontAwesomeIcon icon='fa-solid fa-pen' />
-                        </Button>
+                        <Row className='mt-2'>
+                            <Col>
+                                {displaySearchCriteria(search)}
+                                <Button style={styles.editButton} onClick={()=>{setEditSearchModalOpen(true)}}>
+                                    Edit search criteria <FontAwesomeIcon icon='fa-solid fa-pen' />
+                                </Button>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Col>

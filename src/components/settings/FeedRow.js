@@ -127,7 +127,7 @@ const FeedRow = (props) => {
                             <Row className='justify-content-start'>
                                 {newsColumns.map((item, idx) => {
                                     return (
-                                        <Col key={idx}>
+                                        <Col key={idx} className="d-none d-md-inline-block">
                                             <ColSizeSlide
                                                 title={'Adjust width:'}
                                                 slideInput={columnWidths[idx]}
