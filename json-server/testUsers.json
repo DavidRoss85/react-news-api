@@ -9,7 +9,7 @@
           "id": 0,
           "search": {
             "category": "",
-            "country": "default",
+            "country": "all",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
@@ -31,7 +31,7 @@
           "id": 1,
           "search": {
             "category": "entertainment",
-            "country": "default",
+            "country": "all",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
@@ -55,7 +55,7 @@
           "id": 2,
           "search": {
             "category": "",
-            "country": "default",
+            "country": "all",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
@@ -72,6 +72,52 @@
             "className": ""
           },
           "componentAttribute": {}
+        },
+        {
+          "id": 3,
+          "search": {
+            "category": "",
+            "country": "all",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": "music"
+          },
+          "numArticles": 6,
+          "title": "Music News",
+          "tileType": "topic",
+          "row": 2,
+          "sizing": {
+            "md": "6",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": ""
+          },
+          "componentAttribute": {}
+        },
+        {
+          "id": 4,
+          "search": {
+            "category": "business",
+            "country": "all",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": ""
+          },
+          "numArticles": 12,
+          "title": "Business",
+          "tileType": "pallette",
+          "row": 2,
+          "sizing": {
+            "md": "6",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": ""
+          },
+          "componentAttribute": {
+            "md": "3"
+          }
         }
       ]
     }
@@ -300,6 +346,28 @@
             "className": "slideHolder"
           },
           "componentAttribute": {},
+          "search": {
+            "category": "",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": ""
+          }
+        },
+        {
+          "id": 1,
+          "title": "News Window",
+          "tileType": "pallette",
+          "row": 2,
+          "numArticles": 6,
+          "sizing": {
+            "md": "8",
+            "className": ""
+          },
+          "innerSizing": {},
+          "componentAttribute": {
+            "md": "6"
+          },
           "search": {
             "category": "",
             "country": "default",

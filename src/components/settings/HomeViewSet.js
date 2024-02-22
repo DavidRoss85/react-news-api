@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import FeedRow from "./FeedRow";
 import { postSettings } from "../../app/selectors/userSlice";
+import HomeSetButtonRow from "./HomeSetButtonRow";
 
 const HomeViewSet = () => {
 
@@ -104,24 +105,12 @@ const HomeViewSet = () => {
 
     return (
         <>
-            <Row>
-                <Col style={{ padding: '8px', textAlign: 'start' }}>
-                    <Button style={styles.buttonStyle} onClick={addFeedRow}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Row</Button>
-                    <Button style={styles.buttonStyle} onClick={deleteSelectedRows}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected Rows</Button>
-                    <Button
-                        style={styles.buttonStyle}
-                        onClick={() => saveUserSettings(newsRows)}
-                    >
-                        <FontAwesomeIcon icon="fa-regular fa-floppy-disk" /> Save Settings
-                    </Button>
-                    {/* <Button
-                        style={styles.buttonStyle}
-                        onClick={() => { console.log('newsRows: ', newsRows) }}
-                    >
-                        Test
-                    </Button> */}
-                </Col>
-            </Row>
+            <HomeSetButtonRow 
+                addFunc={addFeedRow}
+                deleteFunc={deleteSelectedRows}
+                saveFunc={()=>{saveUserSettings(newsRows)}}
+                buttonStyle={styles.buttonStyle}
+            />
             <Row>
                 {newsRows.map((components, idx) => {
                     return (
@@ -141,6 +130,12 @@ const HomeViewSet = () => {
                     )
                 })}
             </Row>
+            <HomeSetButtonRow 
+                addFunc={addFeedRow}
+                deleteFunc={deleteSelectedRows}
+                saveFunc={()=>{saveUserSettings(newsRows)}}
+                buttonStyle={styles.buttonStyle}
+            />
         </>
     )
 }
