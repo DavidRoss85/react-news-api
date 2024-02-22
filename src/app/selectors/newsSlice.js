@@ -60,7 +60,6 @@ const extractCacheData = (newsURL, searchCache) => {
 export const fetchBreakingNews = createAsyncThunk(
     'news/fetchBreakingNews',
     async (searchCriteria) => {
-
         const { id, searchCache = EMPTY_CACHE } = searchCriteria;
 
         const newsURL = buildNewsURL(searchCriteria);

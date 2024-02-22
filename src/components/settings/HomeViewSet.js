@@ -17,12 +17,12 @@ const HomeViewSet = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setCurrentSettings({...userSettings});
+        setCurrentSettings({ ...userSettings });
     }, [userSettings])
 
-    useEffect(()=>{
+    useEffect(() => {
         setToggleUpdate(!toggleUpdate);
-    },[newsRows]);
+    }, [newsRows]);
 
     useEffect(() => {
         setNewsRows(() => {
@@ -48,7 +48,11 @@ const HomeViewSet = () => {
     }, [homePageSettings])
 
     const saveUserSettings = (newsArray) => {
-        const settingsArray = newsArray.flat()
+        const flattenedArray = newsArray.flat()
+        const settingsArray = flattenedArray.map((item, idx) => {
+            const newItem = { ...item, id: idx }
+            return { ...newItem };
+        })
         const settingsObj = {
             username: userSettings.username || 'defaultUser',
             avatar: '',
@@ -97,7 +101,7 @@ const HomeViewSet = () => {
         }));
         setToggleUpdate(!toggleUpdate)
     }
-    
+
     return (
         <>
             <Row>

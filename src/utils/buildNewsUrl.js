@@ -5,9 +5,6 @@ const URL_BASE = "https://newsapi.org/v2/"
 const URL_API_PRE = "&apiKey="
 
 // const sampleURL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
-// const URL_COUNTRY_PRE = "?country="
-// const URL_TOP_HEADLINES = "top-headlines"
-// const URL_EVERYTHING = "everything"
 
 export const buildNewsURL = (searchCriteria) => {
     const { endpoint = 'top-headlines', country, category, pageSize, page, keyword } = searchCriteria;
@@ -27,7 +24,7 @@ export const buildNewsURL = (searchCriteria) => {
             + `${immPage}`;
             //+ `${URL_API_PRE}${apiKey}`;
         
-        console.log('The built url: ' + newsURL)
+        // console.log('The built url: ' + newsURL)
 
         return newsURL;
     } else if (endpoint === 'everything') {
@@ -51,7 +48,7 @@ export const buildNewsURL = (searchCriteria) => {
             + `${immPageSize}${immPage}`;
             //+ `${URL_API_PRE}${apiKey}`;
 
-        console.log('The built url: ' + newsURL)
+        // console.log('The built url: ' + newsURL)
 
         return newsURL;
 
