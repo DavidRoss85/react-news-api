@@ -162,7 +162,7 @@
           "componentAttribute": {},
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
@@ -184,7 +184,7 @@
           "componentAttribute": {},
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
@@ -204,7 +204,7 @@
           "componentAttribute": {},
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
@@ -224,7 +224,7 @@
           "componentAttribute": {},
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
@@ -237,7 +237,7 @@
           "row": 3,
           "numArticles": 6,
           "sizing": {
-            "md": "2",
+            "md": 2,
             "className": ""
           },
           "innerSizing": {},
@@ -246,10 +246,35 @@
           },
           "search": {
             "category": "",
-            "country": "default",
+            "country": "",
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          }
+        },
+        {
+          "id": 0,
+          "title": "Test News Window",
+          "tileType": "list",
+          "row": 4,
+          "numArticles": 15,
+          "sizing": {
+            "md": "8",
+            "className": ""
+          },
+          "innerSizing": {},
+          "componentAttribute": {},
+          "search": {
+            "endpoint": "everything",
+            "country": "",
+            "category": "",
+            "keyword": "",
+            "fromDate": "",
+            "toDate": "",
+            "language": "fr",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
           }
         }
       ]

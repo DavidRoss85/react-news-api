@@ -7,7 +7,6 @@ const testMode = true;
 
 export const fetchFromServer = async (newsURL) => {
 
-    // console.log('The built url: ' + newsURL)
     const testURL = LOCAL_URL + 'worldNews'
 
     try {

@@ -10,19 +10,23 @@ import SearchCriteriaForm from "./SearchCriteriaForm";
 const EditSearchModal = (props) => {
 
     //Make sure to pass these props
-    const { isModalOpen, setIsModalOpen } = props;
+    const { isModalOpen, setIsModalOpen, updateFunc, search } = props;
 
     const [renderItem, setRenderItem] = useState(<></>)
 
-    //Determine the items to show in the Modal window
-    
+    const handleSubmit=(value)=>{
+        updateFunc(value);
+        setIsModalOpen(false);
+    }
     return (
         <Modal isOpen={isModalOpen}>
             <ModalHeader toggle={() => setIsModalOpen(false)}>
                 Search Criteria
             </ModalHeader>
             <ModalBody>
-                <SearchCriteriaForm 
+                <SearchCriteriaForm
+                    search={search}
+                    handleSubmit={handleSubmit} 
                     clickCancel={()=>{setIsModalOpen(false)}}
                 />
             </ModalBody>

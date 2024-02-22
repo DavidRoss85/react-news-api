@@ -26,6 +26,9 @@ export const buildNewsURL = (searchCriteria) => {
             + `${immCountry}${immKeyword}${immCategory}${immPageSize}`
             + `${immPage}`;
             //+ `${URL_API_PRE}${apiKey}`;
+        
+        console.log('The built url: ' + newsURL)
+
         return newsURL;
     } else if (endpoint === 'everything') {
         //everything? q= &searchIn=(title/description/content) &from=(2024-01-20) &to=(2024-01-20)
@@ -47,6 +50,9 @@ export const buildNewsURL = (searchCriteria) => {
             + `${immTo}${immLang}${immSort}`
             + `${immPageSize}${immPage}`;
             //+ `${URL_API_PRE}${apiKey}`;
+
+        console.log('The built url: ' + newsURL)
+
         return newsURL;
 
     }

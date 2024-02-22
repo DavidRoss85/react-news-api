@@ -10,6 +10,7 @@ import previewPic4 from '../../app/img/topicPic.png';
 import { COMPONENT_TYPES } from '../../app/shared/DEFAULTS';
 import { capitalizeFirstLetter } from '../../utils/miscConversions';
 import EditSearchModal from './EditSearchModal';
+import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
 const componentPic = {
     slide: previewPic1,
@@ -88,6 +89,16 @@ const FeedCol = (props) => {
         setEditTitle(false);
     }
     
+    const updateSearchCriteria=(value)=>{
+        const searchCriteria ={
+            ...value,
+            errorMode: false,
+        }
+        console.log('search value: ', value)
+        console.log('update Search criteria: ', searchCriteria)
+        const newParams ={...localParams, search: searchCriteria};
+        updateFunc({...newParams});
+    }
     return (
         <>
             <Col
@@ -205,6 +216,8 @@ const FeedCol = (props) => {
             </Col>
 
             <EditSearchModal
+                search={search}
+                updateFunc={updateSearchCriteria}
                 isModalOpen={editSearchModalOpen}
                 setIsModalOpen={setEditSearchModalOpen}
             />
