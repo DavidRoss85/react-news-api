@@ -10,7 +10,6 @@ import previewPic4 from '../../app/img/topicPic.png';
 import { COMPONENT_TYPES } from '../../app/shared/DEFAULTS';
 import { capitalizeFirstLetter } from '../../utils/miscConversions';
 import EditSearchModal from './EditSearchModal';
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
 const componentPic = {
     slide: previewPic1,
@@ -29,26 +28,26 @@ const FeedCol = (props) => {
 
     const [localParams, setLocalParams] = useState(params);
     const { title = '', tileType = '', row = 1, sizing = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
-    
+
     const [titleText, setTitleText] = useState('');
-    const [numberText, setNumberText]=useState('');
-    const [editTitle, setEditTitle]=useState(false);
-    const [editNumber, setEditNumber]= useState(false);
+    const [numberText, setNumberText] = useState('');
+    const [editTitle, setEditTitle] = useState(false);
+    const [editNumber, setEditNumber] = useState(false);
     const [editSearchModalOpen, setEditSearchModalOpen] = useState(false);
-    
+
     useEffect(() => {
-        if (params){
-            setLocalParams({...params});
+        if (params) {
+            setLocalParams({ ...params });
         }
     }, [params]);
-    
-    
+
+
     const chooseType = (value) => {
         let attribute = {};
-        let thisInnerSizing={};
+        let thisInnerSizing = {};
         switch (value) {
             case 'slide':
-                thisInnerSizing={className:''};
+                thisInnerSizing = { className: '' };
                 break;
             case 'pallette':
                 attribute = { md: '6' };
@@ -60,11 +59,11 @@ const FeedCol = (props) => {
             default:
         }
 
-        const newParams = { 
-            ...localParams, 
-            tileType: value, 
+        const newParams = {
+            ...localParams,
+            tileType: value,
             componentAttribute: attribute,
-            innerSizing: thisInnerSizing 
+            innerSizing: thisInnerSizing
         };
         updateFunc(newParams);
     }
@@ -74,55 +73,55 @@ const FeedCol = (props) => {
 
         //updates numArticles with a number > 0
         const newParams = { ...localParams, numArticles: (newNumber >= 1) ? newNumber : 1 };
-        updateFunc({...newParams});
+        updateFunc({ ...newParams });
         setEditNumber(false);
         setNumberText('');
     }
     // console.log(numArticles)
-    
-    const updateTitle=(value)=>{
-        if (value!==''){
-            const newParams = {...localParams, title: value};
-            updateFunc({...newParams});
+
+    const updateTitle = (value) => {
+        if (value !== '') {
+            const newParams = { ...localParams, title: value };
+            updateFunc({ ...newParams });
             setTitleText('');
         }
         setEditTitle(false);
     }
-    
-    const updateSearchCriteria=(value)=>{
-        const searchCriteria ={
+
+    const updateSearchCriteria = (value) => {
+        const searchCriteria = {
             ...value,
             errorMode: false,
         }
         console.log('search value: ', value)
         console.log('update Search criteria: ', searchCriteria)
-        const newParams ={...localParams, search: searchCriteria};
-        updateFunc({...newParams});
+        const newParams = { ...localParams, search: searchCriteria };
+        updateFunc({ ...newParams });
     }
 
-    const displaySearchCriteria=(search)=>{
-        if (search.endpoint==='top-headlines'){
+    const displaySearchCriteria = (search) => {
+        if (search.endpoint === 'top-headlines') {
             return (
                 <>
                     Search criteria:
                     <p className='text-no-wrap text-truncate'>
-                        {capitalizeFirstLetter(search.endpoint)}<br/>
-                        Country - {capitalizeFirstLetter(search.country)}<br/>
-                        Category - {capitalizeFirstLetter(search.category)}<br/>
-                        Keywords - {capitalizeFirstLetter(search.keyword)}<br/>
+                        {capitalizeFirstLetter(search.endpoint)}<br />
+                        Country - {capitalizeFirstLetter(search.country)}<br />
+                        Category - {capitalizeFirstLetter(search.category)}<br />
+                        Keywords - {capitalizeFirstLetter(search.keyword)}<br />
                     </p>
                 </>
             )
-        }else {
-            
+        } else {
+
             return (
                 <>
                     Search criteria:
                     <p>
-                        {capitalizeFirstLetter(search.endpoint)}<br/>
+                        {capitalizeFirstLetter(search.endpoint)}<br />
                         Date Range {capitalizeFirstLetter(search.fromDate)}{' - '}
-                        {capitalizeFirstLetter(search.toDate)}<br/>
-                        Language - {search.language.toUpperCase()}<br/>
+                        {capitalizeFirstLetter(search.toDate)}<br />
+                        Language - {search.language.toUpperCase()}<br />
                         Sort By - {capitalizeFirstLetter(search.sortBy)}
                     </p>
                 </>
@@ -151,25 +150,25 @@ const FeedCol = (props) => {
                 </Row>
                 <Row>
                     {editTitle ?
-                            <Col className={classes.titleClass + 'text-end'}>
-                                <Input
-                                    type={'text'}
-                                    placeholder='Enter new Title'
-                                    value={titleText}
-                                    onChange={(e)=>{setTitleText(e.target.value)}}
-                                    onKeyDown={(e) => e.key === 'Enter' ? updateTitle(titleText) : e}
-                                />
-                                <Button onClick={()=>{updateTitle(titleText)}} style={styles.saveButton}>
-                                    <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
-                                </Button>
-                                <Button onClick={()=>{setEditTitle(false);setTitleText('')}} style={styles.cancelButton}>
-                                    <FontAwesomeIcon icon="fa-solid fa-x" />
-                                </Button>
-                            </Col>
-                    : 
+                        <Col className={classes.titleClass + 'text-end'}>
+                            <Input
+                                type={'text'}
+                                placeholder='Enter new Title'
+                                value={titleText}
+                                onChange={(e) => { setTitleText(e.target.value) }}
+                                onKeyDown={(e) => e.key === 'Enter' ? updateTitle(titleText) : e}
+                            />
+                            <Button onClick={() => { updateTitle(titleText) }} style={styles.saveButton}>
+                                <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
+                            </Button>
+                            <Button onClick={() => { setEditTitle(false); setTitleText('') }} style={styles.cancelButton}>
+                                <FontAwesomeIcon icon="fa-solid fa-x" />
+                            </Button>
+                        </Col>
+                        :
                         <Col className={classes.titleClass + 'text-center'}>
-                            <span>Title: {title} </span> 
-                            <Button onClick={()=>{setEditTitle(true)}} style={styles.editButton}>
+                            <span>Title: {title} </span>
+                            <Button onClick={() => { setEditTitle(true) }} style={styles.editButton}>
                                 <FontAwesomeIcon icon='fa-solid fa-pen' />
                             </Button>
                         </Col>
@@ -215,20 +214,20 @@ const FeedCol = (props) => {
                                         type={'text'}
                                         placeholder='Enter a number (1-100)'
                                         value={numberText}
-                                        onChange={(e)=>{setNumberText(e.target.value)}}
+                                        onChange={(e) => { setNumberText(e.target.value) }}
                                         onKeyDown={(e) => e.key === 'Enter' ? updateNumber(numberText) : e}
                                     />
-                                    <Button onClick={()=>{updateNumber(numberText)}} style={styles.saveButton}>
+                                    <Button onClick={() => { updateNumber(numberText) }} style={styles.saveButton}>
                                         <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
                                     </Button>
-                                    <Button onClick={()=>{setEditNumber(false);setNumberText('')}} style={styles.cancelButton}>
+                                    <Button onClick={() => { setEditNumber(false); setNumberText('') }} style={styles.cancelButton}>
                                         <FontAwesomeIcon icon="fa-solid fa-x" />
                                     </Button>
                                 </Col>
-                            : 
+                                :
                                 <Col className={classes.titleClass + 'text-center'}>
-                                    <span>Number of Articles: {numArticles} </span> 
-                                    <Button onClick={()=>{setEditNumber(true)}} style={styles.editButton}>
+                                    <span>Number of Articles: {numArticles} </span>
+                                    <Button onClick={() => { setEditNumber(true) }} style={styles.editButton}>
                                         <FontAwesomeIcon icon='fa-solid fa-pen' />
                                     </Button>
                                 </Col>
@@ -237,7 +236,7 @@ const FeedCol = (props) => {
                         <Row className='mt-2'>
                             <Col>
                                 {displaySearchCriteria(search)}
-                                <Button style={styles.editButton} onClick={()=>{setEditSearchModalOpen(true)}}>
+                                <Button style={styles.editButton} onClick={() => { setEditSearchModalOpen(true) }}>
                                     Edit search criteria <FontAwesomeIcon icon='fa-solid fa-pen' />
                                 </Button>
                             </Col>
@@ -282,14 +281,14 @@ const styles = {
     newsSelected: {
         background: myColors.selectedGreen,
     },
-    editButton:{
+    editButton: {
         border: 'none',
         color: 'rgb(100,50,50)',
         backgroundColor: 'rgba(50,50,50,.2)',
     },
-    saveButton:{
+    saveButton: {
         border: 'none',
-        color:'green',
+        color: 'green',
         backgroundColor: 'rgba(50,100,50,.5)',
     },
     cancelButton: {

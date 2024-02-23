@@ -8,6 +8,7 @@ import SelectBox from "../misc/SelectBox";
 import FeedCol from "./FeedCol";
 import DeleteButton from "../misc/DeleteButton";
 import ColSizeSlide from "./ColSizeSlide";
+import ColNumUpDown from "./ColNumUpDown";
 
 const MAX_COLUMNS = 5;
 const FeedRow = (props) => {
@@ -23,7 +24,7 @@ const FeedRow = (props) => {
     const [newsColumns, setNewsColumns] = useState(params.components);
     const [selectedColumns, setSelectedColumns] = useState([]);
     const [columnWidths, setColumnWidths] = useState([]);
-    
+
     useEffect(() => {
         updateFunc(params.idx, newsColumns);
         setColumnWidths(columnWidths => {
@@ -127,10 +128,10 @@ const FeedRow = (props) => {
                             <Row className='justify-content-start'>
                                 {newsColumns.map((item, idx) => {
                                     return (
-                                        <Col key={idx} className="d-none d-md-inline-block">
-                                            <ColSizeSlide
-                                                title={'Adjust width:'}
-                                                slideInput={columnWidths[idx]}
+                                        <Col key={idx} className="d-none d-md-inline-block text-start">
+                                            <ColNumUpDown
+                                                title={`Column ${idx + 1} width:`}
+                                                numInput={columnWidths[idx]}
                                                 finishChange={changeColumnWidth(idx)}
                                             />
                                         </Col>
@@ -141,6 +142,7 @@ const FeedRow = (props) => {
                         <Col md='6'>
                         </Col>
                     </Row>
+
                     <Row>
                         {/*Mapping twice to simplify layout code and readability*/}
                         {newsColumns.map((item, idx) => {

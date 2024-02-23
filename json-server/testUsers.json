@@ -131,16 +131,14 @@
         {
           "id": 0,
           "title": "News Window",
-          "tileType": "slide",
+          "tileType": "list",
           "row": 1,
           "numArticles": 10,
           "sizing": {
-            "md": 5,
+            "md": "5",
             "className": ""
           },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
+          "innerSizing": {},
           "componentAttribute": {},
           "search": {
             "category": "",

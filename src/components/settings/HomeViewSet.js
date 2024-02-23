@@ -13,17 +13,12 @@ const HomeViewSet = () => {
     const userSettings = useSelector(state => state.settings.data);
     const [currentSettings, setCurrentSettings] = useState(userSettings);
     const { homepage: homePageSettings } = currentSettings.current;
-    const [toggleUpdate, setToggleUpdate] = useState(false);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         setCurrentSettings({ ...userSettings });
     }, [userSettings])
-
-    useEffect(() => {
-        setToggleUpdate(!toggleUpdate);
-    }, [newsRows]);
 
     useEffect(() => {
         setNewsRows(() => {
@@ -100,15 +95,14 @@ const HomeViewSet = () => {
         setNewsRows(newsRows => newsRows.filter((item, idx) => {
             return id !== idx
         }));
-        setToggleUpdate(!toggleUpdate)
     }
 
     return (
         <>
-            <HomeSetButtonRow 
+            <HomeSetButtonRow
                 addFunc={addFeedRow}
                 deleteFunc={deleteSelectedRows}
-                saveFunc={()=>{saveUserSettings(newsRows)}}
+                saveFunc={() => { saveUserSettings(newsRows) }}
                 buttonStyle={styles.buttonStyle}
             />
             <Row>
@@ -120,7 +114,6 @@ const HomeViewSet = () => {
                             rowSelected={selectedRows.includes(idx) ? true : false}
                             deleteFunc={() => deleteRow(idx)}
                             updateFunc={updateFeedRow}
-                            toggleUpdate={toggleUpdate}
                             params={{
                                 rowNum: idx + 1,
                                 idx,
@@ -130,10 +123,10 @@ const HomeViewSet = () => {
                     )
                 })}
             </Row>
-            <HomeSetButtonRow 
+            <HomeSetButtonRow
                 addFunc={addFeedRow}
                 deleteFunc={deleteSelectedRows}
-                saveFunc={()=>{saveUserSettings(newsRows)}}
+                saveFunc={() => { saveUserSettings(newsRows) }}
                 buttonStyle={styles.buttonStyle}
             />
         </>
