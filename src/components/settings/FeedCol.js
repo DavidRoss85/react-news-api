@@ -27,7 +27,7 @@ const FeedCol = (props) => {
     } = props
 
     const [localParams, setLocalParams] = useState(params);
-    const { title = '', tileType = '', row = 1, sizing = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
+    const { id = 0, title = '', tileType = '', sizing = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
 
     const [titleText, setTitleText] = useState('');
     const [numberText, setNumberText] = useState('');
@@ -180,13 +180,13 @@ const FeedCol = (props) => {
                     <Col>
                         <Row className='justify-content-center text-start'>
                             <Col>
-                                <Label htmlFor='type-selector'>
+                                <Label htmlFor={`type-selector${id}`}>
                                     Type:
                                 </Label>
                                 <Input
                                     type='select'
                                     defaultValue={tileType}
-                                    id='type-selector'
+                                    id={`type-selector${id}`}
                                     onChange={(e) => { chooseType(e.target.value) }}
                                 >
                                     {COMPONENT_TYPES.map((item, idx) => {

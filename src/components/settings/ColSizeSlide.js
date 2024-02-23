@@ -32,6 +32,7 @@ const ColSizeSlide = (props) => {
             {/* {title}<br /> */}
             {title} {slideValue} <br />
             <Input
+                name='columnWidthEditor'
                 style={{ width: '100px' }}
                 type='range'
                 min='1'
