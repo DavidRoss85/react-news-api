@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { newsReducer } from './selectors/newsSlice';
 import { settingsReducer } from './selectors/settingsSlice';
 import { userReducer } from './selectors/userSlice';
-
+import { cacheReducer } from './selectors/cacheSlice';
 
 //Testing custom middleware
 const logMiddleMessage = (store) => (next) => (action) => {
@@ -21,6 +21,7 @@ export const store = configureStore({
         news: newsReducer,
         settings: settingsReducer,
         user: userReducer,
+        cache: cacheReducer,
     },
     //middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([logMiddleMessage])
 })

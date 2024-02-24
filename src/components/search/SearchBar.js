@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const SearchBar = () => {
     const [searchCriteria, setSearchCriteria] = useState('');
-    const searchCache = useSelector((state) => state.news.cache)
+    const searchCache = useSelector((state) => state.cache)
     const navigate = useNavigate();
     const dispatch = useDispatch()
 

@@ -2,6 +2,14 @@ export const emptyNewsArray = [
     { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
 
+export const EMPTY_CACHE = [
+    {
+        criteria: {},
+        results: {},
+        timeStamp: null
+    }
+]
+
 export const defaultPageColumn = {
     id: 0,
     title: "News Window",
@@ -38,7 +46,12 @@ export const defaultPageColumn = {
 //     criteria: "top-headlines"
 // }
 
-export const CACHE_TTE = 3600000 //milliseconds
+const ONE_YEAR = 31536000000 //milliseconds
+const ONE_MONTH = 2592000000 //milliseconds
+const ONE_DAY = 86400000 //millisecond
+const ONE_HOUR = 3600000 //milliseconds
+
+export const CACHE_TTL = ONE_DAY * 5 //5 days
 
 export const LOCATIONLIST = ["all", "us", "ae", "ar", "at", "au", "be", "bg", "br", "ca", "ch", "cn", "co", "cu", "cz", "de", "eg", "fr", "gb", "gr", "hk", "hu", "id", "ie", "il", "in", "it", "jp", "kr", "lt", "lv", "ma", "mx", "my", "ng", "nl", "no", "nz", "ph", "pl", "pt", "ro", "rs", "ru", "sa", "se", "sg", "si", "sk", "th", "tr", "tw", "ua", "ve", "za"];
 export const COMPONENT_TYPES = ["slide", "pallette", "list", "topic"];

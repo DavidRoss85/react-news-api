@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { EMPTY_NEWS } from "../shared/TEST_NEWS";
 import { fetchFromServer } from "./newsAPI";
-import { userPref, CACHE_TTE } from "../shared/DEFAULTS";
+import { userPref } from "../shared/DEFAULTS";
 import { buildNewsURL } from "../../utils/buildNewsUrl";
+import { addToCache, compressURL, saveLocalCache } from "./cacheSlice";
+import { extractCacheData } from "./cacheSlice";
 
 const initialState = {
     breakingNews:
@@ -27,6 +29,17 @@ const initialState = {
             timeStamp: ''
         }
     ],
+    newCache: {
+        history: [],
+        data: [
+            {
+                criteria: {},
+                results: {},
+                timeStamp: '',
+            }
+        ]
+
+    },
     emptyNews: [EMPTY_NEWS]
 }
 
@@ -37,44 +50,33 @@ const EMPTY_CACHE = [
         timeStamp: null
     }
 ]
-const extractCacheData = (newsURL, searchCache) => {
-    let cacheIndex = null;
 
-    const result = searchCache.find((item, idx) => {
-        cacheIndex = idx;
-        return item.criteria === newsURL;
-    })
-
-    if (result) {
-        //If found results in cache
-        const timePassed = Date.now() - result.timeStamp
-        if (timePassed < CACHE_TTE) { 
-            return { newsData: result.results };
-        } else {
-            return { expired: cacheIndex }
-        }
-    }
-    return null
-}
 
 export const fetchBreakingNews = createAsyncThunk(
     'news/fetchBreakingNews',
-    async (searchCriteria) => {
+    async (searchCriteria, { dispatch }) => {
+
         const { id, searchCache = EMPTY_CACHE } = searchCriteria;
 
         const newsURL = buildNewsURL(searchCriteria);
-        const cachedItems = extractCacheData(newsURL, searchCache);
+        const cachedItems = extractCacheData(newsURL, searchCache.history, searchCache.data);
 
         if (!cachedItems || cachedItems.expired) {
             const newsData = await fetchFromServer(newsURL);
             const dataToCache = {
-                criteria: newsURL,
+                criteria: compressURL(newsURL),
                 results: newsData,
                 timeStamp: Date.now()
             }
-            return newsData.status === 'error' ? { id, newsData } : { id, newsData, cache: dataToCache, ...cachedItems };
+            console.log('Fetch from server ')
+            if(!newsData.status==='error'){
+                dispatch(addToCache({ cache: {...dataToCache}, ...cachedItems }))
+                dispatch(saveLocalCache({dataToCache}))
+            }
+            return { id, newsData }; 
         } else {
             console.log('Load Cache')
+
             return { id, ...cachedItems };
         }
     }
@@ -82,23 +84,29 @@ export const fetchBreakingNews = createAsyncThunk(
 
 export const fetchSearchResults = createAsyncThunk(
     'news/fetchSearchResults',
-    async (searchCriteria) => {
-
-        const { id, searchCache = EMPTY_CACHE } = searchCriteria;
+    async (searchCriteria, {dispatch}) => {
         
+        const { id, searchCache = EMPTY_CACHE } = searchCriteria;
+
         const newsURL = buildNewsURL(searchCriteria);
-        const cachedItems = extractCacheData(newsURL, searchCache)
+        const cachedItems = extractCacheData(newsURL, searchCache.history, searchCache.data);
 
         if (!cachedItems || cachedItems.expired) {
             const newsData = await fetchFromServer(newsURL);
             const dataToCache = {
-                criteria: newsURL,
+                criteria: compressURL(newsURL),
                 results: newsData,
                 timeStamp: Date.now()
             }
-            return newsData.status === 'error' ? { id, newsData, criteria: searchCriteria } : { id, newsData, criteria: searchCriteria, cache: dataToCache, ...cachedItems };
+            console.log('Fetch from server ', newsData)
+            if(!newsData.status==='error'){
+                dispatch(addToCache({ cache: {...dataToCache}, ...cachedItems }))
+                dispatch(saveLocalCache({dataToCache}))
+            }
+            return { id, newsData, criteria: searchCriteria }; 
         } else {
             console.log('Load Cache')
+
             return { id, criteria: searchCriteria, ...cachedItems };
         }
 
@@ -122,20 +130,6 @@ const newsSlice = createSlice({
             const { feed, id, news } = action.payload;
             state[feed][id] = news;
         },
-        emptyCache: (state, action)=>{
-            state.cache = EMPTY_CACHE;
-        },
-        loadLocalCache: (state, action)=>{
-            const localCache = sessionStorage.getItem('searchCache');
-            if (localCache){
-                state.cache = localCache;
-            }else {
-                state.cache = EMPTY_CACHE;
-            }
-        },
-        saveLocalCache: (state, action)=>{
-            sessionStorage.setItem('searchCache', state.cache)
-        }
     },
     extraReducers: (builder) => {
         builder
@@ -144,16 +138,6 @@ const newsSlice = createSlice({
             })
             .addCase(fetchBreakingNews.fulfilled, (state, action) => {
                 const { newsData, id, feed = 'breakingNews', cache, expired } = action.payload;
-                //Cache results if possible
-                if (cache) {
-                    if (expired) {
-                        state.cache[expired] = cache
-                        console.log('Cache overwrite')
-                    } else {
-                        state.cache.push(cache);
-                        console.log('Cached results.')
-                    }
-                }
                 const immId = id
                 if (id > state[feed].length - 1) {
                     state[feed].push({ news: newsData, isLoading: false, errMsg: '' })
@@ -183,12 +167,6 @@ const newsSlice = createSlice({
                 state.searchResults[0].criteria = '';
             })
             .addCase(fetchSearchResults.fulfilled, (state, action) => {
-                //Cache results if possible
-                const { cache } = action.payload
-                if (cache) {
-                    state.cache.push(cache);
-                    console.log('cached results.')
-                }
                 state.searchResults[0].isLoading = false;
                 state.searchResults[0].errMsg = '';
                 state.searchResults[0].news = action.payload.newsData
@@ -204,7 +182,7 @@ const newsSlice = createSlice({
 })
 
 export const newsReducer = newsSlice.reducer;
-export const { reloadNews, updateFeed, emptyCache, saveLocalCache, loadLocalCache } = newsSlice.actions;
+export const { reloadNews, updateFeed } = newsSlice.actions;
 
 export const getWorldNews = (id) => (state) => {
     const immId = (id > state.news.worldNews.length - 1) ? state.news.worldNews.length - 1 : id;

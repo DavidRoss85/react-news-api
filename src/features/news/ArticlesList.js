@@ -18,7 +18,7 @@ const ArticlesList = (props) => {
 
     const isLoading = useSelector(getLoadingStatus(id));
     const newsFeed = useSelector(getBreakingNews(id));
-    const searchCache = useSelector((state) => state.news.cache)
+    const searchCache = useSelector((state) => state.cache)
     const tileSetting = useSelector((state) => state.settings.data.current.homepage[id].search)
     const { status } = newsFeed;
 

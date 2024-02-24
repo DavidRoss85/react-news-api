@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
-import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, NavItem } from "reactstrap";
+import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, NavItem, Button } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import RegionFilter from "../misc/RegionFilter"
 import SiteLogo from "./SiteLogo";
 import UserLoginMenu from "./UserLoginMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
-
+    const tempVar = useSelector(state=>state.cache)
     useEffect(() => {
         setMenuOpen(false);
     }, [homeClick]);
 
-
+    const testThis=()=>{
+        console.log('Access state: ', tempVar)
+    }
     return (
         <Navbar dark sticky="top" expand="md" className="navbar-light bg-black text-end" >
             <NavbarBrand className="logo" href="/">
@@ -40,6 +43,10 @@ const Navmenu = ({ homeClick = false }) => {
                 </Nav>
 
                 <Nav className="ms-auto">
+                    <NavItem>
+                        <Button onClick={()=>{testThis()}}>Test</Button>
+                    </NavItem>
+
                     <NavItem className="ms-auto">
                         <UserLoginMenu />
                     </NavItem>
