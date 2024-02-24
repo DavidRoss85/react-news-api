@@ -12,17 +12,25 @@ export const defaultPageColumn = {
         md: "1",
         className: ""
     },
+    style:{
+        border:'2px solid black'
+    },
     innerSizing: {
         className: "slideHolder"
     },
     componentAttribute: {},
     search: {
-        category: "",
-        country: "default",
         endpoint: "top-headlines",
-        errorMode: false,
-        keyword: ""
-    },
+        country: "default",
+        category: "",
+        keyword: "",
+        fromDate: "",
+        toDate: "",
+        language: "",
+        sortBy: "",
+        sources: "",
+        errorMode: false
+},
 }
 // export const newsParams = {
 //     numArticles: 10,

@@ -17,6 +17,8 @@ const FeedRow = (props) => {
         toggleRowSelect = () => { },
         deleteFunc = () => { },
         updateFunc = () => { },
+        moveUpFunc = () => { },
+        moveDownFunc = () => { },
         toggleUpdate,
         params
     } = props;
@@ -53,6 +55,26 @@ const FeedRow = (props) => {
             return [...newsColumns];
         });
     };
+
+    const moveColumnLeft = (id) => {
+        setNewsColumns(newsColumns => {
+            const tempColumn = newsColumns[id];
+            const moveToColumn = id <= 0 ? newsColumns.length - 1 : id - 1
+            newsColumns[id] = newsColumns[moveToColumn];
+            newsColumns[moveToColumn] = tempColumn
+            return [...newsColumns]
+        })
+    }
+    const moveColumnRight = (id) => {
+        setNewsColumns(newsColumns => {
+            const tempColumn = newsColumns[id];
+            const moveToColumn = id >= (newsColumns.length - 1) ? 0 : id + 1
+            newsColumns[id] = newsColumns[moveToColumn];
+            newsColumns[moveToColumn] = tempColumn
+            return [...newsColumns]
+        })
+    }
+
 
     const toggleColumnSelect = (id) => {
         if (selectedColumns.includes(id)) {
@@ -111,6 +133,23 @@ const FeedRow = (props) => {
                         <Col style={{ textAlign: 'start', fontWeight: 'bold' }}>
                             Row: #{params.rowNum}
                         </Col>
+                        <Col className='text-center'>
+                            <Row>
+                                <Col sm='4'>
+                                    <Button {...styles.moveButton} onClick={moveUpFunc}>
+                                        <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
+                                    </Button>
+                                </Col>
+                                <Col sm='4' className="d-none d-sm-inline block">
+                                    Move Row
+                                </Col>
+                                <Col sm='4'>
+                                    <Button {...styles.moveButton} onClick={moveDownFunc}>
+                                        <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
                         <Col style={{ textAlign: 'end', }}>
                             <SelectBox isSelected={rowSelected} onClick={toggleRowSelect} />
                             <DeleteButton onClick={deleteFunc} style={styles.deleteButton} btnText={'Delete Row'} />
@@ -118,19 +157,19 @@ const FeedRow = (props) => {
                     </Row>
                     <Row style={{ textAlign: 'start' }}>
                         <Col>
-                            <Button style={styles.buttonStyle} onClick={addNewsColumn}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Column</Button>
-                            <Button style={styles.buttonStyle} onClick={() => updateColumnContents(0)({ ...newsColumns[0], tileType: 'pallette' })}>Test</Button>
-                            {/* <Button style={styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
+                            <Button {...styles.buttonStyle} onClick={addNewsColumn}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Column</Button>
+                            {/* <Button {...styles.buttonStyle} onClick={() => updateColumnContents(0)({ ...newsColumns[0], tileType: 'pallette' })}>Test</Button> */}
+                            {/* <Button {...styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
                         </Col>
                     </Row>
                     <Row>
-                        <Col >
+                        <Col>
                             <Row className='justify-content-start'>
                                 {newsColumns.map((item, idx) => {
                                     return (
-                                        <Col key={idx} className="d-none d-md-inline-block text-start">
+                                        <Col md='2' key={idx} className="d-none d-md-inline-block text-start">
                                             <ColNumUpDown
-                                                title={`Column ${idx + 1} width:`}
+                                                title={`#${idx + 1} width:`}
                                                 numInput={columnWidths[idx]}
                                                 finishChange={changeColumnWidth(idx)}
                                             />
@@ -161,6 +200,8 @@ const FeedRow = (props) => {
                                     key={idx}
                                     deleteFunc={() => deleteColumn(idx)}
                                     updateFunc={updateColumnContents(idx)}
+                                    moveLeftFunc={() => { moveColumnLeft(idx) }}
+                                    moveRightFunc={() => { moveColumnRight(idx) }}
                                     isSelected={selectedColumns.includes(idx)}
                                     toggleSelect={() => toggleColumnSelect(idx)}
                                     params={immItem}
@@ -185,17 +226,29 @@ const styles = {
         border: '3px solid black',
         borderRadius: '14px',
         marginTop: '8px',
+        marginLeft: '0px'
     },
     buttonStyle: {
-        backgroundColor: 'rgba(80,80,255,.8)',
-        marginLeft: '3px',
-        marginRight: '3px'
+        color: 'primary',
+        style:{
+            // backgroundColor: 'rgba(80,80,255,.8)',
+            marginLeft: '3px',
+            marginRight: '3px'
+        }
     },
     deleteButton: {
-        border: '1px solid black',
-        backgroundColor: 'rgba(0,0,0,0)',
-        color: 'black',
-        fontWeight: 'bold'
+        color: 'dark',
+        outline: true,
+        style:{
+            fontWeight: 'bold',
+        }
+    },
+    moveButton: {
+        color: 'dark',
+        outline: true,
+        style:{
+            fontWeight: 'bold',
+        }
     },
     menuRow: {
         borderRadius: '10px',

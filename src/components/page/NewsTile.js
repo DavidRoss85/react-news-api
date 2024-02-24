@@ -6,7 +6,7 @@ import TopicSection from "../../features/news/TopicSection";
 
 //Place this inside of a <Row> component 
 const NewsTile = ({ newsParams }) => {
-    const { sizing, innerSizing, title, tileType, componentAttribute } = newsParams
+    const { sizing, style, innerSizing, title, tileType, componentAttribute } = newsParams
 
     let componentToRender = <></>
 
@@ -28,7 +28,7 @@ const NewsTile = ({ newsParams }) => {
     }
 
     return (
-        <Col {...sizing} style={{border:'2px black solid'}}>
+        <Col {...sizing} style={{...style}}>
             <Row style={{padding:'10px'}}>
                 <Col className="text-center">
                     <h2>{title}</h2>

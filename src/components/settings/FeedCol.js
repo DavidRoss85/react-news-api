@@ -23,14 +23,17 @@ const FeedCol = (props) => {
         toggleSelect = () => { },
         updateFunc = () => { console.log('function undefined') },
         deleteFunc = () => { },
+        moveLeftFunc = () => { },
+        moveRightFunc = () => { },
         params
     } = props
 
     const [localParams, setLocalParams] = useState(params);
-    const { id = 0, title = '', tileType = '', sizing = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
-
+    const { id = 0, title = '', tileType = '', sizing = {}, style = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
+    // {border:'2px black solid'}
     const [titleText, setTitleText] = useState('');
     const [numberText, setNumberText] = useState('');
+    const [borderSelect, setBorderSelect] = useState(!!style.border)
     const [editTitle, setEditTitle] = useState(false);
     const [editNumber, setEditNumber] = useState(false);
     const [editSearchModalOpen, setEditSearchModalOpen] = useState(false);
@@ -42,15 +45,37 @@ const FeedCol = (props) => {
     }, [params]);
 
 
-    const chooseType = (value) => {
+    const updateAttribute = (value) => {
+        const newParams = {
+            ...localParams,
+            componentAttribute: value,
+        };
+        updateFunc(newParams);
+    }
+
+    const updateBorders = (value) => {
+
+        const newStyle = value ? { border: '2px solid black' } : {}
+        const newParams = {
+            ...localParams,
+            style: {
+                ...localParams.style,
+                ...newStyle
+            }
+        };
+        setBorderSelect(value);
+        updateFunc(newParams);
+    }
+
+    const updateType = (value) => {
         let attribute = {};
         let thisInnerSizing = {};
         switch (value) {
             case 'slide':
-                thisInnerSizing = { className: '' };
+                thisInnerSizing = { className: 'slideHolder' };
                 break;
             case 'pallette':
-                attribute = { md: '6' };
+                attribute = componentAttribute;
                 break;
             case 'list':
                 break;
@@ -93,8 +118,6 @@ const FeedCol = (props) => {
             ...value,
             errorMode: false,
         }
-        console.log('search value: ', value)
-        console.log('update Search criteria: ', searchCriteria)
         const newParams = { ...localParams, search: searchCriteria };
         updateFunc({ ...newParams });
     }
@@ -145,7 +168,33 @@ const FeedCol = (props) => {
                     </Col>
                     <Col>
                         {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
-                        <DeleteButton onClick={deleteFunc} style={styles.deleteButton} btnText={'Delete'} />
+                        <DeleteButton 
+                            onClick={deleteFunc} 
+                            style={styles.deleteButton} 
+                            btnText={'Delete'} 
+                        />
+                    </Col>
+                </Row>
+                <Row className='text-center p-1'>
+                    <Col className='text-start d-none d-md-inline-block'>
+                        <Button {...styles.moveButton} onClick={moveLeftFunc}>
+                            <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+                        </Button>
+                    </Col>
+                    <Col className='text-start d-md-none'>
+                        <Button {...styles.moveButton} onClick={moveLeftFunc}>
+                            <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
+                        </Button>
+                    </Col>
+                    <Col className='text-end d-none d-md-inline-block'>
+                        <Button {...styles.moveButton} onClick={moveRightFunc}>
+                            <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+                        </Button>
+                    </Col>
+                    <Col className='text-end d-md-none'>
+                        <Button {...styles.moveButton} onClick={moveRightFunc}>
+                            <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
+                        </Button>
                     </Col>
                 </Row>
                 <Row>
@@ -174,20 +223,33 @@ const FeedCol = (props) => {
                         </Col>
                     }
                 </Row>
-                <Row >
-                </Row>
                 <Row>
                     <Col>
+                        <Row>
+                            <Col>
+                                <Input
+                                    id={`borderSelect${id}`}
+                                    name={`borderSelect${id}`}
+                                    type='checkbox'
+                                    onChange={(e) => { updateBorders(e.target.checked) }}
+                                    checked={borderSelect}
+                                />
+                                {' '}
+                                <Label htmlFor={`borderSelect${id}`}>
+                                    Borders
+                                </Label>
+                            </Col>
+                        </Row>
                         <Row className='justify-content-center text-start'>
                             <Col>
                                 <Label htmlFor={`type-selector${id}`}>
                                     Type:
-                                </Label>
+                                </Label> 
                                 <Input
                                     type='select'
                                     defaultValue={tileType}
                                     id={`type-selector${id}`}
-                                    onChange={(e) => { chooseType(e.target.value) }}
+                                    onChange={(e) => { updateType(e.target.value) }}
                                 >
                                     {COMPONENT_TYPES.map((item, idx) => {
                                         return (
@@ -204,7 +266,36 @@ const FeedCol = (props) => {
                         </Row>
                         <Row className='mt-2'>
                             <Col>
-                                <img src={componentPic[tileType]} className='img-fluid' />
+                                <Row>
+                                    <Col>
+                                        <img src={componentPic[tileType]} className='img-fluid' />
+                                    </Col>
+                                </Row>
+                                {tileType === 'pallette' ?
+                                    <Row>
+                                        <Col className='text-center justify-content-center'>
+                                            <Label htmlFor={`optionsSelector${id}`}>
+                                                Columns:
+                                            </Label>
+                                            <Input
+                                                id={`optionsSelector${id}`}
+                                                className='text-center'
+                                                type='select'
+                                                defaultValue={componentAttribute.md}
+                                                onChange={(e) => { updateAttribute({ md: e.target.value }) }}
+                                            >
+                                                <option value={'12'}>1</option>
+                                                <option value={'6'}>2</option>
+                                                <option value={'4'}>3</option>
+                                                <option value={'3'}>4</option>
+                                                <option value={'2'}>6</option>
+                                                <option value={'1'}>12</option>
+                                            </Input>
+                                        </Col>
+                                    </Row>
+                                    :
+                                    <></>
+                                }
                             </Col>
                         </Row>
                         <Row className='mt-2'>
@@ -267,13 +358,24 @@ const styles = {
         paddingBottom: '5px',
     },
     topMenu: {
-        textAlign: 'right'
+        textAlign: 'right',
+        paddingTop: '5px'
     },
     deleteButton: {
-        border: '1px dashed black',
-        backgroundColor: 'rgba(0,0,0,0)',
-        color: 'black',
-        fontWeight: 'bold',
+        color: 'dark',
+        outline: true,
+        style:{
+            border: '1px dashed black',
+            fontWeight: 'bold',
+        }
+    },
+    moveButton: {
+        color: 'dark',
+        outline: true,
+        style:{
+            border: '1px dashed black',
+            fontWeight: 'bold',
+        }
     },
     newsStyle: {
         background: 'white',

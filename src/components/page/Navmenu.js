@@ -40,7 +40,7 @@ const Navmenu = ({ homeClick = false }) => {
                 </Nav>
 
                 <Nav className="ms-auto">
-                    <NavItem className="">
+                    <NavItem className="ms-auto">
                         <UserLoginMenu />
                     </NavItem>
                 </Nav>

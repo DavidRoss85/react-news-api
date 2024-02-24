@@ -131,14 +131,41 @@
         {
           "id": 0,
           "title": "News Window",
-          "tileType": "list",
+          "tileType": "pallette",
           "row": 1,
-          "numArticles": 10,
+          "numArticles": 12,
           "sizing": {
-            "md": "5",
+            "md": "4",
             "className": ""
           },
           "innerSizing": {},
+          "componentAttribute": {
+            "md": "4"
+          },
+          "search": {
+            "category": "",
+            "country": "",
+            "endpoint": "top-headlines",
+            "errorMode": false,
+            "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
+          }
+        },
+        {
+          "id": 1,
+          "title": "News Window",
+          "tileType": "slide",
+          "row": 1,
+          "numArticles": 10,
+          "sizing": {
+            "md": "4",
+            "className": ""
+          },
+          "innerSizing": {
+            "className": "slideHolder"
+          },
           "componentAttribute": {},
           "search": {
             "category": "",
@@ -146,28 +173,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
-          }
-        },
-        {
-          "id": 1,
-          "title": "News Window",
-          "tileType": "pallette",
-          "row": 1,
-          "numArticles": 10,
-          "sizing": {
-            "md": 2,
-            "className": ""
           },
-          "innerSizing": {},
-          "componentAttribute": {
-            "md": "6"
-          },
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -177,7 +185,7 @@
           "row": 1,
           "numArticles": 10,
           "sizing": {
-            "md": "3",
+            "md": "2",
             "className": ""
           },
           "innerSizing": {},
@@ -188,6 +196,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -208,6 +219,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -217,7 +231,7 @@
           "row": 2,
           "numArticles": 6,
           "sizing": {
-            "md": 4,
+            "md": "4",
             "className": ""
           },
           "innerSizing": {
@@ -230,6 +244,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -239,7 +256,7 @@
           "row": 2,
           "numArticles": 6,
           "sizing": {
-            "md": 8,
+            "md": "8",
             "className": ""
           },
           "innerSizing": {
@@ -252,6 +269,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -261,7 +281,7 @@
           "row": 3,
           "numArticles": 6,
           "sizing": {
-            "md": 6,
+            "md": "6",
             "className": ""
           },
           "innerSizing": {},
@@ -272,6 +292,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -281,7 +304,7 @@
           "row": 3,
           "numArticles": 6,
           "sizing": {
-            "md": 4,
+            "md": "4",
             "className": ""
           },
           "innerSizing": {},
@@ -292,6 +315,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -301,7 +327,7 @@
           "row": 3,
           "numArticles": 6,
           "sizing": {
-            "md": 2,
+            "md": "2",
             "className": ""
           },
           "innerSizing": {},
@@ -314,6 +340,9 @@
             "endpoint": "top-headlines",
             "errorMode": false,
             "keyword": ""
+          },
+          "style": {
+            "border": "2px solid black"
           }
         },
         {
@@ -339,6 +368,9 @@
             "sortBy": "",
             "sources": "",
             "errorMode": false
+          },
+          "style": {
+            "border": "2px solid black"
           }
         }
       ]
@@ -355,65 +387,29 @@
           "title": "News Window",
           "tileType": "slide",
           "row": 1,
-          "numArticles": 6,
+          "numArticles": 100,
           "sizing": {
-            "md": 7,
+            "md": "12",
             "className": ""
+          },
+          "style": {
+            "border": "2px solid black"
           },
           "innerSizing": {
             "className": "slideHolder"
           },
           "componentAttribute": {},
           "search": {
-            "category": "",
-            "country": "",
             "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
-          }
-        },
-        {
-          "id": 1,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 2,
-          "numArticles": 6,
-          "sizing": {
-            "md": 7,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": ""
-          },
-          "componentAttribute": {},
-          "search": {
+            "country": "default",
             "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
-          }
-        },
-        {
-          "id": 2,
-          "title": "News Window",
-          "tileType": "slide",
-          "row": 3,
-          "numArticles": 6,
-          "sizing": {
-            "md": 7,
-            "className": ""
-          },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
-          "componentAttribute": {},
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
+            "keyword": "",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
           }
         }
       ]

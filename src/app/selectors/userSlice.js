@@ -19,6 +19,10 @@ const initialState = {
         userLoading: false,
         success: false
     },
+    saveState:{
+        isSaving: false,
+        success: false,
+    }
     // isLoading: true,
     // fetchComplete: false,
     // errMsg: ''

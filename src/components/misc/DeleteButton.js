@@ -11,7 +11,7 @@ const DeleteButton = (props) => {
     return (
         <Button
             onClick={onClick}
-            style={style}
+            {...style}
             className='text-truncate'
         >
             {textInFront
@@ -21,5 +21,6 @@ const DeleteButton = (props) => {
         </Button>
     )
 }
+
 
 export default DeleteButton;

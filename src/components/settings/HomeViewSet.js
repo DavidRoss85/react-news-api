@@ -6,7 +6,7 @@ import FeedRow from "./FeedRow";
 import { postSettings } from "../../app/selectors/userSlice";
 import HomeSetButtonRow from "./HomeSetButtonRow";
 
-const HomeViewSet = () => {
+const HomeViewSet = ({ backFunc }) => {
 
     const [newsRows, setNewsRows] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
@@ -97,13 +97,32 @@ const HomeViewSet = () => {
         }));
     }
 
+    const moveRowsUp = (id) => {
+        setNewsRows(newsRows => {
+            const tempRow = newsRows[id];
+            const moveToRow = id <= 0 ? newsRows.length - 1 : id - 1
+            newsRows[id] = newsRows[moveToRow];
+            newsRows[moveToRow] = tempRow
+            return [...newsRows]
+        })
+    }
+    const moveRowsDown = (id) => {
+        setNewsRows(newsRows => {
+            const tempRow = newsRows[id];
+            const moveToRow = id >= (newsRows.length - 1) ? 0 : id + 1
+            newsRows[id] = newsRows[moveToRow];
+            newsRows[moveToRow] = tempRow
+            return [...newsRows]
+        })
+    }
+
     return (
         <>
             <HomeSetButtonRow
                 addFunc={addFeedRow}
                 deleteFunc={deleteSelectedRows}
                 saveFunc={() => { saveUserSettings(newsRows) }}
-                buttonStyle={styles.buttonStyle}
+                backFunc={backFunc}
             />
             <Row>
                 {newsRows.map((components, idx) => {
@@ -114,6 +133,8 @@ const HomeViewSet = () => {
                             rowSelected={selectedRows.includes(idx) ? true : false}
                             deleteFunc={() => deleteRow(idx)}
                             updateFunc={updateFeedRow}
+                            moveUpFunc={() => { moveRowsUp(idx) }}
+                            moveDownFunc={() => { moveRowsDown(idx) }}
                             params={{
                                 rowNum: idx + 1,
                                 idx,
@@ -127,16 +148,10 @@ const HomeViewSet = () => {
                 addFunc={addFeedRow}
                 deleteFunc={deleteSelectedRows}
                 saveFunc={() => { saveUserSettings(newsRows) }}
-                buttonStyle={styles.buttonStyle}
+                backFunc={backFunc}
             />
         </>
     )
 }
-const styles = {
-    buttonStyle: {
-        backgroundColor: '#850d0d',
-        marginLeft: '3px',
-        marginRight: '3px'
-    },
-}
+
 export default HomeViewSet;
