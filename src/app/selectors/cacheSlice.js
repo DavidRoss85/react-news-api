@@ -59,7 +59,7 @@ const cacheSlice = createSlice({
             // console.log('This state is being accessed in addToCache: ')
         },
         emptyCache: (state, action) => {
-            state.cache = EMPTY_CACHE;
+            state = EMPTY_CACHE;
             localStorage.clear();
             console.log('Cache cleared successfully')
         },
