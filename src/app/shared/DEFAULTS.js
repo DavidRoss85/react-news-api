@@ -2,13 +2,18 @@ export const emptyNewsArray = [
     { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
 
-export const EMPTY_CACHE = [
-    {
-        criteria: {},
-        results: {},
-        timeStamp: null
-    }
-]
+export const EMPTY_CACHE = {
+    history: ['ReservedSpot'],
+    data: [
+        {
+            criteria: 'Empty',
+            results: {},
+            timeStamp: '',
+        }
+    ],
+    isLoading: true,
+    errMsg: ''
+}
 
 export const defaultPageColumn = {
     id: 0,

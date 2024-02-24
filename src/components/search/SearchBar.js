@@ -4,7 +4,7 @@ import { useState } from "react";
 import { fetchSearchResults, reloadNews } from "../../app/selectors/newsSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-const SearchBar = () => {
+const SearchBar = ({duplicate}) => {
     const [searchCriteria, setSearchCriteria] = useState('');
     const searchCache = useSelector((state) => state.cache)
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const SearchBar = () => {
         <Row>
             <Col md="10">
                 <input
-                    id="searchBox"
+                    id={duplicate ?"searchBoxAgain": 'searchBox'}
                     className="form-control"
                     type="text"
                     placeholder="This is DNN"

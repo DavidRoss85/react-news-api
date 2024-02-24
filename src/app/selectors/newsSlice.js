@@ -68,12 +68,13 @@ export const fetchBreakingNews = createAsyncThunk(
                 results: newsData,
                 timeStamp: Date.now()
             }
-            console.log('Fetch from server ')
-            if(!newsData.status==='error'){
-                dispatch(addToCache({ cache: {...dataToCache}, ...cachedItems }))
-                dispatch(saveLocalCache({dataToCache}))
+            console.log('Fetch from server ', newsData.status)
+            if (!newsData.status === 'error') {
+                console.log('here too')
+                dispatch(addToCache({ cache: { ...dataToCache }, ...cachedItems }))
+                dispatch(saveLocalCache({ dataToCache }))
             }
-            return { id, newsData }; 
+            return { id, newsData };
         } else {
             console.log('Load Cache')
 
@@ -84,8 +85,8 @@ export const fetchBreakingNews = createAsyncThunk(
 
 export const fetchSearchResults = createAsyncThunk(
     'news/fetchSearchResults',
-    async (searchCriteria, {dispatch}) => {
-        
+    async (searchCriteria, { dispatch }) => {
+
         const { id, searchCache = EMPTY_CACHE } = searchCriteria;
 
         const newsURL = buildNewsURL(searchCriteria);
@@ -99,11 +100,11 @@ export const fetchSearchResults = createAsyncThunk(
                 timeStamp: Date.now()
             }
             console.log('Fetch from server ', newsData)
-            if(!newsData.status==='error'){
-                dispatch(addToCache({ cache: {...dataToCache}, ...cachedItems }))
-                dispatch(saveLocalCache({dataToCache}))
+            if (!newsData.status === 'error') {
+                dispatch(addToCache({ cache: { ...dataToCache }, ...cachedItems }))
+                dispatch(saveLocalCache({ dataToCache }))
             }
-            return { id, newsData, criteria: searchCriteria }; 
+            return { id, newsData, criteria: searchCriteria };
         } else {
             console.log('Load Cache')
 

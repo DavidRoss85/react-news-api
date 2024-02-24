@@ -9,14 +9,13 @@ import { useSelector } from "react-redux";
 
 const Navmenu = ({ homeClick = false }) => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const tempVar = useSelector(state=>state.cache)
     useEffect(() => {
         setMenuOpen(false);
     }, [homeClick]);
 
-    const testThis=()=>{
-        console.log('Access state: ', tempVar)
-    }
+    // const testThis=()=>{
+        //For testing
+    // }
     return (
         <Navbar dark sticky="top" expand="md" className="navbar-light bg-black text-end" >
             <NavbarBrand className="logo" href="/">
@@ -43,9 +42,9 @@ const Navmenu = ({ homeClick = false }) => {
                 </Nav>
 
                 <Nav className="ms-auto">
-                    <NavItem>
+                    {/* <NavItem>
                         <Button onClick={()=>{testThis()}}>Test</Button>
-                    </NavItem>
+                    </NavItem> */}
 
                     <NavItem className="ms-auto">
                         <UserLoginMenu />

@@ -61,7 +61,7 @@ const SearchPage = () => {
         <>
             <Row className='footer-container p-3'>
                 <Col>
-                    <SearchBar />
+                    <SearchBar duplicate={true} />
                 </Col>
             </Row>
             <Row>

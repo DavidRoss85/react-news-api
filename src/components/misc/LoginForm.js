@@ -24,7 +24,7 @@ const LoginForm = (props) => {
             onSubmit={handleSubmit}
             validate={validateUserLoginForm}
         >
-            <Form>
+            <Form >
                 <FormGroup>
                     <Label htmlFor='username'>Username</Label>
                     <Field
@@ -32,6 +32,7 @@ const LoginForm = (props) => {
                         name='username'
                         placeholder='Username'
                         className='form-control'
+                        autoComplete='on'
                     />
                     <ErrorMessage name='username'>
                         {(msg) => <p className='text-danger'>{msg}</p>}

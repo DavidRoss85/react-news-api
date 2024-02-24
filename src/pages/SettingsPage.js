@@ -1,13 +1,20 @@
 import { Container, Row, Col, Button } from "reactstrap";
 import HomeViewSet from "../components/settings/HomeViewSet";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { emptyCache } from "../app/selectors/cacheSlice";
 
 const SettingsPage = () => {
 
     const [showHomeSettings, setShowHomeSettings]=useState(false)
+    const dispatch=useDispatch();
 
     const returnToSettingsScreen=()=>{
         setShowHomeSettings(false);
+    }
+
+    const clearCache=()=>{
+        dispatch(emptyCache());
     }
     return (
         <Container fluid>
@@ -19,12 +26,26 @@ const SettingsPage = () => {
                         />
                     :
                         <>
-                            <Button 
-                                onClick={()=>{setShowHomeSettings(true)}}
-                                color='warning'
-                            >
-                                Edit Home Screen Settings
-                            </Button>
+                            <Row className="m-3">
+                                <Col>
+                                    <Button 
+                                        onClick={()=>{setShowHomeSettings(true)}}
+                                        color='warning'
+                                    >
+                                        Edit Home Screen Settings
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Button 
+                                        onClick={clearCache}
+                                        color='warning'
+                                    >
+                                        Clear Cache
+                                    </Button>
+                                </Col>
+                            </Row>
                         </>
                     
                     }

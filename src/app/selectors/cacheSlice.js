@@ -61,6 +61,7 @@ const cacheSlice = createSlice({
         emptyCache: (state, action) => {
             state.cache = EMPTY_CACHE;
             localStorage.clear();
+            console.log('Cache cleared successfully')
         },
         loadLocalCache: (state, action) => {
             // return
@@ -83,7 +84,7 @@ const cacheSlice = createSlice({
                 const dataToStore = JSON.stringify(item);
                 localStorage.setItem(`${item.criteria}`, dataToStore);
             }
-            // console.log(`Cache stored locally. ${localStorage.length} entries`)// console.log(localStorage.length)
+            console.log(`Cache stored locally. ${localStorage.length} entries`)// console.log(localStorage.length)
         }
     }
 })

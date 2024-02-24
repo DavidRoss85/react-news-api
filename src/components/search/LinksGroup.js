@@ -9,7 +9,7 @@ const LinksGroup = ({ searchLinks }) => {
         subLinks = [{ "title": "Search", "query": "?q=United States" }]
     } = searchLinks;
 
-    const searchCache = useSelector((state) => state.news.cache)
+    const searchCache = useSelector((state) => state.cache)
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
