@@ -358,13 +358,13 @@
           "innerSizing": {},
           "componentAttribute": {},
           "search": {
-            "endpoint": "everything",
+            "endpoint": "top-headlines",
             "country": "",
             "category": "",
             "keyword": "",
             "fromDate": "",
             "toDate": "",
-            "language": "fr",
+            "language": "",
             "sortBy": "",
             "sources": "",
             "errorMode": false
