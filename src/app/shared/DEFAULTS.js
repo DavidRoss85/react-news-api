@@ -98,7 +98,7 @@ export const userPref = {
                 errorMode: false,
                 keyword: ""
             },
-            numArticles: 10,
+            numArticles: 6,
             title: "Entertainment",
             tileType: "pallette",
             row: 1,
@@ -142,10 +142,10 @@ export const userPref = {
                 country: "default",
                 endpoint: "top-headlines",
                 errorMode: false,
-                keyword: "music"
+                keyword: "Artificial Intelligence"
             },
             numArticles: 6,
-            title: "Music News",
+            title: "AI News",
             tileType: "topic",
             row: 2,
             sizing: {
@@ -166,7 +166,7 @@ export const userPref = {
                 errorMode: false,
                 keyword: ""
             },
-            numArticles: 12,
+            numArticles: 32,
             title: "Business",
             tileType: "pallette",
             row: 2,
