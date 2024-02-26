@@ -24,8 +24,8 @@ const ColNumUpDown = (props) => {
     }
     useEffect(() => {
         if (!numValue && numInput) {
-            setNumValue(numInput)
         }
+        setNumValue(numInput)
     }, [numInput]);
 
     return (

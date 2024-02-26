@@ -130,32 +130,7 @@
       "homepage": [
         {
           "id": 0,
-          "title": "News Window",
-          "tileType": "pallette",
-          "row": 1,
-          "numArticles": 12,
-          "sizing": {
-            "md": "4",
-            "className": ""
-          },
-          "innerSizing": {},
-          "componentAttribute": {
-            "md": "4"
-          },
-          "search": {
-            "category": "",
-            "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
-          },
-          "style": {
-            "border": "2px solid black"
-          }
-        },
-        {
-          "id": 1,
-          "title": "News Window",
+          "title": "Top Stories",
           "tileType": "slide",
           "row": 1,
           "numArticles": 10,
@@ -179,8 +154,38 @@
           }
         },
         {
+          "id": 1,
+          "title": "US News",
+          "tileType": "pallette",
+          "row": 1,
+          "numArticles": 12,
+          "sizing": {
+            "md": "4",
+            "className": ""
+          },
+          "innerSizing": {},
+          "componentAttribute": {
+            "md": "4"
+          },
+          "search": {
+            "endpoint": "top-headlines",
+            "country": "us",
+            "category": "",
+            "keyword": "",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
+          },
+          "style": {
+            "border": "2px solid black"
+          }
+        },
+        {
           "id": 2,
-          "title": "News Window",
+          "title": "AI News",
           "tileType": "list",
           "row": 1,
           "numArticles": 10,
@@ -191,11 +196,16 @@
           "innerSizing": {},
           "componentAttribute": {},
           "search": {
-            "category": "",
+            "endpoint": "everything",
             "country": "",
-            "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
+            "category": "",
+            "keyword": "Artificial Intelligence",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
           },
           "style": {
             "border": "2px solid black"
@@ -226,24 +236,27 @@
         },
         {
           "id": 4,
-          "title": "News Window",
-          "tileType": "slide",
+          "title": "Top Stories (UK)",
+          "tileType": "topic",
           "row": 2,
-          "numArticles": 6,
+          "numArticles": 10,
           "sizing": {
-            "md": "4",
+            "md": "5",
             "className": ""
           },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
+          "innerSizing": {},
           "componentAttribute": {},
           "search": {
-            "category": "",
-            "country": "",
             "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
+            "country": "gb",
+            "category": "",
+            "keyword": "",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
           },
           "style": {
             "border": "2px solid black"
@@ -251,24 +264,27 @@
         },
         {
           "id": 5,
-          "title": "News Window",
-          "tileType": "slide",
+          "title": "Top Sports Stories",
+          "tileType": "topic",
           "row": 2,
           "numArticles": 6,
           "sizing": {
-            "md": "8",
+            "md": "7",
             "className": ""
           },
-          "innerSizing": {
-            "className": "slideHolder"
-          },
+          "innerSizing": {},
           "componentAttribute": {},
           "search": {
-            "category": "",
-            "country": "",
             "endpoint": "top-headlines",
-            "errorMode": false,
-            "keyword": ""
+            "country": "",
+            "category": "sports",
+            "keyword": "",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
           },
           "style": {
             "border": "2px solid black"

@@ -247,7 +247,7 @@ const FeedCol = (props) => {
                                 </Label> 
                                 <Input
                                     type='select'
-                                    defaultValue={tileType}
+                                    value={tileType}
                                     id={`type-selector${id}`}
                                     onChange={(e) => { updateType(e.target.value) }}
                                 >
