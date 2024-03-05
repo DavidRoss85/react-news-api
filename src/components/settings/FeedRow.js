@@ -1,5 +1,6 @@
 import { Row, Col, Button } from "reactstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSpring, animated } from '@react-spring/web'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { defaultPageColumn } from "../../app/shared/DEFAULTS";
 import { makeRoomInArray, restrictArrayValues } from "../../utils/miscConversions";
@@ -22,9 +23,13 @@ const FeedRow = (props) => {
         params
     } = props;
 
+    const [springs, api] = useSpring(() => ({ from: { y: 0 }, }));
+    const rowRef = useRef(null); //used to get height of row
+
     const [newsColumns, setNewsColumns] = useState(params.components);
     const [selectedColumns, setSelectedColumns] = useState([]);
     const [columnWidths, setColumnWidths] = useState([]);
+    const [animating, setAnimating] = useState(false);
 
     useEffect(() => {
         updateFunc(params.idx, newsColumns);
@@ -119,96 +124,136 @@ const FeedRow = (props) => {
             return [...newsColumns];
         })
     }
+
+    const animateUp = () => {
+        if(animating) return;
+        setAnimating(true);
+        api.start({
+            from: {
+                y: springs.y.get(),
+            },
+            to: async (next, cancel) => {
+                const mY = springs.y.get();
+                await next({ y: mY - (rowRef.current ? rowRef.current.offsetHeight : 200), opacity: .5 });
+                moveUpFunc();
+                await next({ y: mY, opacity: 1 });
+                setAnimating(false);
+            },
+        })
+
+    }
+    const animateDown = () => {
+        if(animating) return;
+        setAnimating(true);
+        api.start({
+            from: {
+                y: springs.y.get(),
+            },
+            to: async (next, cancel) => {
+                const mY = springs.y.get();
+                await next({ y: mY + rowRef.current ? rowRef.current.offsetHeight : 200, opacity: .5, });
+                moveDownFunc();
+                await next({ y: mY, opacity: 1 });
+                setAnimating(false);
+            },
+        })
+
+    }
+
     return (
         <>
-            <Row style={
-                rowSelected
-                    ? { ...styles.basicStyle, ...styles.rowSelected }
-                    : { ...styles.basicStyle, ...styles.rowStyle }
-            }
-            >
-                <Col>
-                    <Row style={styles.menuRow}>
-                        <Col style={{ textAlign: 'start', fontWeight: 'bold' }}>
-                            Row: #{params.rowNum}
-                        </Col>
-                        <Col className='text-center'>
-                            <Row>
-                                <Col sm='4'>
-                                    <Button {...styles.moveButton} onClick={moveUpFunc}>
-                                        <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
-                                    </Button>
-                                </Col>
-                                <Col sm='4' className="d-none d-sm-inline block">
-                                    Move Row
-                                </Col>
-                                <Col sm='4'>
-                                    <Button {...styles.moveButton} onClick={moveDownFunc}>
-                                        <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col style={{ textAlign: 'end', }}>
-                            <SelectBox isSelected={rowSelected} onClick={toggleRowSelect} />
-                            <DeleteButton onClick={deleteFunc} style={styles.deleteButton} btnText={'Delete Row'} />
-                        </Col>
-                    </Row>
-                    <Row style={{ textAlign: 'start' }}>
-                        <Col>
-                            <Button {...styles.buttonStyle} onClick={addNewsColumn}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Column</Button>
-                            {/* <Button {...styles.buttonStyle} onClick={() => updateColumnContents(0)({ ...newsColumns[0], tileType: 'pallette' })}>Test</Button> */}
-                            {/* <Button {...styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Row className='justify-content-start'>
-                                {newsColumns.map((item, idx) => {
-                                    return (
-                                        <Col md='2' key={idx} className="d-none d-md-inline-block text-start">
-                                            <ColNumUpDown
-                                                title={`#${idx + 1} width:`}
-                                                numInput={columnWidths[idx]}
-                                                finishChange={changeColumnWidth(idx)}
-                                            />
-                                        </Col>
-                                    )
-                                })}
-                            </Row>
-                        </Col>
-                        <Col md='6'>
-                        </Col>
-                    </Row>
+            <Row>
+                <animated.div
+                    ref={rowRef}
+                    style={
+                        rowSelected
+                            ? {...springs, ...styles.basicStyle, ...styles.rowSelected }
+                            : {...springs, ...styles.basicStyle, ...styles.rowStyle }
+                    }
+                >
+                    <Col>
+                        <Row style={styles.menuRow}>
+                            <Col style={{ textAlign: 'start', fontWeight: 'bold' }}>
+                                Row: #{params.rowNum}
+                            </Col>
+                            <Col className='text-center'>
+                                <Row>
+                                    <Col sm='4'>
+                                        <Button {...styles.moveButton} onClick={animateUp}>
+                                            <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
+                                        </Button>
+                                    </Col>
+                                    <Col sm='4' className="d-none d-sm-inline block">
+                                        Move Row
+                                    </Col>
+                                    <Col sm='4'>
+                                        <Button {...styles.moveButton} onClick={animateDown}>
+                                            <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col style={{ textAlign: 'end', }}>
+                                <SelectBox isSelected={rowSelected} onClick={toggleRowSelect} />
+                                <DeleteButton onClick={deleteFunc} style={styles.deleteButton} btnText={'Delete Row'} />
+                            </Col>
+                        </Row>
+                        <Row style={{ textAlign: 'start' }}>
+                            <Col>
+                                <Button {...styles.buttonStyle} onClick={addNewsColumn}><FontAwesomeIcon icon="fa-solid fa-plus" /> Add Column</Button>
+                                {/* <Button {...styles.buttonStyle} onClick={() => updateColumnContents(0)({ ...newsColumns[0], tileType: 'pallette' })}>Test</Button> */}
+                                {/* <Button {...styles.buttonStyle} onClick={deleteSelected}><FontAwesomeIcon icon="fa-solid fa-trash" /> Delete Selected</Button> */}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Row className='justify-content-start'>
+                                    {newsColumns.map((item, idx) => {
+                                        return (
+                                            <Col md='2' key={idx} className="d-none d-md-inline-block text-start">
+                                                <ColNumUpDown
+                                                    title={`#${idx + 1} width:`}
+                                                    numInput={columnWidths[idx]}
+                                                    finishChange={changeColumnWidth(idx)}
+                                                />
+                                            </Col>
+                                        )
+                                    })}
+                                </Row>
+                            </Col>
+                            <Col md='6'>
+                            </Col>
+                        </Row>
 
-                    <Row>
-                        {/*Mapping twice to simplify layout code and readability*/}
-                        {newsColumns.map((item, idx) => {
-                            //inserts the md value into the object
-                            const immItem = {
-                                ...item,
-                                sizing: {
-                                    ...item.sizing,
-                                    md: columnWidths[idx]
-                                        ? columnWidths[idx].toString()
-                                        : '1'
+                        <Row>
+                            {/*Mapping twice to simplify layout code and readability*/}
+                            {newsColumns.map((item, idx) => {
+                                //inserts the md value into the object
+                                const immItem = {
+                                    ...item,
+                                    sizing: {
+                                        ...item.sizing,
+                                        md: columnWidths[idx]
+                                            ? columnWidths[idx].toString()
+                                            : '1'
+                                    }
                                 }
-                            }
-                            return (
-                                <FeedCol
-                                    key={idx}
-                                    deleteFunc={() => deleteColumn(idx)}
-                                    updateFunc={updateColumnContents(idx)}
-                                    moveLeftFunc={() => { moveColumnLeft(idx) }}
-                                    moveRightFunc={() => { moveColumnRight(idx) }}
-                                    isSelected={selectedColumns.includes(idx)}
-                                    toggleSelect={() => toggleColumnSelect(idx)}
-                                    params={immItem}
-                                />
-                            )
-                        })}
-                    </Row>
-                </Col>
+                                return (
+                                    <FeedCol
+                                        key={idx}
+                                        deleteFunc={() => deleteColumn(idx)}
+                                        updateFunc={updateColumnContents(idx)}
+                                        moveLeftFunc={() => { moveColumnLeft(idx) }}
+                                        moveRightFunc={() => { moveColumnRight(idx) }}
+                                        isSelected={selectedColumns.includes(idx)}
+                                        toggleSelect={() => toggleColumnSelect(idx)}
+                                        params={immItem}
+                                    />
+                                )
+                            })}
+                        </Row>
+                    </Col>
+                </animated.div>
             </Row>
         </>
     )
@@ -229,7 +274,7 @@ const styles = {
     },
     buttonStyle: {
         color: 'primary',
-        style:{
+        style: {
             // backgroundColor: 'rgba(80,80,255,.8)',
             marginLeft: '3px',
             marginRight: '3px'
@@ -238,14 +283,14 @@ const styles = {
     deleteButton: {
         color: 'dark',
         outline: true,
-        style:{
+        style: {
             fontWeight: 'bold',
         }
     },
     moveButton: {
         color: 'dark',
         outline: true,
-        style:{
+        style: {
             fontWeight: 'bold',
         }
     },

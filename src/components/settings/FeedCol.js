@@ -28,7 +28,7 @@ const FeedCol = (props) => {
         params
     } = props
 
-    const [springs, api] = useSpring(() => ({ from: { x: 0 }, }));
+    const [springs, api] = useSpring(() => ({ from: { x: 0 }, })); //animation spring
     const colRef = useRef(null); //used to get width of column
 
     const [localParams, setLocalParams] = useState(params);
@@ -40,6 +40,7 @@ const FeedCol = (props) => {
     const [editTitle, setEditTitle] = useState(false);
     const [editNumber, setEditNumber] = useState(false);
     const [editSearchModalOpen, setEditSearchModalOpen] = useState(false);
+    const [animating, setAnimating] = useState(false);
 
     useEffect(() => {
         if (params) {
@@ -156,20 +157,24 @@ const FeedCol = (props) => {
     }
 
     const animateLeft = () => {
+        if(animating) return;
+        setAnimating(true);
         api.start({
             from: {
                 x: springs.x.get(),
             },
             to: async (next, cancel) => {
                 const mX = springs.x.get();
-                await next({ x: mX - (colRef.current ? colRef.current.offsetWidth : 200) ,opacity:.5});
+                await next({ x: mX - (colRef.current ? colRef.current.offsetWidth : 200), opacity: .5 });
                 moveLeftFunc();
                 await next({ x: mX, opacity: 1 });
+                setAnimating(false);
             },
         })
-
     }
     const animateRight = () => {
+        if(animating) return;
+        setAnimating(true);
         api.start({
             from: {
                 x: springs.x.get(),
@@ -179,6 +184,7 @@ const FeedCol = (props) => {
                 await next({ x: mX + colRef.current ? colRef.current.offsetWidth : 200, opacity: .5, });
                 moveRightFunc();
                 await next({ x: mX, opacity: 1 });
+                setAnimating(false);
             },
         })
 
