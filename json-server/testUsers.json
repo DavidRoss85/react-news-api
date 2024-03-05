@@ -400,12 +400,40 @@
       "homepage": [
         {
           "id": 0,
+          "title": "Coding bootcamp",
+          "tileType": "topic",
+          "row": 1,
+          "numArticles": 20,
+          "sizing": {
+            "md": 3,
+            "className": ""
+          },
+          "style": {
+            "border": "2px solid black"
+          },
+          "innerSizing": {},
+          "componentAttribute": {},
+          "search": {
+            "endpoint": "everything",
+            "country": "",
+            "category": "",
+            "keyword": "Coding bootcamp",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
+          }
+        },
+        {
+          "id": 1,
           "title": "News Window",
           "tileType": "slide",
-          "row": 1,
-          "numArticles": 100,
+          "row": 2,
+          "numArticles": 6,
           "sizing": {
-            "md": "12",
+            "md": 4,
             "className": ""
           },
           "style": {
@@ -417,9 +445,67 @@
           "componentAttribute": {},
           "search": {
             "endpoint": "top-headlines",
-            "country": "default",
+            "country": "",
             "category": "",
             "keyword": "",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
+          }
+        },
+        {
+          "id": 2,
+          "title": "Boring News",
+          "tileType": "pallette",
+          "row": 2,
+          "numArticles": 15,
+          "sizing": {
+            "md": 4,
+            "className": ""
+          },
+          "style": {
+            "border": "2px solid black"
+          },
+          "innerSizing": {},
+          "componentAttribute": {
+            "md": "4"
+          },
+          "search": {
+            "endpoint": "everything",
+            "country": "",
+            "category": "",
+            "keyword": "Boring",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
+          }
+        },
+        {
+          "id": 3,
+          "title": "Microsoft",
+          "tileType": "list",
+          "row": 2,
+          "numArticles": 10,
+          "sizing": {
+            "md": 4,
+            "className": ""
+          },
+          "style": {
+            "border": "2px solid black"
+          },
+          "innerSizing": {},
+          "componentAttribute": {},
+          "search": {
+            "endpoint": "everything",
+            "country": "",
+            "category": "",
+            "keyword": "Microsoft",
             "fromDate": "",
             "toDate": "",
             "language": "",

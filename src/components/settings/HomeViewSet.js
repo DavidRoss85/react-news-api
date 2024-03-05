@@ -101,7 +101,15 @@ const HomeViewSet = ({ backFunc }) => {
             const tempRow = newsRows[id];
             const moveToRow = id <= 0 ? newsRows.length - 1 : id - 1
             newsRows[id] = newsRows[moveToRow];
-            newsRows[moveToRow] = tempRow
+            newsRows[moveToRow] = tempRow;
+            newsRows[id] = newsRows[id].map((column) => {
+                column = { ...column, row: (id + 1) };
+                return column;
+            });
+            newsRows[moveToRow] = newsRows[moveToRow].map((column) => {
+                column = { ...column, row: (moveToRow + 1) };
+                return column;
+            })
             return [...newsRows]
         })
     }
@@ -110,7 +118,15 @@ const HomeViewSet = ({ backFunc }) => {
             const tempRow = newsRows[id];
             const moveToRow = id >= (newsRows.length - 1) ? 0 : id + 1
             newsRows[id] = newsRows[moveToRow];
-            newsRows[moveToRow] = tempRow
+            newsRows[moveToRow] = tempRow;
+            newsRows[id] = newsRows[id].map((column) => {
+                column = { ...column, row: (id + 1) };
+                return column;
+            });
+            newsRows[moveToRow] = newsRows[moveToRow].map((column) => {
+                column = { ...column, row: (moveToRow + 1) };
+                return column;
+            })
             return [...newsRows]
         })
     }
