@@ -1,3 +1,5 @@
+export const SERVER_URL = 'http://localhost:8080'
+
 export const emptyNewsArray = [
     { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
@@ -64,6 +66,33 @@ export const ENDPOINTS = ["top-headlines", "everything"];
 export const CATEGORIES = ["", "business", "entertainment", "general", "health", "science", "sports", "technology",];
 export const LANGUAGES = ["", "ar", "de", "en", "es", "fr", "he", "it", "nl", "no", "pt", "ru", "sv", "ud", "zh",];
 export const SORT_BY = ["", "relevancy", "popularity", "publishedAt",];
+// export const userPref = {
+//     region: 'all',
+//     homepage: [
+//         {
+//             id: 0,
+//             search: {
+//                 category: "",
+//                 country: "default",
+//                 endpoint: "top-headlines",
+//                 errorMode: false,
+//                 keyword: "",
+//             },
+//             numArticles: 10,
+//             title: "Top-Stories",
+//             tileType: "slide",
+//             row: 1,
+//             sizing: {
+//                 md: "5",
+//                 className: ""
+//             },
+//             innerSizing: {
+//                 className: "slideHolder"
+//             },
+//             componentAttribute: {}
+//         },
+//     ]
+// }
 export const userPref = {
     region: 'all',
     homepage: [
