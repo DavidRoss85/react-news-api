@@ -4,6 +4,46 @@ export const emptyNewsArray = [
     { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
 
+export const ERROR_NEWS = {
+    "status": "error",
+    "totalResults": 0,
+    "articles": [
+        {
+            "source": {
+                "id": "",
+                "name": ""
+            },
+            "author": "",
+            "title": "",
+            "description": "",
+            "url": "",
+            "urlToImage": "",
+            "publishedAt": "",
+            "content": ""
+        }
+    ]
+};
+
+export const EMPTY_NEWS = {
+    "status": "loading",
+    "totalResults": 0,
+    "articles": [
+        {
+            "source": {
+                "id": "",
+                "name": ""
+            },
+            "author": "",
+            "title": "",
+            "description": "",
+            "url": "",
+            "urlToImage": "",
+            "publishedAt": "",
+            "content": ""
+        }
+    ]
+};
+
 export const EMPTY_CACHE = {
     history: ['ReservedSpot'],
     data: [

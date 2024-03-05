@@ -4,14 +4,9 @@ import {
     Button
 } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { validateSearchCriteria } from "../../utils/validateSearchCriteria";
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ENDPOINTS, LOCATIONLIST, CATEGORIES, LANGUAGES, SORT_BY } from "../../app/shared/DEFAULTS";
 import { capitalizeFirstLetter } from "../../utils/miscConversions";
-import { legacy_createStore } from "redux";
-import { validateUserLoginForm } from "../../utils/validateUserLoginForm";
-
 
 const SearchCriteriaForm = (props) => {
 

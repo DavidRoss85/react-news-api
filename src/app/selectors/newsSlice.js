@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { EMPTY_NEWS } from "../shared/TEST_NEWS";
 import { fetchFromServer } from "./newsFetch";
-import { userPref } from "../shared/DEFAULTS";
+import { userPref, EMPTY_NEWS } from "../shared/DEFAULTS";
 import { buildNewsURL } from "../../utils/buildNewsUrl";
 import { addToCache, compressURL, saveLocalCache } from "./cacheSlice";
 import { extractCacheData } from "./cacheSlice";
-import { buildNewsRequest } from "../../utils/buildNewsRequest";
 
 const initialState = {
     breakingNews:

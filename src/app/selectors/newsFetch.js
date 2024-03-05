@@ -1,5 +1,4 @@
-import { ERROR_NEWS } from "../shared/TEST_NEWS"
-import { SERVER_URL } from "../shared/DEFAULTS";
+import { SERVER_URL, ERROR_NEWS } from "../shared/DEFAULTS";
 
 const LOCAL_URL = 'http://localhost:3001/'
 

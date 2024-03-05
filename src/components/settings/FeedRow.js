@@ -7,7 +7,6 @@ import { makeRoomInArray, restrictArrayValues } from "../../utils/miscConversion
 import SelectBox from "../misc/SelectBox";
 import FeedCol from "./FeedCol";
 import DeleteButton from "../misc/DeleteButton";
-import ColSizeSlide from "./ColSizeSlide";
 import ColNumUpDown from "./ColNumUpDown";
 
 const MAX_COLUMNS = 5;

@@ -1,4 +1,4 @@
-import { Row, Col, Button } from "reactstrap";
+import { Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SelectBox = (props) => {

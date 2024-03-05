@@ -1,8 +1,4 @@
-const apiKey = process.env.REACT_APP_NEWS_API_KEY
-
-
 const URL_BASE = "https://newsapi.org/v2/"
-const URL_API_PRE = "&apiKey="
 
 // const sampleURL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
 

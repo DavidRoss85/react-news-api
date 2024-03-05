@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Row, Col, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

@@ -1,6 +1,5 @@
-import { Row, Col, Button } from "reactstrap";
+import { Row } from "reactstrap";
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import FeedRow from "./FeedRow";
 import { postSettings } from "../../app/selectors/userSlice";

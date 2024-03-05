@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Button, Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import SelectBox from '../misc/SelectBox';
 import DeleteButton from '../misc/DeleteButton';
 import previewPic1 from '../../app/img/carouselPic.png';
 import previewPic2 from '../../app/img/pallettePic.png';

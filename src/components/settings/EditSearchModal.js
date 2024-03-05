@@ -3,7 +3,6 @@ import {
     ModalHeader,
     ModalBody
 } from "reactstrap";
-import { useState, useEffect } from "react";
 import SearchCriteriaForm from "./SearchCriteriaForm";
 
 
@@ -12,7 +11,7 @@ const EditSearchModal = (props) => {
     //Make sure to pass these props
     const { isModalOpen, setIsModalOpen, updateFunc, search } = props;
 
-    const [renderItem, setRenderItem] = useState(<></>)
+    // const [renderItem, setRenderItem] = useState(<></>)
 
     const handleSubmit=(value)=>{
         updateFunc(value);
