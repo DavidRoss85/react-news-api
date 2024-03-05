@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSpring, animated } from '@react-spring/web'
 import { Row, Col, Button, Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteButton from '../misc/DeleteButton';
@@ -26,6 +27,9 @@ const FeedCol = (props) => {
         moveRightFunc = () => { },
         params
     } = props
+
+    const [springs, api] = useSpring(() => ({ from: { x: 0 }, }));
+    const colRef = useRef(null); //used to get width of column
 
     const [localParams, setLocalParams] = useState(params);
     const { id = 0, title = '', tileType = '', sizing = {}, style = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
@@ -150,189 +154,223 @@ const FeedCol = (props) => {
             )
         }
     }
+
+    const animateLeft = () => {
+        api.start({
+            from: {
+                x: springs.x.get(),
+            },
+            to: async (next, cancel) => {
+                const mX = springs.x.get();
+                await next({ x: mX - (colRef.current ? colRef.current.offsetWidth : 200) ,opacity:.5});
+                moveLeftFunc();
+                await next({ x: mX, opacity: 1 });
+            },
+        })
+
+    }
+    const animateRight = () => {
+        api.start({
+            from: {
+                x: springs.x.get(),
+            },
+            to: async (next, cancel) => {
+                const mX = springs.x.get();
+                await next({ x: mX + colRef.current ? colRef.current.offsetWidth : 200, opacity: .5, });
+                moveRightFunc();
+                await next({ x: mX, opacity: 1 });
+            },
+        })
+
+    }
     return (
         <>
             <Col
-                style={
-                    isSelected
-                        ? { ...styles.basicStyle, ...styles.newsSelected }
-                        : { ...styles.basicStyle, ...styles.newsStyle }
-                }
                 {...localParams.sizing}
-
             >
-                <Row style={styles.topMenu}>
-                    <Col className='text-start'>
-                        <strong>Current Settings:</strong>
-                    </Col>
-                    <Col>
-                        {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
-                        <DeleteButton 
-                            onClick={deleteFunc} 
-                            style={styles.deleteButton} 
-                            btnText={'Delete'} 
-                        />
-                    </Col>
-                </Row>
-                <Row className='text-center p-1'>
-                    <Col className='text-start d-none d-md-inline-block'>
-                        <Button {...styles.moveButton} onClick={moveLeftFunc}>
-                            <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
-                        </Button>
-                    </Col>
-                    <Col className='text-start d-md-none'>
-                        <Button {...styles.moveButton} onClick={moveLeftFunc}>
-                            <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
-                        </Button>
-                    </Col>
-                    <Col className='text-end d-none d-md-inline-block'>
-                        <Button {...styles.moveButton} onClick={moveRightFunc}>
-                            <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
-                        </Button>
-                    </Col>
-                    <Col className='text-end d-md-none'>
-                        <Button {...styles.moveButton} onClick={moveRightFunc}>
-                            <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
-                        </Button>
-                    </Col>
-                </Row>
-                <Row>
-                    {editTitle ?
-                        <Col className={classes.titleClass + 'text-end'}>
-                            <Input
-                                type={'text'}
-                                placeholder='Enter new Title'
-                                value={titleText}
-                                onChange={(e) => { setTitleText(e.target.value) }}
-                                onKeyDown={(e) => e.key === 'Enter' ? updateTitle(titleText) : e}
-                            />
-                            <Button onClick={() => { updateTitle(titleText) }} style={styles.saveButton}>
-                                <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
-                            </Button>
-                            <Button onClick={() => { setEditTitle(false); setTitleText('') }} style={styles.cancelButton}>
-                                <FontAwesomeIcon icon="fa-solid fa-x" />
-                            </Button>
-                        </Col>
-                        :
-                        <Col className={classes.titleClass + 'text-center'}>
-                            <span>Title: {title} </span>
-                            <Button onClick={() => { setEditTitle(true) }} style={styles.editButton}>
-                                <FontAwesomeIcon icon='fa-solid fa-pen' />
-                            </Button>
-                        </Col>
+
+                <animated.div
+                    ref={colRef}
+                    style={
+                        isSelected
+                            ? { ...springs, ...styles.basicStyle, ...styles.newsSelected, ...springs }
+                            : { ...springs, ...styles.basicStyle, ...styles.newsStyle, ...springs }
                     }
-                </Row>
-                <Row>
-                    <Col>
-                        <Row>
-                            <Col>
+
+                >
+                    <Row style={styles.topMenu}>
+                        <Col className='text-start'>
+                            <strong>Current Settings:</strong>
+                        </Col>
+                        <Col>
+                            {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
+                            <DeleteButton
+                                onClick={deleteFunc}
+                                style={styles.deleteButton}
+                                btnText={'Delete'}
+                            />
+                        </Col>
+                    </Row>
+                    <Row className='text-center p-1'>
+                        <Col className='text-start d-none d-md-inline-block'>
+                            <Button {...styles.moveButton} onClick={animateLeft}>
+                                <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+                            </Button>
+                        </Col>
+                        <Col className='text-start d-md-none'>
+                            <Button {...styles.moveButton} onClick={animateLeft}>
+                                <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
+                            </Button>
+                        </Col>
+                        <Col className='text-end d-none d-md-inline-block'>
+                            <Button {...styles.moveButton} onClick={animateRight}>
+                                <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+                            </Button>
+                        </Col>
+                        <Col className='text-end d-md-none'>
+                            <Button {...styles.moveButton} onClick={animateRight}>
+                                <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        {editTitle ?
+                            <Col className={classes.titleClass + 'text-end'}>
                                 <Input
-                                    id={`borderSelect${id}`}
-                                    name={`borderSelect${id}`}
-                                    type='checkbox'
-                                    onChange={(e) => { updateBorders(e.target.checked) }}
-                                    checked={borderSelect}
+                                    type={'text'}
+                                    placeholder='Enter new Title'
+                                    value={titleText}
+                                    onChange={(e) => { setTitleText(e.target.value) }}
+                                    onKeyDown={(e) => e.key === 'Enter' ? updateTitle(titleText) : e}
                                 />
-                                {' '}
-                                <Label htmlFor={`borderSelect${id}`}>
-                                    Borders
-                                </Label>
-                            </Col>
-                        </Row>
-                        <Row className='justify-content-center text-start'>
-                            <Col>
-                                <Label htmlFor={`type-selector${id}`}>
-                                    Type:
-                                </Label> 
-                                <Input
-                                    type='select'
-                                    value={tileType}
-                                    id={`type-selector${id}`}
-                                    onChange={(e) => { updateType(e.target.value) }}
-                                >
-                                    {COMPONENT_TYPES.map((item, idx) => {
-                                        return (
-                                            <option
-                                                key={idx}
-                                                className='text-center'
-                                                value={item}
-                                            >
-                                                {capitalizeFirstLetter(item)}
-                                            </option>)
-                                    })}
-                                </Input>
-                            </Col>
-                        </Row>
-                        <Row className='mt-2'>
-                            <Col>
-                                <Row>
-                                    <Col>
-                                        <img src={componentPic[tileType]} className='img-fluid' />
-                                    </Col>
-                                </Row>
-                                {tileType === 'pallette' ?
-                                    <Row>
-                                        <Col className='text-center justify-content-center'>
-                                            <Label htmlFor={`optionsSelector${id}`}>
-                                                Columns:
-                                            </Label>
-                                            <Input
-                                                id={`optionsSelector${id}`}
-                                                className='text-center'
-                                                type='select'
-                                                defaultValue={componentAttribute.md}
-                                                onChange={(e) => { updateAttribute({ md: e.target.value }) }}
-                                            >
-                                                <option value={'12'}>1</option>
-                                                <option value={'6'}>2</option>
-                                                <option value={'4'}>3</option>
-                                                <option value={'3'}>4</option>
-                                                <option value={'2'}>6</option>
-                                                <option value={'1'}>12</option>
-                                            </Input>
-                                        </Col>
-                                    </Row>
-                                    :
-                                    <></>
-                                }
-                            </Col>
-                        </Row>
-                        <Row className='mt-2'>
-                            {editNumber ?
-                                <Col className={classes.titleClass + 'text-end'}>
-                                    <Input
-                                        type={'text'}
-                                        placeholder='Enter a number (1-100)'
-                                        value={numberText}
-                                        onChange={(e) => { setNumberText(e.target.value) }}
-                                        onKeyDown={(e) => e.key === 'Enter' ? updateNumber(numberText) : e}
-                                    />
-                                    <Button onClick={() => { updateNumber(numberText) }} style={styles.saveButton}>
-                                        <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
-                                    </Button>
-                                    <Button onClick={() => { setEditNumber(false); setNumberText('') }} style={styles.cancelButton}>
-                                        <FontAwesomeIcon icon="fa-solid fa-x" />
-                                    </Button>
-                                </Col>
-                                :
-                                <Col className={classes.titleClass + 'text-center'}>
-                                    <span>Number of Articles: {numArticles} </span>
-                                    <Button onClick={() => { setEditNumber(true) }} style={styles.editButton}>
-                                        <FontAwesomeIcon icon='fa-solid fa-pen' />
-                                    </Button>
-                                </Col>
-                            }
-                        </Row>
-                        <Row className='mt-2'>
-                            <Col>
-                                {displaySearchCriteria(search)}
-                                <Button style={styles.editButton} onClick={() => { setEditSearchModalOpen(true) }}>
-                                    Edit search criteria <FontAwesomeIcon icon='fa-solid fa-pen' />
+                                <Button onClick={() => { updateTitle(titleText) }} style={styles.saveButton}>
+                                    <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
+                                </Button>
+                                <Button onClick={() => { setEditTitle(false); setTitleText('') }} style={styles.cancelButton}>
+                                    <FontAwesomeIcon icon="fa-solid fa-x" />
                                 </Button>
                             </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                            :
+                            <Col className={classes.titleClass + 'text-center'}>
+                                <span>Title: {title} </span>
+                                <Button onClick={() => { setEditTitle(true) }} style={styles.editButton}>
+                                    <FontAwesomeIcon icon='fa-solid fa-pen' />
+                                </Button>
+                            </Col>
+                        }
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <Input
+                                        id={`borderSelect${id}`}
+                                        name={`borderSelect${id}`}
+                                        type='checkbox'
+                                        onChange={(e) => { updateBorders(e.target.checked) }}
+                                        checked={borderSelect}
+                                    />
+                                    {' '}
+                                    <Label htmlFor={`borderSelect${id}`}>
+                                        Borders
+                                    </Label>
+                                </Col>
+                            </Row>
+                            <Row className='justify-content-center text-start'>
+                                <Col>
+                                    <Label htmlFor={`type-selector${id}`}>
+                                        Type:
+                                    </Label>
+                                    <Input
+                                        type='select'
+                                        value={tileType}
+                                        id={`type-selector${id}`}
+                                        onChange={(e) => { updateType(e.target.value) }}
+                                    >
+                                        {COMPONENT_TYPES.map((item, idx) => {
+                                            return (
+                                                <option
+                                                    key={idx}
+                                                    className='text-center'
+                                                    value={item}
+                                                >
+                                                    {capitalizeFirstLetter(item)}
+                                                </option>)
+                                        })}
+                                    </Input>
+                                </Col>
+                            </Row>
+                            <Row className='mt-2'>
+                                <Col>
+                                    <Row>
+                                        <Col>
+                                            <img src={componentPic[tileType]} className='img-fluid' />
+                                        </Col>
+                                    </Row>
+                                    {tileType === 'pallette' ?
+                                        <Row>
+                                            <Col className='text-center justify-content-center'>
+                                                <Label htmlFor={`optionsSelector${id}`}>
+                                                    Columns:
+                                                </Label>
+                                                <Input
+                                                    id={`optionsSelector${id}`}
+                                                    className='text-center'
+                                                    type='select'
+                                                    defaultValue={componentAttribute.md}
+                                                    onChange={(e) => { updateAttribute({ md: e.target.value }) }}
+                                                >
+                                                    <option value={'12'}>1</option>
+                                                    <option value={'6'}>2</option>
+                                                    <option value={'4'}>3</option>
+                                                    <option value={'3'}>4</option>
+                                                    <option value={'2'}>6</option>
+                                                    <option value={'1'}>12</option>
+                                                </Input>
+                                            </Col>
+                                        </Row>
+                                        :
+                                        <></>
+                                    }
+                                </Col>
+                            </Row>
+                            <Row className='mt-2'>
+                                {editNumber ?
+                                    <Col className={classes.titleClass + 'text-end'}>
+                                        <Input
+                                            type={'text'}
+                                            placeholder='Enter a number (1-100)'
+                                            value={numberText}
+                                            onChange={(e) => { setNumberText(e.target.value) }}
+                                            onKeyDown={(e) => e.key === 'Enter' ? updateNumber(numberText) : e}
+                                        />
+                                        <Button onClick={() => { updateNumber(numberText) }} style={styles.saveButton}>
+                                            <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
+                                        </Button>
+                                        <Button onClick={() => { setEditNumber(false); setNumberText('') }} style={styles.cancelButton}>
+                                            <FontAwesomeIcon icon="fa-solid fa-x" />
+                                        </Button>
+                                    </Col>
+                                    :
+                                    <Col className={classes.titleClass + 'text-center'}>
+                                        <span>Number of Articles: {numArticles} </span>
+                                        <Button onClick={() => { setEditNumber(true) }} style={styles.editButton}>
+                                            <FontAwesomeIcon icon='fa-solid fa-pen' />
+                                        </Button>
+                                    </Col>
+                                }
+                            </Row>
+                            <Row className='mt-2'>
+                                <Col>
+                                    {displaySearchCriteria(search)}
+                                    <Button style={styles.editButton} onClick={() => { setEditSearchModalOpen(true) }}>
+                                        Edit search criteria <FontAwesomeIcon icon='fa-solid fa-pen' />
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </animated.div>
             </Col>
 
             <EditSearchModal
@@ -363,7 +401,7 @@ const styles = {
     deleteButton: {
         color: 'dark',
         outline: true,
-        style:{
+        style: {
             border: '1px dashed black',
             fontWeight: 'bold',
         }
@@ -371,7 +409,7 @@ const styles = {
     moveButton: {
         color: 'dark',
         outline: true,
-        style:{
+        style: {
             border: '1px dashed black',
             fontWeight: 'bold',
         }
