@@ -20,8 +20,10 @@ const initialState = {
         success: false
     },
     saveState:{
+        isSaved: true,
         isSaving: false,
         success: false,
+        status: ''
     }
     // isLoading: true,
     // fetchComplete: false,
@@ -87,9 +89,10 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        // updateRegion: (state, action) => {
-        //     state.data.preferences.region = action.payload
-        // },
+        updateIsSaved: (state, action) => {
+            state.saveState.isSaved = action.payload;
+            state.success = action.payload;
+        },
         logOutUser: (state, action) => {
             state.data = initialState.data
             state.userState=initialState.userState
@@ -133,17 +136,31 @@ const userSlice = createSlice({
                 state.userState.success = false
                 state.errMsg = 'User not found'
             })
+            .addCase(postSettings.pending, (state,action)=>{
+                state.saveState.isSaving=true;
+                state.saveState.success=false;
+                state.saveState.status='';
+
+            })
             .addCase(postSettings.fulfilled, (state,action)=>{
                 console.log('Save user preferences success')
+                state.saveState.isSaving=false;
+                state.saveState.success=true;
+                state.saveState.isSaved=true;
+                state.saveState.status='';
             })
             .addCase(postSettings.rejected, (state,action)=>{
                 console.log('Save user preferences failed!\n', action.error? action.error.message : 'Fetch failed')
+                state.saveState.isSaving=false;
+                state.saveState.success=false;
+                state.saveState.isSaved=false;
+                state.saveState.status='Save Failed...'
             })
     }
 })
 
 export const userReducer = userSlice.reducer;
-export const {logOutUser } = userSlice.actions;
+export const {logOutUser, updateIsSaved } = userSlice.actions;
 
 export const getUserInfo = (state) => {
     return state.user

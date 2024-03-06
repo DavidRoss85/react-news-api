@@ -28,7 +28,7 @@ const FeedCol = (props) => {
         params
     } = props
 
-    const [springs, api] = useSpring(() => ({ from: { x: 0 }, })); //animation spring
+    const [springs, api] = useSpring(() => ({ from: { x: 0, opacity:1 },  })); //animation spring
     const colRef = useRef(null); //used to get width of column
 
     const [localParams, setLocalParams] = useState(params);
@@ -165,7 +165,7 @@ const FeedCol = (props) => {
             },
             to: async (next, cancel) => {
                 const mX = springs.x.get();
-                await next({ x: mX - (colRef.current ? colRef.current.offsetWidth : 200), opacity: .5 });
+                await next({ x: mX - (colRef.current ? colRef.current.offsetWidth : 200), opacity: 0 });
                 moveLeftFunc();
                 await next({ x: mX, opacity: 1 });
                 setAnimating(false);
@@ -181,13 +181,26 @@ const FeedCol = (props) => {
             },
             to: async (next, cancel) => {
                 const mX = springs.x.get();
-                await next({ x: mX + colRef.current ? colRef.current.offsetWidth : 200, opacity: .5, });
+                await next({ x: mX + colRef.current ? colRef.current.offsetWidth : 200, opacity: 0, });
                 moveRightFunc();
                 await next({ x: mX, opacity: 1 });
                 setAnimating(false);
             },
         })
 
+    }
+
+    const animateDelete = ()=>{
+        if(animating)return;
+        setAnimating(true);
+        api.start({
+            from: { opacity: 1},
+            to: async(next, cancel)=>{
+                await next({opacity:0});
+                deleteFunc();
+                setAnimating(false);
+            }
+        })
     }
     return (
         <>
@@ -211,7 +224,7 @@ const FeedCol = (props) => {
                         <Col>
                             {/* <SelectBox isSelected={isSelected} onClick={toggleSelect} /> */}
                             <DeleteButton
-                                onClick={deleteFunc}
+                                onClick={animateDelete}
                                 style={styles.deleteButton}
                                 btnText={'Delete'}
                             />

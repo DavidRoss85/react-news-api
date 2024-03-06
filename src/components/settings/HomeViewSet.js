@@ -2,7 +2,7 @@ import { Row } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import FeedRow from "./FeedRow";
-import { postSettings } from "../../app/selectors/userSlice";
+import { postSettings, updateIsSaved } from "../../app/selectors/userSlice";
 import HomeSetButtonRow from "./HomeSetButtonRow";
 
 const HomeViewSet = ({ backFunc }) => {
@@ -62,14 +62,15 @@ const HomeViewSet = ({ backFunc }) => {
         setNewsRows(newsRows => {
             newsRows[id] = value;
             return [...newsRows];
-        })
+        });
+        // dispatch(updateIsSaved(false));
     }
-
+    
     const addFeedRow = () => {
         setNewsRows(newsRows => {
             newsRows.push([]);
             return [...newsRows];
-        })
+        });
     }
 
     const toggleRowSelect = (id) => {
@@ -79,7 +80,7 @@ const HomeViewSet = ({ backFunc }) => {
             setSelectedRows(selectedRows => {
                 selectedRows.push(id);
                 return [...selectedRows];
-            })
+            });
         }
     }
 
@@ -87,7 +88,7 @@ const HomeViewSet = ({ backFunc }) => {
         selectedRows.map((id) => {
             deleteRow(id);
         })
-        setSelectedRows([])
+        setSelectedRows([]);
     }
 
     const deleteRow = (id) => {
@@ -110,7 +111,7 @@ const HomeViewSet = ({ backFunc }) => {
                 column = { ...column, row: (moveToRow + 1) };
                 return column;
             })
-            return [...newsRows]
+            return [...newsRows];
         })
     }
     const moveRowsDown = (id) => {
@@ -127,7 +128,7 @@ const HomeViewSet = ({ backFunc }) => {
                 column = { ...column, row: (moveToRow + 1) };
                 return column;
             })
-            return [...newsRows]
+            return [...newsRows];
         })
     }
 

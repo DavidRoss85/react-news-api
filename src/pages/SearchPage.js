@@ -15,7 +15,7 @@ const SearchPage = () => {
     const oldSearchCriteria = useSelector((state) => state.news.searchResults[0].criteria);
     const searchResults = useSelector((state) => state.news.searchResults[0].news);
     const isLoading = useSelector((state) => state.news.searchResults[0].isLoading);
-    const searchCache = useSelector((state) => state.news.cache)
+    const searchCache = useSelector((state) => state.cache)
     const [success, setSuccess] = useState(false);
     const [numPages, setNumPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -45,7 +45,7 @@ const SearchPage = () => {
         setNumPages(Math.ceil(searchResults.articles.length / 10))
         displayNews();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [searchResults])
+    }, [searchResults])
 
     useEffect(() => {
         if (searchCriteria !== oldSearchCriteria) {

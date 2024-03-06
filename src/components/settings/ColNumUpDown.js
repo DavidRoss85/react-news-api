@@ -5,7 +5,6 @@ const ColNumUpDown = (props) => {
     const {
         finishChange = (v) => { },
         numInput,
-        forceUpdate,
         title
     } = props;
 
@@ -15,17 +14,16 @@ const ColNumUpDown = (props) => {
 
     const handleChange = (e) => {
         const eValue = parseInt(e.target.value) || 1
+        //Limit updates to DOM: Updating too often causes error in react
         if (!restrictUpdate) {
             finishChange(eValue);
-            setNumValue(eValue);
+            // setNumValue(eValue);
             setRestrictUpdate(true);
             setTimeout(() => setRestrictUpdate(false), 10);
         }
     }
     useEffect(() => {
-        if (!numValue && numInput) {
-        }
-        setNumValue(numInput)
+        setNumValue(numInput);
     }, [numInput]);
 
     return (
@@ -34,15 +32,15 @@ const ColNumUpDown = (props) => {
             {title}<br />
             <Input
                 name='columnWidthEditor'
-                style={{ width: '7vw'}}
+                style={{ width: '7vw' }}
                 type='number'
                 min='1'
                 max='12'
                 step='1'
-                value={numValue}
-                onMouseUp={() => setNumValue(parseInt(numInput))}
+                value={numValue || 1}
+                // onMouseUp={() => setNumValue(parseInt(numInput))}
                 onChange={handleChange}
-                onKeyUp={() => setNumValue(parseInt(numInput))}
+            // onKeyUp={() => setNumValue(parseInt(numInput))}
             />
         </>
     )

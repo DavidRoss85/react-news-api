@@ -36,7 +36,7 @@
             "errorMode": false,
             "keyword": ""
           },
-          "numArticles": 10,
+          "numArticles": 6,
           "title": "Entertainment",
           "tileType": "pallette",
           "row": 1,
@@ -80,10 +80,10 @@
             "country": "all",
             "endpoint": "top-headlines",
             "errorMode": false,
-            "keyword": "music"
+            "keyword": "Artificial Intelligence"
           },
           "numArticles": 6,
-          "title": "Music News",
+          "title": "AI News",
           "tileType": "topic",
           "row": 2,
           "sizing": {
@@ -104,7 +104,7 @@
             "errorMode": false,
             "keyword": ""
           },
-          "numArticles": 12,
+          "numArticles": 32,
           "title": "Business",
           "tileType": "pallette",
           "row": 2,
@@ -400,37 +400,9 @@
       "homepage": [
         {
           "id": 0,
-          "title": "Coding bootcamp",
-          "tileType": "topic",
-          "row": 1,
-          "numArticles": 20,
-          "sizing": {
-            "md": 3,
-            "className": ""
-          },
-          "style": {
-            "border": "2px solid black"
-          },
-          "innerSizing": {},
-          "componentAttribute": {},
-          "search": {
-            "endpoint": "everything",
-            "country": "",
-            "category": "",
-            "keyword": "Coding bootcamp",
-            "fromDate": "",
-            "toDate": "",
-            "language": "",
-            "sortBy": "",
-            "sources": "",
-            "errorMode": false
-          }
-        },
-        {
-          "id": 1,
           "title": "News Window",
           "tileType": "slide",
-          "row": 2,
+          "row": 1,
           "numArticles": 6,
           "sizing": {
             "md": 4,
@@ -457,10 +429,10 @@
           }
         },
         {
-          "id": 2,
+          "id": 1,
           "title": "Boring News",
           "tileType": "pallette",
-          "row": 2,
+          "row": 1,
           "numArticles": 15,
           "sizing": {
             "md": 4,
@@ -487,10 +459,10 @@
           }
         },
         {
-          "id": 3,
+          "id": 2,
           "title": "Microsoft",
           "tileType": "list",
-          "row": 2,
+          "row": 1,
           "numArticles": 10,
           "sizing": {
             "md": 4,
@@ -506,6 +478,62 @@
             "country": "",
             "category": "",
             "keyword": "Microsoft",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
+          }
+        },
+        {
+          "id": 3,
+          "title": "Coding bootcamp",
+          "tileType": "topic",
+          "row": 2,
+          "numArticles": 20,
+          "sizing": {
+            "md": "3",
+            "className": ""
+          },
+          "style": {
+            "border": "2px solid black"
+          },
+          "innerSizing": {},
+          "componentAttribute": {},
+          "search": {
+            "endpoint": "everything",
+            "country": "",
+            "category": "",
+            "keyword": "Coding bootcamp",
+            "fromDate": "",
+            "toDate": "",
+            "language": "en",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
+          }
+        },
+        {
+          "id": 4,
+          "title": "America!",
+          "tileType": "topic",
+          "row": 2,
+          "numArticles": 20,
+          "sizing": {
+            "md": "4",
+            "className": ""
+          },
+          "style": {
+            "border": "2px solid black"
+          },
+          "innerSizing": {},
+          "componentAttribute": {},
+          "search": {
+            "endpoint": "top-headlines",
+            "country": "us",
+            "category": "",
+            "keyword": "",
             "fromDate": "",
             "toDate": "",
             "language": "",

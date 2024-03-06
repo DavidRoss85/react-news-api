@@ -19,7 +19,6 @@ const FeedRow = (props) => {
         updateFunc = () => { },
         moveUpFunc = () => { },
         moveDownFunc = () => { },
-        toggleUpdate,
         params
     } = props;
 
@@ -90,13 +89,13 @@ const FeedRow = (props) => {
             })
         }
     }
-
-    const deleteSelected = () => {
-        selectedColumns.map((id) => {
-            deleteColumn(id);
-        })
-        setSelectedColumns([])
-    }
+    //Save for later
+    // const deleteSelected = () => {
+    //     selectedColumns.map((id) => {
+    //         deleteColumn(id);
+    //     })
+    //     setSelectedColumns([])
+    // }
 
     const deleteColumn = (id) => {
         setNewsColumns(newsColumns => newsColumns.filter((item, idx) => id !== idx));

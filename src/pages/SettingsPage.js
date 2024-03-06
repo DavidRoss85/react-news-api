@@ -26,6 +26,11 @@ const SettingsPage = () => {
                         />
                     :
                         <>
+                            <Row>
+                                <Col>
+                                    <h3>User Settings</h3>
+                                </Col>
+                            </Row>
                             <Row className="m-3">
                                 <Col>
                                     <Button 
@@ -36,7 +41,7 @@ const SettingsPage = () => {
                                     </Button>
                                 </Col>
                             </Row>
-                            <Row>
+                            <Row className="m-3">
                                 <Col>
                                     <Button 
                                         onClick={clearCache}
@@ -44,6 +49,16 @@ const SettingsPage = () => {
                                     >
                                         Clear Cache
                                     </Button>
+                                </Col>
+                            </Row>
+                            <Row className="m-3">
+                                <Col>
+                                    <Button 
+                                        color= 'warning'
+                                        disabled
+                                    >
+                                        Account (Coming soon...)
+                                    </Button> 
                                 </Col>
                             </Row>
                         </>

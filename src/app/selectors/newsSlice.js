@@ -102,7 +102,7 @@ export const fetchSearchResults = createAsyncThunk(
                 results: newsData,
                 timeStamp: Date.now()
             }
-            console.log('Fetch from server ', newsData)
+            console.log('Fetch from server ', newsData.status)
             if (newsData.status !== 'error') {
                 dispatch(addToCache({ cache: { ...dataToCache }, ...cachedItems }))
                 dispatch(saveLocalCache({ dataToCache }))
