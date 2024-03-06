@@ -400,6 +400,36 @@
       "homepage": [
         {
           "id": 0,
+          "title": "Exciting Boring News",
+          "tileType": "pallette",
+          "row": 1,
+          "numArticles": 15,
+          "sizing": {
+            "md": "4",
+            "className": ""
+          },
+          "style": {
+            "border": "2px solid black"
+          },
+          "innerSizing": {},
+          "componentAttribute": {
+            "md": "4"
+          },
+          "search": {
+            "endpoint": "everything",
+            "country": "",
+            "category": "",
+            "keyword": "Boring",
+            "fromDate": "",
+            "toDate": "",
+            "language": "",
+            "sortBy": "",
+            "sources": "",
+            "errorMode": false
+          }
+        },
+        {
+          "id": 1,
           "title": "News Window",
           "tileType": "slide",
           "row": 1,
@@ -420,36 +450,6 @@
             "country": "",
             "category": "",
             "keyword": "",
-            "fromDate": "",
-            "toDate": "",
-            "language": "",
-            "sortBy": "",
-            "sources": "",
-            "errorMode": false
-          }
-        },
-        {
-          "id": 1,
-          "title": "Boring News",
-          "tileType": "pallette",
-          "row": 1,
-          "numArticles": 15,
-          "sizing": {
-            "md": 4,
-            "className": ""
-          },
-          "style": {
-            "border": "2px solid black"
-          },
-          "innerSizing": {},
-          "componentAttribute": {
-            "md": "4"
-          },
-          "search": {
-            "endpoint": "everything",
-            "country": "",
-            "category": "",
-            "keyword": "Boring",
             "fromDate": "",
             "toDate": "",
             "language": "",
