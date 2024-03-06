@@ -12,6 +12,8 @@
 /build
 
 # misc
+/stash
+/.VSCodeCounter
 .DS_Store
 .env.local
 .env.development.local
