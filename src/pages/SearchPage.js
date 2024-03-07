@@ -76,7 +76,7 @@ const SearchPage = () => {
                 </Col>
             </Row>
             {searchResults.articles.map((article, idx) => {
-                const immArticle = formatArticle(article);
+                const immArticle = formatArticle(article, (idx % 5 + 1));
                 return (
                     <Row key={idx}>
                         <Col>
