@@ -5,7 +5,7 @@ const ArticleHeadline = ({ article, className }) => {
 
     return (
 
-        <Card className={className}>
+        <Card className={className} title={title}>
             <a href={url}>
                 <CardHeader>{title}</CardHeader>
             </a>

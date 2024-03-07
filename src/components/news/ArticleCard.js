@@ -3,7 +3,7 @@ import { Row, Col, Card, CardImg, CardTitle, CardBody, CardHeader, CardText } fr
 const ArticleCard = ({ article }) => {
     const { author, title, url, urlToImage, description } = article;
     return (
-        <a href={url}>
+        <a href={url} title={title}>
             <Card>
                 <Row className='align-items-center'>
                     <Col className='text-center'>

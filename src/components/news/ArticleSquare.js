@@ -5,7 +5,7 @@ const ArticleSquare = ({ article, className }) => {
     const { author, title, url, urlToImage } = article;
     return (
         <a href={url} >
-            <Card className={className}>
+            <Card className={className} title={title}>
                 <div className="img-overlay">
                     <div className="overlay-text">Visit</div>
                     <CardTitle className="card-caption">{title}</CardTitle>

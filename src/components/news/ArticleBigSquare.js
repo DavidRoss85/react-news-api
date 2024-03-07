@@ -4,7 +4,7 @@ import { Card, CardImg, CardTitle, CardBody } from "reactstrap"
 const ArticleBigSquare = ({ article, className }) => {
     const { title, url, urlToImage } = article;
     return (
-        <Card className={className}>
+        <Card className={className} title={title}>
             <a href={url} >
                 <div className="img-overlay">
                     <div className="overlay-text">Visit</div>
