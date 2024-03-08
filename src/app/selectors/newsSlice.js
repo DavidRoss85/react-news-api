@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchFromServer } from "./newsFetch";
+import { fetchFromServer } from "../../utils/newsFetch";
 import { userPref, EMPTY_NEWS } from "../shared/DEFAULTS";
 import { buildNewsURL } from "../../utils/buildNewsUrl";
 import { addToCache, compressURL, saveLocalCache } from "./cacheSlice";
@@ -141,7 +141,7 @@ const newsSlice = createSlice({
                 // Each component handles its own setting the isLoading status
             })
             .addCase(fetchBreakingNews.fulfilled, (state, action) => {
-                const { newsData, id, feed = 'breakingNews', cache, expired } = action.payload;
+                const { newsData, id, feed = 'breakingNews'} = action.payload;
                 const immId = id
                 if (id > state[feed].length - 1) {
                     state[feed].push({ news: newsData, isLoading: false, errMsg: '' })

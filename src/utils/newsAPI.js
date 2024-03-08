@@ -1,4 +1,4 @@
-import { ERROR_NEWS } from "../shared/DEFAULTS"
+import { ERROR_NEWS } from "../app/shared/DEFAULTS"
 
 const apiKey = process.env.REACT_APP_NEWS_API_KEY
 const URL_API_PRE = "&apiKey="

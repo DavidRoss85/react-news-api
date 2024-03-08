@@ -1,9 +1,9 @@
 import { Row } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import FeedRow from "./FeedRow";
+import FeedRow from "../../components/settings/FeedRow";
 import { postSettings, updateIsSaved } from "../../app/selectors/userSlice";
-import HomeSetButtonRow from "./HomeSetButtonRow";
+import HomeSetButtonRow from "../../components/settings/HomeSetButtonRow";
 
 const HomeViewSet = ({ backFunc }) => {
 

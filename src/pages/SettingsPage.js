@@ -1,5 +1,5 @@
 import { Container, Row, Col, Button } from "reactstrap";
-import HomeViewSet from "../components/settings/HomeViewSet";
+import HomeViewSet from "../features/settings/HomeViewSet"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { emptyCache } from "../app/selectors/cacheSlice";
