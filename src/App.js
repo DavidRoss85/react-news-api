@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import './App.css';
-import Header from './components/page/Header';
-import Footer from './components/page/Footer'
-import Navmenu from './components/page/Navmenu';
+import Header from './features/page/Header';
+import Footer from './features/page/Footer';
+import Navmenu from './features/page/Navmenu';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 
