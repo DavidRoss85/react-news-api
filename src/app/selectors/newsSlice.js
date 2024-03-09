@@ -21,24 +21,6 @@ const initialState = {
         errMsg: '',
         criteria: ''
     }],
-    cache: [
-        {
-            criteria: {},
-            results: {},
-            timeStamp: ''
-        }
-    ],
-    newCache: {
-        history: [],
-        data: [
-            {
-                criteria: {},
-                results: {},
-                timeStamp: '',
-            }
-        ]
-
-    },
     emptyNews: [EMPTY_NEWS]
 }
 
@@ -71,7 +53,7 @@ export const fetchBreakingNews = createAsyncThunk(
                 results: newsData,
                 timeStamp: Date.now()
             }
-            console.log('Fetch from server ', newsData.status)
+            console.log('\n***\nFetch from server ', newsData.status)
             if (newsData.status !== 'error') {
                 dispatch(addToCache({ cache: { ...dataToCache }, ...cachedItems }))
                 dispatch(saveLocalCache({ dataToCache }))
@@ -102,7 +84,7 @@ export const fetchSearchResults = createAsyncThunk(
                 results: newsData,
                 timeStamp: Date.now()
             }
-            console.log('Fetch from server ', newsData.status)
+            console.log('\n***\nFetch from server ', newsData.status)
             if (newsData.status !== 'error') {
                 dispatch(addToCache({ cache: { ...dataToCache }, ...cachedItems }))
                 dispatch(saveLocalCache({ dataToCache }))

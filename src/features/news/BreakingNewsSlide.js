@@ -38,8 +38,10 @@ const BreakingNewsSlide = ({newsParams}) => {
     }
 
     useEffect(() => {
-        triggerReload();
-    }, [tileSetting])
+        if(searchCache.didInitialize){
+            triggerReload();
+        }
+    }, [tileSetting,searchCache.didInitialize]);
 
     useEffect(() => {
         setNewsArray(

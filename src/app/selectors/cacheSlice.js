@@ -10,6 +10,7 @@ const initialState = {
             timeStamp: '',
         }
     ],
+    didInitialize: false,
     isLoading: true,
     errMsg: ''
 }
@@ -52,7 +53,7 @@ const cacheSlice = createSlice({
             } else {
                 state.history.push(cache.criteria);
                 state.data.push(cache);
-                console.log('Add to cache')
+                console.log('Results added to cache')
             }
             // console.log('This state is being accessed in addToCache: ')
         },
@@ -72,9 +73,11 @@ const cacheSlice = createSlice({
                     const parsedData = JSON.parse(localData);
                     state.history.push(parsedData.criteria)
                     state.data.push(parsedData)
-                }
+                };
+                console.log('\n***\nPrevious search data loaded from local storage.','Total: ', localStorage.length, ' entries.\n***')
                 // console.log('Data: ', localStorage.key(i))
             }
+            state.didInitialize=true;
         },
         saveLocalCache: (state, action) => {
             localStorage.clear();
@@ -82,7 +85,7 @@ const cacheSlice = createSlice({
                 const dataToStore = JSON.stringify(item);
                 localStorage.setItem(`${item.criteria}`, dataToStore);
             }
-            console.log(`Cache stored locally. ${localStorage.length} entries`)// console.log(localStorage.length)
+            console.log(`Cache saved to local storage. ${localStorage.length} total entries in storage.\n***`)// console.log(localStorage.length)
         }
     }
 })

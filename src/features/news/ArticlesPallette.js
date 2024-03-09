@@ -40,8 +40,10 @@ const ArticlesPallette = (props) => {
     }
 
     useEffect(() => {
-        triggerReload();
-    }, [tileSetting])
+        if(searchCache.didInitialize){
+            triggerReload();
+        }
+    }, [tileSetting,searchCache.didInitialize]);
 
     useEffect(() => {
         if (newsFeed) {
