@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, NavItem, Button } from "reactstrap";
 import { NavLink } from "react-router-dom";
-import RegionFilter from "../../components/misc/RegionFilter"
-import SiteLogo from "../../components/page/SiteLogo";
-import UserLoginMenu from "../../components/page/UserLoginMenu";
+import RegionFilter from "../../components/navbar/RegionFilter"
+import SiteLogo from "../../components/footer/SiteLogo";
+import UserLoginMenu from "../../components/navbar/UserLoginMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 

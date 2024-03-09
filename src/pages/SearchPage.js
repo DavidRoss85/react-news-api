@@ -4,7 +4,7 @@ import { fetchSearchResults, reloadNews } from "../app/selectors/newsSlice";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ArticleCard from "../components/news/ArticleCard";
-import PageNumbers from "../components/misc/PageNumbers"
+import PageNumbers from "../components/search/PageNumbers"
 import { formatArticle } from "../utils/formatArticle";
 import { Loading, Failed } from "../components/misc/ComponentStatuses";
 import SearchBar from "../components/search/SearchBar";

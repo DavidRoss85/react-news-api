@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { defaultPageColumn } from "../../app/shared/DEFAULTS";
 import { makeRoomInArray, restrictArrayValues } from "../../utils/miscConversions";
 
-import SelectBox from "../misc/SelectBox";
+import SelectBox from "./SelectBox";
 import FeedCol from "./FeedCol";
-import DeleteButton from "../misc/DeleteButton";
+import DeleteButton from "./DeleteButton";
 import ColNumUpDown from "./ColNumUpDown";
 
 const MAX_COLUMNS = 5;

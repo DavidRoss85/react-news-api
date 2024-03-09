@@ -1,8 +1,8 @@
 import { Container, Row, Col } from "reactstrap";
 import FooterSearch from "../search/FooterSearch";
-import SiteLogo from "../../components/page/SiteLogo";
-import SocialIcons from "../../components/page/SocialIcons";
-import BottomText from "../../components/page/BottomText";
+import SiteLogo from "../../components/footer/SiteLogo";
+import SocialIcons from "../../components/footer/SocialIcons";
+import BottomText from "../../components/footer/BottomText";
 
 const Footer = () => {
 

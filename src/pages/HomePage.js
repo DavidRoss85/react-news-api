@@ -1,7 +1,7 @@
 import { Container, Row } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import NewsTile from "../components/page/NewsTile";
+import NewsTile from "../components/news/NewsTile";
 import { loadLocalCache } from "../app/selectors/cacheSlice";
 
 const HomePage = () => {

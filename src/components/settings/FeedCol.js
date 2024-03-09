@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSpring, animated } from '@react-spring/web'
 import { Row, Col, Button, Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import DeleteButton from '../misc/DeleteButton';
+import DeleteButton from './DeleteButton';
 import previewPic1 from '../../app/img/carouselPic.png';
 import previewPic2 from '../../app/img/pallettePic.png';
 import previewPic3 from '../../app/img/headlinesPic.png';

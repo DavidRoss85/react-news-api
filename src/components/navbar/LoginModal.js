@@ -4,7 +4,7 @@ import {
     ModalBody
 } from "reactstrap";
 import { useState, useEffect } from "react";
-import LoginForm from "../misc/LoginForm";
+import LoginForm from "./LoginForm";
 import { Loading, Failed } from "../misc/ComponentStatuses";
 
 
