@@ -135,6 +135,7 @@ const newsSlice = createSlice({
             })
             .addCase(fetchBreakingNews.rejected, (state, action) => {
                 //Since API rejects are handled in separate module, this likely won't be called.
+                //This code is left commented out just in case.
                 // const { id, feed = 'breakingNews' } = action.payload;
                 // const immId = id
                 // if (id > state[feed].length - 1) { //Just in case an id outside parameters gets passed

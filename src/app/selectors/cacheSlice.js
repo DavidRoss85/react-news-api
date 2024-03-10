@@ -1,6 +1,9 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { EMPTY_CACHE, CACHE_TTL } from "../shared/DEFAULTS";
 
+//history contains the search string 
+//which will match the position of the item in data.
+//The first array position for the search cache is reserved.
 const initialState = {
     history: ['ReservedSpot'],
     data: [

@@ -199,6 +199,7 @@ const FeedCol = (props) => {
                 await next({opacity:0});
                 deleteFunc();
                 setAnimating(false);
+                await next({opacity:1});
             }
         })
     }
@@ -232,22 +233,22 @@ const FeedCol = (props) => {
                     </Row>
                     <Row className='text-center p-1'>
                         <Col className='text-start d-none d-md-inline-block'>
-                            <Button {...styles.moveButton} onClick={animateLeft}>
+                            <Button {...styles.moveButton} onClick={animateLeft} title={'Switch positions'}>
                                 <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
                             </Button>
                         </Col>
                         <Col className='text-start d-md-none'>
-                            <Button {...styles.moveButton} onClick={animateLeft}>
+                            <Button {...styles.moveButton} onClick={animateLeft} title={'Switch positions'}>
                                 <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
                             </Button>
                         </Col>
                         <Col className='text-end d-none d-md-inline-block'>
-                            <Button {...styles.moveButton} onClick={animateRight}>
+                            <Button {...styles.moveButton} onClick={animateRight} title={'Switch positions'}>
                                 <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
                             </Button>
                         </Col>
                         <Col className='text-end d-md-none'>
-                            <Button {...styles.moveButton} onClick={animateRight}>
+                            <Button {...styles.moveButton} onClick={animateRight} title={'Switch positions'}>
                                 <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
                             </Button>
                         </Col>
@@ -262,17 +263,17 @@ const FeedCol = (props) => {
                                     onChange={(e) => { setTitleText(e.target.value) }}
                                     onKeyDown={(e) => e.key === 'Enter' ? updateTitle(titleText) : e}
                                 />
-                                <Button onClick={() => { updateTitle(titleText) }} style={styles.saveButton}>
+                                <Button onClick={() => { updateTitle(titleText) }} style={styles.saveButton} title={'Save'}>
                                     <FontAwesomeIcon icon="fa-regular fa-floppy-disk" />
                                 </Button>
-                                <Button onClick={() => { setEditTitle(false); setTitleText('') }} style={styles.cancelButton}>
+                                <Button onClick={() => { setEditTitle(false); setTitleText('') }} style={styles.cancelButton} title={'Cancel'}>
                                     <FontAwesomeIcon icon="fa-solid fa-x" />
                                 </Button>
                             </Col>
                             :
                             <Col className={classes.titleClass + 'text-center'}>
                                 <span>Title: {title} </span>
-                                <Button onClick={() => { setEditTitle(true) }} style={styles.editButton}>
+                                <Button onClick={() => { setEditTitle(true) }} style={styles.editButton} title={'Edit'}>
                                     <FontAwesomeIcon icon='fa-solid fa-pen' />
                                 </Button>
                             </Col>
@@ -323,7 +324,7 @@ const FeedCol = (props) => {
                                 <Col>
                                     <Row>
                                         <Col>
-                                            <img src={componentPic[tileType]} className='img-fluid' />
+                                            <img src={componentPic[tileType]} className='img-fluid'  title={'Example of how your news will display'}/>
                                         </Col>
                                     </Row>
                                     {tileType === 'pallette' ?
@@ -373,7 +374,7 @@ const FeedCol = (props) => {
                                     :
                                     <Col className={classes.titleClass + 'text-center'}>
                                         <span>Number of Articles: {numArticles} </span>
-                                        <Button onClick={() => { setEditNumber(true) }} style={styles.editButton}>
+                                        <Button onClick={() => { setEditNumber(true) }} style={styles.editButton} title={'Change number of articles loaded'}>
                                             <FontAwesomeIcon icon='fa-solid fa-pen' />
                                         </Button>
                                     </Col>

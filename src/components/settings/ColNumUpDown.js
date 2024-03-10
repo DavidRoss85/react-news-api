@@ -32,6 +32,7 @@ const ColNumUpDown = (props) => {
             {title}<br />
             <Input
                 name='columnWidthEditor'
+                title={'Change the width of your columns'}
                 style={{ width: '7vw' }}
                 type='number'
                 min='1'

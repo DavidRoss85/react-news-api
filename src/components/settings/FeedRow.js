@@ -178,7 +178,7 @@ const FeedRow = (props) => {
                             <Col className='text-center'>
                                 <Row>
                                     <Col sm='4'>
-                                        <Button {...styles.moveButton} onClick={animateUp}>
+                                        <Button {...styles.moveButton} onClick={animateUp}  title={'Change the row order'}>
                                             <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
                                         </Button>
                                     </Col>
@@ -186,7 +186,7 @@ const FeedRow = (props) => {
                                         Move Row
                                     </Col>
                                     <Col sm='4'>
-                                        <Button {...styles.moveButton} onClick={animateDown}>
+                                        <Button {...styles.moveButton} onClick={animateDown} title={'Change the row order'}>
                                             <FontAwesomeIcon icon="fa-solid fa-arrow-down" />
                                         </Button>
                                     </Col>

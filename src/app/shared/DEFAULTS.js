@@ -67,8 +67,8 @@ export const defaultPageColumn = {
         md: "1",
         className: ""
     },
-    style:{
-        border:'2px solid black'
+    style: {
+        border: '2px solid black'
     },
     innerSizing: {
         className: "slideHolder"
@@ -85,7 +85,7 @@ export const defaultPageColumn = {
         sortBy: "",
         sources: "",
         errorMode: false
-},
+    },
 }
 // export const newsParams = {
 //     numArticles: 10,
@@ -93,10 +93,11 @@ export const defaultPageColumn = {
 //     criteria: "top-headlines"
 // }
 
-const ONE_YEAR = 31536000000 //milliseconds
-const ONE_MONTH = 2592000000 //milliseconds
-const ONE_DAY = 86400000 //millisecond
-const ONE_HOUR = 3600000 //milliseconds
+const ONE_YEAR = 31536000000; //milliseconds
+const ONE_MONTH = 2592000000; //milliseconds
+const ONE_DAY = 86400000; //millisecond
+const ONE_HOUR = 3600000; //milliseconds
+const ONE_MINUTE = 60000; //milliseconds
 
 export const CACHE_TTL = ONE_YEAR * 5 //5 years
 
