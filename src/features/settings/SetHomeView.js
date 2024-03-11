@@ -5,7 +5,7 @@ import FeedRow from "../../components/settings/FeedRow";
 import { postSettings, updateIsSaved } from "../../app/selectors/userSlice";
 import HomeSetButtonRow from "../../components/settings/HomeSetButtonRow";
 
-const HomeViewSet = ({ backFunc }) => {
+const SetHomeView = ({ backFunc }) => {
 
     const [newsRows, setNewsRows] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
@@ -170,4 +170,4 @@ const HomeViewSet = ({ backFunc }) => {
     )
 }
 
-export default HomeViewSet;
+export default SetHomeView;

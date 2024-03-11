@@ -1,30 +1,30 @@
 import { Container, Row, Col, Button } from "reactstrap";
-import HomeViewSet from "../features/settings/HomeViewSet"
+import SetHomeView from "../features/settings/SetHomeView"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { emptyCache } from "../app/selectors/cacheSlice";
 
 const SettingsPage = () => {
 
-    const [showHomeSettings, setShowHomeSettings]=useState(false)
-    const dispatch=useDispatch();
+    const [showHomeSettings, setShowHomeSettings] = useState(false)
+    const dispatch = useDispatch();
 
-    const returnToSettingsScreen=()=>{
+    const returnToSettingsScreen = () => {
         setShowHomeSettings(false);
     }
 
-    const clearCache=()=>{
+    const clearCache = () => {
         dispatch(emptyCache());
     }
     return (
         <Container fluid>
             <Row className='justify-content-center text-center m-1'>
-                <Col >
+                <Col>
                     {showHomeSettings ?
-                        <HomeViewSet 
+                        <SetHomeView
                             backFunc={returnToSettingsScreen}
                         />
-                    :
+                        :
                         <>
                             <Row>
                                 <Col>
@@ -33,8 +33,8 @@ const SettingsPage = () => {
                             </Row>
                             <Row className="m-3">
                                 <Col>
-                                    <Button 
-                                        onClick={()=>{setShowHomeSettings(true)}}
+                                    <Button
+                                        onClick={() => { setShowHomeSettings(true) }}
                                         color='warning'
                                     >
                                         Edit Home Screen Settings
@@ -43,7 +43,7 @@ const SettingsPage = () => {
                             </Row>
                             <Row className="m-3">
                                 <Col>
-                                    <Button 
+                                    <Button
                                         onClick={clearCache}
                                         color='warning'
                                     >
@@ -53,16 +53,16 @@ const SettingsPage = () => {
                             </Row>
                             <Row className="m-3">
                                 <Col>
-                                    <Button 
-                                        color= 'warning'
+                                    <Button
+                                        color='warning'
                                         disabled
                                     >
                                         Account (Coming soon...)
-                                    </Button> 
+                                    </Button>
                                 </Col>
                             </Row>
                         </>
-                    
+
                     }
                 </Col>
             </Row>
