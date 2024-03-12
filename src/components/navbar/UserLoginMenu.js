@@ -8,47 +8,71 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { attemptLogin, logOutUser } from "../../app/selectors/userSlice";
+import { attemptLogin, fetchUserSettings, logOutUser } from "../../app/selectors/userSlice";
 import { loadUserPreferences } from "../../app/selectors/settingsSlice";
 import LoginModal from "./LoginModal";
 
 const UserLoginMenu = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
+    const [isLoading, setIsLoading ] = useState(false);
+    const [success, setSuccess ] = useState(false);
+    const [loadingMessage, setLoadingMessage] = useState('Logging in...');
+    const [failedMessage, setFailedMessage] = useState('Failed to log in');
+
 
     const currentUserName = useSelector((state) => state.user.data.username);
     const userInfo = useSelector((state) => state.user);
     const userState = useSelector((state) => state.user.userState);
+    const userDataState = useSelector(state => state.user.dataState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { loggedIn, userLoading, success } = userState;
-
+    const { loggedIn, userLoading, success:userSuccess } = userState;
+    const { isLoading: dataLoading, success: dataSuccess, errMsg: dataErr } = userDataState;
 
     const toggleMenu = (event) => {
-        event.stopPropagation()
-        setDropdownOpen((prevState) => !prevState)
+        event.stopPropagation();
+        setDropdownOpen((prevState) => !prevState);
     };
     const handleLogin = (values) => {
         const currentUser = {
             username: values.username,
             password: values.password
         }
-        dispatch(attemptLogin(currentUser))
+        dispatch(attemptLogin(currentUser));
     };
 
     //reset settings
     const signOut = () => {
+
         dispatch(logOutUser());
         dispatch(loadUserPreferences(userInfo));
     }
 
     useEffect(() => {
         if (loggedIn) {
-            setLoginModalOpen(false)
-        }
-        dispatch(loadUserPreferences(userInfo));
-    }, [loggedIn])
+            console.log('Logged in')
+            if(dataLoading){
+                console.log('Data is loading')
+                setLoadingMessage('Getting your preferences...');
+                setFailedMessage('Failed to load your preferences');
+            } else if(!dataLoading && dataSuccess){
+                setLoginModalOpen(false);
+                // dispatch(loadUserPreferences(userInfo));
+            } else if (!dataLoading && !dataSuccess){
+
+            }
+        }else {
+            setLoadingMessage('Logging in...');
+            setFailedMessage('Unable to log in');
+    }
+    }, [loggedIn, dataLoading, dataSuccess, dataErr]);
+
+    useEffect(() => {
+       dataLoading || userLoading ? setIsLoading(true) : setIsLoading(false);
+       dataSuccess && userSuccess ? setSuccess(true) : setSuccess(false);
+    }, [dataLoading,userLoading,userSuccess,dataSuccess])
 
 
     return (
@@ -93,8 +117,11 @@ const UserLoginMenu = () => {
             </Dropdown>
 
             <LoginModal
+                loadText={loadingMessage}
+                failText={failedMessage}
                 success={success}
-                isLoading={userLoading}
+                isLoading={isLoading}
+                loggedIn={loggedIn}
                 loginModalOpen={loginModalOpen}
                 setLoginModalOpen={setLoginModalOpen}
                 handleLogin={handleLogin}

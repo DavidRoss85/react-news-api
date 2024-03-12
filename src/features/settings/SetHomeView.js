@@ -2,7 +2,7 @@ import { Row } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import FeedRow from "../../components/settings/FeedRow";
-import { postSettings, updateIsSaved } from "../../app/selectors/userSlice";
+import { postUserSettings, updateIsSaved } from "../../app/selectors/userSlice";
 import HomeSetButtonRow from "../../components/settings/HomeSetButtonRow";
 
 const SetHomeView = ({ backFunc }) => {
@@ -56,7 +56,7 @@ const SetHomeView = ({ backFunc }) => {
                 homepage: settingsArray
             }
         }
-        dispatch(postSettings(settingsObj));
+        dispatch(postUserSettings(settingsObj));
     }
     const updateFeedRow = (id, value) => {
         setNewsRows(newsRows => {
