@@ -21,7 +21,6 @@ const LoginModal = (props) => {
     useEffect(() => {
         setFailedMessage(failText);
         setLoadingMessage(loadText);
-        console.log('Login modal text changed')
     }, [loadText, failText]);
 
     //Determine the items to show in the Modal window

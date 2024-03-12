@@ -57,9 +57,7 @@ const UserLoginMenu = () => {
             } else if(!dataLoading && dataSuccess){
                 setLoginModalOpen(false);
                 dispatch(loadUserPreferences(userInfo));
-            } else if (!dataLoading && !dataSuccess){
-
-            }
+            } 
         }else {
             setLoadingMessage('Logging in...');
             setFailedMessage('Unable to log in');
