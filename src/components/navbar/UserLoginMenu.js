@@ -45,21 +45,18 @@ const UserLoginMenu = () => {
 
     //reset settings
     const signOut = () => {
-
         dispatch(logOutUser());
         dispatch(loadUserPreferences(userInfo));
     }
 
     useEffect(() => {
         if (loggedIn) {
-            console.log('Logged in')
             if(dataLoading){
-                console.log('Data is loading')
                 setLoadingMessage('Getting your preferences...');
                 setFailedMessage('Failed to load your preferences');
             } else if(!dataLoading && dataSuccess){
                 setLoginModalOpen(false);
-                // dispatch(loadUserPreferences(userInfo));
+                dispatch(loadUserPreferences(userInfo));
             } else if (!dataLoading && !dataSuccess){
 
             }

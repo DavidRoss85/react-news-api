@@ -36,89 +36,103 @@ const initialState = {
 export const attemptLogin = createAsyncThunk(
     'user/attemptLogin',
     async (userInfo, { dispatch }) => {
-        // try {
-        //     const response = await fetch(
-        //         SERVER_URL + '/login',
-        //         {
-        //             method: 'POST',
-        //             body: JSON.stringify(userInfo),
-        //             headers: { 'Content-Type': 'application/json' }
-        //         }
-        //     );
-        //     if (!response.ok) {
-        //         console.log('Bad response attempting Login')
-        //         return Promise.reject('Login Failed');
-        //     }
-        //     const data = await response.json();
-        //     dispatch(fetchUserSettings(data.username));
-        //     return data
-        // } catch (e) {
-        //     console.log('An Error Occured:', e)
-        //     return Promise.reject('No user found');
-        // }
-        const sleep = async (ms) => {
-            return new Promise((resolve) => { setTimeout(resolve, ms) })
+        try {
+            const response = await fetch(
+                SERVER_URL + '/login',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(userInfo),
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+            if (!response.ok) {
+                console.log('Bad response attempting Login')
+                return Promise.reject('Login Failed');
+            }
+            const data = await response.json();
+            if (data.validated) {
+                dispatch(fetchUserSettings(data));
+                return data;
+            } else {
+                return Promise.reject('Login Failed');
+            }
+        } catch (e) {
+            console.log('An Error Occured:', e);
+            return Promise.reject('No user found');
         }
-        await sleep(2000);
-        // return new Promise.reject('Login failed')
-        dispatch(fetchUserSettings({ username: 'user' }));
-        return { username: 'user' }
+        // const sleep = async (ms) => {
+        //     return new Promise((resolve) => { setTimeout(resolve, ms) })
+        // }
+        // await sleep(2000);
+        // // return new Promise.reject('Login failed')
+        // dispatch(fetchUserSettings({ username: 'user' }));
+        // return { username: 'user' }
     }
 )
 export const fetchUserSettings = createAsyncThunk(
     'user/fetchUserSettings',
     async (userInfo) => {
-        // try {
-        //     const response = await fetch(
-        //         SERVER_URL + '/user',
-        //         {
-        //             method: 'POST',
-        //             body: JSON.stringify(userInfo),
-        //             headers: { 'Content-Type': 'application/json' }
-        //         }
-        //     );
-        //     if (!response.ok) {
-        //         return Promise.reject('Failed to get user preferences');
-        //     }
-        //     const data = await response.json();
-        //     return data
-
-        // } catch (e) {
-        //     console.log('Error fetching user preferences: ')
-        //     return Promise.reject('Failed to get user preferences');
-        // }
-        const sleep = async (ms) => {
-            return new Promise((resolve) => { setTimeout(resolve, ms) })
+        const dataToSend = {
+            request:'GET-SETTINGS',
+            data: {...userInfo}
         }
-        await sleep(2000);
-        // return new Promise.reject('Failed to get preferences')
-        return {
-            data: {
-                username: 'THIS USER',
-                avatar: '',
-                preferences: {
-                    region: userPref.region,
-                    homepage: userPref.homepage
+        try {
+            const response = await fetch(
+                SERVER_URL + '/user',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(dataToSend),
+                    headers: { 'Content-Type': 'application/json' }
                 }
+            );
+            if (!response.ok) {
+                return Promise.reject('Failed to get user preferences');
             }
+            const data = await response.json();
+            return data
+
+        } catch (e) {
+            console.log('Error fetching user preferences: ')
+            return Promise.reject('Failed to get user preferences');
         }
+        // const sleep = async (ms) => {
+        //     return new Promise((resolve) => { setTimeout(resolve, ms) })
+        // }
+        // await sleep(2000);
+        // // return new Promise.reject('Failed to get preferences')
+        // return {
+        //     data: {
+        //         username: 'THIS USER',
+        //         avatar: '',
+        //         preferences: {
+        //             region: userPref.region,
+        //             homepage: userPref.homepage
+        //         }
+        //     }
+        // }
     }
 )
 export const postUserSettings = createAsyncThunk(
     'user/postUserSettings',
     async (settings, { dispatch }) => {
-        const userName = settings.username.toLowerCase()
+        // console.log('Updating user settings: ',settings)
+        const userName = settings.username.toLowerCase();
+        const dataToSend = {
+            request: 'UPDATE-SETTINGS',
+            data: {...settings}
+        }
+
         const response = await fetch(
-            TEMP_LOGIN_URL + userName,
+            SERVER_URL + '/user',
             {
-                //GET, PUT, POST, DELETE
-                method: 'PUT', //will replace
-                body: JSON.stringify(settings),
+                method: 'PUT',
+                body: JSON.stringify(dataToSend),
                 headers: { 'Content-Type': 'application/json' }
             }
         )
         if (!response.ok) return Promise.reject(response.status);
         const data = await response.json();
+        // console.log('Update received: ', data)
         dispatch(loadUserPreferences({ data }));
     }
 )
@@ -131,11 +145,12 @@ const userSlice = createSlice({
     reducers: {
         updateIsSaved: (state, action) => {
             state.saveState.isSaved = action.payload;
-            state.success = action.payload;
+            state.saveState.success = action.payload;
         },
         logOutUser: (state, action) => {
             state.data = initialState.data
             state.userState = initialState.userState
+            state.dataState = initialState.dataState
         }
     },
     extraReducers: (builder) => {
@@ -149,7 +164,7 @@ const userSlice = createSlice({
                 state.userState.userLoading = false;
                 state.userState.success = true;
                 state.data.username = action.payload.username
-                console.log('The user is: ', action.payload.username)
+                // console.log('The user is: ', action.payload.username)
             })
             .addCase(attemptLogin.rejected, (state, action) => {
                 state.userState.loggedIn = false;
@@ -167,15 +182,15 @@ const userSlice = createSlice({
                 state.dataState.isLoading = false;
                 state.dataState.success = true;
                 state.dataState.errMsg = '';
-                state.data = action.payload.data
-                console.log('User data loaded: ', action.payload.data)
+                state.data = action.payload
+                // console.log('User data loaded: ', action.payload)
             })
             .addCase(fetchUserSettings.rejected, (state, action) => {
                 state.dataState.isLoading = false;
                 state.dataState.success = false;
-                state.errMsg = action.error ? action.error.message : 'Failed to get user data';
+                state.dataState.errMsg = action.error ? action.error.message : 'Failed to get user data';
                 state.data.preferences = userPref;
-                console.log('Fetch data rejected')
+                // console.log('Fetch data rejected')
             })
             //POST User Settings
             .addCase(postUserSettings.pending, (state, action) => {
