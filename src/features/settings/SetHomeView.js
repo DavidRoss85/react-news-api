@@ -47,7 +47,8 @@ const SetHomeView = ({ backFunc }) => {
         const settingsArray = flattenedArray.map((item, idx) => {
             const newItem = { ...item, id: idx }
             return { ...newItem };
-        })
+        });
+        
         const settingsObj = {
             username: userSettings.username || 'defaultUser',
             avatar: '',

@@ -18,7 +18,6 @@ const settingsSlice = createSlice({
     initialState,
     reducers: {
         changeRegion: (state, action) => {
-            console.log('Change region: ', action.payload)
             state.data.current.region = action.payload;
             state.data.preferences.homepage.map((page, idx) => {
                 if(!page.search) return page

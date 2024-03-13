@@ -36,12 +36,16 @@ const initialState = {
 export const attemptLogin = createAsyncThunk(
     'user/attemptLogin',
     async (userInfo, { dispatch }) => {
+        const request = {
+            request: 'LOGIN',
+            data:{...userInfo},
+        }
         try {
             const response = await fetch(
                 SERVER_URL + '/login',
                 {
                     method: 'POST',
-                    body: JSON.stringify(userInfo),
+                    body: JSON.stringify(request),
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
@@ -55,10 +59,12 @@ export const attemptLogin = createAsyncThunk(
                 return data;
             } else {
                 return Promise.reject('Login Failed');
-            }
+            };
+
         } catch (e) {
             console.log('An Error Occured:', e);
             return Promise.reject('No user found');
+
         }
         // const sleep = async (ms) => {
         //     return new Promise((resolve) => { setTimeout(resolve, ms) })
@@ -72,7 +78,7 @@ export const attemptLogin = createAsyncThunk(
 export const fetchUserSettings = createAsyncThunk(
     'user/fetchUserSettings',
     async (userInfo) => {
-        const dataToSend = {
+        const request = {
             request:'GET-SETTINGS',
             data: {...userInfo}
         }
@@ -81,7 +87,7 @@ export const fetchUserSettings = createAsyncThunk(
                 SERVER_URL + '/user',
                 {
                     method: 'POST',
-                    body: JSON.stringify(dataToSend),
+                    body: JSON.stringify(request),
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
@@ -115,9 +121,8 @@ export const fetchUserSettings = createAsyncThunk(
 export const postUserSettings = createAsyncThunk(
     'user/postUserSettings',
     async (settings, { dispatch }) => {
-        // console.log('Updating user settings: ',settings)
         const userName = settings.username.toLowerCase();
-        const dataToSend = {
+        const request = {
             request: 'UPDATE-SETTINGS',
             data: {...settings}
         }
@@ -126,14 +131,13 @@ export const postUserSettings = createAsyncThunk(
             SERVER_URL + '/user',
             {
                 method: 'PUT',
-                body: JSON.stringify(dataToSend),
+                body: JSON.stringify(request),
                 headers: { 'Content-Type': 'application/json' }
             }
         )
         if (!response.ok) return Promise.reject(response.status);
         const data = await response.json();
-        // console.log('Update received: ', data)
-        dispatch(loadUserPreferences({ data }));
+        dispatch(loadUserPreferences( data ));
     }
 )
 
@@ -182,8 +186,8 @@ const userSlice = createSlice({
                 state.dataState.isLoading = false;
                 state.dataState.success = true;
                 state.dataState.errMsg = '';
-                state.data = action.payload
-                // console.log('User data loaded: ', action.payload)
+                state.data = action.payload.data
+                // console.log('User data received: ', action.payload.data)
             })
             .addCase(fetchUserSettings.rejected, (state, action) => {
                 state.dataState.isLoading = false;

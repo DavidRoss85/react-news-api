@@ -134,6 +134,7 @@ export const SORT_BY = ["", "relevancy", "popularity", "publishedAt",];
 //         },
 //     ]
 // }
+
 export const userPref = {
     region: 'all',
     homepage: [
@@ -255,3 +256,29 @@ export const userPref = {
 }
 
 
+export const INITIAL_PREF = {
+    data: {
+        username: '',
+        avatar: '',
+        preferences: {
+            region: userPref.region,
+            homepage: userPref.homepage
+        }
+    },
+    userState: {
+        loggedIn: false,
+        userLoading: false,
+        success: false
+    },
+    dataState: {
+        isLoading: false,
+        success: false,
+        errMsg: ''
+    },
+    saveState: {
+        isSaved: true,
+        isSaving: false,
+        success: false,
+        status: ''
+    },
+}

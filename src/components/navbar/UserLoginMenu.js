@@ -11,12 +11,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { attemptLogin, fetchUserSettings, logOutUser } from "../../app/selectors/userSlice";
 import { loadUserPreferences } from "../../app/selectors/settingsSlice";
 import LoginModal from "./LoginModal";
+import { INITIAL_PREF } from "../../app/shared/DEFAULTS";
 
 const UserLoginMenu = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
-    const [isLoading, setIsLoading ] = useState(false);
-    const [success, setSuccess ] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [loadingMessage, setLoadingMessage] = useState('Logging in...');
     const [failedMessage, setFailedMessage] = useState('Failed to log in');
 
@@ -28,7 +29,7 @@ const UserLoginMenu = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { loggedIn, userLoading, success:userSuccess } = userState;
+    const { loggedIn, userLoading, success: userSuccess } = userState;
     const { isLoading: dataLoading, success: dataSuccess, errMsg: dataErr } = userDataState;
 
     const toggleMenu = (event) => {
@@ -46,28 +47,28 @@ const UserLoginMenu = () => {
     //reset settings
     const signOut = () => {
         dispatch(logOutUser());
-        dispatch(loadUserPreferences(userInfo));
+        dispatch(loadUserPreferences(INITIAL_PREF)); //Investigate this later
     }
 
     useEffect(() => {
         if (loggedIn) {
-            if(dataLoading){
+            if (dataLoading) {
                 setLoadingMessage('Getting your preferences...');
                 setFailedMessage('Failed to load your preferences');
-            } else if(!dataLoading && dataSuccess){
+            } else if (!dataLoading && dataSuccess) {
                 setLoginModalOpen(false);
                 dispatch(loadUserPreferences(userInfo));
-            } 
-        }else {
+            }
+        } else {
             setLoadingMessage('Logging in...');
             setFailedMessage('Unable to log in');
-    }
+        }
     }, [loggedIn, dataLoading, dataSuccess, dataErr]);
 
     useEffect(() => {
-       dataLoading || userLoading ? setIsLoading(true) : setIsLoading(false);
-       dataSuccess && userSuccess ? setSuccess(true) : setSuccess(false);
-    }, [dataLoading,userLoading,userSuccess,dataSuccess])
+        dataLoading || userLoading ? setIsLoading(true) : setIsLoading(false);
+        dataSuccess && userSuccess ? setSuccess(true) : setSuccess(false);
+    }, [dataLoading, userLoading, userSuccess, dataSuccess])
 
 
     return (
