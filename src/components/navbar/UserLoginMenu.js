@@ -22,9 +22,10 @@ const UserLoginMenu = () => {
     const [failedMessage, setFailedMessage] = useState('Failed to log in');
 
 
-    const currentUserName = useSelector((state) => state.user.data.username);
-    const userInfo = useSelector((state) => state.user);
-    const userState = useSelector((state) => state.user.userState);
+    const currentUserName = useSelector(state => state.user.data.username);
+    const userInfo = useSelector(state => state.user);
+    const errMsg = useSelector(state=> state.user.dataState.errMsg)
+    const userState = useSelector(state => state.user.userState);
     const userDataState = useSelector(state => state.user.dataState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -54,16 +55,17 @@ const UserLoginMenu = () => {
         if (loggedIn) {
             if (dataLoading) {
                 setLoadingMessage('Getting your preferences...');
-                setFailedMessage('Failed to load your preferences');
             } else if (!dataLoading && dataSuccess) {
                 setLoginModalOpen(false);
                 dispatch(loadUserPreferences(userInfo));
+            } else if (!dataLoading && !dataSuccess){
+                setFailedMessage(errMsg);
             }
         } else {
             setLoadingMessage('Logging in...');
-            setFailedMessage('Unable to log in');
+            setFailedMessage(errMsg);
         }
-    }, [loggedIn, dataLoading, dataSuccess, dataErr]);
+    }, [loggedIn, dataLoading, dataSuccess, dataErr, errMsg]);
 
     useEffect(() => {
         dataLoading || userLoading ? setIsLoading(true) : setIsLoading(false);

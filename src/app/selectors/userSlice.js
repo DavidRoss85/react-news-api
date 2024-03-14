@@ -50,8 +50,9 @@ export const attemptLogin = createAsyncThunk(
                 }
             );
             if (!response.ok) {
-                console.log('Bad response attempting Login')
-                return Promise.reject('Login Failed');
+                const data = await response.json();
+                console.log('Bad response attempting Login: ', data.server)
+                return Promise.reject(data.server.message);
             }
             const data = await response.json();
             if (data.validated) {
@@ -92,7 +93,9 @@ export const fetchUserSettings = createAsyncThunk(
                 }
             );
             if (!response.ok) {
-                return Promise.reject('Failed to get user preferences');
+                const data = await response.json();
+                console.log('Bad response getting Preferences: ', data.server)
+                return Promise.reject(data.server.message ||'Failed to get user preferences');
             }
             const data = await response.json();
             return data
@@ -168,19 +171,20 @@ const userSlice = createSlice({
                 state.userState.userLoading = false;
                 state.userState.success = true;
                 state.data.username = action.payload.username
+                state.dataState.errMsg = 'Not Logged in...'
                 // console.log('The user is: ', action.payload.username)
             })
             .addCase(attemptLogin.rejected, (state, action) => {
                 state.userState.loggedIn = false;
                 state.userState.userLoading = false;
                 state.userState.success = false
-                state.errMsg = action.error ? action.error.message : 'Login attempt failed'
+                state.dataState.errMsg = action.error ? action.error.message : 'Login attempt failed'
             })
             //Fetch User Settings:
             .addCase(fetchUserSettings.pending, (state) => {
                 state.dataState.isLoading = true;
                 state.dataState.success= false;
-                state.dataState.errMsg = '';
+                state.dataState.errMsg = 'User preferences not loaded';
             })
             .addCase(fetchUserSettings.fulfilled, (state, action) => {
                 state.dataState.isLoading = false;
@@ -192,7 +196,7 @@ const userSlice = createSlice({
             .addCase(fetchUserSettings.rejected, (state, action) => {
                 state.dataState.isLoading = false;
                 state.dataState.success = false;
-                state.dataState.errMsg = action.error ? action.error.message : 'Failed to get user data';
+                state.dataState.errMsg = action.error ? action.error.message : 'Your preferences could not be loaded at this time';
                 state.data.preferences = userPref;
                 // console.log('Fetch data rejected')
             })

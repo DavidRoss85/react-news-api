@@ -57,7 +57,7 @@ const LoginModal = (props) => {
 
     return (
         <Modal isOpen={loginModalOpen}>
-            <ModalHeader toggle={() => setLoginModalOpen(false)}>
+            <ModalHeader toggle={() => {setTryingToLogIn(false); setLoginModalOpen(false)}}>
                 Login
             </ModalHeader>
             <ModalBody>
