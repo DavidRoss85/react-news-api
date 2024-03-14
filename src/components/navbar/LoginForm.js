@@ -4,7 +4,7 @@ import {
     Button
 } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { validateUserLoginForm } from "../../utils/validateUserLoginForm";
+import { validateUserLoginForm } from "../../utils/validateFormData";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
