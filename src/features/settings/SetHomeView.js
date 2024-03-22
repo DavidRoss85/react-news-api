@@ -10,6 +10,7 @@ const SetHomeView = ({ backFunc }) => {
     const [newsRows, setNewsRows] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
     const userSettings = useSelector(state => state.settings.data);
+    const accessToken = useSelector(state => state.user.session.accessToken);
     const [currentSettings, setCurrentSettings] = useState(userSettings);
     const { homepage: homePageSettings } = currentSettings.current;
 
@@ -48,9 +49,8 @@ const SetHomeView = ({ backFunc }) => {
             const newItem = { ...item, id: idx }
             return { ...newItem };
         });
-        
         const settingsObj = {
-            username: userSettings.username || 'defaultUser',
+            accessToken,
             avatar: '',
             preferences: {
                 region: '',
@@ -66,7 +66,7 @@ const SetHomeView = ({ backFunc }) => {
         });
         // dispatch(updateIsSaved(false));
     }
-    
+
     const addFeedRow = () => {
         setNewsRows(newsRows => {
             newsRows.push([]);

@@ -7,8 +7,12 @@ import { SERVER_URL } from "../shared/DEFAULTS";
 const TEMP_LOGIN_URL = 'http://localhost:3002/'
 
 const initialState = {
+    session: {
+        accessToken: null,
+    },
     data: {
         username: '',
+        displayname: '',
         avatar: '',
         preferences: {
             region: userPref.region,
@@ -38,11 +42,11 @@ export const attemptLogin = createAsyncThunk(
     async (userInfo, { dispatch }) => {
         const request = {
             request: 'LOGIN',
-            data:{...userInfo},
+            ...userInfo,
         }
         try {
             const response = await fetch(
-                SERVER_URL + '/login',
+                SERVER_URL + '/users/login',
                 {
                     method: 'POST',
                     body: JSON.stringify(request),
@@ -51,11 +55,13 @@ export const attemptLogin = createAsyncThunk(
             );
             if (!response.ok) {
                 const data = await response.json();
-                console.log('Bad response attempting Login: ', data.server)
-                return Promise.reject(data.server.message);
+                console.log('Bad response attempting Login: ')
+                return Promise.reject(data.message);
             }
             const data = await response.json();
-            if (data.validated) {
+        
+            if (data.validated === true) {
+                //store the token securely (research)
                 dispatch(fetchUserSettings(data));
                 return data;
             } else {
@@ -79,23 +85,27 @@ export const attemptLogin = createAsyncThunk(
 export const fetchUserSettings = createAsyncThunk(
     'user/fetchUserSettings',
     async (userInfo) => {
+        const {accessToken} = userInfo;
         const request = {
-            request:'GET-SETTINGS',
-            data: {...userInfo}
+            request: 'GET-SETTINGS',
+            data: { ...userInfo }
         }
         try {
             const response = await fetch(
-                SERVER_URL + '/user',
+                SERVER_URL + '/users/settings',
                 {
-                    method: 'POST',
-                    body: JSON.stringify(request),
-                    headers: { 'Content-Type': 'application/json' }
+                    method: 'GET',
+                    // body: JSON.stringify(request),
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${accessToken}` 
+                    }
                 }
             );
             if (!response.ok) {
                 const data = await response.json();
-                console.log('Bad response getting Preferences: ', data.server)
-                return Promise.reject(data.server.message ||'Failed to get user preferences');
+                console.log('Bad response getting Preferences: ', data.message)
+                return Promise.reject(data.message || 'Failed to get user preferences');
             }
             const data = await response.json();
             return data
@@ -124,23 +134,26 @@ export const fetchUserSettings = createAsyncThunk(
 export const postUserSettings = createAsyncThunk(
     'user/postUserSettings',
     async (settings, { dispatch }) => {
-        const userName = settings.username.toLowerCase();
+        const {accessToken, ...rest } = settings;
         const request = {
             request: 'UPDATE-SETTINGS',
-            data: {...settings}
+            data: { ...rest }
         }
 
         const response = await fetch(
-            SERVER_URL + '/user',
+            SERVER_URL + '/users/settings',
             {
                 method: 'PUT',
                 body: JSON.stringify(request),
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}` 
+                }
             }
         )
         if (!response.ok) return Promise.reject(response.status);
         const data = await response.json();
-        dispatch(loadUserPreferences( data ));
+        dispatch(loadUserPreferences(data));
     }
 )
 
@@ -170,8 +183,10 @@ const userSlice = createSlice({
                 state.userState.loggedIn = true;
                 state.userState.userLoading = false;
                 state.userState.success = true;
-                state.data.username = action.payload.username
+                state.data.username = action.payload.username;
+                state.data.displayname = action.payload.displayname;
                 state.dataState.errMsg = 'Not Logged in...'
+                state.session.accessToken = action.payload.accessToken;
                 // console.log('The user is: ', action.payload.username)
             })
             .addCase(attemptLogin.rejected, (state, action) => {
@@ -183,14 +198,14 @@ const userSlice = createSlice({
             //Fetch User Settings:
             .addCase(fetchUserSettings.pending, (state) => {
                 state.dataState.isLoading = true;
-                state.dataState.success= false;
+                state.dataState.success = false;
                 state.dataState.errMsg = 'User preferences not loaded';
             })
             .addCase(fetchUserSettings.fulfilled, (state, action) => {
                 state.dataState.isLoading = false;
                 state.dataState.success = true;
                 state.dataState.errMsg = '';
-                state.data = action.payload.data
+                state.data = { ...state.data, ...action.payload.data };
                 // console.log('User data received: ', action.payload.data)
             })
             .addCase(fetchUserSettings.rejected, (state, action) => {

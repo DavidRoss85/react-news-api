@@ -48,6 +48,7 @@ const UserLoginMenu = () => {
     //reset settings
     const signOut = () => {
         dispatch(logOutUser());
+        navigate('/');
         dispatch(loadUserPreferences(INITIAL_PREF)); //Investigate this later
     }
 

@@ -4,6 +4,7 @@ import { userPref } from "../shared/DEFAULTS";
 const initialState = {
     data: {
         username: '',
+        displayname: '',
         avatar: '',
         current: {
             region: userPref.region,
@@ -11,7 +12,7 @@ const initialState = {
         }
     },
     isLoaded: false
-}
+};
 
 const settingsSlice = createSlice({
     name: 'settings',

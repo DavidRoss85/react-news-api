@@ -257,8 +257,12 @@ export const userPref = {
 
 
 export const INITIAL_PREF = {
+    session: {
+        accessToken: null,
+    },
     data: {
         username: '',
+        displayname: '',
         avatar: '',
         preferences: {
             region: userPref.region,
