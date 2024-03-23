@@ -13,12 +13,6 @@ const Navmenu = ({ homeClick = false }) => {
         setMenuOpen(false);
     }, [homeClick]);
     
-    //For testing:
-    // const testVar=useSelector(state=>state.cache)
-    // const testThis=()=>{
-    //     console.log(testVar)
-    // }
-
     return (
         <Navbar dark sticky="top" expand="md" className="navbar-light bg-black text-end" >
             <NavbarBrand className="logo" href="/">

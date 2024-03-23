@@ -183,13 +183,8 @@ const SearchCriteriaForm = (props) => {
         if (event.target.id === 'endpoint') {
             setlocalEndpoint(event.target.value);
         }
-        console.log('form change')
     }
 
-    function testFunc(v){
-        console.log('test func: ')
-    }
-    
     return (
         <Formik
             onSubmit={handleSubmit}
@@ -214,7 +209,6 @@ const SearchCriteriaForm = (props) => {
                         name='endpoint'
                         as='select'
                         className='form-control'
-                    // onChange={(e)=>{console.log(e);}}
                     >
                         {ENDPOINTS.map((item, idx) => {
                             return (

@@ -53,14 +53,14 @@ export const fetchBreakingNews = createAsyncThunk(
                 results: newsData,
                 timeStamp: Date.now()
             }
-            console.log('\n***\nFetch from server ', newsData.status)
+            console.log('\n***\nGetting news from server. Status:', newsData.status)
             if (newsData.status !== 'error') {
                 dispatch(addToCache({ cache: { ...dataToCache }, ...cachedItems }))
                 dispatch(saveLocalCache({ dataToCache }))
             }
             return { id, newsData };
         } else {
-            console.log('Load Cache')
+            console.log('Loading results from local Cache')
 
             return { id, ...cachedItems };
         }
@@ -84,14 +84,14 @@ export const fetchSearchResults = createAsyncThunk(
                 results: newsData,
                 timeStamp: Date.now()
             }
-            console.log('\n***\nFetch from server ', newsData.status)
+            console.log('\n***\nGetting news from server ', newsData.status)
             if (newsData.status !== 'error') {
                 dispatch(addToCache({ cache: { ...dataToCache }, ...cachedItems }))
                 dispatch(saveLocalCache({ dataToCache }))
             }
             return { id, newsData, criteria: searchCriteria };
         } else {
-            console.log('Load Cache')
+            console.log('Getting news from local cache')
 
             return { id, criteria: searchCriteria, ...cachedItems };
         }

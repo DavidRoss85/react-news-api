@@ -52,7 +52,7 @@ const cacheSlice = createSlice({
             if (expired) {
                 state.history[expired] = cache.criteria;
                 state.data[expired] = cache;
-                console.log('expired')
+                console.log('Updating expired entry')
             } else {
                 state.history.push(cache.criteria);
                 state.data.push(cache);
@@ -77,7 +77,7 @@ const cacheSlice = createSlice({
                     state.history.push(parsedData.criteria)
                     state.data.push(parsedData)
                 };
-                console.log('\n***\nPrevious search data loaded from local storage.','Total: ', localStorage.length, ' entries.\n***')
+                console.log('\n***\nCache loaded from local storage:', localStorage.length, 'entries.\n***')
                 // console.log('Data: ', localStorage.key(i))
             }
             state.didInitialize=true;
@@ -99,9 +99,10 @@ export const { addToCache, emptyCache, saveLocalCache, loadLocalCache } = cacheS
 export const checkCache = (searchCriteria) => (state) => {
     const result = state.cache.searches.find((item) => item.criteria === searchCriteria)
     if (result) {
-        console.log('Cache found. No search performed.');
-        console.log('New search: ', searchCriteria);
-        console.log('Cached search: ', result)
+        //No longer used
+        // console.log('Cache found. No search performed.');
+        // console.log('New search: ', searchCriteria);
+        // console.log('Cached search: ', result)
         return true;
     }
 }

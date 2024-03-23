@@ -67,7 +67,7 @@ export const attemptLogin = createAsyncThunk(
             );
             if (!response.ok) {
                 const data = await response.json();
-                console.log('Bad response attempting Login: ')
+                // console.log('Bad response attempting Login: ')
                 return Promise.reject(data.message);
             };
 
@@ -104,16 +104,13 @@ export const postSignup = createAsyncThunk(
             // console.log('Server response:',await response.json());
             if (!response.ok) {
                 const data = await response.json();
-                console.log('RESPONSE IS NOT OK', data)
                 return Promise.reject(data.message);
             }
             const data = await response.json();
-            console.log('RESPONSE IS OK!', data)
             return data;
 
         }catch(e){
-            console.log('BIG ERROR:', e)
-            console.log('Error attempting to sign up: ')
+            console.log('Error attempting to sign up: ',e)
             return Promise.reject('Failed to sign up');
         }
     }
@@ -158,8 +155,6 @@ export const postUserSettings = createAsyncThunk(
     'user/postUserSettings',
     async (settings, { dispatch }) => {
         const { accessToken, ...rest } = settings;
-        console.log('SETTINGS: ', settings);
-        console.log('DATA REST', rest);
         const request = {
             request: 'UPDATE-SETTINGS',
             data: {...rest}
@@ -181,7 +176,7 @@ export const postUserSettings = createAsyncThunk(
             dispatch(loadUserPreferences(data));
 
         }catch(e){
-            console.log('Error saving user preferences: ')
+            console.log('Error saving user preferences: ',e)
             return Promise.reject('Failed to save user preferences');
 
         }
@@ -303,7 +298,6 @@ const userSlice = createSlice({
 
             })
             .addCase(postUserSettings.fulfilled, (state, action) => {
-                console.log('Save user preferences success')
                 state.saveState.isSaving = false;
                 state.saveState.success = true;
                 state.saveState.isSaved = true;
