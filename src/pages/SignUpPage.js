@@ -2,7 +2,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserSession } from "../app/selectors/userSlice";
+import { getUserSession, resetSignUpVariables } from "../app/selectors/userSlice";
 import SignUpView from "../features/signup/SignUpView";
 
 const SignUpPage = () => {
@@ -20,6 +20,7 @@ const SignUpPage = () => {
     }, []);
 
     useEffect(() => {
+        console.log('SignUp page Logged in?', loggedIn)
         if (!loggedIn) {
             setRenderMenu(
                 <>
@@ -31,7 +32,10 @@ const SignUpPage = () => {
                     <Row className="m-3">
                         <Col>
                             <Button
-                                onClick={() => { setCurrentWindow('signUp') }}
+                                onClick={() => {
+                                     setCurrentWindow('signUp');
+                                     dispatch(resetSignUpVariables());
+                                }}
                                 color='warning'
                             >
                                 Create Account
@@ -72,15 +76,20 @@ const SignUpPage = () => {
 
     useEffect(() => {
         if (currentWindow === 'signUp') {
-            setRenderWindow(
-                <SignUpView
-                    backFunc={returnToMenuScreen}
-                />
-            );
+            if(!loggedIn){
+                setRenderWindow(
+                    <SignUpView
+                        backFunc={returnToMenuScreen}
+                    />
+                );
+            }else{
+                setCurrentWindow('menu');
+                navigate('/');
+            }
         } else {
             setRenderWindow(<></>)
         };
-    }, [currentWindow]);
+    }, [currentWindow, loggedIn]);
 
     const returnToMenuScreen = () => {
         setCurrentWindow('menu');

@@ -59,7 +59,7 @@ const FeedCol = (props) => {
 
     const updateBorders = (value) => {
 
-        const newStyle = value ? { border: '2px solid black' } : {}
+        const newStyle = value ? { border: '2px solid black' } : {border:'none'}
         const newParams = {
             ...localParams,
             style: {

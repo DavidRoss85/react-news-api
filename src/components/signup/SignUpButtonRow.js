@@ -8,45 +8,50 @@ const SignUpButtonRow = (props) => {
     const {
         backFunc = () => { },
         handleSubmit = () => { },
-        message = ''
+        message = '',
+        isLoading = false,
+        success = false,
+        result = ''
     } = props;
 
+    const [messageFormat, setMessageFormat] = useState('text-danger');
 
-    const SignUpButton = () => {
-        // if (saveState.isSaving) {
-        //     return (
-        //         <Button
-        //             {...styles.saveButton}
-        //         >
-        //             <FontAwesomeIcon icon="fa-regular fa-floppy-disk" /> Saving...
-        //         </Button>
-        //     )
-        // }
-
-        return (
-            <Button
-                {...styles.signUpButton}
-                onClick={handleSubmit}
-            >
-                <FontAwesomeIcon icon="fa-regular fa-floppy-disk" /> Save Settings
-            </Button>
-        )
-    }
+    useEffect(() => {
+        if (result === 'success') {
+            setMessageFormat('text-success');
+        } else {
+            setMessageFormat('text-danger')
+        }
+    }, [result]);
 
     return (
-        <Row>
-            <Col style={{ padding: '8px', textAlign: 'start' }}>
-                <Button
-                    {...styles.backButton}
-                    onClick={backFunc}
-                >
-                    <FontAwesomeIcon icon="fa-solid fa-arrow-left" /> Back to Menu
-                </Button>
+        <>
+            <Row>
+                <Col style={{ padding: '8px', textAlign: 'start' }}>
+                    <Button
+                        {...styles.backButton}
+                        onClick={backFunc}
+                    >
+                        <FontAwesomeIcon icon="fa-solid fa-arrow-left" /> Back to Menu
+                    </Button>
 
-                <span className='text-danger'>{message}</span>
 
-            </Col>
-        </Row>
+                </Col>
+            </Row>
+            <Row>
+                <Col className='pb-3'>
+                    <span className={messageFormat}>
+                        {message} <br/>
+                        {(result === 'success' ?
+                            ('Please log in to customize your account')
+                            :
+                            '')
+                        }
+                    </span>
+                </Col>
+            </Row>
+        </>
+
     )
 
 };

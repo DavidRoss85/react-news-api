@@ -44,7 +44,8 @@ const initialState = {
     signUp: {
         isLoading: false,
         success: false,
-        errMsg: '',
+        result: '',
+        message: '',
     },
 }
 
@@ -157,9 +158,11 @@ export const postUserSettings = createAsyncThunk(
     'user/postUserSettings',
     async (settings, { dispatch }) => {
         const { accessToken, ...rest } = settings;
+        console.log('SETTINGS: ', settings);
+        console.log('DATA REST', rest);
         const request = {
             request: 'UPDATE-SETTINGS',
-            data: { ...rest }
+            data: {...rest}
         }
         try{
             const response = await fetch(
@@ -247,6 +250,7 @@ const userSlice = createSlice({
         },
         resetSignUpVariables: (state, action) => {
             state.signUp = initialState.signUp;
+            state.userExists = initialState.userExists;
         },
     },
     extraReducers: (builder) => {
@@ -316,19 +320,20 @@ const userSlice = createSlice({
             .addCase(postSignup.pending, (state, action) => {
                 state.signUp.isLoading = true;
                 state.signUp.success = false;
-                state.signUp.errMsg = '';
+                state.signUp.message = '';
 
             })
             .addCase(postSignup.fulfilled, (state, action) => {
                 state.signUp.isLoading = false;
                 state.signUp.success = true;
-                state.signUp.errMsg = action.payload.message;
+                state.signUp.result = action.payload.result;
+                state.signUp.message = action.payload.message;
             })
             .addCase(postSignup.rejected, (state, action) => {
                 state.signUp.isLoading = false;
                 state.signUp.success = false;
                 // console.log('Payload',action)
-                state.signUp.errMsg = action.error? action.error.message : 'There was an issue creating your account';
+                state.signUp.message = action.error? action.error.message : 'There was an issue creating your account';
             })
             //Query Username
             .addCase(queryUsername.pending, (state, action) => {
