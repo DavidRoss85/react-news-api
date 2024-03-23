@@ -131,7 +131,7 @@ const SetHomeView = ({ backFunc }) => {
             })
             return [...newsRows];
         })
-    }
+    };
 
     return (
         <>

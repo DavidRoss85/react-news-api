@@ -18,6 +18,7 @@ import { useEffect } from 'react';
 
 import SettingsPage from './pages/SettingsPage';
 import { keepUserSession } from './app/selectors/userSlice';
+import SignUpPage from './pages/SignUpPage';
 
 
 function App() {
@@ -25,13 +26,13 @@ function App() {
   //This lets NavMenu know to collapse when something else is clicked
   const [homeClick, toggleHomeClick] = useState(false);
 
-  const userState = useSelector(state=> state.user);
+  const userState = useSelector(state => state.user);
   const dispatch = useDispatch();
-  
+
   //A listener to persist user data stored in session storage
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(keepUserSession(userState));
-  },[userState]);
+  }, [userState]);
 
   return (
     <div onClick={() => toggleHomeClick(!homeClick)} className='App'>
@@ -44,6 +45,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/settings/' element={<SettingsPage />} />
         <Route path='/search/:searchCriteria' element={<SearchPage />} />
+        <Route path='/signup' element={<SignUpPage />} />
       </Routes>
       <Footer />
     </div>

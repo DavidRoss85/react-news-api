@@ -1,6 +1,7 @@
+const emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
 export const validateUserLoginForm = (values) => {
     const errors = {};
-
     if (!values.username) {
         errors.username = 'Username is required';
     } else if (values.username.length < 3 || values.username.length > 40) {
@@ -25,8 +26,15 @@ export const validateUserAccountForm = (values)=>{
         errors.username = 'Username must be between 3 and 40 characters long';
     };
     //display name
-    if (values.displayName.length < 2 || values.displayName.length > 40) {
-        errors.username = 'Display name must be between 2 and 40 characters long';
+    if (values.displayname.length < 2 || values.displayname.length > 25) {
+        errors.displayname = 'Display name must be between 2 and 25 characters long';
+    };
+    //email
+    if(!values.email) {
+        errors.email = 'Email is required'
+    } 
+    else if (!emailRegEx.test(values.email)) {
+        errors.email = 'Invalid email address';
     };
     //password
     if (!values.password) {

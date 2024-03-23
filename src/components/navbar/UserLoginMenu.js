@@ -22,7 +22,7 @@ const UserLoginMenu = () => {
     const [failedMessage, setFailedMessage] = useState('Failed to log in');
 
 
-    const currentUserName = useSelector(state => state.user.data.username);
+    const currentUserName = useSelector(state => state.user.data.displayname);
     const userInfo = useSelector(state => state.user);
     const errMsg = useSelector(state=> state.user.dataState.errMsg)
     const userState = useSelector(state => state.user.userState);
@@ -108,7 +108,7 @@ const UserLoginMenu = () => {
                             <DropdownItem style={{ color: '#aaa' }} onClick={() => setLoginModalOpen(true)}>
                                 Sign in
                             </DropdownItem>
-                            <DropdownItem style={{ color: '#333' }} disabled>
+                            <DropdownItem style={{ color: '#aaa' }} onClick={() => { navigate(`/signup/`) }}>
                                 Create Account
                             </DropdownItem>
                         </>

@@ -35,6 +35,12 @@ const initialState = {
         success: false,
         status: ''
     },
+    userExists:{
+        isUpdated: false,
+        isLoading: false,
+        success: false,
+        available: false,
+    }
 }
 
 export const attemptLogin = createAsyncThunk(
@@ -135,6 +141,23 @@ export const postUserSettings = createAsyncThunk(
         dispatch(loadUserPreferences(data));
     }
 )
+export const queryUsername = createAsyncThunk(
+    'user/queryUsername',
+    async (username) => {
+        const response = await fetch(
+            SERVER_URL + '/users/queryusername/' + username,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }
+        )
+        if (!response.ok) return Promise.reject(response.status);
+        const data = await response.json();
+        return data;
+    }
+)
 
 
 
@@ -175,6 +198,9 @@ const userSlice = createSlice({
         },
         clearUserSession: (state, action) => {
             sessionStorage.setItem(`userSession`, '')
+        },
+        clearQueryUsername: (state, action)=>{
+            state.userExists = initialState.userExists;
         }
     },
     extraReducers: (builder) => {
@@ -240,11 +266,31 @@ const userSlice = createSlice({
                 state.saveState.isSaved = false;
                 state.saveState.status = 'Save Failed...'
             })
+            //Query Username
+            .addCase(queryUsername.pending, (state, action) => {
+                state.userExists.isUpdated=false;
+                state.userExists.isLoading = true;
+                state.userExists.success = false;
+                state.userExists.available=false;
+
+            })
+            .addCase(queryUsername.fulfilled, (state, action) => {
+                state.userExists.isUpdated=true;
+                state.userExists.isLoading = false;
+                state.userExists.success = true;
+                state.userExists.available=action.payload.result;
+            })
+            .addCase(queryUsername.rejected, (state, action) => {
+                state.userExists.isUpdated=false;
+                state.userExists.isLoading = false;
+                state.userExists.success = false;
+                state.userExists.available=false;
+            })
     }
 })
 
 export const userReducer = userSlice.reducer;
-export const { logOutUser, updateIsSaved, keepUserSession, getUserSession, clearUserSession } = userSlice.actions;
+export const { logOutUser, updateIsSaved, keepUserSession, getUserSession, clearUserSession, clearQueryUsername } = userSlice.actions;
 
 export const getUserInfo = (state) => {
     return state.user

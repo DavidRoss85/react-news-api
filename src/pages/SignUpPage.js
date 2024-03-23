@@ -1,12 +1,10 @@
 import { Container, Row, Col, Button } from "reactstrap";
-import SetHomeView from "../features/settings/SetHomeView"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { emptyCache } from "../app/selectors/cacheSlice";
 import { getUserSession } from "../app/selectors/userSlice";
+import SignUpView from "../features/signup/SignUpView";
 
-const SettingsPage = () => {
+const SignUpPage =()=>{
 
     const [currentWindow, setCurrentWindow] = useState('menu');
     const [renderMenu, setRenderMenu] = useState(<></>);
@@ -19,41 +17,21 @@ const SettingsPage = () => {
     },[]);
 
     useEffect(() => {
-        if (loggedIn) {
+        if (!loggedIn) {
             setRenderMenu(
                 <>
                     <Row>
                         <Col>
-                            <h3>User Settings</h3>
+                            <h3>Create an account here</h3>
                         </Col>
                     </Row>
                     <Row className="m-3">
                         <Col>
                             <Button
-                                onClick={() => { setCurrentWindow('homeSettings') }}
+                                onClick={() => { setCurrentWindow('signUp') }}
                                 color='warning'
                             >
-                                Edit Home Screen Settings
-                            </Button>
-                        </Col>
-                    </Row>
-                    <Row className="m-3">
-                        <Col>
-                            <Button
-                                color='warning'
-                                disabled
-                            >
-                                Account (Coming soon...)
-                            </Button>
-                        </Col>
-                    </Row>
-                    <Row className="m-3">
-                        <Col>
-                            <Button
-                                onClick={clearCache}
-                                color='warning'
-                            >
-                                Clear Cache
+                                Create Account
                             </Button>
                         </Col>
                     </Row>
@@ -65,16 +43,19 @@ const SettingsPage = () => {
                 <>
                     <Row>
                         <Col>
-                            Please log in to access settings Menu
+                            You are already signed in.
+                        </Col>
+                        <Col>
+                            Please log out to create a new account.
                         </Col>
                     </Row>
                     <Row className="m-3">
                         <Col>
                             <Button
-                                onClick={clearCache}
+                                onClick={()=>{}}
                                 color='warning'
                             >
-                                Clear Cache
+                                Should I put a sign out button here?
                             </Button>
                         </Col>
                     </Row>
@@ -85,10 +66,10 @@ const SettingsPage = () => {
     }, [loggedIn]);
 
     useEffect(() => {
-        if (currentWindow === 'homeSettings') {
+        if (currentWindow === 'signUp') {
             setRenderWindow(
-                <SetHomeView
-                    backFunc={returnToSettingsScreen}
+                <SignUpView
+                    backFunc={returnToMenuScreen}
                 />
             );
         } else {
@@ -96,14 +77,9 @@ const SettingsPage = () => {
         };
     }, [currentWindow]);
 
-    const returnToSettingsScreen = () => {
+    const returnToMenuScreen = () => {
         setCurrentWindow('menu');
     };
-
-    const clearCache = () => {
-        dispatch(emptyCache());
-    };
-
 
     return (
         <Container fluid>
@@ -117,7 +93,7 @@ const SettingsPage = () => {
                 </Col>
             </Row>
         </Container>
-    )
-}
+        )
+};
 
-export default SettingsPage;
+export default SignUpPage;

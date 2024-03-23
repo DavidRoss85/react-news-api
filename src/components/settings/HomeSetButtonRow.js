@@ -4,7 +4,7 @@ import { useSpring, animated } from '@react-spring/web';
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-
+//
 const HomeSetButtonRow = (props) => {
 
     const {
@@ -127,22 +127,30 @@ const styles = {
         color: 'primary',
         style: {
             marginLeft: '3px',
-            marginRight: '3px'
-        }
+            marginRight: '3px',
+        },
     },
     deleteButton: {
         color: 'danger',
         style: {
             marginLeft: '3px',
-            marginRight: '3px'
-        }
+            marginRight: '3px',
+        },
     },
     saveButton: {
         color: 'success',
         style: {
             marginLeft: '3px',
-            marginRight: '3px'
-        }
+            marginRight: '3px',
+        },
     },
-}
+    backButton: {
+        color: 'secondary',
+        style: {
+            marginLeft: '3px',
+            marginRight: '3px',
+        },
+    },
+
+};
 export default HomeSetButtonRow;
