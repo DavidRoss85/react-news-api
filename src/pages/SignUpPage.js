@@ -1,20 +1,23 @@
 import { Container, Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getUserSession } from "../app/selectors/userSlice";
 import SignUpView from "../features/signup/SignUpView";
 
-const SignUpPage =()=>{
+const SignUpPage = () => {
 
     const [currentWindow, setCurrentWindow] = useState('menu');
     const [renderMenu, setRenderMenu] = useState(<></>);
     const [renderWindow, setRenderWindow] = useState(<></>);
     const loggedIn = useSelector(state => state.user.userState.loggedIn);
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    useEffect(()=>{
-       dispatch(getUserSession());
-    },[]);
+
+    useEffect(() => {
+        dispatch(getUserSession());
+    }, []);
 
     useEffect(() => {
         if (!loggedIn) {
@@ -45,6 +48,8 @@ const SignUpPage =()=>{
                         <Col>
                             You are already signed in.
                         </Col>
+                    </Row>
+                    <Row>
                         <Col>
                             Please log out to create a new account.
                         </Col>
@@ -52,10 +57,10 @@ const SignUpPage =()=>{
                     <Row className="m-3">
                         <Col>
                             <Button
-                                onClick={()=>{}}
+                                onClick={() => {navigate('/') }}
                                 color='warning'
                             >
-                                Should I put a sign out button here?
+                                Home
                             </Button>
                         </Col>
                     </Row>
@@ -93,7 +98,7 @@ const SignUpPage =()=>{
                 </Col>
             </Row>
         </Container>
-        )
+    )
 };
 
 export default SignUpPage;

@@ -8,6 +8,7 @@ const SignUpButtonRow = (props) => {
     const {
         backFunc = () => { },
         handleSubmit = () => { },
+        message = ''
     } = props;
 
 
@@ -42,7 +43,7 @@ const SignUpButtonRow = (props) => {
                     <FontAwesomeIcon icon="fa-solid fa-arrow-left" /> Back to Menu
                 </Button>
 
-                {/* <SignUpButton /> */}
+                <span className='text-danger'>{message}</span>
 
             </Col>
         </Row>

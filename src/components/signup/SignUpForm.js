@@ -17,10 +17,13 @@ const SignUpForm = (props) => {
 
     const userExistsStatus = useSelector(state => state.user.userExists);
     const { isUpdated, success, available } = userExistsStatus
+    const signUpStatus = useSelector(state=>state.user.signUp);
+    const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [showUserCheck, setShowUserCheck] = useState(false);
     const [showUserX, setShowUserX] = useState(false);
+
 
     const dispatch = useDispatch();
     const checkUserNameAvailability = (nameValue) => {
@@ -28,6 +31,10 @@ const SignUpForm = (props) => {
             dispatch(queryUsername(nameValue));
         }
     };
+
+    useEffect(()=>{
+        setIsLoading(signUpStatus.isLoading);
+    },[signUpStatus.isLoading]);
 
     useEffect(() => {
         if (isUpdated) {
@@ -63,8 +70,9 @@ const SignUpForm = (props) => {
                                 placeholder='Username'
                                 className='form-control'
                                 onBlur={(e) => { props.handleBlur(e); checkUserNameAvailability(e.target.value) }}
-                                onChange={(e)=>{props.handleChange(e); dispatch(clearQueryUsername())}}
+                                onChange={(e) => { props.handleChange(e); dispatch(clearQueryUsername()) }}
                                 autoComplete='off'
+                                disabled={isLoading}
                             />
                             <FontAwesomeIcon icon="fa-solid fa-x"
                                 className='p-2'
@@ -82,12 +90,10 @@ const SignUpForm = (props) => {
                         </div>
                         <ErrorMessage name='username'>
                             {(msg) => {
-                                if (msg) {
-                                    return <p className='text-danger'>{msg}</p>
-                                } else {
-                                    return <p className='text-danger'>{msg}</p>
-                                }
-                                return <p>RARARARA</p>
+                                if (!msg && showUserX) {
+                                    return <p className='text-danger'>{'Username unavailable'}</p>
+                                };
+                                return <p className='text-danger'>{msg}</p>
                             }}
                         </ErrorMessage>
                     </FormGroup>
@@ -100,6 +106,7 @@ const SignUpForm = (props) => {
                             placeholder='Welcome'
                             className='form-control'
                             autoComplete='off'
+                            disabled={isLoading}
                         />
                         <ErrorMessage name='displayname'>
                             {(msg) => <p className='text-danger'>{msg}</p>}
@@ -113,6 +120,7 @@ const SignUpForm = (props) => {
                             name='email'
                             placeholder='1234@email.com'
                             className='form-control'
+                            disabled={isLoading}
                         />
                         <ErrorMessage name='email'>
                             {(msg) => <p className='text-danger'>{msg}</p>}
@@ -130,6 +138,7 @@ const SignUpForm = (props) => {
                                 className='form-control'
                                 style={{ border: 'none' }}
                                 autoComplete='new-password'
+                                disabled={isLoading}
                             />
                             <FontAwesomeIcon
                                 icon={showPassword ? ['far', 'fa-eye'] : ['far', 'fa-eye-slash']}
@@ -154,6 +163,7 @@ const SignUpForm = (props) => {
                                 className='form-control'
                                 style={{ border: 'none' }}
                                 autoComplete='new-password'
+                                disabled={isLoading}
                             />
                             <FontAwesomeIcon
                                 icon={showConfirmPassword ? ['far', 'fa-eye'] : ['far', 'fa-eye-slash']}
@@ -166,9 +176,9 @@ const SignUpForm = (props) => {
                             {(msg) => <p className='text-danger'>{msg}</p>}
                         </ErrorMessage>
                     </FormGroup>
-                    <Button type='submit' color='primary'>Create Account</Button>
+                    <Button type='submit' color='primary' disabled={isLoading}>Create Account</Button>
                     {' '}
-                    <Button onClick={clickCancel} >Cancel</Button>
+                    <Button onClick={clickCancel} disabled={isLoading} >Cancel</Button>
                 </Form>
             }
         </Formik>

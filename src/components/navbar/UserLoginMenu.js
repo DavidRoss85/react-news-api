@@ -60,8 +60,10 @@ const UserLoginMenu = () => {
             } else if (!dataLoading && dataSuccess) {
                 setLoginModalOpen(false);
                 dispatch(loadUserPreferences(userInfo));
+                // navigate('/');
             } else if (!dataLoading && !dataSuccess){
                 setFailedMessage(errMsg);
+                navigate('/');
             }
         } else {
             setLoadingMessage('Logging in...');

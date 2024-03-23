@@ -35,12 +35,17 @@ const initialState = {
         success: false,
         status: ''
     },
-    userExists:{
+    userExists: {
         isUpdated: false,
         isLoading: false,
         success: false,
         available: false,
-    }
+    },
+    signUp: {
+        isLoading: false,
+        success: false,
+        errMsg: '',
+    },
 }
 
 export const attemptLogin = createAsyncThunk(
@@ -80,7 +85,39 @@ export const attemptLogin = createAsyncThunk(
         };
 
     }
+);
+export const postSignup = createAsyncThunk(
+    'user/postSignup',
+    async (userInfo, { dispatch }) => {
+        try{
+            const response = await fetch(
+                SERVER_URL + '/users/signup',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(userInfo),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+            // console.log('Server response:',await response.json());
+            if (!response.ok) {
+                const data = await response.json();
+                console.log('RESPONSE IS NOT OK', data)
+                return Promise.reject(data.message);
+            }
+            const data = await response.json();
+            console.log('RESPONSE IS OK!', data)
+            return data;
+
+        }catch(e){
+            console.log('BIG ERROR:', e)
+            console.log('Error attempting to sign up: ')
+            return Promise.reject('Failed to sign up');
+        }
+    }
 )
+
 export const fetchUserSettings = createAsyncThunk(
     'user/fetchUserSettings',
     async (userInfo, { dispatch }) => {
@@ -124,21 +161,27 @@ export const postUserSettings = createAsyncThunk(
             request: 'UPDATE-SETTINGS',
             data: { ...rest }
         }
-
-        const response = await fetch(
-            SERVER_URL + '/users/settings',
-            {
-                method: 'PUT',
-                body: JSON.stringify(request),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+        try{
+            const response = await fetch(
+                SERVER_URL + '/users/settings',
+                {
+                    method: 'PUT',
+                    body: JSON.stringify(request),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${accessToken}`
+                    }
                 }
-            }
-        )
-        if (!response.ok) return Promise.reject(response.status);
-        const data = await response.json();
-        dispatch(loadUserPreferences(data));
+            )
+            if (!response.ok) return Promise.reject(response.status);
+            const data = await response.json();
+            dispatch(loadUserPreferences(data));
+
+        }catch(e){
+            console.log('Error saving user preferences: ')
+            return Promise.reject('Failed to save user preferences');
+
+        }
     }
 )
 export const queryUsername = createAsyncThunk(
@@ -199,9 +242,12 @@ const userSlice = createSlice({
         clearUserSession: (state, action) => {
             sessionStorage.setItem(`userSession`, '')
         },
-        clearQueryUsername: (state, action)=>{
+        clearQueryUsername: (state, action) => {
             state.userExists = initialState.userExists;
-        }
+        },
+        resetSignUpVariables: (state, action) => {
+            state.signUp = initialState.signUp;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -266,31 +312,57 @@ const userSlice = createSlice({
                 state.saveState.isSaved = false;
                 state.saveState.status = 'Save Failed...'
             })
+            //POST Signup
+            .addCase(postSignup.pending, (state, action) => {
+                state.signUp.isLoading = true;
+                state.signUp.success = false;
+                state.signUp.errMsg = '';
+
+            })
+            .addCase(postSignup.fulfilled, (state, action) => {
+                state.signUp.isLoading = false;
+                state.signUp.success = true;
+                state.signUp.errMsg = action.payload.message;
+            })
+            .addCase(postSignup.rejected, (state, action) => {
+                state.signUp.isLoading = false;
+                state.signUp.success = false;
+                // console.log('Payload',action)
+                state.signUp.errMsg = action.error? action.error.message : 'There was an issue creating your account';
+            })
             //Query Username
             .addCase(queryUsername.pending, (state, action) => {
-                state.userExists.isUpdated=false;
+                state.userExists.isUpdated = false;
                 state.userExists.isLoading = true;
                 state.userExists.success = false;
-                state.userExists.available=false;
+                state.userExists.available = false;
 
             })
             .addCase(queryUsername.fulfilled, (state, action) => {
-                state.userExists.isUpdated=true;
+                state.userExists.isUpdated = true;
                 state.userExists.isLoading = false;
                 state.userExists.success = true;
-                state.userExists.available=action.payload.result;
+                state.userExists.available = action.payload.result;
             })
             .addCase(queryUsername.rejected, (state, action) => {
-                state.userExists.isUpdated=false;
+                state.userExists.isUpdated = false;
                 state.userExists.isLoading = false;
                 state.userExists.success = false;
-                state.userExists.available=false;
+                state.userExists.available = false;
             })
     }
 })
 
 export const userReducer = userSlice.reducer;
-export const { logOutUser, updateIsSaved, keepUserSession, getUserSession, clearUserSession, clearQueryUsername } = userSlice.actions;
+export const {
+    logOutUser,
+    updateIsSaved,
+    keepUserSession,
+    getUserSession,
+    clearUserSession,
+    clearQueryUsername,
+    resetSignUpVariables,
+} = userSlice.actions;
 
 export const getUserInfo = (state) => {
     return state.user
