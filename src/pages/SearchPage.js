@@ -8,6 +8,9 @@ import PageNumbers from "../components/search/PageNumbers"
 import { formatArticle } from "../utils/formatArticle";
 import { Loading, Failed } from "../components/misc/ComponentStatuses";
 import SearchBar from "../components/search/SearchBar";
+import { getUserSession } from "../app/selectors/userSlice";
+import { loadUserPreferences } from "../app/selectors/settingsSlice";
+
 
 const SearchPage = () => {
     const { searchCriteria } = useParams();
@@ -15,15 +18,18 @@ const SearchPage = () => {
     const oldSearchCriteria = useSelector((state) => state.news.searchResults[0].criteria);
     const searchResults = useSelector((state) => state.news.searchResults[0].news);
     const isLoading = useSelector((state) => state.news.searchResults[0].isLoading);
-    const searchCache = useSelector((state) => state.cache)
+    const searchCache = useSelector((state) => state.cache);
+    const userSettings = useSelector(state=>state.user);
     const [success, setSuccess] = useState(false);
     const [numPages, setNumPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const { status } = searchResults;
 
     const dispatch = useDispatch();
-
-    
+    useEffect(()=>{
+        dispatch(getUserSession());
+     },[]);
+     
     const triggerReload = () => {
         dispatch(reloadNews({ id: 0, feed: 'searchResults' }));
         dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria, searchCache }));

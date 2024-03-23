@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import NewsTile from "../components/news/NewsTile";
 import { loadLocalCache } from "../app/selectors/cacheSlice";
+import { getUserSession } from "../app/selectors/userSlice";
 
 const HomePage = () => {
     const appSettings = useSelector((state) => state.settings)
@@ -11,6 +12,7 @@ const HomePage = () => {
     const dispatch = useDispatch();
     
     useEffect(()=>{
+        dispatch(getUserSession());
         dispatch(loadLocalCache());
     },[])
     //figure out how many rows to generate:

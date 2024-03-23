@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { attemptLogin, fetchUserSettings, logOutUser } from "../../app/selectors/userSlice";
+import { attemptLogin, clearUserSession, fetchUserSettings, logOutUser } from "../../app/selectors/userSlice";
 import { loadUserPreferences } from "../../app/selectors/settingsSlice";
 import LoginModal from "./LoginModal";
 import { INITIAL_PREF } from "../../app/shared/DEFAULTS";
@@ -48,8 +48,9 @@ const UserLoginMenu = () => {
     //reset settings
     const signOut = () => {
         dispatch(logOutUser());
-        navigate('/');
+        dispatch(clearUserSession());
         dispatch(loadUserPreferences(INITIAL_PREF)); //Investigate this later
+        navigate('/');
     }
 
     useEffect(() => {

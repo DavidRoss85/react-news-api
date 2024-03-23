@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
 import { loadUserPreferences } from "./settingsSlice";
 import { SERVER_URL } from "../shared/DEFAULTS";
@@ -57,11 +57,10 @@ export const attemptLogin = createAsyncThunk(
                 const data = await response.json();
                 console.log('Bad response attempting Login: ')
                 return Promise.reject(data.message);
-            }
+            };
+
             const data = await response.json();
-        
             if (data.validated === true) {
-                //store the token securely (research)
                 dispatch(fetchUserSettings(data));
                 return data;
             } else {
@@ -72,33 +71,27 @@ export const attemptLogin = createAsyncThunk(
             console.log('An Error Occured:', e);
             return Promise.reject('No user found');
 
-        }
-        // const sleep = async (ms) => {
-        //     return new Promise((resolve) => { setTimeout(resolve, ms) })
-        // }
-        // await sleep(2000);
-        // // return new Promise.reject('Login failed')
-        // dispatch(fetchUserSettings({ username: 'user' }));
-        // return { username: 'user' }
+        };
+
     }
 )
 export const fetchUserSettings = createAsyncThunk(
     'user/fetchUserSettings',
-    async (userInfo) => {
-        const {accessToken} = userInfo;
+    async (userInfo, { dispatch }) => {
+        const { accessToken, username, displayname } = userInfo;
         const request = {
             request: 'GET-SETTINGS',
             data: { ...userInfo }
-        }
+        };
         try {
             const response = await fetch(
                 SERVER_URL + '/users/settings',
                 {
                     method: 'GET',
                     // body: JSON.stringify(request),
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${accessToken}` 
+                        'Authorization': `Bearer ${accessToken}`
                     }
                 }
             );
@@ -106,35 +99,21 @@ export const fetchUserSettings = createAsyncThunk(
                 const data = await response.json();
                 console.log('Bad response getting Preferences: ', data.message)
                 return Promise.reject(data.message || 'Failed to get user preferences');
-            }
+            };
             const data = await response.json();
             return data
 
         } catch (e) {
             console.log('Error fetching user preferences: ')
             return Promise.reject('Failed to get user preferences');
-        }
-        // const sleep = async (ms) => {
-        //     return new Promise((resolve) => { setTimeout(resolve, ms) })
-        // }
-        // await sleep(2000);
-        // // return new Promise.reject('Failed to get preferences')
-        // return {
-        //     data: {
-        //         username: 'THIS USER',
-        //         avatar: '',
-        //         preferences: {
-        //             region: userPref.region,
-        //             homepage: userPref.homepage
-        //         }
-        //     }
-        // }
+        };
+
     }
 )
 export const postUserSettings = createAsyncThunk(
     'user/postUserSettings',
     async (settings, { dispatch }) => {
-        const {accessToken, ...rest } = settings;
+        const { accessToken, ...rest } = settings;
         const request = {
             request: 'UPDATE-SETTINGS',
             data: { ...rest }
@@ -145,9 +124,9 @@ export const postUserSettings = createAsyncThunk(
             {
                 method: 'PUT',
                 body: JSON.stringify(request),
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}` 
+                    'Authorization': `Bearer ${accessToken}`
                 }
             }
         )
@@ -171,6 +150,31 @@ const userSlice = createSlice({
             state.data = initialState.data
             state.userState = initialState.userState
             state.dataState = initialState.dataState
+        },
+        keepUserSession: (state, action) => {
+            const currentState = (current(state));
+            const updatedState = { ...currentState, ...action.payload };
+            const dataToStore = JSON.stringify(updatedState);
+            sessionStorage.setItem(`userSession`, dataToStore);
+            // console.log('store session: ',dataToStore)
+        },
+        getUserSession: (state, action) => {
+            const localSession = sessionStorage.getItem(`userSession`);
+            if (localSession) {
+                const parsedData = JSON.parse(localSession);
+                const { session, data, userState, dataState, saveState } = parsedData;
+                state.session = session;
+                state.data = data;
+                state.userState = userState;
+                state.dataState = dataState;
+                state.saveState = saveState;
+                // console.log('get session: ', parsedData)
+            } else {
+                // state = initialState;
+            };
+        },
+        clearUserSession: (state, action) => {
+            sessionStorage.setItem(`userSession`, '')
         }
     },
     extraReducers: (builder) => {
@@ -240,7 +244,7 @@ const userSlice = createSlice({
 })
 
 export const userReducer = userSlice.reducer;
-export const { logOutUser, updateIsSaved } = userSlice.actions;
+export const { logOutUser, updateIsSaved, keepUserSession, getUserSession, clearUserSession } = userSlice.actions;
 
 export const getUserInfo = (state) => {
     return state.user

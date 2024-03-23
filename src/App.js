@@ -12,16 +12,32 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 import SettingsPage from './pages/SettingsPage';
+import { keepUserSession } from './app/selectors/userSlice';
 
 
 function App() {
 
-  //These let NavMenu know to collapse when something else is clicked
+  //This lets NavMenu know to collapse when something else is clicked
   const [homeClick, toggleHomeClick] = useState(false);
+
+  const userState = useSelector(state=> state.user);
+  const dispatch = useDispatch();
+  
+  //A listener to persist user data stored in session storage
+  useEffect(()=>{
+    dispatch(keepUserSession(userState));
+  },[userState]);
 
   return (
     <div onClick={() => toggleHomeClick(!homeClick)} className='App'>
+      {/*The above div has an onClick handler to detect when the page is clicked.
+      This is to overcome the bootstrap issue where the navbar stays open when
+      in small viewports*/}
       <Header />
       <Navmenu homeClick={homeClick} />
       <Routes>
