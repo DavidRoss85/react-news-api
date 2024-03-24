@@ -1,4 +1,5 @@
-import { SERVER_URL, ERROR_NEWS } from "../app/shared/DEFAULTS";
+import { ERROR_NEWS } from "../app/shared/DEFAULTS";
+import { SERVER_URL } from "../app/config";
 
 const LOCAL_URL = 'http://localhost:3001/'
 

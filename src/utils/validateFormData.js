@@ -44,7 +44,7 @@ export const validateUserAccountForm = (values) => {
     };
     //password
     if (!values.password) {
-        errors.password = 'Password is required';
+        errors.password = 'Password is required: Must have a minimum eight characters, at least one upper case English letter, at least one lower case English letter, one number, and one of these special characters: #?!@$ %^&*-';
     } else {// password checking
         let errArray = [];
         //Used ternary operators with an empty function instead of if statements because I'm lazy

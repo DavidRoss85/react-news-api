@@ -1,5 +1,3 @@
-export const SERVER_URL = 'http://localhost:8080'
-
 export const emptyNewsArray = [
     { loaded: false, src: "", caption: "author", title: "title", url: "", altText: "title" }
 ]
@@ -87,19 +85,6 @@ export const defaultPageColumn = {
         errorMode: false
     },
 }
-// export const newsParams = {
-//     numArticles: 10,
-//     country: "us",
-//     criteria: "top-headlines"
-// }
-
-const ONE_YEAR = 31536000000; //milliseconds
-const ONE_MONTH = 2592000000; //milliseconds
-const ONE_DAY = 86400000; //millisecond
-const ONE_HOUR = 3600000; //milliseconds
-const ONE_MINUTE = 60000; //milliseconds
-
-export const CACHE_TTL = ONE_DAY //
 
 export const LOCATIONLIST = ["all", "us", "ae", "ar", "at", "au", "be", "bg", "br", "ca", "ch", "cn", "co", "cu", "cz", "de", "eg", "fr", "gb", "gr", "hk", "hu", "id", "ie", "il", "in", "it", "jp", "kr", "lt", "lv", "ma", "mx", "my", "ng", "nl", "no", "nz", "ph", "pl", "pt", "ro", "rs", "ru", "sa", "se", "sg", "si", "sk", "th", "tr", "tw", "ua", "ve", "za"];
 export const COMPONENT_TYPES = ["slide", "pallette", "list", "topic"];
@@ -107,33 +92,6 @@ export const ENDPOINTS = ["top-headlines", "everything"];
 export const CATEGORIES = ["", "business", "entertainment", "general", "health", "science", "sports", "technology",];
 export const LANGUAGES = ["", "ar", "de", "en", "es", "fr", "he", "it", "nl", "no", "pt", "ru", "sv", "ud", "zh",];
 export const SORT_BY = ["", "relevancy", "popularity", "publishedAt",];
-// export const userPref = {
-//     region: 'all',
-//     homepage: [
-//         {
-//             id: 0,
-//             search: {
-//                 category: "",
-//                 country: "all",
-//                 endpoint: "top-headlines",
-//                 errorMode: false,
-//                 keyword: "",
-//             },
-//             numArticles: 10,
-//             title: "Top-Stories",
-//             tileType: "slide",
-//             row: 1,
-//             sizing: {
-//                 md: "5",
-//                 className: ""
-//             },
-//             innerSizing: {
-//                 className: "slideHolder"
-//             },
-//             componentAttribute: {}
-//         },
-//     ]
-// }
 
 export const userPref = {
     region: 'all',

@@ -20,7 +20,6 @@ const SignUpPage = () => {
     }, []);
 
     useEffect(() => {
-        console.log('SignUp page Logged in?', loggedIn)
         if (!loggedIn) {
             setRenderMenu(
                 <>

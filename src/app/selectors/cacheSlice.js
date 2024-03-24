@@ -1,5 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { EMPTY_CACHE, CACHE_TTL } from "../shared/DEFAULTS";
+import { EMPTY_CACHE } from "../shared/DEFAULTS";
+import { CACHE_TTL } from "../config";
 
 //history contains the search string 
 //which will match the position of the item in data.

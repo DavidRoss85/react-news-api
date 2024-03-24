@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { userPref } from "../shared/DEFAULTS";
 import { loadUserPreferences } from "./settingsSlice";
-import { SERVER_URL } from "../shared/DEFAULTS";
+import { SERVER_URL } from "../config";
 
 // const TEMPURL = 'http://localhost:3002/user'
 const TEMP_LOGIN_URL = 'http://localhost:3002/'
@@ -80,8 +80,8 @@ export const attemptLogin = createAsyncThunk(
             };
 
         } catch (e) {
-            console.log('An Error Occured:', e);
-            return Promise.reject('No user found');
+            console.error('attemptLogin:\n','An error occured trying to contact the server:\n', e.message);
+            return Promise.reject('Error Contacting Server');
 
         };
 
@@ -110,8 +110,8 @@ export const postSignup = createAsyncThunk(
             return data;
 
         }catch(e){
-            console.log('Error attempting to sign up: ',e)
-            return Promise.reject('Failed to sign up');
+            console.error('postSignup:\n','An error occured trying to while trying to contact the server:\n' ,e.message)
+            return Promise.reject('An error occured trying to while trying to contact the server');
         }
     }
 )
@@ -145,8 +145,8 @@ export const fetchUserSettings = createAsyncThunk(
             return data
 
         } catch (e) {
-            console.log('Error fetching user preferences: ')
-            return Promise.reject('Failed to get user preferences');
+            console.error('fetchUserSettings:\n','An error occured trying to while trying to contact the server:\n' ,e.message)
+            return Promise.reject('An error occured trying to while trying to contact the server');
         };
 
     }
@@ -176,27 +176,31 @@ export const postUserSettings = createAsyncThunk(
             dispatch(loadUserPreferences(data));
 
         }catch(e){
-            console.log('Error saving user preferences: ',e)
-            return Promise.reject('Failed to save user preferences');
-
+            console.error('postUserSettings:\n','An error occured trying to while trying to contact the server:\n' ,e.message)
+            return Promise.reject('An error occured trying to while trying to contact the server');
         }
     }
 )
 export const queryUsername = createAsyncThunk(
     'user/queryUsername',
     async (username) => {
-        const response = await fetch(
-            SERVER_URL + '/users/queryusername/' + username,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
+        try{
+            const response = await fetch(
+                SERVER_URL + '/users/queryusername/' + username,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
                 }
-            }
-        )
-        if (!response.ok) return Promise.reject(response.status);
-        const data = await response.json();
-        return data;
+            )
+            if (!response.ok) return Promise.reject(response.status);
+            const data = await response.json();
+            return data;
+        }catch(e){
+            console.error('queryUsername:\n' ,'An error occured trying to while trying to contact the server:\n',e.message)
+            return Promise.reject('An error occured trying to while trying to contact the server');
+        }
     }
 )
 
