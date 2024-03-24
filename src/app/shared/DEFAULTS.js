@@ -76,7 +76,7 @@ export const defaultPageColumn = {
     componentAttribute: {},
     search: {
         endpoint: "top-headlines",
-        country: "default",
+        country: "all",
         category: "",
         keyword: "",
         fromDate: "",
@@ -114,7 +114,7 @@ export const SORT_BY = ["", "relevancy", "popularity", "publishedAt",];
 //             id: 0,
 //             search: {
 //                 category: "",
-//                 country: "default",
+//                 country: "all",
 //                 endpoint: "top-headlines",
 //                 errorMode: false,
 //                 keyword: "",
@@ -142,7 +142,7 @@ export const userPref = {
             id: 0,
             search: {
                 category: "",
-                country: "default",
+                country: "all",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: "",
@@ -164,7 +164,7 @@ export const userPref = {
             id: 1,
             search: {
                 category: "entertainment",
-                country: "default",
+                country: "all",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: ""
@@ -188,7 +188,7 @@ export const userPref = {
             id: 2,
             search: {
                 category: "",
-                country: "default",
+                country: "all",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: ""
@@ -210,7 +210,7 @@ export const userPref = {
             id: 3,
             search: {
                 category: "",
-                country: "default",
+                country: "all",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: "Artificial Intelligence"
@@ -232,7 +232,7 @@ export const userPref = {
             id: 4,
             search: {
                 category: "business",
-                country: "default",
+                country: "all",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: ""

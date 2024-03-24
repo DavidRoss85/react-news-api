@@ -66,6 +66,7 @@ const UserLoginMenu = () => {
                 navigate('/');
             }
         } else {
+            dispatch(loadUserPreferences(userInfo))
             setLoadingMessage('Logging in...');
             setFailedMessage(errMsg);
         }

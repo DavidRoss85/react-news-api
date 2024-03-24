@@ -22,16 +22,16 @@ const settingsSlice = createSlice({
             state.data.current.region = action.payload;
             state.data.preferences.homepage.map((page, idx) => {
                 if(!page.search) return page
-                if (page.search.country === 'default') {
+                if (page.search.country === 'all') {
                     state.data.current.homepage[idx].search.country = action.payload
                 }
-                return page
+                return page;
             })
 
 
         },
         loadUserPreferences: (state, action) => {
-            //copies the preferences then if the country is set to 'default', change it to the current region.
+            //copies the preferences then if the country is set to 'all', change it to the current region.
             const { data } = action.payload
             state.data = { ...data, current: { ...data.preferences } }
             state.data.current.homepage = state.data.current.homepage.map((page, idx) => {
@@ -41,7 +41,7 @@ const settingsSlice = createSlice({
                     }
                 } 
                 const {country} = page.search;
-                const immCountry = (country === 'default') ? state.data.current.region : country
+                const immCountry = (country === 'all') ? state.data.current.region : country
                 const immPage = {...page, search: {...page.search,country: immCountry}};
                 return immPage
             })
