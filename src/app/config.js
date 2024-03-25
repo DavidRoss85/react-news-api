@@ -5,4 +5,4 @@ const ONE_HOUR = 3600000; //milliseconds
 const ONE_MINUTE = 60000; //milliseconds
 
 export const CACHE_TTL = ONE_DAY //
-export const SERVER_URL = 'http://localhost:8080'
+export const SERVER_URL = 'http://localhost:8081'
