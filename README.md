@@ -15,7 +15,8 @@ This is a front-end application that is paired with the "news-server" project. T
 
 **Some details:**
 
-**Using the app**
+**Using the app:**
+
 On Startup, users will be greeted with the main page, which will offer a default view and a set of news suggestions. The images and news are all provided by the news API, and in some cases with the pictures unavailable, the website will insert a random AI-generated image in its place.
 These suggestions are not region locked, so they will respond to changes in the region drop-down box.
 In addition, users will have the option to type in a custom search term or use one of the pre-populated search recommendations below.
@@ -23,7 +24,8 @@ Once a search is performed, users will be directed to the search page where they
 At any time, users can access their options by clicking the options icon from the user dropdown menu and clicking the edit home screen settings.
 From here, users can add, delete, or move frozen columns. Change the title or appearance of each block and customize what news is fed to each block. Once saved, the changes will be reflected on their home page.
 
-**Code**
+**Code:**
+
 The front end was built using the React framework, utilizing Redux, react Strap, React Router and React Spring for global state management, layout, navigation, and animation respectively.
 
 The Redux store is where everything begins. Any changes to information in the store can trigger subsequent updates in the app.
