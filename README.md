@@ -1,11 +1,11 @@
 # Welcome to the Client for the News Feed web app
 
 ## Notes:
-1. **app/config.js contains URL and TTL variables**
+1. **Include an src/app/config.js with the URL and TTL variables**
  - CACHE_TTL
  - SERVER_URL
 
-2. **CACHE_TTL controls how long cached results will remain valid in local storage**
+2. **CACHE_TTL controls how long cached results will remain valid in local storage (Number: milliseconds)**
 
 3. **SERVER_URL points to the Server app**
 
