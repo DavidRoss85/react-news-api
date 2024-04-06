@@ -63,7 +63,7 @@ const BreakingNewsSlide = ({newsParams}) => {
     return (
         <SlideShow
             items={newsArray}
-            interval={2000}
+            interval={4000}
             fade={true}
             slide={true}
             pause={"hover"}
