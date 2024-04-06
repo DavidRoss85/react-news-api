@@ -20,7 +20,7 @@ const HomePage = () => {
     let renderRows = []
     for (let i = 1; i <= maxRows; i++) {
         renderRows.push(
-            <Row key={i}>
+            <Row key={i} className='justify-content-center mx-auto' style={{maxWidth:'1400px'}}>
                 {
                     newsParams.filter((param) => param.row === i)
                         .map((param, idx) => {
