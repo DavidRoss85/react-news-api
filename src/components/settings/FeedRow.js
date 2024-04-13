@@ -125,7 +125,7 @@ const FeedRow = (props) => {
     }
 
     const animateUp = () => {
-        if(animating) return;
+        if (animating) return;
         setAnimating(true);
         api.start({
             from: {
@@ -142,7 +142,7 @@ const FeedRow = (props) => {
 
     }
     const animateDown = () => {
-        if(animating) return;
+        if (animating) return;
         setAnimating(true);
         api.start({
             from: {
@@ -166,8 +166,8 @@ const FeedRow = (props) => {
                     ref={rowRef}
                     style={
                         rowSelected
-                            ? {...springs, ...styles.basicStyle, ...styles.rowSelected }
-                            : {...springs, ...styles.basicStyle, ...styles.rowStyle }
+                            ? { ...springs, ...styles.basicStyle, ...styles.rowSelected }
+                            : { ...springs, ...styles.basicStyle, ...styles.rowStyle }
                     }
                 >
                     <Col>
@@ -178,7 +178,7 @@ const FeedRow = (props) => {
                             <Col className='text-center'>
                                 <Row>
                                     <Col sm='4'>
-                                        <Button {...styles.moveButton} onClick={animateUp}  title={'Change the row order'}>
+                                        <Button {...styles.moveButton} onClick={animateUp} title={'Change the row order'}>
                                             <FontAwesomeIcon icon="fa-solid fa-arrow-up" />
                                         </Button>
                                     </Col>

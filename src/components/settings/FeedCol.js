@@ -30,15 +30,26 @@ const FeedCol = (props) => {
         params
     } = props
 
-    const [springs, api] = useSpring(() => ({ from: { x: 0, opacity:1 },  })); //animation spring
+    const [springs, api] = useSpring(() => ({ from: { x: 0, opacity: 1 }, })); //animation spring
     const colRef = useRef(null); //used to get width of column
 
     const [localParams, setLocalParams] = useState(params);
-    const { id = 0, title = '', tileType = '', sizing = {}, style = {}, innerSizing = {}, componentAttribute = {}, search = {}, numArticles = 1 } = localParams;
-    // {border:'2px black solid'}
+    const { id = 0,
+        title = '',
+        tileType = '',
+        sizing = {},
+        style = {},
+        innerSizing = {},
+        componentAttribute = {},
+        search = {},
+        numArticles = 1
+    } = localParams;
+
     const [titleText, setTitleText] = useState('');
     const [numberText, setNumberText] = useState('');
-    const [borderSelect, setBorderSelect] = useState(!!style.border)
+    const [borderSelect, setBorderSelect] = useState(() => {
+        return (!style.border || style.border === 'none') ? false : true
+    })
     const [editTitle, setEditTitle] = useState(false);
     const [editNumber, setEditNumber] = useState(false);
     const [editSearchModalOpen, setEditSearchModalOpen] = useState(false);
@@ -61,7 +72,7 @@ const FeedCol = (props) => {
 
     const updateBorders = (value) => {
 
-        const newStyle = value ? { border: '2px solid black' } : {border:'none'}
+        const newStyle = value ? { border: '2px solid black' } : { border: 'none' }
         const newParams = {
             ...localParams,
             style: {
@@ -161,7 +172,7 @@ const FeedCol = (props) => {
     }
 
     const animateLeft = () => {
-        if(animating) return;
+        if (animating) return;
         setAnimating(true);
         api.start({
             from: {
@@ -177,7 +188,7 @@ const FeedCol = (props) => {
         })
     }
     const animateRight = () => {
-        if(animating) return;
+        if (animating) return;
         setAnimating(true);
         api.start({
             from: {
@@ -194,16 +205,16 @@ const FeedCol = (props) => {
 
     }
 
-    const animateDelete = ()=>{
-        if(animating)return;
+    const animateDelete = () => {
+        if (animating) return;
         setAnimating(true);
         api.start({
-            from: { opacity: 1},
-            to: async(next, cancel)=>{
-                await next({opacity:0});
+            from: { opacity: 1 },
+            to: async (next, cancel) => {
+                await next({ opacity: 0 });
                 deleteFunc();
                 setAnimating(false);
-                await next({opacity:1});
+                await next({ opacity: 1 });
             }
         })
     }
@@ -319,7 +330,8 @@ const FeedCol = (props) => {
                                                     value={item}
                                                 >
                                                     {capitalizeFirstLetter(item)}
-                                                </option>)
+                                                </option>
+                                            )
                                         })}
                                     </Input>
                                 </Col>
@@ -328,7 +340,7 @@ const FeedCol = (props) => {
                                 <Col>
                                     <Row>
                                         <Col>
-                                            <img src={componentPic[tileType]} className='img-fluid'  title={'Example of how your news will display'}/>
+                                            <img src={componentPic[tileType]} className='img-fluid' title={'Example of how your news will display'} />
                                         </Col>
                                     </Row>
                                     {tileType === 'pallette' ?
