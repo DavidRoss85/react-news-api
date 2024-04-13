@@ -3,6 +3,7 @@ import BreakingNewsSlide from "../../features/news/BreakingNewsSlide";
 import ArticlesPallette from "../../features/news/ArticlesPallette";
 import ArticlesList from "../../features/news/ArticlesList";
 import TopicSection from "../../features/news/TopicSection";
+import CardBlock from "../../features/news/CardBlock";
 
 //Place this inside of a <Row> component 
 const NewsTile = ({ newsParams }) => {
@@ -23,13 +24,16 @@ const NewsTile = ({ newsParams }) => {
         case 'topic':
             componentToRender = <TopicSection newsParams={newsParams} {...componentAttribute} />
             break;
+        case 'card':
+            componentToRender = <CardBlock newsParams={newsParams} {...componentAttribute} />
+            break;
         default:
 
     }
 
     return (
-        <Col {...sizing} style={{...style}}>
-            <Row style={{padding:'10px'}}>
+        <Col {...sizing} style={{ ...style }}>
+            <Row style={{ padding: '10px' }}>
                 <Col className="text-center">
                     <h2>{title}</h2>
                 </Col>

@@ -19,17 +19,17 @@ const SearchPage = () => {
     const searchResults = useSelector((state) => state.news.searchResults[0].news);
     const isLoading = useSelector((state) => state.news.searchResults[0].isLoading);
     const searchCache = useSelector((state) => state.cache);
-    const userSettings = useSelector(state=>state.user);
+    const userSettings = useSelector(state => state.user);
     const [success, setSuccess] = useState(false);
     const [numPages, setNumPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const { status } = searchResults;
 
     const dispatch = useDispatch();
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getUserSession());
-     },[]);
-     
+    }, []);
+
     const triggerReload = () => {
         dispatch(reloadNews({ id: 0, feed: 'searchResults' }));
         dispatch(fetchSearchResults({ endpoint: 'everything', keyword: searchCriteria, searchCache }));
@@ -38,7 +38,7 @@ const SearchPage = () => {
         if (page < 1 || page > numPages) return
         setCurrentPage(page)
     }
-    
+
     const displayNews = () => {
         if (status === 'ok') {
             setSuccess(true);
@@ -81,19 +81,21 @@ const SearchPage = () => {
                     <PageNumbers currentPage={currentPage} numPages={numPages} click={changePage} />
                 </Col>
             </Row>
-            {searchResults.articles.map((article, idx) => {
-                const immArticle = formatArticle(article, (idx % 5 + 1));
-                return (
-                    <Row key={idx}>
-                        <Col>
-                            <ArticleCard article={immArticle} />
-                        </Col>
-                    </Row>
+            {
+                searchResults.articles.map((article, idx) => {
+                    const immArticle = formatArticle(article, (idx % 5 + 1));
+                    return (
+                        <Row key={idx} style={resultsStyle.row} className={'mx-auto'}>
+                            <Col>
+                                <ArticleCard article={immArticle} />
+                            </Col>
+                        </Row>
 
-                )
-            }).filter((article, idx) => {
-                return (idx < (currentPage * 10) && idx >= (currentPage * 10) - 10)
-            })}
+                    )
+                }).filter((article, idx) => {
+                    return (idx < (currentPage * 10) && idx >= (currentPage * 10) - 10)
+                })
+            }
 
             <Row className='justify-content-center'>
                 <Col xs='auto' className='text-center'>
@@ -104,4 +106,10 @@ const SearchPage = () => {
     )
 }
 
+const resultsStyle = {
+    row: {
+        maxWidth: '1400px',
+
+    }
+}
 export default SearchPage;

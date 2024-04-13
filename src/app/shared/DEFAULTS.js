@@ -195,9 +195,9 @@ export const userPref = {
                 errorMode: false,
                 keyword: ""
             },
-            numArticles: 32,
+            numArticles: 3,
             title: "Business",
-            tileType: "pallette",
+            tileType: "card",
             row: 2,
             sizing: {
                 md: "6",
