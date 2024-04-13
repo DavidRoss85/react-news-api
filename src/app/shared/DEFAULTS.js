@@ -94,7 +94,7 @@ export const LANGUAGES = ["", "ar", "de", "en", "es", "fr", "he", "it", "nl", "n
 export const SORT_BY = ["", "relevancy", "popularity", "publishedAt",];
 
 export const userPref = {
-    region: 'all',
+    region: 'us',
     homepage: [
         {
             id: 0,
