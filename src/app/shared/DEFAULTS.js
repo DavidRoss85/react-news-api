@@ -110,7 +110,7 @@ export const userPref = {
             tileType: "slide",
             row: 1,
             sizing: {
-                md: "5",
+                md: "6",
                 className: ""
             },
             innerSizing: {
@@ -127,36 +127,36 @@ export const userPref = {
                 errorMode: false,
                 keyword: ""
             },
-            numArticles: 6,
+            numArticles: 9,
             title: "Entertainment",
             tileType: "pallette",
-            row: 1,
+            row: 2,
             sizing: {
-                md: "4",
+                md: "6",
                 className: ""
             },
             innerSizing: {
                 className: ""
             },
             componentAttribute: {
-                md: "6"
+                md: "4"
             }
         },
         {
             id: 2,
             search: {
-                category: "",
+                category: "general",
                 country: "all",
                 endpoint: "top-headlines",
                 errorMode: false,
                 keyword: ""
             },
-            numArticles: 8,
+            numArticles: 10,
             title: "News",
             tileType: "list",
-            row: 1,
+            row: 2,
             sizing: {
-                md: "3",
+                md: "6",
                 className: ""
             },
             innerSizing: {
@@ -167,16 +167,16 @@ export const userPref = {
         {
             id: 3,
             search: {
-                category: "",
+                category: "health",
                 country: "all",
                 endpoint: "top-headlines",
                 errorMode: false,
-                keyword: "Artificial Intelligence"
+                keyword: ""
             },
             numArticles: 6,
-            title: "AI News",
+            title: "Health News",
             tileType: "topic",
-            row: 2,
+            row: 3,
             sizing: {
                 md: "6",
                 className: ""
@@ -198,7 +198,7 @@ export const userPref = {
             numArticles: 3,
             title: "Business",
             tileType: "card",
-            row: 2,
+            row: 3,
             sizing: {
                 md: "6",
                 className: ""
