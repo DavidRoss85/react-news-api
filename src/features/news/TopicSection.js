@@ -1,6 +1,6 @@
 import ArticleHeadline from "../../components/news/ArticleHeadline";
 import ArticleBigSquare from "../../components/news/ArticleBigSquare";
-import newsImage from "../../app/img/genericNewsLogo16x9.png";
+import newsImage from "../../app/img/genericNewsLogo16x9.jpg";
 import { Col, Row } from "reactstrap";
 import { useEffect, useState } from "react";
 import { Failed, Loading } from "../../components/misc/ComponentStatuses";

@@ -3,10 +3,11 @@ import { useSpring, animated } from '@react-spring/web'
 import { Row, Col, Button, Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteButton from './DeleteButton';
-import previewPic1 from '../../app/img/carouselPic.png';
-import previewPic2 from '../../app/img/pallettePic.png';
-import previewPic3 from '../../app/img/headlinesPic.png';
-import previewPic4 from '../../app/img/topicPic.png';
+import previewPic1 from '../../app/img/carouselPic.jpg';
+import previewPic2 from '../../app/img/pallettePic.jpg';
+import previewPic3 from '../../app/img/headlinesPic.jpg';
+import previewPic4 from '../../app/img/topicPic.jpg';
+import previewPic5 from '../../app/img/cardBlockPic.jpg';
 import { COMPONENT_TYPES } from '../../app/shared/DEFAULTS';
 import { capitalizeFirstLetter } from '../../utils/miscConversions';
 import EditSearchModal from './EditSearchModal';
@@ -15,7 +16,8 @@ const componentPic = {
     slide: previewPic1,
     pallette: previewPic2,
     list: previewPic3,
-    topic: previewPic4
+    topic: previewPic4,
+    card: previewPic5,
 }
 const FeedCol = (props) => {
     const {
@@ -84,6 +86,8 @@ const FeedCol = (props) => {
             case 'list':
                 break;
             case 'topic':
+                break;
+            case 'card':
                 break;
             default:
         }

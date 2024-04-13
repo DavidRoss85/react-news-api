@@ -1,4 +1,4 @@
-import newsImage from "../app/img/genericNewsLogo16x9.png";
+import newsImage from "../app/img/genericNewsLogo16x9.jpg";
 
 export const convertToSlideFormat = (articles = []) => {
     return articles.map((article) => {

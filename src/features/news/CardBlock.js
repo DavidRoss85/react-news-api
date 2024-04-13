@@ -62,7 +62,7 @@ const CardBlock = (props) => {
     return (
         <div>
             {newsArray.map((article, idx) => {
-                const immArticle = formatArticle(article, (idx % 5 + 1));
+                const immArticle = formatArticle(article, (idx % 6 + 1));
                 return (
                     <Row key={idx} className={'mx-auto'}>
                         <Col>
