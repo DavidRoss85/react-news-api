@@ -29,11 +29,12 @@ const SlideShow = (props) => {
     const slides = items.map((item, idx) => {
         let { src, altText, caption, title, url } = item;
         if (!caption) caption = "";
+       
         return (
             <CarouselItem onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)} key={idx} >
                 <a href={url}>
                     <img src={src} alt={altText} />
-                    {showCaption && (<CarouselCaption captionText={caption} captionHeader={title} />)}
+                    {showCaption && (<CarouselCaption captionText={caption} captionHeader={title} cssModule={{'d-none':'d-block'}}/>)}
                 </a>
             </CarouselItem>
         );
