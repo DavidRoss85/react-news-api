@@ -36,7 +36,8 @@ const SearchPage = () => {
     }
     const changePage = (page) => {
         if (page < 1 || page > numPages) return
-        setCurrentPage(page)
+        setCurrentPage(page);
+
     }
 
     const displayNews = () => {
@@ -71,7 +72,7 @@ const SearchPage = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className='text-center'>
+                <Col className='text-center' id='search-page-top'>
                     <h3>Search Results for {searchCriteria}</h3>
                     <hr />
                 </Col>
