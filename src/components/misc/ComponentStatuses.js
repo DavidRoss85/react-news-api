@@ -13,7 +13,7 @@ export const Loading = ({ message = 'Loading News...' }) => {
 }
 
 export const Failed = (props) => {
-    const { reset, message = 'Failed to load News...', buttonText = 'Reload' } = props
+    const { reset, message = 'Failed to load News...', buttonText = 'Reload' } = props;
     return (
         <Row style={{ height: '100%' }} className='text-center align-items-center'>
             <Col>

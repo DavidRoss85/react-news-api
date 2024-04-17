@@ -6,7 +6,7 @@ const LOCAL_URL = 'http://localhost:3001/'
 export const fetchFromServer = async (searchRequest) => {
 
     // const searchURL = LOCAL_URL + 'worldNews'
-    const searchURL= `${SERVER_URL}/news`
+    const searchURL = `${SERVER_URL}/news`
     try {
         const res = await fetch(
             searchURL,
@@ -14,11 +14,13 @@ export const fetchFromServer = async (searchRequest) => {
                 method: 'POST',
                 body: JSON.stringify(searchRequest),
                 headers: {
-                    'Content-Type':'application/json',
+                    'Content-Type': 'application/json',
                 },
             }
         );
-        if (!res.ok) return ERROR_NEWS;
+        if (!res.ok) {
+            return {...ERROR_NEWS};
+        }
         const data = await res.json();
         return data;
 

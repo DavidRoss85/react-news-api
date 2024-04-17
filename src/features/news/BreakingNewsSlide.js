@@ -14,6 +14,7 @@ const BreakingNewsSlide = ({newsParams}) => {
     
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState('');
 
     const isLoading = useSelector(getLoadingStatus(id))
     const newsFeed = useSelector(getBreakingNews(id));
@@ -28,6 +29,7 @@ const BreakingNewsSlide = ({newsParams}) => {
             setSuccess(true);
         } else if (status === 'error') {
             console.log("ERROR loading news in News Slide component.")
+            setMessage(newsFeed.message);
             setSuccess(false);
         }
     }
@@ -59,7 +61,7 @@ const BreakingNewsSlide = ({newsParams}) => {
     }, [newsFeed]);
 
     if (isLoading) { return (<Loading />) }
-    if (!success) { return (<Failed reset={triggerReload} />) }
+    if (!success) { return (<Failed reset={triggerReload} message={message} />) }
     return (
         <SlideShow
             items={newsArray}

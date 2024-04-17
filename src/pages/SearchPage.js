@@ -21,6 +21,7 @@ const SearchPage = () => {
     const searchCache = useSelector((state) => state.cache);
     const userSettings = useSelector(state => state.user);
     const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState('');
     const [numPages, setNumPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const { status } = searchResults;
@@ -44,7 +45,8 @@ const SearchPage = () => {
         if (status === 'ok') {
             setSuccess(true);
         } else if (status === 'error') {
-            console.log("ERROR loading news Search.")
+            console.log("ERROR loading news Search.");
+            setMessage(searchResults.message);
             setSuccess(false);
         }
     }
@@ -62,7 +64,7 @@ const SearchPage = () => {
     }, [searchCriteria, oldSearchCriteria])
 
     if (isLoading) { return (<Loading />) };
-    if (!success) { return (<Failed message='News Search Failed...' reset={triggerReload} />) }
+    if (!success) { return (<Failed message={message ||'News Search Failed...'} reset={triggerReload} />) }
 
     return (
         <>

@@ -17,11 +17,12 @@ const TopicSection = (props) => {
 
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState('');
 
     const emptyNewsArray = useSelector(getEmptyNewsArray);
     const isLoading = useSelector(getLoadingStatus(id));
     const newsFeed = useSelector(getBreakingNews(id));
-    const searchCache = useSelector((state) => state.cache)
+    const searchCache = useSelector((state) => state.cache);
     const tileSetting = useSelector((state)=>state.settings.data.current.homepage[id].search)
     const { status } = newsFeed;
 
@@ -31,7 +32,8 @@ const TopicSection = (props) => {
         if (status === 'ok') {
             setSuccess(true);
         } else if (status === 'error') {
-            console.log("ERROR loading news in News Slide component.")
+            console.log("ERROR loading news in News Slide component.");
+            setMessage(newsFeed.message);
             setSuccess(false);
         }
     }
@@ -60,7 +62,7 @@ const TopicSection = (props) => {
 
 
     if (isLoading) { return (<Loading />) }
-    if (!success) { return (<Failed reset={triggerReload} />) }
+    if (!success) { return (<Failed reset={triggerReload} message={message} />) }
 
     const immArticle = newsArray[0] ?
         { ...newsArray[0], urlToImage: (!newsArray[0].urlToImage) ? newsImage : newsArray[0].urlToImage }

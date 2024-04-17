@@ -15,6 +15,7 @@ const ArticlesList = (props) => {
 
     const [newsArray, setNewsArray] = useState(useSelector(getEmptyNewsArray));
     const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState('');
 
     const isLoading = useSelector(getLoadingStatus(id));
     const newsFeed = useSelector(getBreakingNews(id));
@@ -28,7 +29,8 @@ const ArticlesList = (props) => {
         if (status === 'ok') {
             setSuccess(true);
         } else if (status === 'error') {
-            console.log("ERROR loading news in News Slide component.")
+            console.log("ERROR loading news in News Slide component.");
+            setMessage(newsFeed.message);
             setSuccess(false);
         }
     }
@@ -56,7 +58,7 @@ const ArticlesList = (props) => {
 
     //Show loading wheel
     if (isLoading) { return (<Loading />) };
-    if (!success) { return (<Failed reset={triggerReload} />) };
+    if (!success) { return (<Failed reset={triggerReload} message={message} />) };
 
     return (
         <div>
