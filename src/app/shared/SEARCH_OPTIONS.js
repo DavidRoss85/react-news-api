@@ -14,8 +14,11 @@ export const SEARCH_OPTIONS =
                 { "title": "Africa", "query": "?q=United States" },
                 { "title": "Antartica", "query": "?q=Antartica" },
                 { "title": "Australia", "query": "?q=Australia" },
+                { "title": "Caribbean", "query": "?q=Caribbean" },
                 { "title": "China", "query": "?q=China" },
                 { "title": "Europe", "query": "?q=Europe" },
+                { "title": "Isreal", "query": "?q=Isreal" },
+                { "title": "Iraq", "query": "?q=Iraq" },
                 { "title": "Middle East", "query": "?q=Middle East" },
                 { "title": "Russia", "query": "?q=Russia" },
                 { "title": "SouthAmerica", "query": "?q=South America" },
@@ -29,6 +32,18 @@ export const SEARCH_OPTIONS =
                 { "title": "Celebrity", "query": "?q=Celebrity" },
                 { "title": "Movies", "query": "?q=Movies" },
                 { "title": "Television", "query": "?q=Television" }
+            ]
+        },
+        {
+            "headLink": { "title": "Tech", "query": "?q=Technology" },
+            "subLinks": [
+                { "title": "Apple", "query": "?q=Apple" },
+                { "title": "Artificial Intelligence", "query": "?q=Artificial Intelligence" },
+                { "title": "Google", "query": "?q=Google" },
+                { "title": "Microsoft", "query": "?q=Microsoft" },
+                { "title": "Nanotechnology", "query": "?q=Nanotechnology" },
+                { "title": "Nuclear Fusion", "query": "?q=Nuclear Fusion" },
+                { "title": "Open AI", "query": "?q=OpenAI" }
             ]
         },
         {
